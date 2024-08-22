@@ -1,0 +1,26 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Rule for the main `materials` document
+    match /materials/{materialId} {
+      // Allow read access if the user is authenticated
+      allow read: if request.auth != null;
+
+      // Rule for sub-collection `jcStrength`
+      match /jcStrength/{propertyId} {
+        // Check if the user is authenticated and if the material's tier allows access
+        allow read: if request.auth != null &&
+                      // Fetch the document snapshot to check the tier field
+                      get(/databases/$(database)/documents/materials/$(materialId)).data.tier == 'premium';
+      }
+      
+      // Rule for sub-collection `jcFailure`
+      match /jcFailure/{propertyId} {
+        // Check if the user is authenticated and if the material's tier allows access
+        allow read: if request.auth != null &&
+                      // Fetch the document snapshot to check the tier field
+                      get(/databases/$(database)/documents/materials/$(materialId)).data.tier == 'premium';
+      }
+    }
+  }
+}

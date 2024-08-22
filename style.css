@@ -170,7 +170,7 @@ MODAL WINDOW
 
 
 /*-------------
-ADD CONTACTS FORM
+ADD materialS FORM
 ------------- */
 
 #modal .modal-header h2 {
@@ -235,28 +235,28 @@ ADD CONTACTS FORM
 
 
 /*-------------
-CONTACT LIST
+material LIST
 ------------- */
 
-#contact-list {
+#material-list {
     padding: 0;
     margin: 0;
     /*border: 1px solid #999;*/
     border-bottom: 0;
 }
 
-.contact-list-item{
+.material-list-item{
     display: flex;
     border-bottom: 1px solid #999;
     padding: 1px;
 }
 
-.contact-list-item .media{
+.material-list-item .media{
 
     flex:1;
 }
 
-.contact-list-item .media .two-letters {
+.material-list-item .media .two-letters {
 /*     width: 60px;
     height: 60px;
     background: #333;
@@ -269,7 +269,7 @@ CONTACT LIST
     align-items: center;
 }
 
-.contact-list-item .content{
+.material-list-item .content{
 
     flex: 3;
     display: flex;
@@ -278,7 +278,7 @@ CONTACT LIST
     padding-left: 2em;
 }
 
-.contact-list-item .content .title {
+.material-list-item .content .title {
     font-size: 1.2m;
     font-weight: normal;
     color: #333;
@@ -288,7 +288,7 @@ CONTACT LIST
     justify-content: left;
 }
 
-.contact-list-item .content .subtitle {
+.material-list-item .content .subtitle {
     font-size: 1.2m;
     font-weight: normal;
     color: #333;
@@ -297,7 +297,7 @@ CONTACT LIST
     justify-content: left;
 }
 
-.contact-list-item .action{
+.material-list-item .action{
 
     flex: 1;
     display: flex;
@@ -311,29 +311,29 @@ HOVER EFFECTS
 ------------- */
 
 /* General hover effect */
-.contact-list-item:hover .title,
-.contact-list-item:hover .subtitle {
+.material-list-item:hover .title,
+.material-list-item:hover .subtitle {
     font-weight: bold;
 }
 
 /* Specific hover colors for each material */
-#contact-list-steel .contact-list-item:hover .title,
-#contact-list-steel .contact-list-item:hover .subtitle {
+#material-list-steel .material-list-item:hover .title,
+#material-list-steel .material-list-item:hover .subtitle {
     color: rgb(120, 0, 0) !important; /* Adjust color for Steel tab */
 }
 
-#contact-list-aluminium .contact-list-item:hover .title,
-#contact-list-aluminium .contact-list-item:hover .subtitle {
+#material-list-aluminium .material-list-item:hover .title,
+#material-list-aluminium .material-list-item:hover .subtitle {
     color: rgb(0, 128, 192) !important; /* Adjust color for Aluminium tab */
 }
 
-#contact-list-iron .contact-list-item:hover .title,
-#contact-list-iron .contact-list-item:hover .subtitle {
+#material-list-iron .material-list-item:hover .title,
+#material-list-iron .material-list-item:hover .subtitle {
     color: rgb(0, 111, 55) !important; /* Adjust color for Iron tab */
 }
 
-#contact-list-other .contact-list-item:hover .title,
-#contact-list-other .contact-list-item:hover .subtitle {
+#material-list-other .material-list-item:hover .title,
+#material-list-other .material-list-item:hover .subtitle {
     color: rgb(255, 128, 64) !important; /* Adjust color for Other tab */
 }
 

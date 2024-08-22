@@ -5,7 +5,7 @@
 
 import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
 const db = getFirestore();
-const dbRef = collection(db, "materials");
+const dbRef = collection(db, "materialCollection");
 
 //------------------------------------------------------------
 // MOBILE VIEW
@@ -40,10 +40,10 @@ const toggleLeftAndRightViewsOnMobile = () => {
 // GET DATA
 //------------------------------------------------------------
 
-let contacts = [];
+let materials = [];
 
 
-const getContacts = async() => {
+const getmaterials = async() => {
     
     try {
         
@@ -51,92 +51,94 @@ const getContacts = async() => {
 
         await onSnapshot(dbRef, docsSnap => {
 
-            contacts = [];
+            materials = [];
 
             docsSnap.forEach(doc => {
             
-                const contact = doc.data();
-                contact.id = doc.id;
-                contacts.push(contact);
+                const material = doc.data();
+                material.id = doc.id;
+                materials.push(material);
                 
                 // console.log(doc.data());         EVERYTHING IS FETCHED
                 // console.log(doc.data().material);   ONLY material IS FETCHED
                 // console.log(doc.id);             ONLY ID IS FETCHED
             })
     
-            showContacts(contacts);
+            showMaterials(materials);
         });
 
     } catch(err) {
-        console.log("getContacts =" + err);
+        console.log("getmaterials =" + err);
     }
 
 }
 
-getContacts();
+getmaterials();
 
 //------------------------------------------------------------
-// SHOW CONTACT AS LIST ITEM ON THE LEFT
+// SHOW material AS LIST ITEM ON THE LEFT
 //------------------------------------------------------------
 
-const showContacts = (contacts) => {
-    // Clear all contact lists first
-    const contactLists = {
-      steel: document.getElementById("contact-list-steel"),
-      aluminium: document.getElementById("contact-list-aluminium"),
-      iron: document.getElementById("contact-list-iron"),
-      other: document.getElementById("contact-list-other")
+const showMaterials = (materials) => {
+    // Clear all material lists first
+    const materialLists = {
+        steel: document.getElementById("material-list-steel"),
+        aluminium: document.getElementById("material-list-aluminium"),
+        iron: document.getElementById("material-list-iron"),
+        other: document.getElementById("material-list-other")
     };
-  
-    for (let list in contactLists) {
-      if (contactLists.hasOwnProperty(list)) {
-        contactLists[list].innerHTML = "";
-      }
+
+    for (let list in materialLists) {
+        if (materialLists.hasOwnProperty(list)) {
+            materialLists[list].innerHTML = "";
+        }
     }
 
-    // Sort contacts alphabetically by name
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort materials alphabetically by name (now accessed from materialInfo)
+    materials.sort((a, b) => 
+        a.materialInfo.name.localeCompare(b.materialInfo.name)
+    );
 
-    contacts.forEach(contact => {
-
-        const li = `<li class="contact-list-item" id="${contact.id}">
-
-                    <div class="media">
-                        <div class="two-letters">AB</div>
-                    </div>
-                        
-                    <div class="content">
-                        <div class="title">
-                            ${contact.name}
+    materials.forEach((material) => {
+        const li = `<li class="material-list-item" id="${material.id}">
+                        <div class="media">
+                            <div class="two-letters">AB</div>
                         </div>
-                        <div class="subtitle">
-                            ${contact.version}
+                        <div class="content">
+                            <div class="title">
+                                ${material.materialInfo.name}
+                            </div>
+                            <div class="subtitle">
+                                ${material.materialInfo.version}
+                            </div>
                         </div>
-                    </div>
+                    </li>`;
 
+        // Determine the material list based on material.material
+        const materialType = material.materialInfo.material 
+            ? material.materialInfo.material.toLowerCase() 
+            : null;
 
-                </li>`;
-
-    // Determine the contact list based on contact.material
-    if (contact.material && contactLists[contact.material.toLowerCase()]) {
-        contactLists[contact.material.toLowerCase()].innerHTML += li;
-      } else {
-        console.error(`Unknown material: ${contact.material}`);
-      }
+        if (materialType && materialLists[materialType]) {
+            materialLists[materialType].innerHTML += li;
+        } else {
+            materialLists.other.innerHTML += li;
+            console.error(`Unknown material: ${materialType}`);
+        }
     });
 };
 
 //------------------------------------------------------------
-// CLICK CONTACT LIST ITEM
+// CLICK material LIST ITEM
 //------------------------------------------------------------
 
 
 
 
 
-const contactListPressed = (event) => {
+const materialListPressed = (event) => {
     const id = event.target.closest("li").getAttribute("id");
-    const action = document.querySelectorAll('.contact-list-item .action');
+    const action = document.querySelectorAll('.material-list-item .action');
     // console.log (id);
 
     if(event.target.className === "edit-user") {
@@ -149,7 +151,7 @@ const contactListPressed = (event) => {
         downloadButtonPressed(id);
     
     } else {
-        displayContactOnDetailsView(id);
+        displaymaterialOnDetailsView(id);
         toggleLeftAndRightViewsOnMobile();
         displayButtonsOnDetailView(id);
         
@@ -159,20 +161,20 @@ const contactListPressed = (event) => {
 }
 
 
-// Add event listeners to all contact lists
-const addEventListenersToContactLists = () => {
-    const contactListSelectors = ["#contact-list-steel", "#contact-list-aluminium", "#contact-list-iron", "#contact-list-other"];
-    contactListSelectors.forEach(selector => {
-      const contactList = document.querySelector(selector);
-      if (contactList) {
-        contactList.addEventListener("click", contactListPressed);
+// Add event listeners to all material lists
+const addEventListenersTomaterialLists = () => {
+    const materialListSelectors = ["#material-list-steel", "#material-list-aluminium", "#material-list-iron", "#material-list-other"];
+    materialListSelectors.forEach(selector => {
+      const materialList = document.querySelector(selector);
+      if (materialList) {
+        materialList.addEventListener("click", materialListPressed);
       }
     });
   };
   
   // Call the function to add event listeners after DOM content is loaded
   document.addEventListener('DOMContentLoaded', function() {
-    addEventListenersToContactLists();
+    addEventListenersTomaterialLists();
 });
 
 //------------------------------------------------------------
@@ -181,45 +183,53 @@ const addEventListenersToContactLists = () => {
 
 const editButtonPressed = (id) => {
     modalOverlay.style.display = "flex";
-    const contact = getContact(id);
+    const material = getmaterial(id);
 
-    name.value = contact.name;
-    version.value = contact.version;
-    
-    initial_yield_strength.value = contact.initial_yield_strength;
-    hardening_constan.value = contact.hardening_constan;
-    hardening_exponent.value = contact.hardening_exponent;
-    strain_rate_constant.value = contact.strain_rate_constant;
-    thermal_softening_exp.value = contact.thermal_softening_exp;
-    melting_temperature.value = contact.melting_temperature;
-    reference_strain_rate.value = contact.reference_strain_rate;
+    // Accessing materialInfo properties
+    name.value = material.materialInfo.name;
+    version.value = material.materialInfo.version;
+    materialField.value = material.materialInfo.material; // renamed to avoid conflict with `material`
 
-    initial_failure_strain.value = contact.initial_failure_strain;
-    exponential_factor.value = contact.exponential_factor;
-    triaxial_factor.value = contact.triaxial_factor;
-    strain_rate_factor.value = contact.strain_rate_factor;
-    temperature_factor.value = contact.temperature_factor;
+    // Accessing Johnson Cook Strength properties
+    initial_yield_strength.value = material.materialModels.johnsonCookStrength.initial_yield_strength;
+    hardening_constant.value = material.materialModels.johnsonCookStrength.hardening_constant;
+    hardening_exponent.value = material.materialModels.johnsonCookStrength.hardening_exponent;
+    strain_rate_constant.value = material.materialModels.johnsonCookStrength.strain_rate_constant;
+    thermal_softening_exp.value = material.materialModels.johnsonCookStrength.thermal_softening_exp;
+    melting_temperature.value = material.materialModels.johnsonCookStrength.melting_temperature;
+    reference_strain_rate.value = material.materialModels.johnsonCookStrength.reference_strain_rate;
 
-    e_modulus.value = contact.e_modulus;
-    poisson.value = contact.poisson;
-    shear_modulus.value = contact.shear_modulus;
-    bulk_modulus.value = contact.bulk_modulus;
+    // Accessing Johnson Cook Failure properties
+    initial_failure_strain.value = material.materialModels.johnsonCookFailure.initial_failure_strain;
+    exponential_factor.value = material.materialModels.johnsonCookFailure.exponential_factor;
+    triaxial_factor.value = material.materialModels.johnsonCookFailure.triaxial_factor;
+    strain_rate_factor.value = material.materialModels.johnsonCookFailure.strain_rate_factor;
+    temperature_factor.value = material.materialModels.johnsonCookFailure.temperature_factor;
 
-    grueneisen_coefficient.value = contact.grueneisen_coefficient;
-    parameter_c1.value = contact.parameter_c1;
-    parameter_s1.value = contact.parameter_s1;
-    parameter_quadratic.value = contact.parameter_quadratic;
+    // Accessing Isotropic Elasticity properties
+    e_modulus.value = material.materialModels.isotropicElasticity.e_modulus;
+    poisson.value = material.materialModels.isotropicElasticity.poisson;
+    shear_modulus.value = material.materialModels.isotropicElasticity.shear_modulus;
+    bulk_modulus.value = material.materialModels.isotropicElasticity.bulk_modulus;
 
-    density.value = contact.density;
-    specific_heat.value = contact.specific_heat;
+    // Accessing Shock EOS properties
+    grueneisen_coefficient.value = material.materialModels.shockEOS.grueneisen_coefficient;
+    parameter_c1.value = material.materialModels.shockEOS.parameter_c1;
+    parameter_s1.value = material.materialModels.shockEOS.parameter_s1;
+    parameter_quadratic.value = material.materialModels.shockEOS.parameter_quadratic;
 
-    hardness.value = contact.hardness;
-    source.value = contact.source;
-    reference.value = contact.reference;
-    material.value = contact.material;
+    // Accessing Physical Properties
+    density.value = material.materialModels.physicalProperties.density;
+    specific_heat.value = material.materialModels.physicalProperties.specific_heat;
+    hardness.value = material.materialModels.physicalProperties.hardness;
 
-    modalOverlay.setAttribute("contact-id", contact.id);
+    // Accessing Additional Info
+    source.value = material.additionalInfo.source;
+    reference.value = material.additionalInfo.reference;
+
+    modalOverlay.setAttribute("material-id", material.id);
 }
+
 
 //------------------------------------------------------------
 // DELETE DATA
@@ -246,7 +256,7 @@ const deleteButtonPressed = async (id) => {
 //------------------------------------------------------------
 
 const downloadButtonPressed = async (id) => {
-    const contact = getContact(id);
+    const material = getmaterial(id);
 
     // Get the date
     const currentDate = new Date();
@@ -266,50 +276,57 @@ const downloadButtonPressed = async (id) => {
     const formattedDate = formatDate(currentDate);
 
     // Generate a consistent random color based on the material name
-    var materialName = `${contact.name} (${contact.version})`;
+    var materialName = `${material.name} (${material.version})`;
     var color = generateColor(materialName);
 
     // Values to be inserted into the XML template
     var values = {
-        version: "18.2.0.210", // 1st value should be adjsuted based on ANSYS version, if there are compatibily issues
+        version: "18.2.0.210", // 1st value should be adjusted based on ANSYS version, if there are compatibility issues
         versiondate: formattedDate, // Use the formatted current date and time
         pr0_pa0: color.red.toString(), // Red
         pr0_pa1: color.green.toString(), // Green
         pr0_pa2: color.blue.toString(), // Blue
         pr0_pa3: "Appearance",
+    
         pr1_pa4: "Interpolation Options",
-        pr1_pa5: contact.density, // Density
+        pr1_pa5: material.materialModels.physicalProperties.density || "n/a", // Density
         pr1_pa6: "7.88860905221012e-31",
+    
         pr2_pa4: "Interpolation Options",
-        pr2_pa7: contact.e_modulus, // Young's Modulus
-        pr2_pa8: contact.poisson, // Poisson's Ratio
+        pr2_pa7: material.materialModels.isotropicElasticity.e_modulus || "n/a", // Young's Modulus
+        pr2_pa8: material.materialModels.isotropicElasticity.poisson || "n/a", // Poisson's Ratio
         pr2_pa9: "69607843137.2549",
         pr2_pa10: "26691729323.3083",
         pr2_pa6: "7.88860905221012e-31",
-        pr3_pa11: contact.initial_yield_strength, // Initial Yield Stress
-        pr3_pa12: contact.hardening_constan, // Hardening Constant
-        pr3_pa13: contact.hardening_exponent, // Hardening Exponent
-        pr3_pa14: contact.strain_rate_constant, // Strain Rate Constant
-        pr3_pa15: contact.thermal_softening_exp, // Thermal Softening Exponent
-        pr3_pa16: contact.melting_temperature, // Melting Temperature
-        pr3_pa17: contact.reference_strain_rate, // Reference Strain Rate (/sec)
+    
+        pr3_pa11: material.materialModels.johnsonCookStrength.initial_yield_strength || "n/a", // Initial Yield Stress
+        pr3_pa12: material.materialModels.johnsonCookStrength.hardening_constant || "n/a", // Hardening Constant
+        pr3_pa13: material.materialModels.johnsonCookStrength.hardening_exponent || "n/a", // Hardening Exponent
+        pr3_pa14: material.materialModels.johnsonCookStrength.strain_rate_constant || "n/a", // Strain Rate Constant
+        pr3_pa15: material.materialModels.johnsonCookStrength.thermal_softening_exp || "n/a", // Thermal Softening Exponent
+        pr3_pa16: material.materialModels.johnsonCookStrength.melting_temperature || "n/a", // Melting Temperature
+        pr3_pa17: material.materialModels.johnsonCookStrength.reference_strain_rate || "n/a", // Reference Strain Rate (/sec)
+    
         pr4_pa4: "Interpolation Options",
-        pr4_pa18: contact.specific_heat, // Specific Heat
+        pr4_pa18: material.materialModels.physicalProperties.specific_heat || "n/a", // Specific Heat
         pr4_pa6: "7.88860905221012e-31",
-        pr5_pa19: contact.initial_failure_strain, // Damage Constant D1
-        pr5_pa20: contact.exponential_factor, // Damage Constant D2
-        pr5_pa21: contact.triaxial_factor, // Damage Constant D3
-        pr5_pa22: contact.strain_rate_factor, // Damage Constant D4
-        pr5_pa23: contact.temperature_factor, // Damage Constant D5
-        pr5_pa16: contact.melting_temperature, // Melting Temperature
-        pr5_pa17: contact.reference_strain_rate, // Reference Strain Rate (/sec)
-        pr6_pa24: contact.grueneisen_coefficient, // Gruneisen Coefficient
-        pr6_pa25: contact.parameter_c1, // Parameter C1
-        pr6_pa26: contact.parameter_s1, // Parameter S1
-        pr6_pa27: contact.parameter_quadratic, // Parameter Quadratic S2
-        pr7_pa10: contact.shear_modulus, // Shear Modulus
+    
+        pr5_pa19: material.materialModels.johnsonCookFailure.initial_failure_strain || "n/a", // Damage Constant D1
+        pr5_pa20: material.materialModels.johnsonCookFailure.exponential_factor || "n/a", // Damage Constant D2
+        pr5_pa21: material.materialModels.johnsonCookFailure.triaxial_factor || "n/a", // Damage Constant D3
+        pr5_pa22: material.materialModels.johnsonCookFailure.strain_rate_factor || "n/a", // Damage Constant D4
+        pr5_pa23: material.materialModels.johnsonCookFailure.temperature_factor || "n/a", // Damage Constant D5
+        pr5_pa16: material.materialModels.johnsonCookStrength.melting_temperature || "n/a", // Melting Temperature (from Strength)
+        pr5_pa17: material.materialModels.johnsonCookStrength.reference_strain_rate || "n/a", // Reference Strain Rate (/sec) (from Strength)
+    
+        pr6_pa24: material.materialModels.shockEOS.grueneisen_coefficient || "n/a", // Gruneisen Coefficient
+        pr6_pa25: material.materialModels.shockEOS.parameter_c1 || "n/a", // Parameter C1
+        pr6_pa26: material.materialModels.shockEOS.parameter_s1 || "n/a", // Parameter S1
+        pr6_pa27: material.materialModels.shockEOS.parameter_quadratic || "n/a", // Parameter Quadratic S2
+    
+        pr7_pa10: material.materialModels.isotropicElasticity.shear_modulus || "n/a", // Shear Modulus
         material_name: materialName // Dynamic material_name variable
-    }; 
+    };
 
     // Fetch the XML template
     const response = await fetch('mat-template.xml');
@@ -363,182 +380,182 @@ function generateColor(materialName) {
 // DISPLAY DETAILS VIEW ON LIST ITEM CLICK
 //------------------------------------------------------------
 
-const getContact = (id) => {
-    return contacts.find(contact => {
-        return contact.id === id;
+const getmaterial = (id) => {
+    return materials.find(material => {
+        return material.id === id;
     })
 }
 
 
 
-const displayContactOnDetailsView = (id) => {
-    const contact = getContact(id);
+const displaymaterialOnDetailsView = (id) => {
+    const material = getmaterial(id);
     const rightColDetail = document.getElementById("right-col-detail");
 
-    // Function to check if value is null or empty and return "n/a" if so
-    const formatValue = (value) => value ? value : 'n/a';
+    // Function to format the value
+    const formatValue = (value) => (value === null || value === undefined || value === '') ? 'n/a' : value;
+    
+    // Function to check if the value is missing data
+    const isMissingData = (value) => value === null || value === undefined || value === '';
 
     rightColDetail.innerHTML = `
-
-
         <div class="card-mat-container">
-
             <div class="card-mat">
                 <div class="mat-header">Johnson Cook Strength</div>
-                <div class="mat-row ${!contact.initial_yield_strength ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.initial_yield_strength) ? 'missing-data' : ''}">
                     <div class="mat-property">Initial Yield Strength:</div>
-                    <div class="mat-data">${formatValue(contact.initial_yield_strength)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.initial_yield_strength)}</div>
                     <div class="mat-unit">[MPa]</div>
                 </div>
-                <div class="mat-row ${!contact.hardening_constan ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_constant) ? 'missing-data' : ''}">
                     <div class="mat-property">Hardening Constant:</div>
-                    <div class="mat-data">${formatValue(contact.hardening_constan)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_constant)}</div>
                     <div class="mat-unit">[MPa]</div>
                 </div>
-                <div class="mat-row ${!contact.hardening_exponent ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_exponent) ? 'missing-data' : ''}">
                     <div class="mat-property">Hardening Exponent:</div>
-                    <div class="mat-data">${formatValue(contact.hardening_exponent)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_exponent)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.strain_rate_constant ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.strain_rate_constant) ? 'missing-data' : ''}">
                     <div class="mat-property">Strain Rate Constant:</div>
-                    <div class="mat-data">${formatValue(contact.strain_rate_constant)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.strain_rate_constant)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.thermal_softening_exp ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.thermal_softening_exp) ? 'missing-data' : ''}">
                     <div class="mat-property">Thermal Softening Exp:</div>
-                    <div class="mat-data">${formatValue(contact.thermal_softening_exp)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.thermal_softening_exp)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.melting_temperature ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
                     <div class="mat-property">Melting Temperature:</div>
-                    <div class="mat-data">${formatValue(contact.melting_temperature)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
                     <div class="mat-unit">[K]</div>
                 </div>
-                <div class="mat-row ${!contact.reference_strain_rate ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
                     <div class="mat-property">Reference Strain Rate:</div>
-                    <div class="mat-data">${formatValue(contact.reference_strain_rate)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
                     <div class="mat-unit">[1/s]</div>
                 </div>
             </div>
 
             <div class="card-mat">
                 <div class="mat-header">Johnson Cook Failure</div>
-                <div class="mat-row ${!contact.initial_failure_strain ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.initial_failure_strain) ? 'missing-data' : ''}">
                     <div class="mat-property">Initial Failure Strain:</div>
-                    <div class="mat-data">${formatValue(contact.initial_failure_strain)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.initial_failure_strain)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.exponential_factor ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.exponential_factor) ? 'missing-data' : ''}">
                     <div class="mat-property">Exponential Factor:</div>
-                    <div class="mat-data">${formatValue(contact.exponential_factor)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.exponential_factor)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.triaxial_factor ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.triaxial_factor) ? 'missing-data' : ''}">
                     <div class="mat-property">Triaxial Factor:</div>
-                    <div class="mat-data">${formatValue(contact.triaxial_factor)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.triaxial_factor)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.strain_rate_factor ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.strain_rate_factor) ? 'missing-data' : ''}">
                     <div class="mat-property">Strain Rate Factor:</div>
-                    <div class="mat-data">${formatValue(contact.strain_rate_factor)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.strain_rate_factor)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.temperature_factor ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.temperature_factor) ? 'missing-data' : ''}">
                     <div class="mat-property">Temperature Factor:</div>
-                    <div class="mat-data">${formatValue(contact.temperature_factor)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.temperature_factor)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.melting_temperature ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
                     <div class="mat-property">Melting Temperature:</div>
-                    <div class="mat-data">${formatValue(contact.melting_temperature)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
                     <div class="mat-unit">[K]</div>
                 </div>
-                <div class="mat-row ${!contact.reference_strain_rate ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
                     <div class="mat-property">Reference Strain Rate:</div>
-                    <div class="mat-data">${formatValue(contact.reference_strain_rate)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
                     <div class="mat-unit">[1/s]</div>
                 </div>
             </div>
 
             <div class="card-mat">
                 <div class="mat-header">Isotropic Elasticity</div>
-                <div class="mat-row ${!contact.e_modulus ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.e_modulus) ? 'missing-data' : ''}">
                     <div class="mat-property">Young's Modulus:</div>
-                    <div class="mat-data">${formatValue(contact.e_modulus)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.e_modulus)}</div>
                     <div class="mat-unit">[GPa]</div>
                 </div>
-                <div class="mat-row ${!contact.poisson ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.poisson) ? 'missing-data' : ''}">
                     <div class="mat-property">&#957-Poisson Ratio:</div>
-                    <div class="mat-data">${formatValue(contact.poisson)}</div>
-                    <div class="mat-unit">[GPa]</div>
-                </div>
-                <div class="mat-row ${!contact.shear_modulus ? 'missing-data' : ''}">
-                    <div class="mat-property">Shear Modulus:</div>
-                    <div class="mat-data">${formatValue(contact.shear_modulus)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.poisson)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.bulk_modulus ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.shear_modulus) ? 'missing-data' : ''}">
+                    <div class="mat-property">Shear Modulus:</div>
+                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.shear_modulus)}</div>
+                    <div class="mat-unit">[-]</div>
+                </div>
+                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.bulk_modulus) ? 'missing-data' : ''}">
                     <div class="mat-property">Bulk Modulus:</div>
-                    <div class="mat-data">${formatValue(contact.bulk_modulus)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.bulk_modulus)}</div>
                     <div class="mat-unit">[GPa]</div>
                 </div>
             </div>
 
             <div class="card-mat">
                 <div class="mat-header">Shock EOS</div>
-                <div class="mat-row ${!contact.grueneisen_coefficient ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.grueneisen_coefficient) ? 'missing-data' : ''}">
                     <div class="mat-property">&#947-Grueneisen Coefficient:</div>
-                    <div class="mat-data">${formatValue(contact.grueneisen_coefficient)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.grueneisen_coefficient)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.parameter_c1 ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_c1) ? 'missing-data' : ''}">
                     <div class="mat-property">Parameter C1:</div>
-                    <div class="mat-data">${formatValue(contact.parameter_c1)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_c1)}</div>
                     <div class="mat-unit">[m/s]</div>
                 </div>
-                <div class="mat-row ${!contact.parameter_s1 ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_s1) ? 'missing-data' : ''}">
                     <div class="mat-property">Parameter S1:</div>
-                    <div class="mat-data">${formatValue(contact.parameter_s1)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_s1)}</div>
                     <div class="mat-unit">[-]</div>
                 </div>
-                <div class="mat-row ${!contact.parameter_quadratic ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_quadratic) ? 'missing-data' : ''}">
                     <div class="mat-property">Parameter Quadratic:</div>
-                    <div class="mat-data">${formatValue(contact.parameter_quadratic)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_quadratic)}</div>
                     <div class="mat-unit">[s/m]</div>
                 </div>
             </div>
 
             <div class="card-mat">
                 <div class="mat-header">Physical Properties</div>
-                <div class="mat-row ${!contact.density ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.density) ? 'missing-data' : ''}">
                     <div class="mat-property">Density:</div>
-                    <div class="mat-data">${formatValue(contact.density)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.density)}</div>
                     <div class="mat-unit">[kg/m3]</div>
                 </div>
-                <div class="mat-row ${!contact.specific_heat ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.specific_heat) ? 'missing-data' : ''}">
                     <div class="mat-property">Specific Heat Const. Pr.:</div>
-                    <div class="mat-data">${formatValue(contact.specific_heat)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.specific_heat)}</div>
                     <div class="mat-unit">[J/kgK]</div>
                 </div>
             </div>
 
             <div class="card-mat">
                 <div class="mat-header">Other</div>
-                <div class="mat-row ${!contact.hardness ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.hardness) ? 'missing-data' : ''}">
                     <div class="mat-property">Hardness:</div>
-                    <div class="mat-data">${formatValue(contact.hardness)}</div>
+                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.hardness)}</div>
                     <div class="mat-unit">[BHN]</div>
                 </div>
-                <div class="mat-row ${!contact.source ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.additionalInfo.source) ? 'missing-data' : ''}">
                     <div class="mat-property">Source:</div>
-                    <div class="mat-data">${formatValue(contact.source)}</div>
+                    <div class="mat-data">${formatValue(material.additionalInfo.source)}</div>
                     <div class="mat-unit"></div>
                 </div>
-                <div class="mat-row ${!contact.reference ? 'missing-data' : ''}">
+                <div class="mat-row ${isMissingData(material.additionalInfo.reference) ? 'missing-data' : ''}">
                     <div class="mat-property">Reference:</div>
                     <div class="mat-data">
-                        <a href="${contact.reference}" target="_blank" class="reference-link">Link</a>
+                        <a href="${material.additionalInfo.reference}" target="_blank" class="reference-link">Link</a>
                     </div>
                     <div class="mat-unit"></div>
                 </div>
@@ -546,15 +563,14 @@ const displayContactOnDetailsView = (id) => {
         </div>
 
         <div class="card-chart-container">    
-
             <div class="card-chart">
                 <div class="mat-header">Chart of Johnson Cook Strength</div>
-                <canvas class= "chart-canv" id="chart-johnson-cook-strength"></canvas>
+                <canvas class="chart-canv" id="chart-johnson-cook-strength"></canvas>
             </div>
 
             <div class="card-chart">
                 <div class="mat-header">Chart of Johnson Cook Failure</div>
-                <canvas "chart-canv" id="chart-johnson-cook-failure"></canvas>
+                <canvas class="chart-canv" id="chart-johnson-cook-failure"></canvas>
             </div>
         </div>
     `;
@@ -566,7 +582,7 @@ const displayContactOnDetailsView = (id) => {
 };
 
 const displayButtonsOnDetailView = (id) => {
-    const contact = getContact(id);
+    const material = getmaterial(id);
     const listItem = document.getElementById(id);
 
     if (listItem) {
@@ -590,13 +606,13 @@ const displayButtonsOnDetailView = (id) => {
         // Append the new buttons div to the list item
         listItem.appendChild(buttonsDiv);
     } else {
-        console.error(`Contact with id ${id} not found`);
+        console.error(`material with id ${id} not found`);
     }
 };
 
 
 const hideOtherButtonsOnDetailView = (id) => {
-    const listItems = document.querySelectorAll(".contact-list-item");
+    const listItems = document.querySelectorAll(".material-list-item");
 
     listItems.forEach(item => {
         if (item.id !== id) {
@@ -770,14 +786,16 @@ const initializeCharts = (id) => {
 
 
 const generateJCSchart = (id) => {
-    const contact = getContact(id);
+    const material = getmaterial(id);
 
-    // Assign extracted values to corresponding variables
-    var aJCS = parseFloat(contact.initial_yield_strength);
-    var bJCS = parseFloat(contact.hardening_constan);
-    var nJCS = parseFloat(contact.hardening_exponent);
-    var cJCS = parseFloat(contact.strain_rate_constant);
-    var eJCS = parseFloat(contact.reference_strain_rate);
+   
+    // Assign extracted values to corresponding variables from Johnson Cook Strength subcollection
+    var aJCS = parseFloat(material.materialModels.johnsonCookStrength.initial_yield_strength);
+    var bJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_constant);
+    var nJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_exponent);
+    var cJCS = parseFloat(material.materialModels.johnsonCookStrength.strain_rate_constant);
+    var eJCS = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
+
 
     // Use the extracted values to generate chart data
     const stepSizeJCS = 0.0001;
@@ -810,14 +828,14 @@ const generateJCSchart = (id) => {
 }
 
 const generateJCFchart = (id) => {
-    const contact = getContact(id);
+    const material = getmaterial(id);
 
-    // Assign extracted values to corresponding variables
-    var d1JCF = parseFloat(contact.initial_failure_strain);
-    var d2JCF = parseFloat(contact.exponential_factor);
-    var d3JCF = parseFloat(contact.triaxial_factor);
-    var d4JCF = parseFloat(contact.strain_rate_factor);
-    var eJCF = parseFloat(contact.reference_strain_rate);
+    // Assign extracted values to corresponding variables from Johnson Cook Failure subcollection
+    var d1JCF = parseFloat(material.materialModels.johnsonCookFailure.initial_failure_strain);
+    var d2JCF = parseFloat(material.materialModels.johnsonCookFailure.exponential_factor);
+    var d3JCF = parseFloat(material.materialModels.johnsonCookFailure.triaxial_factor);
+    var d4JCF = parseFloat(material.materialModels.johnsonCookFailure.strain_rate_factor);
+    var eJCF = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
 
     // Use the extracted values to generate chart data
     const stepSizeJCF = 0.001;
@@ -860,44 +878,55 @@ const closeBtn = document.querySelector(".close-btn");
 
 const addButtonPressed = () => {
     modalOverlay.style.display = "flex";
-    modalOverlay.removeAttribute("contact-id");
+    modalOverlay.removeAttribute("material-id");
 
+    // Clear all input fields
     name.value = "";
     version.value = "";
     
-    initial_yield_strength.value = "";
-    hardening_constan.value = "";
-    hardening_exponent.value = "";
-    strain_rate_constant.value = "";
-    thermal_softening_exp.value = "";
-    melting_temperature.value = "";
-    reference_strain_rate.value = "";
+    // MaterialInfo fields
+    materialInfo.name.value = "";
+    materialInfo.version.value = "";
     
-    initial_failure_strain.value = "";
-    exponential_factor.value = "";
-    triaxial_factor.value = "";
-    strain_rate_factor.value = "";
-    temperature_factor.value = "";
-
-    e_modulus.value = "";
-    poisson.value = "";
-    shear_modulus.value = "";
-    bulk_modulus.value = "";
+    // MaterialModels subcollections fields
+    // Johnson Cook Strength
+    materialModels.johnsonCookStrength.initial_yield_strength.value = "";
+    materialModels.johnsonCookStrength.hardening_constan.value = "";
+    materialModels.johnsonCookStrength.hardening_exponent.value = "";
+    materialModels.johnsonCookStrength.strain_rate_constant.value = "";
+    materialModels.johnsonCookStrength.thermal_softening_exp.value = "";
+    materialModels.johnsonCookStrength.melting_temperature.value = "";
+    materialModels.johnsonCookStrength.reference_strain_rate.value = "";
     
-    grueneisen_coefficient.value = "";
-    parameter_c1.value = "";
-    parameter_s1.value = "";
-    parameter_quadratic.value = "";
+    // Johnson Cook Failure
+    materialModels.johnsonCookFailure.initial_failure_strain.value = "";
+    materialModels.johnsonCookFailure.exponential_factor.value = "";
+    materialModels.johnsonCookFailure.triaxial_factor.value = "";
+    materialModels.johnsonCookFailure.strain_rate_factor.value = "";
+    materialModels.johnsonCookFailure.temperature_factor.value = "";
     
-    density.value = "";
-    specific_heat.value = "";
+    // Isotropic Elasticity
+    materialModels.isotropicElasticity.e_modulus.value = "";
+    materialModels.isotropicElasticity.poisson.value = "";
+    materialModels.isotropicElasticity.shear_modulus.value = "";
+    materialModels.isotropicElasticity.bulk_modulus.value = "";
     
-    hardness.value = "";
+    // Shock EOS
+    materialModels.shockEOS.grueneisen_coefficient.value = "";
+    materialModels.shockEOS.parameter_c1.value = "";
+    materialModels.shockEOS.parameter_s1.value = "";
+    materialModels.shockEOS.parameter_quadratic.value = "";
+    
+    // Physical Properties
+    materialModels.physicalProperties.density.value = "";
+    materialModels.physicalProperties.specific_heat.value = "";
+    materialModels.physicalProperties.hardness.value = "";
+    
+    // Additional Info
     source.value = "";
     reference.value = "";
     material.value = "";
-    
-}
+};
 
 const closeButtonPressed = () => {
     modalOverlay.style.display = "none";
@@ -951,45 +980,65 @@ const saveButtonPressed = async() => {
     if (Object.keys(error).length === 0) {
 
         const mat_properties = {
-            name: name.value,
-            version: version.value,
+            materialInfo: {
+                name: name.value,
+                material: material.value, // Adjust as necessary if `material` should be a specific category
+                version: version.value,
+                tier: tier.value, // Ensure you include this if it’s part of the schema
+                price: price.value // Ensure you include this if it’s part of the schema
+            },
             
-            initial_yield_strength: initial_yield_strength.value,
-            hardening_constan: hardening_constan.value,
-            hardening_exponent: hardening_exponent.value,
-            strain_rate_constant: strain_rate_constant.value,
-            thermal_softening_exp: thermal_softening_exp.value,
-            melting_temperature: melting_temperature.value,
-            reference_strain_rate: reference_strain_rate.value,
-        
-            initial_failure_strain: initial_failure_strain.value,
-            exponential_factor: exponential_factor.value,
-            triaxial_factor: triaxial_factor.value,
-            strain_rate_factor: strain_rate_factor.value,
-            temperature_factor: temperature_factor.value,
-        
-            e_modulus: e_modulus.value,
-            poisson: poisson.value,
-            shear_modulus: shear_modulus.value,
-            bulk_modulus: bulk_modulus.value,
-        
-            grueneisen_coefficient: grueneisen_coefficient.value,
-            parameter_c1: parameter_c1.value,
-            parameter_s1: parameter_s1.value,
-            parameter_quadratic: parameter_quadratic.value,
-        
-            density: density.value,
-            specific_heat: specific_heat.value,
-        
-            hardness: hardness.value,
-            source: source.value,
-            reference: reference.value,
-            material: material.value
+            materialModels: {
+                isotropicElasticity: {
+                    e_modulus: e_modulus.value,
+                    poisson: poisson.value,
+                    shear_modulus: shear_modulus.value,
+                    bulk_modulus: bulk_modulus.value,
+                },
+                
+                johnsonCookStrength: {
+                    initial_yield_strength: initial_yield_strength.value,
+                    hardening_constant: hardening_constan.value, // Correct field name
+                    hardening_exponent: hardening_exponent.value,
+                    strain_rate_constant: strain_rate_constant.value,
+                    thermal_softening_exp: thermal_softening_exp.value,
+                    melting_temperature: melting_temperature.value,
+                    reference_strain_rate: reference_strain_rate.value,
+                },
+                
+                johnsonCookFailure: {
+                    initial_failure_strain: initial_failure_strain.value,
+                    exponential_factor: exponential_factor.value,
+                    triaxial_factor: triaxial_factor.value,
+                    strain_rate_factor: strain_rate_factor.value,
+                    temperature_factor: temperature_factor.value,
+                    reference_strain_rate_alt: reference_strain_rate.value, // Adjust to match the field name in the new schema
+                },
+                
+                physicalProperties: {
+                    density: density.value,
+                    specific_heat: specific_heat.value,
+                    hardness: hardness.value,
+                },
+                
+                shockEOS: {
+                    grueneisen_coefficient: grueneisen_coefficient.value,
+                    parameter_c1: parameter_c1.value,
+                    parameter_s1: parameter_s1.value,
+                    parameter_quadratic: parameter_quadratic.value,
+                }
+            },
+            
+            additionalInfo: {
+                source: source.value,
+                reference: reference.value,
+            }
         };
+        
 
-        if(modalOverlay.getAttribute("contact-id")) {
+        if(modalOverlay.getAttribute("material-id")) {
             // update data
-            const docRef = doc(db, "materials", modalOverlay.getAttribute("contact-id"));
+            const docRef = doc(db, "materials", modalOverlay.getAttribute("material-id"));
 
             try {
                 

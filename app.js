@@ -99,34 +99,68 @@ const showMaterials = (materials) => {
         a.materialInfo.name.localeCompare(b.materialInfo.name)
     );
 
-    materials.forEach((material) => {
-        const li = `<li class="material-list-item" id="${material.id}">
-                        <div class="media">
-                            <div class="two-letters">AB</div>
-                        </div>
-                        <div class="content">
-                            <div class="title">
-                                ${material.materialInfo.name}
-                            </div>
-                            <div class="subtitle">
-                                ${material.materialInfo.version}
-                            </div>
-                        </div>
-                    </li>`;
+    // Group materials by name
+    const groupedMaterials = materials.reduce((acc, material) => {
+        const name = material.materialInfo.name;
+        if (!acc[name]) {
+            acc[name] = [];
+        }
+        acc[name].push(material);
+        return acc;
+    }, {});
 
-        // Determine the material list based on material.material
-        const materialType = material.materialInfo.material 
-            ? material.materialInfo.material.toLowerCase() 
+    // Create the HTML structure
+    for (const [name, materialGroup] of Object.entries(groupedMaterials)) {
+        const container = document.createElement('div');
+        container.classList.add('material-group');
+        
+        const header = document.createElement('div');
+        header.classList.add('material-group-header');
+        header.innerText = name;
+        
+        const list = document.createElement('ul');
+        list.classList.add('material-sublist');
+
+        materialGroup.forEach(material => {
+            const li = document.createElement('li');
+            li.classList.add('material-list-item');
+            li.id = material.id;
+            li.innerHTML = `
+                <div class="content">
+                    <div class="subtitle">
+                        ${material.materialInfo.version}
+                    </div>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+
+        container.appendChild(header);
+        container.appendChild(list);
+
+        const materialType = materialGroup[0].materialInfo.material 
+            ? materialGroup[0].materialInfo.material.toLowerCase() 
             : null;
 
         if (materialType && materialLists[materialType]) {
-            materialLists[materialType].innerHTML += li;
+            materialLists[materialType].appendChild(container);
         } else {
-            materialLists.other.innerHTML += li;
+            materialLists.other.appendChild(container);
             console.error(`Unknown material: ${materialType}`);
         }
+    }
+
+    
+
+    document.querySelectorAll('.material-group-header').forEach(header => {
+        header.addEventListener('click', function() {
+            const group = this.parentElement;
+            group.classList.toggle('collapsed');
+        });
     });
+
 };
+
 
 //------------------------------------------------------------
 // CLICK material LIST ITEM
@@ -183,52 +217,56 @@ const addEventListenersTomaterialLists = () => {
 
 const editButtonPressed = (id) => {
     modalOverlay.style.display = "flex";
-    const material = getmaterial(id);
+    const selectedMaterial = getmaterial(id);  // Renamed from `material`
 
     // Accessing materialInfo properties
-    name.value = material.materialInfo.name;
-    version.value = material.materialInfo.version;
-    materialField.value = material.materialInfo.material; // renamed to avoid conflict with `material`
+    name.value = selectedMaterial.materialInfo.name;
+    version.value = selectedMaterial.materialInfo.version;
+    material.value = selectedMaterial.materialInfo.material;  // This refers to the HTML element or another variable, not the renamed constant
+    console.log(material.value); // Should log the DOM element
+
 
     // Accessing Johnson Cook Strength properties
-    initial_yield_strength.value = material.materialModels.johnsonCookStrength.initial_yield_strength;
-    hardening_constant.value = material.materialModels.johnsonCookStrength.hardening_constant;
-    hardening_exponent.value = material.materialModels.johnsonCookStrength.hardening_exponent;
-    strain_rate_constant.value = material.materialModels.johnsonCookStrength.strain_rate_constant;
-    thermal_softening_exp.value = material.materialModels.johnsonCookStrength.thermal_softening_exp;
-    melting_temperature.value = material.materialModels.johnsonCookStrength.melting_temperature;
-    reference_strain_rate.value = material.materialModels.johnsonCookStrength.reference_strain_rate;
+    initial_yield_strength.value = selectedMaterial.materialModels.johnsonCookStrength.initial_yield_strength;
+    hardening_constant.value = selectedMaterial.materialModels.johnsonCookStrength.hardening_constant;
+    hardening_exponent.value = selectedMaterial.materialModels.johnsonCookStrength.hardening_exponent;
+    strain_rate_constant.value = selectedMaterial.materialModels.johnsonCookStrength.strain_rate_constant;
+    thermal_softening_exp.value = selectedMaterial.materialModels.johnsonCookStrength.thermal_softening_exp;
+    melting_temperature.value = selectedMaterial.materialModels.johnsonCookStrength.melting_temperature;
+    reference_strain_rate.value = selectedMaterial.materialModels.johnsonCookStrength.reference_strain_rate;
+    console.log(initial_yield_strength); // Should log the DOM element
 
     // Accessing Johnson Cook Failure properties
-    initial_failure_strain.value = material.materialModels.johnsonCookFailure.initial_failure_strain;
-    exponential_factor.value = material.materialModels.johnsonCookFailure.exponential_factor;
-    triaxial_factor.value = material.materialModels.johnsonCookFailure.triaxial_factor;
-    strain_rate_factor.value = material.materialModels.johnsonCookFailure.strain_rate_factor;
-    temperature_factor.value = material.materialModels.johnsonCookFailure.temperature_factor;
+    initial_failure_strain.value = selectedMaterial.materialModels.johnsonCookFailure.initial_failure_strain;
+    exponential_factor.value = selectedMaterial.materialModels.johnsonCookFailure.exponential_factor;
+    triaxial_factor.value = selectedMaterial.materialModels.johnsonCookFailure.triaxial_factor;
+    strain_rate_factor.value = selectedMaterial.materialModels.johnsonCookFailure.strain_rate_factor;
+    temperature_factor.value = selectedMaterial.materialModels.johnsonCookFailure.temperature_factor;
 
     // Accessing Isotropic Elasticity properties
-    e_modulus.value = material.materialModels.isotropicElasticity.e_modulus;
-    poisson.value = material.materialModels.isotropicElasticity.poisson;
-    shear_modulus.value = material.materialModels.isotropicElasticity.shear_modulus;
-    bulk_modulus.value = material.materialModels.isotropicElasticity.bulk_modulus;
+    e_modulus.value = selectedMaterial.materialModels.isotropicElasticity.e_modulus;
+    poisson.value = selectedMaterial.materialModels.isotropicElasticity.poisson;
+    shear_modulus.value = selectedMaterial.materialModels.isotropicElasticity.shear_modulus;
+    bulk_modulus.value = selectedMaterial.materialModels.isotropicElasticity.bulk_modulus;
 
     // Accessing Shock EOS properties
-    grueneisen_coefficient.value = material.materialModels.shockEOS.grueneisen_coefficient;
-    parameter_c1.value = material.materialModels.shockEOS.parameter_c1;
-    parameter_s1.value = material.materialModels.shockEOS.parameter_s1;
-    parameter_quadratic.value = material.materialModels.shockEOS.parameter_quadratic;
+    grueneisen_coefficient.value = selectedMaterial.materialModels.shockEOS.grueneisen_coefficient;
+    parameter_c1.value = selectedMaterial.materialModels.shockEOS.parameter_c1;
+    parameter_s1.value = selectedMaterial.materialModels.shockEOS.parameter_s1;
+    parameter_quadratic.value = selectedMaterial.materialModels.shockEOS.parameter_quadratic;
 
     // Accessing Physical Properties
-    density.value = material.materialModels.physicalProperties.density;
-    specific_heat.value = material.materialModels.physicalProperties.specific_heat;
-    hardness.value = material.materialModels.physicalProperties.hardness;
+    density.value = selectedMaterial.materialModels.physicalProperties.density;
+    specific_heat.value = selectedMaterial.materialModels.physicalProperties.specific_heat;
+    hardness.value = selectedMaterial.materialModels.physicalProperties.hardness;
 
     // Accessing Additional Info
-    source.value = material.additionalInfo.source;
-    reference.value = material.additionalInfo.reference;
+    source.value = selectedMaterial.additionalInfo.source;
+    reference.value = selectedMaterial.additionalInfo.reference;
 
-    modalOverlay.setAttribute("material-id", material.id);
+    modalOverlay.setAttribute("material-id", selectedMaterial.id);
 }
+
 
 
 //------------------------------------------------------------

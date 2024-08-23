@@ -364,9 +364,7 @@ material LIST
     background-color: #f9f9f9; /* Light hover effect */
 }
 
-.material-list-item:hover {
-    background-color: #f9f9f9; /* Light hover effect */
-}
+
 
 /* Default text colors for each material group header */
 #material-list-steel .material-group-header {
@@ -393,6 +391,7 @@ HOVER EFFECTS
 .material-list-item:hover .title,
 .material-list-item:hover .subtitle {
     font-weight: bold;
+    cursor: pointer;
 }
 
 /* Specific hover colors for each material */

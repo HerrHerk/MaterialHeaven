@@ -71,6 +71,55 @@ const profileLogOutBtn = document.getElementById("profile-logout-btn");
 const authLinksLogIn = document.getElementById("auth-links-login");
 const authLinksLogOut = document.getElementById("auth-links-logout");
 
+
+const formatErrorMessage = (errorCode, action) => {
+    let message = "";
+
+    if(action === "signup") {
+        if (
+            errorCode === "auth/invalid-email" || 
+            errorCode === "auth/missing-email"
+        ) {
+            message = "Please enter a valid Email";
+        } else if (
+            errorCode === "auth/missing-password" ||
+            errorCode === "auth/weak-password"
+        ) {
+            message = "Password must be at least 6 characters long";
+        } else if (
+            errorCode === "auth/email-already-in-use"
+        ) {
+            message = "Email is already taken";
+        } else {
+            message = "Unknown Error";
+        }
+    } else if (action === "login") {
+        if (
+            errorCode === "auth/invalid-email" || 
+            errorCode === "auth/missing-password"
+        ) {
+            message = "Email or Password is incorrect";
+        } else if (
+            errorCode === "auth/user-not-found" ||
+            errorCode === "auth/invalid-credential"
+        ) {
+            message= "Our system was unable to verify your email or password";
+
+        } else {
+            message = "Unknown Error";
+        }
+    }
+
+
+    return message;
+};
+
+
+
+
+
+
+
 onAuthStateChanged(auth, async (user) => {
 
     console.log(user);
@@ -350,44 +399,4 @@ resetPasswordBtn.addEventListener("click", resetPasswordBtnPressed);
 loginWithGoogleBtn.addEventListener("click", loginWithGoogleBtnPressed);
 updateBtn.addEventListener("click", updateBtnPressed);
 
-const formatErrorMessage = (errorCode, action) => {
-    let message = "";
 
-    if(action === "signup") {
-        if (
-            errorCode === "auth/invalid-email" || 
-            errorCode === "auth/missing-email"
-        ) {
-            message = "Please enter a valid Email";
-        } else if (
-            errorCode === "auth/missing-password" ||
-            errorCode === "auth/weak-password"
-        ) {
-            message = "Password must be at least 6 characters long";
-        } else if (
-            errorCode === "auth/email-already-in-use"
-        ) {
-            message = "Email is already taken";
-        } else {
-            message = "Unknown Error";
-        }
-    } else if (action === "login") {
-        if (
-            errorCode === "auth/invalid-email" || 
-            errorCode === "auth/missing-password"
-        ) {
-            message = "Email or Password is incorrect";
-        } else if (
-            errorCode === "auth/user-not-found" ||
-            errorCode === "auth/invalid-credential"
-        ) {
-            message= "Our system was unable to verify your email or password";
-
-        } else {
-            message = "Unknown Error";
-        }
-    }
-
-
-    return message;
-};

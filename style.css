@@ -1,8 +1,8 @@
-body{
+body.main-body{
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #ECF0F1;
 }
 
 #app-layout{
@@ -21,12 +21,12 @@ body{
 }
 
 h1 {
-    color: #5a5a5a;
+    color: #34495E
 
     font-size: 2rem; /* Increase font size for Herk's */
   }
 h2 {
-    color: #5a5a5a;
+    color: #34495E;
 
     font-size: 0.8rem; /* Adjust font size for the loading message */
 
@@ -39,7 +39,7 @@ HEADER
 /* Your custom styles */
 header.main-header {
     display: flex;
-    background-color: rgb(29, 21, 49);
+    background-color: #2C3E50;
     color: white;
     height: 65px;
     align-items: center;
@@ -138,7 +138,7 @@ GLOBAL STYLES
 ------------- */
 
 button{
-    background-color: rgb(25, 85, 85);
+    background-color:#2980B9;
     border: none;
     color: white;
     font-size: 1em;
@@ -148,7 +148,7 @@ button{
 }
 
 button:hover{
-    background-color: #ffa000;
+    background-color: #1ABC9C;
     cursor: pointer;
 }
 
@@ -325,7 +325,7 @@ material LIST
 }
 
 .material-group-header {
-    background-color: #f5f5f5; /* Light grey background for the header */
+    background-color: #FDFEFE; /* Light grey background for the header */
     padding: 10px 15px;
     cursor: pointer;
     font-weight: bold;
@@ -448,7 +448,7 @@ RIGHT COLUMN
 .card-mat {
     background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid #f4f4f4;
-    color: #f4f4f4;
+    color: #D6EAF8;
     padding-left: 5em;
     padding: 5px;
     border-radius: 5px;
@@ -601,7 +601,7 @@ TABS
     /*border: 1px solid #ccc;*/
     border-radius: 0 5px 5px 5px;
     
-    background-color: #fff;
+    /* background-color: #fff; */
     display: none;
 }
 
@@ -641,50 +641,19 @@ AUTH UI
     
 }
 
-#signup-form {
-    min-width: 400px;
-    display:none;
-    text-align: center;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-}
-
-#login-form {
-    min-width: 400px;
-    max-width: 400px;
-    text-align: center;
-    display:none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-}
-
-#user-profile {
+#signup-form,
+#login-form,
+#user-profile,
+#email-verification,
+#reset-password-form,
+#about-form {
     min-width: 400px;
     text-align: center;
-    display:none;
+    display: none;
     position: fixed;
     top: 20%;
-    left: 50%;
-}
-
-#email-verification {
-    min-width: 400px;
-    text-align: center;
-    display:none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-}
-
-#reset-password-form {
-    min-width: 400px;
-    text-align: center;
-    display: hide;
-    position: fixed;
-    top: 20%;
-    left: 50%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
 }
 
 /* CSS to add pointer cursor to specific anchor tags */
@@ -744,7 +713,7 @@ SIDEBAR
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #1f2930;
     overflow-x: hidden;
     transition: 0.1s;
     padding-top: 60px;
@@ -775,7 +744,7 @@ SIDEBAR
 
 /* Show Sidebar */
 .open {
-    width: 250px;
+    width: 270px;
 }
 
 /* Hide Sidebar */

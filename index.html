@@ -13,7 +13,7 @@
     
 </head>
 
-<body>
+<body class="main-body">
     
     <main id="app-layout">
 
@@ -38,7 +38,7 @@
                         
                         <div class="sidebar-logger" id="sidebar-contact-div">
                             <i class="envelope icon"></i>
-                            <a href="#" id="sidebar-contact">Contact</a>
+                            <a href="mailto:business.herrherk@gmail.com?subject=Contact Inquiry&body=Hello," id="sidebar-contact">Contact</a>
                         </div>
                         
                         <div class="sidebar-logger" id="sidebar-reset-password-div">
@@ -368,6 +368,24 @@
                     <button class="ui button red big" id = reset-password-btn>Reset Password</button>
                 </form>
             </div>
+
+            <!-- ABOUT -->
+
+            <div class="ui segment" id="about-form">
+                <h1>About</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim. Integer non lacus eros. Ut non nisi velit. Proin vehicula, nisl at auctor pharetra, neque mi volutpat libero, nec egestas leo velit et eros. Curabitur sed ultricies massa, sed gravida sapien.</p>
+                <div class="ui message hidden" id="about-message"></div>
+                <form class="ui form">
+                    <div class="field">
+                        <div class="ui left icon input big">
+                            <i class="info circle icon"></i>
+                            <input type="text" placeholder="Learn more about us" id="about-placeholder" />
+                        </div>
+                    </div>
+                    <button class="ui button blue big" id="about-btn">Learn More</button>
+                </form>
+            </div>
+
 
 
             <!-- PROFILE -->

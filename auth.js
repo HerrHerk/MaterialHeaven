@@ -78,6 +78,7 @@ const sidebarName = document.getElementById("sidebar-name-div");
 const sidebarEmail = document.getElementById("sidebar-email-div");
 const sidebarLogin = document.getElementById("sidebar-login-div");
 const sidebarLogout = document.getElementById("sidebar-logout-div");
+const aboutForm = document.getElementById("about-form");
 
 //const eyeIcon = document.getElementById("eye-btn");
 
@@ -210,6 +211,7 @@ const hideMainView = (e) => {
     
         if (e.target === e.currentTarget) {
             mainView.style.display = "none";
+            aboutForm.style.display = "none";
             loginForm.style.display = "none";
             userProfileView.style.display = "none";
         }         
@@ -217,6 +219,7 @@ const hideMainView = (e) => {
         mainView.style.display = "none";
         loginForm.style.display = "none";
         userProfileView.style.display = "none";
+        aboutForm.style.display = "none";
     }
 
 }
@@ -404,6 +407,21 @@ const updateBtnPressed = async (e) => {
 
 };
 
+
+const sidebarResetPasswordPressed = () => {
+    
+    mainView.style.display = "flex";
+    resetPasswordForm.style.display = "block";
+};
+
+const sidebarAboutPressed = () => {
+    
+    mainView.style.display = "flex";
+    aboutForm.style.display = "block";
+};
+
+
+
 signUpBtn.addEventListener("click", signUpBtnPressed);
 logOutBtn.addEventListener("click", logOutBtnPressed);
 loginBtn.addEventListener("click", loginBtnPressed);
@@ -418,13 +436,13 @@ forgotPasswordBtn.addEventListener("click", forgotPasswordBtnPressed);
 resetPasswordBtn.addEventListener("click", resetPasswordBtnPressed);
 loginWithGoogleBtn.addEventListener("click", loginWithGoogleBtnPressed);
 //updateBtn.addEventListener("click", updateBtnPressed);
-//eyeIcon.addEventListener("click", eyeIconPressed);
 
-// sidebarAbout.addEventListener("click", sidebarAboutPressed);
+
+sidebarAbout.addEventListener("click", sidebarAboutPressed);
 // sidebarContact.addEventListener("click", sidebarContactPressed);
 sidebarLogin.addEventListener("click", signUpLogInBtnPressed);
 sidebarLogout.addEventListener("click", logOutBtnPressed);
-sidebarResetPassword.addEventListener("click", resetPasswordBtnPressed);
+sidebarResetPassword.addEventListener("click", sidebarResetPasswordPressed);
 
 // HIDE AND REVEAL PASSWORD
 /* const eyeIconPressed = () => {

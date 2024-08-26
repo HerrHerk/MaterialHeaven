@@ -66,10 +66,18 @@ const updateBtn = document.getElementById("update-btn");
 
 
 const signUpLogInBtn = document.getElementById("sign-up-log-in-btn");
-const profileDataBtn = document.getElementById("profile-data-btn");
+const profileDataBtn = document.getElementById("sidebar-profile-div");
 const profileLogOutBtn = document.getElementById("profile-logout-btn");
 const authLinksLogIn = document.getElementById("auth-links-login");
 const authLinksLogOut = document.getElementById("auth-links-logout");
+
+const sidebarAbout = document.getElementById("sidebar-about-div");
+const sidebarResetPassword = document.getElementById("sidebar-reset-password-div");
+const sidebarContact = document.getElementById("sidebar-contact-div");
+const sidebarName = document.getElementById("sidebar-name-div");
+const sidebarEmail = document.getElementById("sidebar-email-div");
+const sidebarLogin = document.getElementById("sidebar-login-div");
+const sidebarLogout = document.getElementById("sidebar-logout-div");
 
 //const eyeIcon = document.getElementById("eye-btn");
 
@@ -127,8 +135,13 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
 
         authLinksLogIn.style.display = "none";
+        sidebarLogin.style.display = "none";
         authLinksLogOut.style.display = "flex"; // Show logout options
+        sidebarLogout.style.display = "flex";
         emailVerificationView.style.display = "none";
+
+
+
 
         if (!user.emailVerified) {
             loginForm.style.display = "none";
@@ -146,7 +159,9 @@ onAuthStateChanged(auth, async (user) => {
             userProfileView.style.display = "none";
             mainView.style.display = "none";
             authLinksLogIn.style.display = "none";
+            sidebarLogin.style.display = "none";
             authLinksLogOut.style.display = "flex"; // Show logout options
+            sidebarLogout.style.display = "flex";
             signUpFormView.style.display = "none";
 
             
@@ -174,7 +189,9 @@ onAuthStateChanged(auth, async (user) => {
         loginForm.style.display = "none";
         userProfileView.style.display = "none";
         authLinksLogIn.style.display = "flex";  // Show login options
+        sidebarLogin.style.display = "flex";
         authLinksLogOut.style.display = "none";
+        sidebarLogout.style.display = "none";
         emailVerificationView.style.display = "none";
         resetPasswordForm.style.display = "none";
 
@@ -236,7 +253,9 @@ const profileDataBtnPressed = () => {
 const profileLogOutBtnPressed = () => {
     logOutBtnPressed();
     authLinksLogIn.style.display = "flex";
+    sidebarLogin.style.display = "flex";
     authLinksLogOut.style.display = "none";
+    sidebarLogout.style.display = "none";
     mainView.style.display = "none";
 
 }
@@ -401,6 +420,12 @@ loginWithGoogleBtn.addEventListener("click", loginWithGoogleBtnPressed);
 //updateBtn.addEventListener("click", updateBtnPressed);
 //eyeIcon.addEventListener("click", eyeIconPressed);
 
+// sidebarAbout.addEventListener("click", sidebarAboutPressed);
+// sidebarContact.addEventListener("click", sidebarContactPressed);
+sidebarLogin.addEventListener("click", signUpLogInBtnPressed);
+sidebarLogout.addEventListener("click", logOutBtnPressed);
+sidebarResetPassword.addEventListener("click", resetPasswordBtnPressed);
+
 // HIDE AND REVEAL PASSWORD
 /* const eyeIconPressed = () => {
 
@@ -418,6 +443,12 @@ loginWithGoogleBtn.addEventListener("click", loginWithGoogleBtnPressed);
         console.log("TEXT -> PW");
     }
 } */
+
+
+
+//------------------------------------------------------------
+// SHOW/HIDE PASSWORD
+//------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
     const passwordFieldLogin = document.getElementById('login-password');
@@ -461,7 +492,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
     
-      
+//------------------------------------------------------------
+// SIDEBAR
+//------------------------------------------------------------
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('closebtn');
+    const menuBtn = document.getElementById('menu-btn');
+
+    // Function to open sidebar
+    function openNav() {
+        sidebar.classList.add('open');
+        sidebar.classList.remove('close');
+    }
+
+    // Function to close sidebar
+    function closeNav() {
+        sidebar.classList.add('close');
+        sidebar.classList.remove('open');
+    }
+
+    // Event listeners
+    menuBtn.addEventListener('click', openNav);
+    closeBtn.addEventListener('click', closeNav);
+
+    // Optional: Close sidebar if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            closeNav();
+        }
+    });
+});     
     
     
 

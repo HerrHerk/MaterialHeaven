@@ -18,10 +18,57 @@
     <main id="app-layout">
 
         <section id = "left-col">
-            <header>
-                <div class="left"></div>
-                <div class ="title">Materials</div>
-                <div class ="right">
+            <header class="main-header">
+                <div class="left">
+                    <!-- Sidebar -->
+                    <div class="sidebar" id="sidebar">
+                        <a href="#" class="closebtn" id="closebtn">&times;</a>
+                        
+
+                        <div class="sidebar-name" id="sidebar-name">Profile</div>
+                        <div class="sidebar-email" id="sidebar-email">Profile</div>
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+                        
+                        <div class="sidebar-logger" id="sidebar-profile-div">
+                            <i class="cog icon"></i>
+                            <a href="#" id="sidebar-profile">Profile</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-contact-div">
+                            <i class="envelope icon"></i>
+                            <a href="#" id="sidebar-contact">Contact</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-reset-password-div">
+                            <i class="lock icon"></i>
+                            <a href="#" id="sidebar-reset-password">Reset Password</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-about-div">
+                            <i class="book icon"></i>
+                            <a href="#" id="sidebar-about">About</a>
+                        </div>
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
+                        <div class="sidebar-logger" id="sidebar-login-div">
+                            <i class="user icon"></i>
+                            <a href="#" id="sidebar-login">Sign Up / Log In</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-logout-div">
+                            <i class="sign-out icon"></i>
+                            <a href="#" id="sidebar-logout">Log Out</a>
+                        </div>
+                        
+                    </div>
+                    <button id="menu-btn">☰</button> <!-- Button to open sidebar -->
+                </div>
+                <div class="title">Materials</div>
+                <div class="right">
                     <button class="add-btn">Add</button>
                 </div>
             </header>
@@ -104,7 +151,7 @@
         </section>
 
         <section id = "right-col">
-            <header>
+            <header class="main-header">
                 <div class="left">
                     <button id="back-btn">Back</button>
                 </div>

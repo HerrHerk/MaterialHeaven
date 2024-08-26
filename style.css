@@ -36,21 +36,28 @@ h2 {
 HEADER
 ------------- */
 
-header {
+/* Your custom styles */
+header.main-header {
+    display: flex;
     background-color: rgb(29, 21, 49);
     color: white;
     height: 65px;
-    display: flex;
-    align-items: center; /* Aligns all items vertically in the center */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* Optional: Reset or normalize styles if needed */
+article, aside, footer, header, nav, section {
+    display: block; /* Default block display */
 }
 
 header .left {
-
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
-
-
-
 
 
 
@@ -71,6 +78,9 @@ header .right {
     justify-content: right;
 }
 
+header .sidebar-logger {
+    display: flex;
+}
 
 /*-------------
 AUTH STYLES
@@ -721,4 +731,75 @@ PASSWORD VISIBILITY
 /* Specific styles for the hidden state */
 .eye-hidden {
     color: rgba(0, 0, 0, 0.6); /* Normal opacity for hidden */
+}
+
+
+/*-------------
+SIDEBAR 
+------------- */
+/* Sidebar Styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 60px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: white; /* Ensure the close button is visible */
+}
+
+/* Show Sidebar */
+.open {
+    width: 250px;
+}
+
+/* Hide Sidebar */
+.close {
+    width: 0;
+}
+
+/* Horizontal separator line */
+.sidebar-separator {
+    border: none;
+    border-bottom: 1px solid #555; /* Light grey color */
+    margin: 15px 0;
+}
+
+/* Sidebar log in/out section */
+.sidebar-logger {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+/* Override the default margin or padding if needed */
+.sidebar a,
+.sidebar-logger a {
+    flex: 1;
+    padding-left: 20px;
 }

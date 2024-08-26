@@ -410,13 +410,19 @@
                             </div>
                         </div>
 
+                        
                         <!-- PASSWORD -->
-                        <div class="field">
+                        <div class="field" style="position: relative;">
                             <div class="ui left icon input big">
                                 <i class="lock icon"></i>
-                                <input type="password" placeholder="Password" id="login-password"/>
+                                <input type="password" placeholder="Password" id="login-password" style="padding-right: 2.5em;"/>
                             </div>
+                            <!-- Invisible button wrapping the eye icon -->
+                            <button id="eye-btn" style="background: transparent; border: none; padding: 0; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <i class="eye icon" id="eye-icon"></i>
+                            </button>
                         </div>
+                        
                         <button class="ui button blue fluid" id="login-btn">
                             LOG IN
                         </button>
@@ -465,11 +471,15 @@
                         </div>
 
                         <!-- PASSWORD -->
-                        <div class="field">
+                        <div class="field" style="position: relative;">
                             <div class="ui left icon input big">
                                 <i class="lock icon"></i>
-                                <input type="password" placeholder="Password" id="password"/>
+                                <input type="password" placeholder="Password" id="password" style="padding-right: 2.5em;"/>
                             </div>
+                            <!-- Invisible button wrapping the eye icon -->
+                            <button id="signup-eye-btn" style="background: transparent; border: none; padding: 0; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <i class="eye icon" id="signup-eye-icon"></i>
+                            </button>
                         </div>
                         <button class="ui button green fluid" id="signup-btn">CREATE ACCOUNT</button>
                     </div>

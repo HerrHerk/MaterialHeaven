@@ -71,6 +71,7 @@ const profileLogOutBtn = document.getElementById("profile-logout-btn");
 const authLinksLogIn = document.getElementById("auth-links-login");
 const authLinksLogOut = document.getElementById("auth-links-logout");
 
+//const eyeIcon = document.getElementById("eye-btn");
 
 const formatErrorMessage = (errorCode, action) => {
     let message = "";
@@ -397,6 +398,72 @@ resendEmailBtn.addEventListener("click", resendEmailBtnPressed);
 forgotPasswordBtn.addEventListener("click", forgotPasswordBtnPressed);
 resetPasswordBtn.addEventListener("click", resetPasswordBtnPressed);
 loginWithGoogleBtn.addEventListener("click", loginWithGoogleBtnPressed);
-updateBtn.addEventListener("click", updateBtnPressed);
+//updateBtn.addEventListener("click", updateBtnPressed);
+//eyeIcon.addEventListener("click", eyeIconPressed);
+
+// HIDE AND REVEAL PASSWORD
+/* const eyeIconPressed = () => {
+
+    console.log("eyew Icon pressed");
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('eye');
+        eyeIcon.classList.add('eye', 'slash');
+        console.log("PW -> TEXT");
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('eye', 'slash');
+        eyeIcon.classList.add('eye');
+        console.log("TEXT -> PW");
+    }
+} */
+
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordFieldLogin = document.getElementById('login-password');
+    const eyeIconLogin = document.getElementById('eye-icon');
+    const eyeBtnLogin = document.getElementById('eye-btn');
+
+    const passwordFieldSignup = document.getElementById('password');
+    const eyeIconSignup = document.getElementById('signup-eye-icon');
+    const eyeBtnSignup = document.getElementById('signup-eye-btn');
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility(event, eyeIcon, passwordField) {
+        event.preventDefault(); // Prevent default button behavior
+
+        console.log("Eye Icon pressed");
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.classList.remove('eye-hidden');
+            eyeIcon.classList.add('eye-visible');
+            eyeIcon.classList.remove('eye');
+            eyeIcon.classList.add('eye', 'slash');
+            console.log("Password field set to text");
+        } else {
+            passwordField.type = 'password';
+            eyeIcon.classList.remove('eye-visible');
+            eyeIcon.classList.add('eye-hidden');
+            eyeIcon.classList.remove('eye', 'slash');
+            eyeIcon.classList.add('eye');
+            console.log("Password field set to password");
+        }
+    }
+
+    // Attach event listeners to the buttons
+    eyeBtnLogin.addEventListener('click', function(event) {
+        togglePasswordVisibility(event, eyeIconLogin, passwordFieldLogin);
+    });
+
+    eyeBtnSignup.addEventListener('click', function(event) {
+        togglePasswordVisibility(event, eyeIconSignup, passwordFieldSignup);
+    });
+});
+    
+      
+    
+    
+
 
 

@@ -697,9 +697,28 @@ AUTH UI
 
 
 /*-------------
-REPLACE SEMANTIC 
+PASSWORD VISIBILITY 
 ------------- */
 
 
+/* Position the eye icon inside the input field */
+#eye-icon,
+#signup-eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    color: rgba(0, 0, 0, 0.6);
+}
 
+/* Specific styles for the visible state */
+.eye-visible {
+    color: rgba(0, 0, 0, 0.4); /* Less opaque to indicate visibility */
+}
 
+/* Specific styles for the hidden state */
+.eye-hidden {
+    color: rgba(0, 0, 0, 0.6); /* Normal opacity for hidden */
+}

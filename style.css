@@ -713,7 +713,7 @@ SIDEBAR
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #1f2930;
+    background-color: #B1CC74;
     overflow-x: hidden;
     transition: 0.1s;
     padding-top: 60px;
@@ -726,7 +726,7 @@ SIDEBAR
     font-size: 25px;
     color: #818181;
     display: block;
-    transition: 0.3s;
+    /* transition: 0.3s; */
 }
 
 .sidebar a:hover {
@@ -771,4 +771,24 @@ SIDEBAR
 .sidebar-logger a {
     flex: 1;
     padding-left: 20px;
+}
+
+.sidebar-name {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #818181;
+    display: block;
+    align-items: center;
+    text-decoration: underline;
+    /* transition: 0.3s; */
+}
+.sidebar-email {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    align-items: center;
+    /* transition: 0.3s; */
 }

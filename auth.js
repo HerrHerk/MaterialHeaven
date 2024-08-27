@@ -74,8 +74,8 @@ const authLinksLogOut = document.getElementById("auth-links-logout");
 const sidebarAbout = document.getElementById("sidebar-about-div");
 const sidebarResetPassword = document.getElementById("sidebar-reset-password-div");
 const sidebarContact = document.getElementById("sidebar-contact-div");
-const sidebarName = document.getElementById("sidebar-name-div");
-const sidebarEmail = document.getElementById("sidebar-email-div");
+const sidebarName = document.getElementById("sidebar-name");
+const sidebarEmail = document.getElementById("sidebar-email");
 const sidebarLogin = document.getElementById("sidebar-login-div");
 const sidebarLogout = document.getElementById("sidebar-logout-div");
 const aboutForm = document.getElementById("about-form");
@@ -154,7 +154,9 @@ onAuthStateChanged(auth, async (user) => {
             
 
         } else {
+
             UIuserEmail.innerHTML = user.email;
+
 
             loginForm.style.display = "none";
             userProfileView.style.display = "none";
@@ -169,15 +171,26 @@ onAuthStateChanged(auth, async (user) => {
             try {
                 const docRef = doc(db, "users", user.uid);
                 const docSnap = await getDoc(docRef);
-                console.log(docSnap.data());
+                /* console.log("docsnap logging", docSnap.data());
+
+
+                console.log("Updating sidebar elements:");
+                console.log("Real name:", docSnap.data().realname);
+                console.log("Email:", docSnap.data().email);  */
+                sidebarName.textContent = docSnap.data().realname; // Correct usage for a <div>
+                sidebarEmail.textContent = docSnap.data().email;
+            
+                /*console.log("Updated sidebarName to:", sidebarName.textContent);
+                console.log("Updated sidebarEmail to:", sidebarEmail.textContent); */
+
 
                 updateName.value = docSnap.data().realname;
-                updateUserName.value = docSnap.data().username;
-                updateEmail.value = docSnap.data().email;
-                
+                // updateUserName.value = docSnap.data().username;
+
 
             } catch (error){
                 console.log(error.code);
+                console.log(error);
             }
 
 

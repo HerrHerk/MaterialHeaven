@@ -14,9 +14,15 @@ body.main-body{
     flex: 1;
 }
 
+#app-layout #middle-col{
+
+    flex: 3;
+    
+}
+
 #app-layout #right-col{
 
-    flex: 2;
+    flex: 1;
     
 }
 
@@ -285,7 +291,7 @@ material LIST
     display: flex;
     
     justify-content: left;
-    padding-left: 2em;
+    padding-left: 2em; /* sub materials */
 }
 
 .material-list-item .content .title {

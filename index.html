@@ -141,9 +141,9 @@
                 </div>
             </div>
 
-            <div id="special-material" class="tab-content">
-                <div class="tab-column" id="special-materialFiles">
-                    <ul id="material-list-special-material", class="material-list">
+            <div id="special-metal" class="tab-content">
+                <div class="tab-column" id="special-metalFiles">
+                    <ul id="material-list-special-metal", class="material-list">
                 
                         <!-- <li class="material-list-item">
 
@@ -577,7 +577,7 @@
     <script type="module" src="firebase-sdk.js"></script>
     <script src="app.js" type="module"></script>
     <script type="module" src="auth.js"></script>
-    <script src="icons.js"></script>
+    
 
     <script>
         // Fetch the JSON file
@@ -588,6 +588,7 @@
                 document.getElementById('steel-icon').src = data['steel'];
                 document.getElementById('aluminium-icon').src = data['aluminium'];
                 document.getElementById('iron-icon').src = data['iron'];
+                document.getElementById('special-metal-icon').src = data['special-metal'];
                 document.getElementById('other-icon').src = data['other'];
  
             })

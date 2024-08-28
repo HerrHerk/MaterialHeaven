@@ -424,7 +424,7 @@ material LIST
     color: rgb(0, 111, 55) !important; /* Iron group color */
 }
 
-#material-list-special-material .material-group-header {
+#material-list-special-metal .material-group-header {
     color: rgb(135, 104, 143) !important; /* Spec Mat group color */
 }
 
@@ -459,8 +459,8 @@ HOVER EFFECTS
     color: rgb(0, 111, 55) !important; /* Adjust color for Iron tab */
 }
 
-#material-list-special-material .material-list-item:hover .title,
-#material-list-special-material .material-list-item:hover .subtitle {
+#material-list-special-metal .material-list-item:hover .title,
+#material-list-special-metal .material-list-item:hover .subtitle {
     color: rgb(135, 104, 143) !important; /* Adjust color for Iron tab */
 }
 
@@ -673,7 +673,7 @@ TABS
   .tab[data-target="iron"] {
     color: rgb(0, 111, 55); /* Adjust color for Iron tab */
   }
-  .tab[data-target="special-material"] {
+  .tab[data-target="special-metal"] {
     color: rgb(135, 104, 143); /* Adjust color for Iron tab */
   }
   .tab[data-target="other"] {

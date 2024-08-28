@@ -85,10 +85,12 @@ const showMaterials = (materials) => {
         steel: document.getElementById("material-list-steel"),
         aluminium: document.getElementById("material-list-aluminium"),
         iron: document.getElementById("material-list-iron"),
-        specialMaterial: document.getElementById("material-list-special-material"),
+        specialMetal: document.getElementById("material-list-special-metal"),
         other: document.getElementById("material-list-other")
     };
-
+    
+    console.log(materialLists.steel, materialLists.aluminium, materialLists.iron, materialLists.specialMetal, materialLists.other);
+    
     for (let list in materialLists) {
         if (materialLists.hasOwnProperty(list)) {
             materialLists[list].innerHTML = "";
@@ -109,6 +111,18 @@ const showMaterials = (materials) => {
         acc[name].push(material);
         return acc;
     }, {});
+
+    
+    //EZ AZÉRT ILYEN, MERT AZ ADATBÁZISBAN MÁSHOGY SZEREPEL ÉS VALAHOGY ÁT KELL ALAkítani
+
+    // Mapping for material types
+    const materialMapping = {
+        "steel": "steel",
+        "aluminium": "aluminium",
+        "iron": "iron",
+        "special metal": "specialMetal",  // Mapping "special metal" to "specialMetal"
+        "other": "other"
+    };
 
     // Create the HTML structure
     for (const [name, materialGroup] of Object.entries(groupedMaterials)) {
@@ -139,17 +153,16 @@ const showMaterials = (materials) => {
         container.appendChild(header);
         container.appendChild(list);
 
-        const materialType = materialGroup[0].materialInfo.material 
-            ? materialGroup[0].materialInfo.material.toLowerCase() 
-            : null;
+        const materialType = materialMapping[materialGroup[0].materialInfo.material.toLowerCase()];
 
         if (materialType && materialLists[materialType]) {
             materialLists[materialType].appendChild(container);
         } else {
             materialLists.other.appendChild(container);
-            console.error(`Unknown material: ${materialType}`);
+            console.error(`Unknown material: ${materialGroup[0].materialInfo.material}`);
         }
     }
+
 
     
 
@@ -198,7 +211,7 @@ const materialListPressed = (event) => {
 
 // Add event listeners to all material lists
 const addEventListenersTomaterialLists = () => {
-    const materialListSelectors = ["#material-list-steel", "#material-list-aluminium", "#material-list-iron", "#material-list-other"];
+    const materialListSelectors = ["#material-list-steel", "#material-list-aluminium", "#material-list-iron", "#material-list-special-metal", "#material-list-other"];
     materialListSelectors.forEach(selector => {
       const materialList = document.querySelector(selector);
       if (materialList) {

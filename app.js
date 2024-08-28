@@ -85,6 +85,7 @@ const showMaterials = (materials) => {
         steel: document.getElementById("material-list-steel"),
         aluminium: document.getElementById("material-list-aluminium"),
         iron: document.getElementById("material-list-iron"),
+        specialMaterial: document.getElementById("material-list-special-material"),
         other: document.getElementById("material-list-other")
     };
 
@@ -1205,5 +1206,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-

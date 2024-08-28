@@ -38,6 +38,19 @@ h2 {
 
 }
 
+/* Hide scrollbar for the entire page */
+html, body {
+    overflow: auto; /* Ensure scrolling is enabled */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 /*-------------
 HEADER
 ------------- */
@@ -259,6 +272,21 @@ material LIST
     margin: 0;
     /*border: 1px solid #999;*/
     border-bottom: 0;
+    
+}
+
+#material-list-steel, 
+#material-list-aluminium, 
+#material-list-iron,
+#material-list-special-metal, 
+#material-list-other {
+    flex: 0.9;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* To enable grid layout */
+    gap: 20px; /* Space between cards */
+    justify-content: space-between; /* Even distribution of cards */
 }
 
 .material-list-item{
@@ -328,6 +356,7 @@ material LIST
     margin-bottom: 10px;
     overflow: hidden;
     transition: all 0.3s ease; /* Smooth transition */
+    width: calc(25% - 20px); /* Adjust for four cards per row */
 }
 
 .material-group-header {
@@ -395,6 +424,10 @@ material LIST
     color: rgb(0, 111, 55) !important; /* Iron group color */
 }
 
+#material-list-special-material .material-group-header {
+    color: rgb(135, 104, 143) !important; /* Spec Mat group color */
+}
+
 #material-list-other .material-group-header {
     color: rgb(255, 128, 64) !important; /* Other group color */
 }
@@ -425,6 +458,12 @@ HOVER EFFECTS
 #material-list-iron .material-list-item:hover .subtitle {
     color: rgb(0, 111, 55) !important; /* Adjust color for Iron tab */
 }
+
+#material-list-special-material .material-list-item:hover .title,
+#material-list-special-material .material-list-item:hover .subtitle {
+    color: rgb(135, 104, 143) !important; /* Adjust color for Iron tab */
+}
+
 
 #material-list-other .material-list-item:hover .title,
 #material-list-other .material-list-item:hover .subtitle {
@@ -586,20 +625,30 @@ TABS
     cursor: pointer;
     justify-content: space-between;
     margin-bottom: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .tab {
     padding: 10px;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
-    border-radius: 5px 5px 0 0;
-    flex-grow: 1;
-    text-align: center;
+    /* border-radius: 5px 5px 0 0; */
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-icon {
+    width: 50px;  /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    margin-right: 8px; /* Space between icon and text */
 }
 
 .tab.active {
     background-color: #fff;
-    border-bottom: none;
+    /* border-bottom: none; */
     font-weight: bold;
 }
 
@@ -623,6 +672,9 @@ TABS
   }
   .tab[data-target="iron"] {
     color: rgb(0, 111, 55); /* Adjust color for Iron tab */
+  }
+  .tab[data-target="special-material"] {
+    color: rgb(135, 104, 143); /* Adjust color for Iron tab */
   }
   .tab[data-target="other"] {
     color: rgb(255, 128, 64); /* Adjust color for Other tab */

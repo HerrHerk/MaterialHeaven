@@ -74,34 +74,40 @@
         
         <section id = "middle-col">
             <header class="main-header">
-
-                <div class="title">Materials</div>
+            </div>
+                <div class="left">
+                    
+                </div>
+                <div class="title">
+                    <img src="/assets/titel/cog-background.png" alt="Materials" class="header-image">
+                </div>
                 <div class="right">
-                    <button class="add-btn">Add</button>
+                    <button class="add-btn"><img src="/assets/icons/add-icon.png" alt="edit icon" width="20" height="20"></button>
                 </div>
             </header>
+            
 
 
             <!-- Tabs for navigation -->
             <div class="tabs">
                 <div class="tab active" data-target="steel">
-                    <img id="steel-icon" class="tab-icon" alt="Steel">
+                    <img src="/assets/icons/steel-icon.png"  class="tab-icon" alt="Steel">
                     Steel
                 </div>
                 <div class="tab" data-target="aluminium">
-                    <img id="aluminium-icon" class="tab-icon" alt="Aluminium">
+                    <img src="/assets/icons/aluminium-icon.png"  class="tab-icon" alt="Aluminium">
                     Aluminium
                 </div>
                 <div class="tab" data-target="iron">
-                    <img id="iron-icon" class="tab-icon" alt="Iron">
+                    <img src="/assets/icons/iron-icon.png" class="tab-icon" alt="Iron">
                     Iron
                 </div>
                 <div class="tab" data-target="special-metal">
-                    <img id="special-metal-icon" class="tab-icon" alt="Special Metals">
+                    <img src="/assets/icons/special-metal-icon.png" alt="edit icon" class="tab-icon" alt="Special Metals">
                     Special Metals
                 </div>
                 <div class="tab" data-target="other">
-                    <img id="other-icon" class="tab-icon" alt="Other">
+                    <img src="/assets/icons/other-icon.png"class="tab-icon" alt="Other">
                     Other
                 </div>
             </div>
@@ -579,21 +585,7 @@
     <script type="module" src="auth.js"></script>
     
 
-    <script>
-        // Fetch the JSON file
-        fetch('icons.json')
-            .then(response => response.json())
-            .then(data => {
-                // Set the src attributes of the icons
-                document.getElementById('steel-icon').src = data['steel'];
-                document.getElementById('aluminium-icon').src = data['aluminium'];
-                document.getElementById('iron-icon').src = data['iron'];
-                document.getElementById('special-metal-icon').src = data['special-metal'];
-                document.getElementById('other-icon').src = data['other'];
- 
-            })
-            .catch(error => console.error('Error loading icons:', error));
-    </script>
+
 
 </body>
 </html>

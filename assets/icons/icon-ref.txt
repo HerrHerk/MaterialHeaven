@@ -1,0 +1,10 @@
+edit-icon: <a href="https://www.flaticon.com/free-icons/modify" title="modify icons">Modify icons created by Freepik - Flaticon</a>
+download-icon: <a href="https://www.flaticon.com/free-icons/download" title="download icons">Download icons created by Creatype - Flaticon</a>
+delete-icon: <a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by bqlqn - Flaticon</a>
+add-icon: <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Pixel perfect - Flaticon</a>
+
+MATERIALS
+
+cast-icon: <a href="https://www.flaticon.com/free-icons/smelting" title="smelting icons">Smelting icons created by gravisio - Flaticon</a>
+special-metal-icon: <a href="https://www.flaticon.com/free-icons/metal" title="metal icons">Metal icons created by Freepik - Flaticon</a>
+

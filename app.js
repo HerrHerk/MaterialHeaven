@@ -131,8 +131,29 @@ const showMaterials = (materials) => {
         
         const header = document.createElement('div');
         header.classList.add('material-group-header');
-        header.innerText = name;
-        
+      
+        // Left part: Material name
+        const nameDiv = document.createElement('div');
+        nameDiv.classList.add('material-name');
+        nameDiv.innerText = name;
+
+        // Right part: Icon (if available)
+        const iconDiv = document.createElement('div');
+        iconDiv.classList.add('material-icon');
+
+        const iconName = materialGroup[0].materialInfo.icon;
+        if (iconName) {
+            const iconImg = document.createElement('img');
+            iconImg.src = `/assets/icons/${iconName}-icon.png`;
+            iconImg.alt = `${name} icon`;
+            iconImg.classList.add('material-icon-img');
+            iconDiv.appendChild(iconImg);
+        }
+
+        // Append both parts to the header
+        header.appendChild(nameDiv);
+        header.appendChild(iconDiv);
+
         const list = document.createElement('ul');
         list.classList.add('material-sublist');
 
@@ -644,9 +665,15 @@ const displayButtonsOnDetailView = (id) => {
         const buttonsDiv = document.createElement("div");
         buttonsDiv.className = "action";
         buttonsDiv.innerHTML = `
-            <button class="edit-user">edit</button>
-            <button class="delete-user">delete</button>
-            <button class="download-btn">download</button>
+            <button class="edit-user">
+                <img src="/assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
+            </button>
+            <button class="delete-user">
+                <img src="/assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
+            </button>
+            <button class="download-btn">
+                <img src="/assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
+            </button>
         `;
 
         // Clear any previous buttons on this item to avoid duplication

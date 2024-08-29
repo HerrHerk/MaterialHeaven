@@ -128,10 +128,10 @@ const showMaterials = (materials) => {
     for (const [name, materialGroup] of Object.entries(groupedMaterials)) {
         const container = document.createElement('div');
         container.classList.add('material-group');
-        
+
         const header = document.createElement('div');
         header.classList.add('material-group-header');
-      
+
         // Left part: Material name
         const nameDiv = document.createElement('div');
         nameDiv.classList.add('material-name');
@@ -141,13 +141,18 @@ const showMaterials = (materials) => {
         const iconDiv = document.createElement('div');
         iconDiv.classList.add('material-icon');
 
-        const iconName = materialGroup[0].materialInfo.icon;
-        if (iconName) {
-            const iconImg = document.createElement('img');
-            iconImg.src = `/assets/icons/${iconName}-icon.png`;
-            iconImg.alt = `${name} icon`;
-            iconImg.classList.add('material-icon-img');
-            iconDiv.appendChild(iconImg);
+        // Find the first non-null icon in the group
+        let iconFound = false;
+        for (const material of materialGroup) {
+            const iconName = material.materialInfo.icon;
+            if (iconName && !iconFound) {
+                const iconImg = document.createElement('img');
+                iconImg.src = `/assets/icons/${iconName}-icon.png`;
+                iconImg.alt = `${name} icon`;
+                iconImg.classList.add('material-icon-img');
+                iconDiv.appendChild(iconImg);
+                iconFound = true; // Stop searching after finding the first icon
+            }
         }
 
         // Append both parts to the header
@@ -183,7 +188,6 @@ const showMaterials = (materials) => {
             console.error(`Unknown material: ${materialGroup[0].materialInfo.material}`);
         }
     }
-
 
     
 

@@ -212,6 +212,7 @@ const showMaterials = (materials) => {
 const materialListPressed = (event) => {
     const id = event.target.closest("li").getAttribute("id");
     const action = document.querySelectorAll('.material-list-item .action');
+    
     // console.log (id);
 
     if(event.target.className === "edit-user") {
@@ -224,14 +225,76 @@ const materialListPressed = (event) => {
         downloadButtonPressed(id);
     
     } else {
+        moveCardToNextRow(id);
         displaymaterialOnDetailsView(id);
         toggleLeftAndRightViewsOnMobile();
         displayButtonsOnDetailView(id);
-        
+
     }
 
     
 }
+
+const moveCardToNextRow = (id) => {
+    const selectedCard = document.getElementById(id);
+    const cardContainer = selectedCard.closest('.material-group');
+    const materialList = cardContainer.parentElement;
+
+    // Unique identifiers for the top and bottom lines and detail div
+    const topLineId = `${id}-top-line`;
+    const bottomLineId = `${id}-bottom-line`;
+    const detailDivId = `${id}-detail`;
+
+    const existingTopLine = document.getElementById(topLineId);
+    const existingBottomLine = document.getElementById(bottomLineId);
+    const existingDetailDiv = document.getElementById(detailDivId);
+
+    if (existingTopLine && existingBottomLine && existingDetailDiv) {
+        // The card is already moved, revert it back
+        materialList.insertBefore(cardContainer, existingTopLine);
+        existingTopLine.remove();
+        existingBottomLine.remove();
+        existingDetailDiv.remove();
+
+        // Move subsequent cards back to their original position
+        const allCards = Array.from(materialList.querySelectorAll('.material-group'));
+        const selectedIndex = allCards.indexOf(cardContainer);
+
+        for (let i = selectedIndex + 1; i < allCards.length; i++) {
+            materialList.insertBefore(allCards[i], null);
+        }
+    } else {
+        // Remove previously opened detail divs and lines
+        document.querySelectorAll('.separator-line').forEach(line => line.remove());
+        document.querySelectorAll('.material-detail').forEach(div => div.remove());
+
+        // Expand the card and add lines and the detail div
+        const topLine = document.createElement('div');
+        topLine.id = topLineId;
+        topLine.classList.add('separator-line');
+
+        const bottomLine = document.createElement('div');
+        bottomLine.id = bottomLineId;
+        bottomLine.classList.add('separator-line');
+
+        const detailDiv = document.createElement('div');
+        detailDiv.id = detailDivId;
+        detailDiv.classList.add('material-detail'); // Apply the class here
+
+        materialList.insertBefore(topLine, cardContainer);
+        materialList.insertBefore(cardContainer, topLine.nextSibling);
+        materialList.insertBefore(detailDiv, cardContainer.nextSibling);
+        materialList.insertBefore(bottomLine, detailDiv.nextSibling);
+
+        const allCards = Array.from(materialList.querySelectorAll('.material-group'));
+        const selectedIndex = allCards.indexOf(cardContainer);
+
+        for (let i = selectedIndex + 1; i < allCards.length; i++) {
+            materialList.appendChild(allCards[i]);
+        }
+    }
+};
+
 
 
 // Add event listeners to all material lists
@@ -467,7 +530,7 @@ const getmaterial = (id) => {
 
 const displaymaterialOnDetailsView = (id) => {
     const material = getmaterial(id);
-    const rightColDetail = document.getElementById("right-col-detail");
+    const singleMaterialDetail = document.getElementById(`${id}-detail`);
 
     // Function to format the value
     const formatValue = (value) => (value === null || value === undefined || value === '') ? 'n/a' : value;
@@ -475,7 +538,7 @@ const displaymaterialOnDetailsView = (id) => {
     // Function to check if the value is missing data
     const isMissingData = (value) => value === null || value === undefined || value === '';
 
-    rightColDetail.innerHTML = `
+    singleMaterialDetail.innerHTML = `
         <div class="card-mat-container">
             <div class="card-mat">
                 <div class="mat-header">Johnson Cook Strength</div>

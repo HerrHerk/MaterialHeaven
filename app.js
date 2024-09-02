@@ -352,6 +352,11 @@ const editButtonPressed = (id) => {
     name.value = selectedMaterial.materialInfo.name;
     version.value = selectedMaterial.materialInfo.version;
     material.value = selectedMaterial.materialInfo.material;  // This refers to the HTML element or another variable, not the renamed constant
+    icon.value = selectedMaterial.materialInfo.icon;
+    description.value = selectedMaterial.materialInfo.description;
+    tier.value = selectedMaterial.materialInfo.tier;
+    price.value = selectedMaterial.materialInfo.price;
+   
     console.log(material.value); // Should log the DOM element
 
 
@@ -371,7 +376,8 @@ const editButtonPressed = (id) => {
     triaxial_factor.value = selectedMaterial.materialModels.johnsonCookFailure.triaxial_factor;
     strain_rate_factor.value = selectedMaterial.materialModels.johnsonCookFailure.strain_rate_factor;
     temperature_factor.value = selectedMaterial.materialModels.johnsonCookFailure.temperature_factor;
-
+    reference_strain_rate_alt.value = selectedMaterial.materialModels.johnsonCookFailure.reference_strain_rate_2;
+    
     // Accessing Isotropic Elasticity properties
     e_modulus.value = selectedMaterial.materialModels.isotropicElasticity.e_modulus;
     poisson.value = selectedMaterial.materialModels.isotropicElasticity.poisson;
@@ -1056,50 +1062,60 @@ const addButtonPressed = () => {
     // Clear all input fields
     name.value = "";
     version.value = "";
-    
-    // MaterialInfo fields
-    materialInfo.name.value = "";
-    materialInfo.version.value = "";
-    
-    // MaterialModels subcollections fields
+    material.value = "";  // Ensure this refers to the correct element
+
+    // Clear MaterialInfo fields
+    name.value = "";
+    version.value = "";
+    material.value = "";
+    icon.value = "";
+    description.value = "";
+    tier.value = "";
+    price.value = "";
+
+    // Clear MaterialModels subcollections fields
     // Johnson Cook Strength
-    materialModels.johnsonCookStrength.initial_yield_strength.value = "";
-    materialModels.johnsonCookStrength.hardening_constan.value = "";
-    materialModels.johnsonCookStrength.hardening_exponent.value = "";
-    materialModels.johnsonCookStrength.strain_rate_constant.value = "";
-    materialModels.johnsonCookStrength.thermal_softening_exp.value = "";
-    materialModels.johnsonCookStrength.melting_temperature.value = "";
-    materialModels.johnsonCookStrength.reference_strain_rate.value = "";
-    
+    initial_yield_strength.value = "";
+    hardening_constant.value = ""; // Correct typo here (was hardening_constan)
+    hardening_exponent.value = "";
+    strain_rate_constant.value = "";
+    thermal_softening_exp.value = "";
+    melting_temperature.value = "";
+    reference_strain_rate.value = "";
+
     // Johnson Cook Failure
-    materialModels.johnsonCookFailure.initial_failure_strain.value = "";
-    materialModels.johnsonCookFailure.exponential_factor.value = "";
-    materialModels.johnsonCookFailure.triaxial_factor.value = "";
-    materialModels.johnsonCookFailure.strain_rate_factor.value = "";
-    materialModels.johnsonCookFailure.temperature_factor.value = "";
-    
+    initial_failure_strain.value = "";
+    exponential_factor.value = "";
+    triaxial_factor.value = "";
+    strain_rate_factor.value = "";
+    temperature_factor.value = "";
+    reference_strain_rate_alt.value = ""; // Make sure you use the correct variable
+
     // Isotropic Elasticity
-    materialModels.isotropicElasticity.e_modulus.value = "";
-    materialModels.isotropicElasticity.poisson.value = "";
-    materialModels.isotropicElasticity.shear_modulus.value = "";
-    materialModels.isotropicElasticity.bulk_modulus.value = "";
-    
+    e_modulus.value = "";
+    poisson.value = "";
+    shear_modulus.value = "";
+    bulk_modulus.value = "";
+
     // Shock EOS
-    materialModels.shockEOS.grueneisen_coefficient.value = "";
-    materialModels.shockEOS.parameter_c1.value = "";
-    materialModels.shockEOS.parameter_s1.value = "";
-    materialModels.shockEOS.parameter_quadratic.value = "";
-    
+    grueneisen_coefficient.value = "";
+    parameter_c1.value = "";
+    parameter_s1.value = "";
+    parameter_quadratic.value = "";
+
     // Physical Properties
-    materialModels.physicalProperties.density.value = "";
-    materialModels.physicalProperties.specific_heat.value = "";
-    materialModels.physicalProperties.hardness.value = "";
-    
+    density.value = "";
+    specific_heat.value = "";
+    hardness.value = "";
+
     // Additional Info
     source.value = "";
     reference.value = "";
-    material.value = "";
+
+    console.log("Name field after clear:", name.value);
+
 };
+
 
 const closeButtonPressed = () => {
     modalOverlay.style.display = "none";
@@ -1158,7 +1174,9 @@ const saveButtonPressed = async() => {
                 material: material.value, // Adjust as necessary if `material` should be a specific category
                 version: version.value,
                 tier: tier.value, // Ensure you include this if it’s part of the schema
-                price: price.value // Ensure you include this if it’s part of the schema
+                price: price.value, // Ensure you include this if it’s part of the schema
+                icon: icon.value,
+                description: description.value
             },
             
             materialModels: {
@@ -1185,7 +1203,7 @@ const saveButtonPressed = async() => {
                     triaxial_factor: triaxial_factor.value,
                     strain_rate_factor: strain_rate_factor.value,
                     temperature_factor: temperature_factor.value,
-                    reference_strain_rate_alt: reference_strain_rate.value, // Adjust to match the field name in the new schema
+                    reference_strain_rate_alt: reference_strain_rate_alt.value, // Adjust to match the field name in the new schema
                 },
                 
                 physicalProperties: {

@@ -211,36 +211,54 @@ const showMaterials = (materials) => {
 
 const materialListPressed = (event) => {
     const id = event.target.closest("li").getAttribute("id");
-    const action = document.querySelectorAll('.material-list-item .action');
-    
-    // console.log (id);
 
-    if(event.target.className === "edit-user") {
-        editButtonPressed(id);
+    // Log the clicked element and its parent classes for better debugging
+    console.log("Clicked element:", event.target);
+    console.log("Clicked element's class:", event.target.className);
+    console.log("Parent button class (if any):", event.target.closest('button')?.className);
+    console.log("Item ID:", id);
 
-    } else if(event.target.className === "delete-user") {
-        deleteButtonPressed(id);
+    // Check if a button is pressed using closest
+    const button = event.target.closest("button");
+    if (button) {
+        const buttonClass = button.className;
+        console.log(`Button pressed: ${buttonClass}`);
+        event.stopPropagation(); // Prevent the click from propagating to the list item
 
-    } else if(event.target.className === "download-btn") {
-        downloadButtonPressed(id);
-    
-    } else {
-        moveCardToNextRow(id);
-        displaymaterialOnDetailsView(id);
-        toggleLeftAndRightViewsOnMobile();
-        displayButtonsOnDetailView(id);
+        // Execute the corresponding button function
+        if (buttonClass.includes("edit-user")) {
+            console.log("Edit button function called.");
+            editButtonPressed(id);
+        } else if (buttonClass.includes("delete-user")) {
+            console.log("Delete button function called.");
+            deleteButtonPressed(id);
+        } else if (buttonClass.includes("download-btn")) {
+            console.log("Download button function called.");
+            downloadButtonPressed(id);
+        }
 
+        return; // Exit the function to prevent card collapse/expansion
     }
 
-    
-}
+    // Handle card expansion/collapse when non-button area is clicked
+    console.log("No button pressed, handling card expansion/collapse.");
+    const cardExpanded = moveCardToNextRow(id);
+    if (!cardExpanded) {
+        console.log("Card collapsed, hiding buttons.");
+        hideButtonsOnCollapse(id); // Hide buttons when card is collapsed
+    } else {
+        console.log("Card expanded, displaying material details.");
+    }
+    displaymaterialOnDetailsView(id);
+    displayButtonsOnDetailView(id);
+};
+
 
 const moveCardToNextRow = (id) => {
     const selectedCard = document.getElementById(id);
     const cardContainer = selectedCard.closest('.material-group');
     const materialList = cardContainer.parentElement;
 
-    // Unique identifiers for the top and bottom lines and detail div
     const topLineId = `${id}-top-line`;
     const bottomLineId = `${id}-bottom-line`;
     const detailDivId = `${id}-detail`;
@@ -250,25 +268,26 @@ const moveCardToNextRow = (id) => {
     const existingDetailDiv = document.getElementById(detailDivId);
 
     if (existingTopLine && existingBottomLine && existingDetailDiv) {
-        // The card is already moved, revert it back
+        // Card is already expanded, collapse it
         materialList.insertBefore(cardContainer, existingTopLine);
         existingTopLine.remove();
         existingBottomLine.remove();
         existingDetailDiv.remove();
 
-        // Move subsequent cards back to their original position
         const allCards = Array.from(materialList.querySelectorAll('.material-group'));
         const selectedIndex = allCards.indexOf(cardContainer);
 
         for (let i = selectedIndex + 1; i < allCards.length; i++) {
             materialList.insertBefore(allCards[i], null);
         }
+
+        return false; // Indicates card was collapsed
     } else {
         // Remove previously opened detail divs and lines
         document.querySelectorAll('.separator-line').forEach(line => line.remove());
         document.querySelectorAll('.material-detail').forEach(div => div.remove());
 
-        // Expand the card and add lines and the detail div
+        // Expand the card
         const topLine = document.createElement('div');
         topLine.id = topLineId;
         topLine.classList.add('separator-line');
@@ -279,7 +298,7 @@ const moveCardToNextRow = (id) => {
 
         const detailDiv = document.createElement('div');
         detailDiv.id = detailDivId;
-        detailDiv.classList.add('material-detail'); // Apply the class here
+        detailDiv.classList.add('material-detail');
 
         materialList.insertBefore(topLine, cardContainer);
         materialList.insertBefore(cardContainer, topLine.nextSibling);
@@ -292,10 +311,18 @@ const moveCardToNextRow = (id) => {
         for (let i = selectedIndex + 1; i < allCards.length; i++) {
             materialList.appendChild(allCards[i]);
         }
+
+        return true; // Indicates card was expanded
     }
 };
 
-
+const hideButtonsOnCollapse = (id) => {
+    const listItem = document.getElementById(id);
+    const existingActionDiv = listItem.querySelector('.action');
+    if (existingActionDiv) {
+        existingActionDiv.remove(); // Remove buttons when card is collapsed
+    }
+};
 
 // Add event listeners to all material lists
 const addEventListenersTomaterialLists = () => {

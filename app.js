@@ -414,7 +414,7 @@ const deleteButtonPressed = async (id) => {
 
     if (isConfirmed) {
         try {
-            const docRef = doc(db, "materials", id);
+            const docRef = doc(db, "materialCollection", id);
             await deleteDoc(docRef);
         } catch(e) {
             setErrorMessage("error", "Unable to delete user data from the database. Please try again later");
@@ -1189,7 +1189,7 @@ const saveButtonPressed = async() => {
                 
                 johnsonCookStrength: {
                     initial_yield_strength: initial_yield_strength.value,
-                    hardening_constant: hardening_constan.value, // Correct field name
+                    hardening_constant: hardening_constant.value, // Correct field name
                     hardening_exponent: hardening_exponent.value,
                     strain_rate_constant: strain_rate_constant.value,
                     thermal_softening_exp: thermal_softening_exp.value,
@@ -1229,7 +1229,7 @@ const saveButtonPressed = async() => {
 
         if(modalOverlay.getAttribute("material-id")) {
             // update data
-            const docRef = doc(db, "materials", modalOverlay.getAttribute("material-id"));
+            const docRef = doc(db, "materialCollection", modalOverlay.getAttribute("material-id"));
 
             try {
                 

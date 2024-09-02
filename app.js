@@ -874,6 +874,23 @@ const initializeCharts = (id) => {
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        color: 'white', // Set legend text color to white
+                        usePointStyle: true,
+                        generateLabels: function(chart) {
+                            var styles = ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)'];
+                            return chart.data.datasets.map(function(dataset, i) {
+                                return {
+                                    text: dataset.label,
+                                    fillStyle: styles[i],
+                                    strokeStyle: styles[i],
+                                    lineWidth: 3,
+                                    pointStyle: 'line',
+                                    fontColor: 'white' // Ensure this is white as well
+                                };
+                            });
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {
@@ -948,6 +965,23 @@ const initializeCharts = (id) => {
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        color: 'white', // Set legend text color to white
+                        usePointStyle: true,
+                        generateLabels: function(chart) {
+                            var styles = ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)'];
+                            return chart.data.datasets.map(function(dataset, i) {
+                                return {
+                                    text: dataset.label,
+                                    fillStyle: styles[i],
+                                    strokeStyle: styles[i],
+                                    lineWidth: 3,
+                                    pointStyle: 'line',
+                                    fontColor: 'white' // Ensure this is white as well
+                                };
+                            });
+                        }
+                    }
                 },
                 tooltip: {
                     callbacks: {

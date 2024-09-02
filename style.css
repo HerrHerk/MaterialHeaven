@@ -524,7 +524,7 @@ RIGHT COLUMN
 }
 
 .card-mat {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #545F66;
     border: 1px solid #f4f4f4;
     color: #ffffff;
     padding-left: 5em;
@@ -582,7 +582,7 @@ CHART
 ------------- */
 
 .card-chart {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #545F66;
     border: 1px solid #f4f4f4;
     color: #f4f4f4;
     padding-left: 5rem;

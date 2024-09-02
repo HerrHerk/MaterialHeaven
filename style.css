@@ -815,7 +815,7 @@ SIDEBAR
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #545F66;
     display: block;
     /* transition: 0.3s; */
 }
@@ -846,7 +846,7 @@ SIDEBAR
 /* Horizontal separator line */
 .sidebar-separator {
     border: none;
-    border-bottom: 1px solid #555; /* Light grey color */
+    border-bottom: 1px solid #545F66; /* Light grey color */
     margin: 15px 0;
 }
 
@@ -868,7 +868,7 @@ SIDEBAR
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 30px;
-    color: #818181;
+    color: #545F66;
     display: block;
     align-items: center;
     text-decoration: underline;
@@ -878,7 +878,7 @@ SIDEBAR
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 18px;
-    color: #818181;
+    color: #545F66;
     display: block;
     align-items: center;
     /* transition: 0.3s; */

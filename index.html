@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-     
+
 
     
 </head>
@@ -38,16 +38,23 @@
                             <a href="#" id="sidebar-profile">Profile</a>
                         </div>
                         
-                        <div class="sidebar-logger" id="sidebar-contact-div">
-                            <i class="envelope icon"></i>
-                            <a href="mailto:business.herrherk@gmail.com?subject=Contact Inquiry&body=Hello," id="sidebar-contact">Contact</a>
+                        <div class="sidebar-logger" id="sidebar-subscription-plan-div">
+                            <i class="euro icon"></i>
+                            <a href="#" id="sidebar-subscription-plan">Subscription</a>
                         </div>
                         
                         <div class="sidebar-logger" id="sidebar-reset-password-div">
                             <i class="lock icon"></i>
                             <a href="#" id="sidebar-reset-password">Reset Password</a>
                         </div>
-                        
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">                     
+
+                        <div class="sidebar-logger" id="sidebar-contact-div">
+                            <i class="envelope icon"></i>
+                            <a href="mailto:business.herrherk@gmail.com?subject=Contact Inquiry&body=Hello," id="sidebar-contact">Contact</a>
+                        </div>
                         <div class="sidebar-logger" id="sidebar-about-div">
                             <i class="book icon"></i>
                             <a href="#" id="sidebar-about">About</a>
@@ -515,6 +522,93 @@
                     </div>
                 </div>
             </div> -->
+
+
+            <!-- SUBSCRIPTION PLANS -->
+            <div class="ui segment" id="subscription-plan-form">
+                <h2 class="ui header">Choose Your Plan</h2>
+                <div class="subscription-plans">
+                    <!-- Free Plan -->
+                    <div class="plan-card free-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Free Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">Free</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Basic Feature 1</li>
+                            <li>Basic Feature 2</li>
+                            <li>Basic Feature 3</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="free-plan-btn">Choose Free</button>
+                    </div>
+                    <!-- Basic Plan -->
+                    <div class="plan-card basic-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Basic Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€150</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="basic-plan-btn">Choose Basic</button>
+                    </div>
+                    <!-- Standard Plan -->
+                    <div class="plan-card standard-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Standard Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€250</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                            <li>Feature 4</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="standard-plan-btn">Choose Standard</button>
+                    </div>
+                    <!-- Premium Plan -->
+                    <div class="plan-card premium-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3>Premium Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€400</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>All Features</li>
+                            <li>Premium Feature 1</li>
+                            <li>Premium Feature 2</li>
+                            <li>Premium Feature 3</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="premium-plan-btn">Choose Premium</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
 
 
             <!-- LOG IN FORM -->

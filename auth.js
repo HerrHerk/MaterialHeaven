@@ -78,6 +78,10 @@ const sidebarName = document.getElementById("sidebar-name");
 const sidebarEmail = document.getElementById("sidebar-email");
 const sidebarLogin = document.getElementById("sidebar-login-div");
 const sidebarLogout = document.getElementById("sidebar-logout-div");
+
+const sidebarSubscription = document.getElementById("sidebar-subscription-plan-div");
+const subscriptionForm = document.getElementById("subscription-plan-form");
+
 const aboutForm = document.getElementById("about-form");
 
 //const eyeIcon = document.getElementById("eye-btn");
@@ -227,12 +231,14 @@ const hideMainView = (e) => {
             aboutForm.style.display = "none";
             loginForm.style.display = "none";
             userProfileView.style.display = "none";
+            subscriptionForm.style.display = "none";
         }         
     } else {
         mainView.style.display = "none";
         loginForm.style.display = "none";
         userProfileView.style.display = "none";
         aboutForm.style.display = "none";
+        subscriptionForm.style.display = "none";
     }
 
 }
@@ -433,7 +439,11 @@ const sidebarAboutPressed = () => {
     aboutForm.style.display = "block";
 };
 
-
+const sidebarSubscriptionPressed = () => {
+    
+    mainView.style.display = "flex";
+    subscriptionForm.style.display = "block";
+};
 
 signUpBtn.addEventListener("click", signUpBtnPressed);
 logOutBtn.addEventListener("click", logOutBtnPressed);
@@ -456,6 +466,8 @@ sidebarAbout.addEventListener("click", sidebarAboutPressed);
 sidebarLogin.addEventListener("click", signUpLogInBtnPressed);
 sidebarLogout.addEventListener("click", logOutBtnPressed);
 sidebarResetPassword.addEventListener("click", sidebarResetPasswordPressed);
+
+sidebarSubscription.addEventListener("click", sidebarSubscriptionPressed);
 
 // HIDE AND REVEAL PASSWORD
 /* const eyeIconPressed = () => {

@@ -717,6 +717,12 @@ TABS
 AUTH UI
 ------------- */
 
+.ui.segment {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
 #ui-section {
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
@@ -739,6 +745,16 @@ AUTH UI
 #reset-password-form,
 #about-form {
     min-width: 400px;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
+}
+
+#subscription-plan-form {
+    min-width: 1000px;
     text-align: center;
     display: none;
     position: fixed;
@@ -883,3 +899,213 @@ SIDEBAR
     align-items: center;
     /* transition: 0.3s; */
 }
+
+
+/*-------------
+SUBSCRIPTION PLANS
+------------- */
+
+/* Subscription Plans Container */
+.subscription-plans-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* Header */
+.subscription-plans-container h2 {
+    font-size: 2.5em;
+    color: #545f66;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+}
+
+.subscription-plans-container h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #2F4858;
+    margin: 20px auto 0;
+    border-radius: 5px;
+}
+
+/* Subscription Plans */
+.subscription-plans {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Plan Cards */
+.plan-card {
+    flex: 1;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #e6e6e6;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Differentiating Colors and Gradients */
+.free-plan {
+    background: linear-gradient(135deg, #E6E6E6, #CCCCCC);
+    color: #7A7A7A;
+}
+
+.free-plan .plan-price {
+    color: #A9A9A9;
+}
+
+.basic-plan {
+    background: linear-gradient(135deg, #C9EAFD, #829399);
+}
+
+.basic-plan .plan-price {
+    color: #5A7D92;
+}
+
+.standard-plan {
+    background: linear-gradient(135deg, #A8D8EB, #545f66);
+}
+
+.standard-plan .plan-price {
+    color: #3D5B73;
+}
+
+.premium-plan {
+    background: linear-gradient(135deg, #7BA5D6, #2F4858);
+}
+
+.premium-plan .plan-price {
+    color: #D0F4EA;
+}
+
+/* Hover Effect */
+.plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+/* Plan Header */
+.plan-header {
+    margin-bottom: 20px;
+}
+
+.plan-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: inherit;
+}
+
+.plan-header h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: inherit;
+    font-weight: 700;
+}
+
+.plan-price {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Plan Benefits */
+.plan-benefits {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font-weight: 500;
+}
+
+.plan-benefits li {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.plan-benefits li::before {
+    content: '✔';
+    color: inherit;
+    font-weight: bold;
+    position: absolute;
+    left: -25px;
+    top: 0;
+    font-size: 1.2em;
+}
+
+/* Horizontal Line Separators */
+.plan-separator {
+    border: 0;
+    height: 2px;
+    background: #fff;
+    width: 50%;
+    margin: 15px auto 25px;
+    opacity: 0.5;
+    border-radius: 2px;
+}
+
+.benefits-separator {
+    margin: 20px auto;
+    width: 80%;
+    opacity: 0.3;
+}
+
+/* Select Plan Button */
+.select-plan-btn {
+    background-color: #2F4858;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.select-plan-btn:hover {
+    background-color: #4A6F82;
+    transform: scale(1.05);
+}
+
+/* Button Gradient Effect */
+.select-plan-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 0;
+}
+
+.select-plan-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Text Styling */
+.plan-card .plan-header h3,
+.plan-card .plan-price,
+.plan-benefits li {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+

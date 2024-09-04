@@ -126,6 +126,13 @@ const showMaterials = (materials) => {
 
     // Create the HTML structure
     for (const [name, materialGroup] of Object.entries(groupedMaterials)) {
+
+        // Add sorting step here for alphabetical ascending order within the card
+        materialGroup.sort((a, b) => 
+            String(a.materialInfo.version).localeCompare(String(b.materialInfo.version))
+        );
+
+
         const container = document.createElement('div');
         container.classList.add('material-group');
 
@@ -161,6 +168,8 @@ const showMaterials = (materials) => {
 
         const list = document.createElement('ul');
         list.classList.add('material-sublist');
+
+
 
         materialGroup.forEach(material => {
             const li = document.createElement('li');

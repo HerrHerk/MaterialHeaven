@@ -13,12 +13,7 @@ const dbRef = collection(db, "materialCollection");
 
 const leftCol = document.getElementById("left-col");
 const rightCol = document.getElementById("right-col");
-const backBtn = document.getElementById("back-btn");
 
-backBtn.addEventListener("click", e => {
-    leftCol.style.display = "block";
-    rightCol.style.display = "none";
-});
 
 const toggleLeftAndRightViewsOnMobile = () => {
     if (document.body.clientWidth <= 600) {
@@ -29,12 +24,38 @@ const toggleLeftAndRightViewsOnMobile = () => {
 
 
 //------------------------------------------------------------
-// FONT SIZE BASED ON SCREEN
+// SIDEBAR RIGHT
 //------------------------------------------------------------
 
-// Example: Adjust root font size based on screen width
 
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar-right');
+    const closeBtn = document.getElementById('closebtn-right');
+    const menuBtn = document.getElementById('filter-btn');
 
+    // Function to open sidebar
+    function openNav() {
+        sidebar.classList.add('open');
+        sidebar.classList.remove('close');
+    }
+
+    // Function to close sidebar
+    function closeNav() {
+        sidebar.classList.add('close');
+        sidebar.classList.remove('open');
+    }
+
+    // Event listeners
+    menuBtn.addEventListener('click', openNav);
+    closeBtn.addEventListener('click', closeNav);
+
+    // Optional: Close sidebar if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            closeNav();
+        }
+    });
+});
 
 //------------------------------------------------------------
 // GET DATA

@@ -65,11 +65,11 @@ const updateBtn = document.getElementById("update-btn");
 
 
 
-const signUpLogInBtn = document.getElementById("sign-up-log-in-btn");
+
 const profileDataBtn = document.getElementById("sidebar-profile-div");
-const profileLogOutBtn = document.getElementById("profile-logout-btn");
-const authLinksLogIn = document.getElementById("auth-links-login");
-const authLinksLogOut = document.getElementById("auth-links-logout");
+
+
+
 
 const sidebarAbout = document.getElementById("sidebar-about-div");
 const sidebarResetPassword = document.getElementById("sidebar-reset-password-div");
@@ -139,9 +139,9 @@ onAuthStateChanged(auth, async (user) => {
     console.log(user);
     if (user) {
 
-        authLinksLogIn.style.display = "none";
+        
         sidebarLogin.style.display = "none";
-        authLinksLogOut.style.display = "flex"; // Show logout options
+        
         sidebarLogout.style.display = "flex";
         emailVerificationView.style.display = "none";
 
@@ -165,9 +165,9 @@ onAuthStateChanged(auth, async (user) => {
             loginForm.style.display = "none";
             userProfileView.style.display = "none";
             mainView.style.display = "none";
-            authLinksLogIn.style.display = "none";
+            
             sidebarLogin.style.display = "none";
-            authLinksLogOut.style.display = "flex"; // Show logout options
+            
             sidebarLogout.style.display = "flex";
             signUpFormView.style.display = "none";
 
@@ -206,9 +206,9 @@ onAuthStateChanged(auth, async (user) => {
 
         loginForm.style.display = "none";
         userProfileView.style.display = "none";
-        authLinksLogIn.style.display = "flex";  // Show login options
+        
         sidebarLogin.style.display = "flex";
-        authLinksLogOut.style.display = "none";
+       
         sidebarLogout.style.display = "none";
         emailVerificationView.style.display = "none";
         resetPasswordForm.style.display = "none";
@@ -272,15 +272,7 @@ const profileDataBtnPressed = () => {
     }
 };
 
-const profileLogOutBtnPressed = () => {
-    logOutBtnPressed();
-    authLinksLogIn.style.display = "flex";
-    sidebarLogin.style.display = "flex";
-    authLinksLogOut.style.display = "none";
-    sidebarLogout.style.display = "none";
-    mainView.style.display = "none";
 
-}
 
 const signUpBtnPressed = async (e) => {
     e.preventDefault();
@@ -450,10 +442,10 @@ logOutBtn.addEventListener("click", logOutBtnPressed);
 loginBtn.addEventListener("click", loginBtnPressed);
 needAnAccountBtn.addEventListener("click", needAnAccountBtnPressed);
 haveAnAccountBtn.addEventListener("click", haveAnAccountBtnPressed);
-signUpLogInBtn.addEventListener("click", signUpLogInBtnPressed);
+
 mainView.addEventListener("click", hideMainView);
 profileDataBtn.addEventListener("click", profileDataBtnPressed);
-profileLogOutBtn.addEventListener("click", profileLogOutBtnPressed);
+
 resendEmailBtn.addEventListener("click", resendEmailBtnPressed);
 forgotPasswordBtn.addEventListener("click", forgotPasswordBtnPressed);
 resetPasswordBtn.addEventListener("click", resetPasswordBtnPressed);

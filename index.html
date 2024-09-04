@@ -119,6 +119,31 @@
                 </div>
             </div>
 
+            <!-- Search, Filter, and Collapse All -->
+<!--             <div class="search-filter-collapse">
+
+                <div class="filter-area">
+                    <button class="filter-btn">
+                        <img src="/assets/icons/filter-icon.png" alt="Filter Icon" class="filter-icon">
+                    </button>
+                    <button class="star-btn" title="Filter Favourites">
+                        <img src="/assets/icons/star-icon.png" alt="Star Icon" class="filter-icon">
+                    </button>
+                    <button class="owned-btn" title="Filter Owned">
+                        <img src="/assets/icons/euro-icon.png" alt="Owned Icon" class="filter-icon">
+                    </button>
+                    <select class="filter-dropdown">
+                        <option value="all">All</option>
+                        <option value="free">Free</option>
+                        <option value="basic">Basic</option>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+                <button class="collapse-all-btn">Collapse All</button>
+            </div> -->
+
+
             <!-- Content areas for each tab -->
             <div id="steel" class="tab-content active">
                 <div class="tab-column" id="steelFiles">
@@ -184,20 +209,29 @@
 
         <section id = "right-col">
             <header class="main-header">
-                <div class="left">
-                    <button id="back-btn">Back</button>
-                </div>
-                <div class="title"></div>
                 <div class="right">
-                    <div class="auth-links-login" id="auth-links-login">
-                        <a href="#" class="auth-text" id="sign-up-log-in-btn"></a>
-                        <i class="user icon"></i>
-                    </div>
-                    <div class="auth-links-logout" id="auth-links-logout">
-                        <div class="profile-data" id="profile-data-btn"></div>
-                        <a href="#" class="auth-text" id="profile-logout-btn"></a>
+                    <!-- Sidebar -->
+                    <div class="sidebar-right" id="sidebar-right">
+                        <a href="#" class="closebtn-right" id="closebtn-right">&times;</a>
+                        
+                        <div class="sidebar-right-title" id="sidebar-right-title">Detailed Search</div>
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
+
+                        <div class="search-bar">
+                            <img src="/assets/icons/search-icon.png" alt="Search Icon" class="search-icon">
+                            <input type="text" placeholder="Search..." class="search-input">
+                        </div>
+
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">                     
+
+
                         
                     </div>
+                    <button id="filter-btn"><img src="/assets/icons/filter-icon.png" alt="Filter Icon" class="filter-icon"></button> <!-- Button to open sidebar -->
                 </div>
             </header>
 

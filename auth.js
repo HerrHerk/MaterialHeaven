@@ -278,30 +278,34 @@ const signUpBtnPressed = async (e) => {
     e.preventDefault();
 
     try {
+        // Step 1: Create the user with Firebase Auth
         const userCredential = await createUserWithEmailAndPassword(
             auth,
             email.value,
             password.value
         );
 
+        // Step 2: Send email verification
         await sendEmailVerification(userCredential.user);
 
+        // Step 3: Create user profile without 'restricted' data
         const docRef = doc(db, "users", userCredential.user.uid);
         await setDoc(docRef, {
             username: userName.value,
             realname: realName.value,
             email: email.value,
-            tier: "free",
+            favourites: {},  // Initialize favourites map (empty by default)
         });
         
-        console.log(userCredential);
+        console.log('User profile created:', userCredential);
 
-    } catch (error)  {
+        // Backend logic (such as a cloud function) will handle setting 'restricted' data
+
+    } catch (error) {
         console.log(error);
         UIErrorMessage.innerHTML = formatErrorMessage(error.code, "signup");
         UIErrorMessage.classList.add('visible');
     }
-    
 };
 
 const logOutBtnPressed = async() => {

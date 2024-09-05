@@ -175,7 +175,7 @@ const showMaterials = (materials) => {
             const iconName = material.materialInfo.icon;
             if (iconName && !iconFound) {
                 const iconImg = document.createElement('img');
-                iconImg.src = `/assets/icons/${iconName}-icon.png`;
+                iconImg.src = `./assets/icons/${iconName}-icon.png`;
                 iconImg.alt = `${name} icon`;
                 iconImg.classList.add('material-icon-img');
                 iconDiv.appendChild(iconImg);
@@ -796,13 +796,13 @@ const displayButtonsOnDetailView = (id) => {
         buttonsDiv.className = "action";
         buttonsDiv.innerHTML = `
             <button class="edit-user">
-                <img src="/assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
+                <img src="./assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
             </button>
             <button class="delete-user">
-                <img src="/assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
+                <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
             </button>
             <button class="download-btn">
-                <img src="/assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
+                <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
             </button>
         `;
 

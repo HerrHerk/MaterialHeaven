@@ -25,7 +25,7 @@ const handlePlanSelection = async (plan) => {
     const { id } = result.data;
 
     // Redirect to Stripe Checkout
-    const stripe = Stripe('YOUR_PUBLISHABLE_STRIPE_KEY'); // Replace with your actual Stripe publishable key
+    const stripe = Stripe('pk_test_51PqDNEHfaXGRtSlVGqOOcDqIgYGSME9GKUZFAsdx1oJZk1XjrWxmdlunFeAZgHyoJgPT08RDprptLse6KdAk01QJ00l7ERpnMA'); // Replace with your actual Stripe publishable key
     const { error } = await stripe.redirectToCheckout({ sessionId: id });
 
     if (error) {

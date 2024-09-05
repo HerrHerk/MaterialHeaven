@@ -578,7 +578,7 @@
                             <li>Basic Feature 3</li>
                         </ul>
                         <hr class="plan-separator benefits-separator">
-                        <button class="ui button select-plan-btn" id="free-plan-btn">Choose Free</button>
+                        <button class="ui button select-plan-btn" id="free-plan-btn" data-plan="free">Choose Free</button>
                     </div>
                     <!-- Basic Plan -->
                     <div class="plan-card basic-plan">
@@ -596,7 +596,7 @@
                             <li>Feature 3</li>
                         </ul>
                         <hr class="plan-separator benefits-separator">
-                        <button class="ui button select-plan-btn" id="basic-plan-btn">Choose Basic</button>
+                        <button class="ui button select-plan-btn" id="basic-plan-btn" data-plan="basic">Choose Basic</button>
                     </div>
                     <!-- Standard Plan -->
                     <div class="plan-card standard-plan">
@@ -615,7 +615,7 @@
                             <li>Feature 4</li>
                         </ul>
                         <hr class="plan-separator benefits-separator">
-                        <button class="ui button select-plan-btn" id="standard-plan-btn">Choose Standard</button>
+                        <button class="ui button select-plan-btn" id="standard-plan-btn" data-plan="standard">Choose Standard</button>
                     </div>
                     <!-- Premium Plan -->
                     <div class="plan-card premium-plan">
@@ -634,7 +634,7 @@
                             <li>Premium Feature 3</li>
                         </ul>
                         <hr class="plan-separator benefits-separator">
-                        <button class="ui button select-plan-btn" id="premium-plan-btn">Choose Premium</button>
+                        <button class="ui button select-plan-btn" id="premium-plan-btn" data-plan="premium">Choose Premium</button>
                     </div>
                 </div>
             </div>
@@ -751,7 +751,7 @@
     <script type="module" src="firebase-sdk.js"></script>
     <script src="app.js" type="module"></script>
     <script type="module" src="auth.js"></script>
-    
+    <script src="payment.js"></script>
 
 
 

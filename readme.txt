@@ -5,9 +5,11 @@ Ezt kell majd futtatniinnen , hogy a szerver oldalon müködjön az account gene
 
 INSTALLS
 npm install stripe
-npm install -g ngrok
+npm install -g firebase-tools
+firebase deploy --only hosting
+firebase deploy --only functions
+
 
 RUN
-ngrok http 5001
 
 https://contacts-e0803.web.app

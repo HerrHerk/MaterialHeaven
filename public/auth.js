@@ -187,8 +187,8 @@ onAuthStateChanged(auth, async (user) => {
                 /*console.log("Updated sidebarName to:", sidebarName.textContent);
                 console.log("Updated sidebarEmail to:", sidebarEmail.textContent); */
 
-
-                updateName.value = docSnap.data().realname;
+                console.log("teszttext");
+                // updateName.value = docSnap.data().realname;
                 // updateUserName.value = docSnap.data().username;
 
 

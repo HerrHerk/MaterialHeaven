@@ -1,17 +1,18 @@
 // Import required modules
 const functions = require("firebase-functions");
-const {onCreate} = require("firebase-functions/v2/auth");
 const admin = require("firebase-admin");
 const stripe = require("stripe")(
     "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpxT9f9CBEpl5wE" +
     "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
 );
 
+const cors = require("cors")({origin: true});
+
 // Initialize Firebase Admin SDK
 admin.initializeApp();
 
 // Function to set restricted data on user creation
-exports.setRestrictedData = onCreate((user) => {
+exports.setRestrictedData = functions.auth.user().onCreate(async (user) => {
   const userId = user.uid;
   const db = admin.firestore();
 
@@ -22,52 +23,71 @@ exports.setRestrictedData = onCreate((user) => {
           tier: "free", // Default tier for new users
         },
       },
-      {merge: true}, // No trailing comma
+      {merge: true},
   );
 });
 
 // Function to create a Stripe Checkout session
-exports.createCheckoutSession = functions.https.onRequest(async (req, res) => {
-  const {plan} = req.body;
+exports.createCheckoutSession = functions.https.onRequest((req, res) => {
+  console.log("createCheckoutSession started");
+  cors(req, res, async () => {
+    console.log("Request body:", req.body);
 
-  const prices = {
-    free: 0,
-    basic: 15000,
-    standard: 25000,
-    premium: 40000,
-  };
+    if (req.method === "OPTIONS") {
+      res.set("Access-Control-Allow-Methods", "GET, POST");
+      res.set("Access-Control-Allow-Headers", "Content-Type");
+      res.status(204).send("");
+      return;
+    }
 
-  if (!Object.prototype.hasOwnProperty.call(prices, plan)) {
-    return res.status(400).send("Invalid plan");
-  }
 
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "eur",
-            product_data: {
-              name: `${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan`,
+    const {plan} = req.body;
+
+    console.log("Plan received:", plan);
+
+    if (!plan) {
+      return res.status(400).send("Plan is required", plan);
+    }
+
+    const prices = {
+      free: 0,
+      basic: 15000,
+      standard: 25000,
+      premium: 40000,
+    };
+
+    if (!Object.prototype.hasOwnProperty.call(prices, plan)) {
+      return res.status(400).send("Invalid plan");
+    }
+
+    try {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price_data: {
+              currency: "eur",
+              product_data: {
+                name: `${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan`,
+              },
+              unit_amount: prices[plan],
             },
-            unit_amount: prices[plan],
+            quantity: 1,
           },
-          quantity: 1,
+        ],
+        mode: "payment",
+        success_url: "https://contacts-e0803.web.app/success.html",
+        cancel_url: "https://contacts-e0803.web.app/cancel.html",
+        metadata: {
+          plan: plan,
         },
-      ],
-      mode: "payment",
-      success_url: "http://127.0.0.1:5500/success.html",
-      cancel_url: "http://127.0.0.1:5500/cancel.html",
-      metadata: {
-        plan: plan, // Store the plan type
-      },
-      client_reference_id: "USER_ID", // Replace with the logged-in user's ID
-    });
+        client_reference_id: req.body.clientId || "USER_ID",
+      });
 
-    res.json({id: session.id});
-  } catch (error) {
-    console.error("Error creating checkout session:", error);
-    res.status(500).send("Internal Server Error");
-  }
+      res.json({id: session.id});
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 });

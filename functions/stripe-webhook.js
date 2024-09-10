@@ -6,11 +6,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(
     "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpxT9f9CBEpl5wE" +
-  "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
+    "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
 );
 admin.initializeApp();
 
-const endpointSecret = "YOUR_WEBHOOK_SECRET"; // Replace with
+const endpointSecret = "whsec_FIPY5vipzZQdVdA7fHqaOPjmv7jQABhy";
 
 const app = express();
 

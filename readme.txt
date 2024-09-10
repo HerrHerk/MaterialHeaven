@@ -4,5 +4,10 @@ Ezt kell majd futtatniinnen , hogy a szerver oldalon müködjön az account gene
 
 
 INSTALLS
-
 npm install stripe
+npm install -g ngrok
+
+RUN
+ngrok http 5001
+
+https://contacts-e0803.web.app

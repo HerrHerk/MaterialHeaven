@@ -1,15 +1,19 @@
 // Import required modules
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+const admin = require("./firebase-admin.js"); // Import the initialized admin
 const stripe = require("stripe")(
     "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpxT9f9CBEpl5wE" +
     "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
 );
-
 const cors = require("cors")({origin: true});
 
 // Initialize Firebase Admin SDK
-admin.initializeApp();
+if (!admin.apps.length) { // Check if the app is already initialized
+  admin.initializeApp();
+}
+
+// Import the stripeWebhook function
+const {stripeWebhook} = require("./stripe-webhook.js");
 
 // Function to set restricted data on user creation
 exports.setRestrictedData = functions.auth.user().onCreate(async (user) => {
@@ -30,7 +34,9 @@ exports.setRestrictedData = functions.auth.user().onCreate(async (user) => {
 // Function to create a Stripe Checkout session
 exports.createCheckoutSession = functions.https.onRequest((req, res) => {
   console.log("createCheckoutSession started");
+
   cors(req, res, async () => {
+    console.log("Request method:", req.method);
     console.log("Request body:", req.body);
 
     if (req.method === "OPTIONS") {
@@ -40,13 +46,12 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
       return;
     }
 
-
-    const {plan} = req.body;
+    const {plan} = req.body.data;
 
     console.log("Plan received:", plan);
 
     if (!plan) {
-      return res.status(400).send("Plan is required", plan);
+      return res.status(400).send({error: "Plan is required"});
     }
 
     const prices = {
@@ -57,7 +62,7 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
     };
 
     if (!Object.prototype.hasOwnProperty.call(prices, plan)) {
-      return res.status(400).send("Invalid plan");
+      return res.status(400).send({error: "Invalid plan"});
     }
 
     try {
@@ -84,10 +89,13 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
         client_reference_id: req.body.clientId || "USER_ID",
       });
 
-      res.json({id: session.id});
+      res.json({data: {id: session.id}});
     } catch (error) {
       console.error("Error creating checkout session:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send({error: "Internal Server Error"});
     }
   });
 });
+
+// Export the stripeWebhook function
+exports.stripeWebhook = stripeWebhook;

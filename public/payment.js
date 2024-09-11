@@ -17,34 +17,40 @@ const handlePlanSelection = async (plan) => {
     return;
   }
 
-  
-
   try {
     // Call the Cloud Function to create a checkout session
     console.log("awaiting for createCheckoutSession...");
-    console.log("Selected plan:", plan); // Add this line for debugging
-    const result = await createCheckoutSession({plan});
-    console.log("Checkout session result:", result); // Add this line for debugging
-    const { id } = result.data;
+    console.log("Selected plan:", plan);
+    
+    let result;
+    try {
+      result = await createCheckoutSession({ plan });
+      console.log("Checkout session result:", result); // Add this line for debugging
+    } catch (error) {
+      console.error("Error during createCheckoutSession:", error);
+      return; // Exit if there's an error, so you don't try to use undefined `result`
+    }
 
+    const { id } = result.data; // Safely access result.data here
 
     // Redirect to Stripe Checkout
     const stripe = Stripe("pk_test_51PqDNEHfaXGRtSlVGqOOcDqIgYGSME9GKUZFAsdx1oJZk1XjrWxmdlunFeAZgHyoJgPT08RDprptLse6KdAk01QJ00l7ERpnMA"); // Replace with your actual Stripe publishable key
-    const {error} = await stripe.redirectToCheckout({sessionId: id});
+    const { error } = await stripe.redirectToCheckout({ sessionId: id });
 
     if (error) {
       console.error("Error during checkout:", error);
     }
   } catch (error) {
-    console.error("Error during checkout:", error); // Add error logging
+    console.error("Error during checkout:", error);
   }
 };
 
+
 // Add event listeners to all plan buttons
-document.querySelectorAll(".select-plan-btn").forEach(button => {
-  button.addEventListener("click", (event) => {
-    const plan = event.target.dataset.plan; // Get the plan from the button"s data attribute
-    console.log("Button with the following plan pressed and recognized: ", plan);
+document.querySelectorAll('.select-plan-btn').forEach(button => {
+  button.addEventListener('click', (event) => {
+    const plan = event.target.dataset.plan; // Get the plan from the button's data attribute
+    console.log("Button with the following plan pressed and recognized: ", plan); // Debug log
     handlePlanSelection(plan); // Call the function with the selected plan
   });
 });

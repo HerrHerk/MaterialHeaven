@@ -1,14 +1,19 @@
 // functions/stripe-webhook.js
 
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+// const admin = require("firebase-admin");
 const express = require("express");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(
     "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpxT9f9CBEpl5wE" +
     "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
 );
-admin.initializeApp();
+const admin = require("./firebase-admin.js"); // Import the initialized admin
+
+
+// admin.initializeApp();
+
+console.log("webhook function called");
 
 const endpointSecret = "whsec_FIPY5vipzZQdVdA7fHqaOPjmv7jQABhy";
 
@@ -28,6 +33,7 @@ app.post("/webhook", async (req, res) => {
   }
 
   if (event.type === "checkout.session.completed") {
+    console.log("webhook checkout.session.completed true");
     const session = event.data.object;
 
     // Extract user ID and plan
@@ -48,3 +54,4 @@ app.post("/webhook", async (req, res) => {
 });
 
 exports.stripeWebhook = functions.https.onRequest(app);
+

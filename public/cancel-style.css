@@ -1,0 +1,96 @@
+body.main-body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #ECF0F1;
+}
+
+#app-layout{
+    display: flex;
+}
+
+
+
+#app-layout #middle-col{
+
+   flex: 1;
+    
+}
+
+
+
+h1 {
+    color: #34495E;
+
+    font-size: 2rem; /* Increase font size for Herk's */
+    text-align: center;
+}
+h2 {
+    color: #34495E;
+
+    font-size: 1.5rem; /* Adjust font size for the loading message */
+    text-align: center;
+
+}
+
+/*-------------
+HEADER
+------------- */
+
+/* Your custom styles */
+header.main-header {
+    display: flex;
+    background-color: #1C1837;
+    color: white;
+    height: 300px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* Optional: Reset or normalize styles if needed */
+article, aside, footer, header, nav, section {
+    display: block; /* Default block display */
+}
+
+.header-image {
+    max-width: 100%;
+    height: 300px;
+    bottom: -20px;
+    position: relative;
+}
+
+header .title {
+
+    flex: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    overflow: hidden; /* Hide overflow to simulate cropping */
+}
+
+/*-------------
+GLOBAL STYLES
+------------- */
+
+button{
+    background-color:#B1CC74;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    margin: 5px;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #E8Fcc2;
+    cursor: pointer;
+}
+
+#main-section{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

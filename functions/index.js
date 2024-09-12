@@ -46,13 +46,19 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
       return;
     }
 
-    const {plan} = req.body.data;
+    const {plan, userId} = req.body.data;
 
     console.log("Plan received:", plan);
+    console.log("userId received:", userId);
 
     if (!plan) {
       return res.status(400).send({error: "Plan is required"});
     }
+
+    if (!userId) {
+      return res.status(400).send({error: "User ID is required"});
+    }
+
 
     const prices = {
       free: 0,
@@ -86,7 +92,7 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
         metadata: {
           plan: plan,
         },
-        client_reference_id: req.body.clientId || "USER_ID",
+        client_reference_id: userId, // Use the actual user ID here
       });
 
       res.json({data: {id: session.id}});

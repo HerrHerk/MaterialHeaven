@@ -17,6 +17,8 @@ const handlePlanSelection = async (plan) => {
     return;
   }
 
+  const userId = auth.currentUser.uid; // Get the current user's UID from Firebase Auth
+
   try {
     // Call the Cloud Function to create a checkout session
     console.log("awaiting for createCheckoutSession...");
@@ -24,7 +26,7 @@ const handlePlanSelection = async (plan) => {
     
     let result;
     try {
-      result = await createCheckoutSession({ plan });
+      result = await createCheckoutSession({ plan, userId });
       console.log("Checkout session result:", result); // Add this line for debugging
     } catch (error) {
       console.error("Error during createCheckoutSession:", error);

@@ -10,48 +10,75 @@ const stripe = require("stripe")(
 );
 const admin = require("./firebase-admin.js"); // Import the initialized admin
 
-
-// admin.initializeApp();
-
-console.log("webhook function called");
-
-const endpointSecret = "whsec_FIPY5vipzZQdVdA7fHqaOPjmv7jQABhy";
-
 const app = express();
 
-app.use(bodyParser.raw({type: "application/json"}));
-
-app.post("/webhook", async (req, res) => {
-  const sig = req.headers["stripe-signature"];
-  let event;
-
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-  } catch (err) {
-    console.log(`Webhook Error: ${err.message}`);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  if (event.type === "checkout.session.completed") {
-    console.log("webhook checkout.session.completed true");
-    const session = event.data.object;
-
-    // Extract user ID and plan
-    const userId = session.client_reference_id;
-    const plan = session.metadata.plan;
-
-    // Update Firestore
-    const db = admin.firestore();
-    await db.collection("users").doc(userId).update({
-      "restricted.purchased": {
-        [plan]: true, // Update plan status
+app.use(
+    bodyParser.json({
+      verify: function(req, res, buf) {
+        req.rawBody = buf;
+        console.log("req.rawBody constructed successfully:");
       },
-      "restricted.tier": plan, // Update the user tier
-    });
-  }
+    }),
+);
 
-  res.json({received: true});
-});
+
+// app.use(bodyParser.raw({type: "application/json"}));
+
+app.post(
+    "/",
+    express.raw({type: "application/json"}),
+    async (req, res) => {
+      let event;
+      const endpointSecret = "whsec_FIPY5vipzZQdVdA7fHqaOPjmv7jQABhy";
+
+      const sig = req.headers["stripe-signature"];
+      console.log("Signature imported successfully:");
+
+
+      try {
+        event = stripe.webhooks.constructEvent(
+            req.rawBody,
+            sig,
+            endpointSecret,
+        );
+        console.log("Event constructed successfully:");
+      } catch (err) {
+        console.log(`Webhook Error: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+      }
+
+      if (event.type === "checkout.session.completed") {
+        const session = event.data.object;
+        console.log("Checkout session completed:");
+
+        // Extract user ID and plan
+        const userId = session.client_reference_id;
+        const plan = session.metadata.plan;
+
+        console.log("User ID:", userId, "Plan:", plan);
+
+
+        // Update Firestore
+
+        try {
+          const db = admin.firestore();
+          await db.collection("users").doc(userId).update({
+            "restricted.purchased": {
+              [plan]: true,
+            },
+            "restricted.tier": plan,
+          });
+          console.log("User plan updated in Firestore");
+        } catch (error) {
+          console.error("Firestore update error:", error);
+        }
+      }
+
+      res.json({received: true});
+    },
+);
+
+app.use(express.json());
 
 exports.stripeWebhook = functions.https.onRequest(app);
 

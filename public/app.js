@@ -479,7 +479,7 @@ const downloadButtonPressed = async (id) => {
     const formattedDate = formatDate(currentDate);
 
     // Generate a consistent random color based on the material name
-    var materialName = `${material.name} (${material.version})`;
+    var materialName = `${material.materialInfo.name} (${material.materialInfo.version})`;
     var color = generateColor(materialName);
 
     // Values to be inserted into the XML template

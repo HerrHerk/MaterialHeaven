@@ -4,8 +4,11 @@
 
 
 import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-functions.js";
 const db = getFirestore();
 const dbRef = collection(db, "materialCollection");
+const functions = getFunctions();
+const getFilteredMaterials = httpsCallable(functions, 'getFilteredMaterials');
 
 //------------------------------------------------------------
 // MOBILE VIEW
@@ -68,25 +71,11 @@ const getmaterials = async() => {
     
     try {
         
-        //const docSnap = await getDocs(dbRef);
-
-        await onSnapshot(dbRef, docsSnap => {
-
-            materials = [];
-
-            docsSnap.forEach(doc => {
-            
-                const material = doc.data();
-                material.id = doc.id;
-                materials.push(material);
-                
-                // console.log(doc.data());         EVERYTHING IS FETCHED
-                // console.log(doc.data().material);   ONLY material IS FETCHED
-                // console.log(doc.id);             ONLY ID IS FETCHED
-            })
-    
-            showMaterials(materials);
-        });
+        const result = await getFilteredMaterials();
+        const materials = result.data.materials;
+        
+        // Proceed with showing the materials
+        showMaterials(materials);
 
     } catch(err) {
         console.log("getmaterials =" + err);

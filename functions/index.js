@@ -105,3 +105,9 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
 
 // Export the stripeWebhook function
 exports.stripeWebhook = stripeWebhook;
+
+
+// Import the material-tier-filter function
+const {getFilteredMaterials} = require("./material-tier-filter.js");
+
+exports.getFilteredMaterials = getFilteredMaterials;

@@ -27,8 +27,10 @@ const filterMaterialData = (material, userTier) => {
   const userTierValue = tierValue[userTier] || -1;
 
   if (userTierValue >= materialTierValue) {
+    console.log(`Returning full material data for tier ${userTier}`);
     return material; // User has access to all data
   } else {
+    console.log(`Hiding materialModels for tier ${userTier}`);
     // Directly remove materialModels if user tier is lower
     const materialWithoutModels = {...material};
     delete materialWithoutModels.materialModels; // Re
@@ -37,18 +39,28 @@ const filterMaterialData = (material, userTier) => {
 };
 
 const getFilteredMaterials = functions.https.onCall(async (data, context) => {
+  console.log("getFilteredMaterials runs");
   if (!context.auth) {
-    throw new functions.https.HttpsError("unauth.", "User must be auth");
+    throw new functions.https.HttpsError(
+        "unauthenticated",
+        "User must be authenticated to access this data.",
+    );
   }
+
 
   const userId = context.auth.uid;
   const userTier = await getUserTier(userId);
+
+  console.log("userId:", userId);
+  console.log("userTier:", userTier);
 
   if (!userTier) {
     throw new functions.https.HttpsError("perm.-denied", "tier not found");
   }
 
-  const materialCollection = admin.firestore().collection("materialCollection");
+  const materialCollection = admin
+      .firestore()
+      .collection("materialCollection");
   const snapshot = await materialCollection.get();
 
   const materials = [];
@@ -57,6 +69,7 @@ const getFilteredMaterials = functions.https.onCall(async (data, context) => {
     material.id = doc.id;
     const filteredMaterial = filterMaterialData(material, userTier);
     materials.push(filteredMaterial);
+    // console.log("Filtered Material:", filteredMaterial); // Log filtered
   });
 
   return {materials};

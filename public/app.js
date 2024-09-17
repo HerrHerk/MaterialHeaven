@@ -8,7 +8,14 @@ import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/
 const db = getFirestore();
 const dbRef = collection(db, "materialCollection");
 const functions = getFunctions();
-const getFilteredMaterials = httpsCallable(functions, 'getFilteredMaterials');
+
+import app from './firebase-sdk.js';
+import { 
+    getAuth,
+    onAuthStateChanged, 
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+const auth = getAuth(app);
+const user = auth.currentUser;
 
 //------------------------------------------------------------
 // MOBILE VIEW
@@ -67,23 +74,38 @@ document.addEventListener('DOMContentLoaded', function() {
 let materials = [];
 
 
+
+
 const getmaterials = async() => {
     
+    
     try {
+
         
-        const result = await getFilteredMaterials();
-        const materials = result.data.materials;
+        const getFilteredMaterialsFn = httpsCallable(functions, 'getFilteredMaterials'); // Prepare the cloud function
+        
+        // Call the cloud function
+        const result = await getFilteredMaterialsFn();
+        materials = result.data.materials;
         
         // Proceed with showing the materials
         showMaterials(materials);
-
-    } catch(err) {
-        console.log("getmaterials =" + err);
+    } catch (err) {
+        console.log("getmaterials error: ", err);
     }
+};
 
-}
 
-getmaterials();
+// Listen for authentication state changes
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("User is logged in:", user.uid);
+        // User is authenticated, now we can call the cloud function
+        getmaterials();
+    } else {
+        console.log("No user is logged in. Delaying function call.");
+    }
+});
 
 //------------------------------------------------------------
 // SHOW material AS LIST ITEM ON THE LEFT
@@ -583,6 +605,12 @@ const getmaterial = (id) => {
 const displaymaterialOnDetailsView = (id) => {
     const material = getmaterial(id);
     const singleMaterialDetail = document.getElementById(`${id}-detail`);
+
+    if (!material.materialModels) {
+        console.log(`materialModels is missing for material ID ${id}`);
+        singleMaterialDetail.innerHTML = `<div class="error">Material data is not available due to insufficient access rights.</div>`;
+        return;
+    }
 
     // Function to format the value
     const formatValue = (value) => (value === null || value === undefined || value === '') ? 'n/a' : value;

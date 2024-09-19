@@ -1269,3 +1269,37 @@ SUBSCRIPTION PLANS
 .search-filter-collapse > *:last-child {
     margin-right: 0;
 }
+
+/*-------------
+BLURRED
+------------- */
+
+
+.blurred {
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+.overlay-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.overlay-box {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.blurred-content-container {
+    position: relative;
+    display: flex;
+    
+    
+}

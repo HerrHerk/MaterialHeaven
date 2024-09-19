@@ -608,197 +608,379 @@ const displaymaterialOnDetailsView = (id) => {
 
     if (!material.materialModels) {
         console.log(`materialModels is missing for material ID ${id}`);
-        singleMaterialDetail.innerHTML = `<div class="error">Material data is not available due to insufficient access rights.</div>`;
+    
+        // Adding cards with empty values, slight blur effect, and overlayed message
+        singleMaterialDetail.innerHTML = `
+            <div class="blurred-content-container">
+                <div class="card-mat-container blurred">
+                    <div class="card-mat">
+                        <div class="mat-header">Johnson Cook Strength</div>
+                        <div class="mat-row">
+                            <div class="mat-property">Initial Yield Strength:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[MPa]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Hardening Constant:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[MPa]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Hardening Exponent:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Strain Rate Constant:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Thermal Softening Exp:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Melting Temperature:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[K]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Reference Strain Rate:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[1/s]</div>
+                        </div>
+                    </div>
+    
+                    <div class="card-mat">
+                        <div class="mat-header">Johnson Cook Failure</div>
+                        <div class="mat-row">
+                            <div class="mat-property">Initial Failure Strain:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Exponential Factor:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Triaxial Factor:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Strain Rate Factor:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Temperature Factor:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                    </div>
+    
+                    <div class="card-mat">
+                        <div class="mat-header">Isotropic Elasticity</div>
+                        <div class="mat-row">
+                            <div class="mat-property">Young's Modulus:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[GPa]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">&#957-Poisson Ratio:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Shear Modulus:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Bulk Modulus:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[GPa]</div>
+                        </div>
+                    </div>
+    
+                    <div class="card-mat">
+                        <div class="mat-header">Shock EOS</div>
+                        <div class="mat-row">
+                            <div class="mat-property">&#947-Grueneisen Coefficient:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Parameter C1:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[m/s]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Parameter S1:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[-]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Parameter Quadratic:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[s/m]</div>
+                        </div>
+                    </div>
+    
+                    <div class="card-mat">
+                        <div class="mat-header">Physical Properties</div>
+                        <div class="mat-row">
+                            <div class="mat-property">Density:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[kg/m3]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Specific Heat Const. Pr.:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[J/kgK]</div>
+                        </div>
+                    </div>
+    
+                    <div class="card-mat">
+                        <div class="mat-header">Other</div>
+                        <div class="mat-row">
+                            <div class="mat-property">Hardness:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit">[BHN]</div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Source:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit"></div>
+                        </div>
+                        <div class="mat-row">
+                            <div class="mat-property">Reference:</div>
+                            <div class="mat-data">-</div>
+                            <div class="mat-unit"></div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card-chart-container">    
+                    <div class="card-chart blurred">
+                        <div class="mat-header">Chart of Johnson Cook Strength</div>
+                        <canvas class="chart-canv" id="chart-johnson-cook-strength"></canvas>
+                    </div>
+
+                    <div class="card-chart blurred">
+                        <div class="mat-header">Chart of Johnson Cook Failure</div>
+                        <canvas class="chart-canv" id="chart-johnson-cook-failure"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="overlay-message">
+                    <div class="overlay-box">
+                        <div class="overlay-text">You need to purchase this material or to have a higher subscription tier!</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Initialize charts after rendering
+        setTimeout(() => {
+            initializeCharts(id);
+        }, 0);
+        
         return;
+    } else {
+        // Function to format the value
+        const formatValue = (value) => (value === null || value === undefined || value === '') ? 'n/a' : value;
+        
+        // Function to check if the value is missing data
+        const isMissingData = (value) => value === null || value === undefined || value === '';
+
+        singleMaterialDetail.innerHTML = `
+            <div class="card-mat-container">
+                <div class="card-mat">
+                    <div class="mat-header">Johnson Cook Strength</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.initial_yield_strength) ? 'missing-data' : ''}">
+                        <div class="mat-property">Initial Yield Strength:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.initial_yield_strength)}</div>
+                        <div class="mat-unit">[MPa]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_constant) ? 'missing-data' : ''}">
+                        <div class="mat-property">Hardening Constant:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_constant)}</div>
+                        <div class="mat-unit">[MPa]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_exponent) ? 'missing-data' : ''}">
+                        <div class="mat-property">Hardening Exponent:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_exponent)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.strain_rate_constant) ? 'missing-data' : ''}">
+                        <div class="mat-property">Strain Rate Constant:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.strain_rate_constant)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.thermal_softening_exp) ? 'missing-data' : ''}">
+                        <div class="mat-property">Thermal Softening Exp:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.thermal_softening_exp)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
+                        <div class="mat-property">Melting Temperature:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
+                        <div class="mat-unit">[K]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
+                        <div class="mat-property">Reference Strain Rate:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
+                        <div class="mat-unit">[1/s]</div>
+                    </div>
+                </div>
+
+                <div class="card-mat">
+                    <div class="mat-header">Johnson Cook Failure</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.initial_failure_strain) ? 'missing-data' : ''}">
+                        <div class="mat-property">Initial Failure Strain:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.initial_failure_strain)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.exponential_factor) ? 'missing-data' : ''}">
+                        <div class="mat-property">Exponential Factor:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.exponential_factor)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.triaxial_factor) ? 'missing-data' : ''}">
+                        <div class="mat-property">Triaxial Factor:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.triaxial_factor)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.strain_rate_factor) ? 'missing-data' : ''}">
+                        <div class="mat-property">Strain Rate Factor:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.strain_rate_factor)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.temperature_factor) ? 'missing-data' : ''}">
+                        <div class="mat-property">Temperature Factor:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.temperature_factor)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
+                        <div class="mat-property">Melting Temperature:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
+                        <div class="mat-unit">[K]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
+                        <div class="mat-property">Reference Strain Rate:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
+                        <div class="mat-unit">[1/s]</div>
+                    </div>
+                </div>
+
+                <div class="card-mat">
+                    <div class="mat-header">Isotropic Elasticity</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.e_modulus) ? 'missing-data' : ''}">
+                        <div class="mat-property">Young's Modulus:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.e_modulus)}</div>
+                        <div class="mat-unit">[GPa]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.poisson) ? 'missing-data' : ''}">
+                        <div class="mat-property">&#957-Poisson Ratio:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.poisson)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.shear_modulus) ? 'missing-data' : ''}">
+                        <div class="mat-property">Shear Modulus:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.shear_modulus)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.bulk_modulus) ? 'missing-data' : ''}">
+                        <div class="mat-property">Bulk Modulus:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.bulk_modulus)}</div>
+                        <div class="mat-unit">[GPa]</div>
+                    </div>
+                </div>
+
+                <div class="card-mat">
+                    <div class="mat-header">Shock EOS</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.shockEOS.grueneisen_coefficient) ? 'missing-data' : ''}">
+                        <div class="mat-property">&#947-Grueneisen Coefficient:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.shockEOS.grueneisen_coefficient)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_c1) ? 'missing-data' : ''}">
+                        <div class="mat-property">Parameter C1:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_c1)}</div>
+                        <div class="mat-unit">[m/s]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_s1) ? 'missing-data' : ''}">
+                        <div class="mat-property">Parameter S1:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_s1)}</div>
+                        <div class="mat-unit">[-]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_quadratic) ? 'missing-data' : ''}">
+                        <div class="mat-property">Parameter Quadratic:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_quadratic)}</div>
+                        <div class="mat-unit">[s/m]</div>
+                    </div>
+                </div>
+
+                <div class="card-mat">
+                    <div class="mat-header">Physical Properties</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.density) ? 'missing-data' : ''}">
+                        <div class="mat-property">Density:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.physicalProperties.density)}</div>
+                        <div class="mat-unit">[kg/m3]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.specific_heat) ? 'missing-data' : ''}">
+                        <div class="mat-property">Specific Heat Const. Pr.:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.physicalProperties.specific_heat)}</div>
+                        <div class="mat-unit">[J/kgK]</div>
+                    </div>
+                </div>
+
+                <div class="card-mat">
+                    <div class="mat-header">Other</div>
+                    <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.hardness) ? 'missing-data' : ''}">
+                        <div class="mat-property">Hardness:</div>
+                        <div class="mat-data">${formatValue(material.materialModels.physicalProperties.hardness)}</div>
+                        <div class="mat-unit">[BHN]</div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.additionalInfo.source) ? 'missing-data' : ''}">
+                        <div class="mat-property">Source:</div>
+                        <div class="mat-data">${formatValue(material.additionalInfo.source)}</div>
+                        <div class="mat-unit"></div>
+                    </div>
+                    <div class="mat-row ${isMissingData(material.additionalInfo.reference) ? 'missing-data' : ''}">
+                        <div class="mat-property">Reference:</div>
+                        <div class="mat-data">
+                            <a href="${material.additionalInfo.reference}" target="_blank" class="reference-link">Link</a>
+                        </div>
+                        <div class="mat-unit"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-chart-container">    
+                <div class="card-chart">
+                    <div class="mat-header">Chart of Johnson Cook Strength</div>
+                    <canvas class="chart-canv" id="chart-johnson-cook-strength"></canvas>
+                </div>
+
+                <div class="card-chart">
+                    <div class="mat-header">Chart of Johnson Cook Failure</div>
+                    <canvas class="chart-canv" id="chart-johnson-cook-failure"></canvas>
+                </div>
+            </div>
+        `;
+
+        // Initialize charts after rendering
+        setTimeout(() => {
+            initializeCharts(id);
+        }, 0);
     }
 
-    // Function to format the value
-    const formatValue = (value) => (value === null || value === undefined || value === '') ? 'n/a' : value;
-    
-    // Function to check if the value is missing data
-    const isMissingData = (value) => value === null || value === undefined || value === '';
 
-    singleMaterialDetail.innerHTML = `
-        <div class="card-mat-container">
-            <div class="card-mat">
-                <div class="mat-header">Johnson Cook Strength</div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.initial_yield_strength) ? 'missing-data' : ''}">
-                    <div class="mat-property">Initial Yield Strength:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.initial_yield_strength)}</div>
-                    <div class="mat-unit">[MPa]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_constant) ? 'missing-data' : ''}">
-                    <div class="mat-property">Hardening Constant:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_constant)}</div>
-                    <div class="mat-unit">[MPa]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.hardening_exponent) ? 'missing-data' : ''}">
-                    <div class="mat-property">Hardening Exponent:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.hardening_exponent)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.strain_rate_constant) ? 'missing-data' : ''}">
-                    <div class="mat-property">Strain Rate Constant:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.strain_rate_constant)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.thermal_softening_exp) ? 'missing-data' : ''}">
-                    <div class="mat-property">Thermal Softening Exp:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.thermal_softening_exp)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
-                    <div class="mat-property">Melting Temperature:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
-                    <div class="mat-unit">[K]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
-                    <div class="mat-property">Reference Strain Rate:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
-                    <div class="mat-unit">[1/s]</div>
-                </div>
-            </div>
-
-            <div class="card-mat">
-                <div class="mat-header">Johnson Cook Failure</div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.initial_failure_strain) ? 'missing-data' : ''}">
-                    <div class="mat-property">Initial Failure Strain:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.initial_failure_strain)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.exponential_factor) ? 'missing-data' : ''}">
-                    <div class="mat-property">Exponential Factor:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.exponential_factor)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.triaxial_factor) ? 'missing-data' : ''}">
-                    <div class="mat-property">Triaxial Factor:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.triaxial_factor)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.strain_rate_factor) ? 'missing-data' : ''}">
-                    <div class="mat-property">Strain Rate Factor:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.strain_rate_factor)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookFailure.temperature_factor) ? 'missing-data' : ''}">
-                    <div class="mat-property">Temperature Factor:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookFailure.temperature_factor)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.melting_temperature) ? 'missing-data' : ''}">
-                    <div class="mat-property">Melting Temperature:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.melting_temperature)}</div>
-                    <div class="mat-unit">[K]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.johnsonCookStrength.reference_strain_rate) ? 'missing-data' : ''}">
-                    <div class="mat-property">Reference Strain Rate:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.johnsonCookStrength.reference_strain_rate)}</div>
-                    <div class="mat-unit">[1/s]</div>
-                </div>
-            </div>
-
-            <div class="card-mat">
-                <div class="mat-header">Isotropic Elasticity</div>
-                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.e_modulus) ? 'missing-data' : ''}">
-                    <div class="mat-property">Young's Modulus:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.e_modulus)}</div>
-                    <div class="mat-unit">[GPa]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.poisson) ? 'missing-data' : ''}">
-                    <div class="mat-property">&#957-Poisson Ratio:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.poisson)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.shear_modulus) ? 'missing-data' : ''}">
-                    <div class="mat-property">Shear Modulus:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.shear_modulus)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.isotropicElasticity.bulk_modulus) ? 'missing-data' : ''}">
-                    <div class="mat-property">Bulk Modulus:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.isotropicElasticity.bulk_modulus)}</div>
-                    <div class="mat-unit">[GPa]</div>
-                </div>
-            </div>
-
-            <div class="card-mat">
-                <div class="mat-header">Shock EOS</div>
-                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.grueneisen_coefficient) ? 'missing-data' : ''}">
-                    <div class="mat-property">&#947-Grueneisen Coefficient:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.grueneisen_coefficient)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_c1) ? 'missing-data' : ''}">
-                    <div class="mat-property">Parameter C1:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_c1)}</div>
-                    <div class="mat-unit">[m/s]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_s1) ? 'missing-data' : ''}">
-                    <div class="mat-property">Parameter S1:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_s1)}</div>
-                    <div class="mat-unit">[-]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.shockEOS.parameter_quadratic) ? 'missing-data' : ''}">
-                    <div class="mat-property">Parameter Quadratic:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.shockEOS.parameter_quadratic)}</div>
-                    <div class="mat-unit">[s/m]</div>
-                </div>
-            </div>
-
-            <div class="card-mat">
-                <div class="mat-header">Physical Properties</div>
-                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.density) ? 'missing-data' : ''}">
-                    <div class="mat-property">Density:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.density)}</div>
-                    <div class="mat-unit">[kg/m3]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.specific_heat) ? 'missing-data' : ''}">
-                    <div class="mat-property">Specific Heat Const. Pr.:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.specific_heat)}</div>
-                    <div class="mat-unit">[J/kgK]</div>
-                </div>
-            </div>
-
-            <div class="card-mat">
-                <div class="mat-header">Other</div>
-                <div class="mat-row ${isMissingData(material.materialModels.physicalProperties.hardness) ? 'missing-data' : ''}">
-                    <div class="mat-property">Hardness:</div>
-                    <div class="mat-data">${formatValue(material.materialModels.physicalProperties.hardness)}</div>
-                    <div class="mat-unit">[BHN]</div>
-                </div>
-                <div class="mat-row ${isMissingData(material.additionalInfo.source) ? 'missing-data' : ''}">
-                    <div class="mat-property">Source:</div>
-                    <div class="mat-data">${formatValue(material.additionalInfo.source)}</div>
-                    <div class="mat-unit"></div>
-                </div>
-                <div class="mat-row ${isMissingData(material.additionalInfo.reference) ? 'missing-data' : ''}">
-                    <div class="mat-property">Reference:</div>
-                    <div class="mat-data">
-                        <a href="${material.additionalInfo.reference}" target="_blank" class="reference-link">Link</a>
-                    </div>
-                    <div class="mat-unit"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-chart-container">    
-            <div class="card-chart">
-                <div class="mat-header">Chart of Johnson Cook Strength</div>
-                <canvas class="chart-canv" id="chart-johnson-cook-strength"></canvas>
-            </div>
-
-            <div class="card-chart">
-                <div class="mat-header">Chart of Johnson Cook Failure</div>
-                <canvas class="chart-canv" id="chart-johnson-cook-failure"></canvas>
-            </div>
-        </div>
-    `;
-
-    // Initialize charts after rendering
-    setTimeout(() => {
-        initializeCharts(id);
-    }, 0);
 };
 
 const displayButtonsOnDetailView = (id) => {
@@ -1048,13 +1230,21 @@ const initializeCharts = (id) => {
 const generateJCSchart = (id) => {
     const material = getmaterial(id);
 
-   
-    // Assign extracted values to corresponding variables from Johnson Cook Strength subcollection
-    var aJCS = parseFloat(material.materialModels.johnsonCookStrength.initial_yield_strength);
-    var bJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_constant);
-    var nJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_exponent);
-    var cJCS = parseFloat(material.materialModels.johnsonCookStrength.strain_rate_constant);
-    var eJCS = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
+    if (!material.materialModels) {
+        // Assign extracted values to corresponding variables from Johnson Cook Strength subcollection
+        var aJCS = parseFloat(792);
+        var bJCS = parseFloat(510);
+        var nJCS = parseFloat(0.26);
+        var cJCS = parseFloat(0.014);
+        var eJCS = parseFloat(1);
+    } else {
+        // Assign extracted values to corresponding variables from Johnson Cook Strength subcollection
+        var aJCS = parseFloat(material.materialModels.johnsonCookStrength.initial_yield_strength);
+        var bJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_constant);
+        var nJCS = parseFloat(material.materialModels.johnsonCookStrength.hardening_exponent);
+        var cJCS = parseFloat(material.materialModels.johnsonCookStrength.strain_rate_constant);
+        var eJCS = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
+    }
 
 
     // Use the extracted values to generate chart data
@@ -1090,12 +1280,22 @@ const generateJCSchart = (id) => {
 const generateJCFchart = (id) => {
     const material = getmaterial(id);
 
-    // Assign extracted values to corresponding variables from Johnson Cook Failure subcollection
-    var d1JCF = parseFloat(material.materialModels.johnsonCookFailure.initial_failure_strain);
-    var d2JCF = parseFloat(material.materialModels.johnsonCookFailure.exponential_factor);
-    var d3JCF = parseFloat(material.materialModels.johnsonCookFailure.triaxial_factor);
-    var d4JCF = parseFloat(material.materialModels.johnsonCookFailure.strain_rate_factor);
-    var eJCF = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
+    if (!material.materialModels) {
+        // Assign fake values
+        var d1JCF = parseFloat(0.05);
+        var d2JCF = parseFloat(3.44);
+        var d3JCF = parseFloat(-2.12);
+        var d4JCF = parseFloat(0.002);
+        var eJCF = parseFloat(1);
+    } else {
+        // Assign extracted values to corresponding variables from Johnson Cook Failure subcollection
+        var d1JCF = parseFloat(material.materialModels.johnsonCookFailure.initial_failure_strain);
+        var d2JCF = parseFloat(material.materialModels.johnsonCookFailure.exponential_factor);
+        var d3JCF = parseFloat(material.materialModels.johnsonCookFailure.triaxial_factor);
+        var d4JCF = parseFloat(material.materialModels.johnsonCookFailure.strain_rate_factor);
+        var eJCF = parseFloat(material.materialModels.johnsonCookStrength.reference_strain_rate);
+    }
+
 
     // Use the extracted values to generate chart data
     const stepSizeJCF = 0.001;

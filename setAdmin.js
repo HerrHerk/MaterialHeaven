@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-admin-setup/contacts-e0803-firebase-adminsdk-1kb9a-a8f23f6cfa.json'); // Replace with the path to your Firebase credentials JSON file
+const serviceAccount = require('./firebase-admin-setup/INSERT KEY HERE'); // Replace with the path to your Firebase credentials JSON file
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({

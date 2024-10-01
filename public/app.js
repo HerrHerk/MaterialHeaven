@@ -98,12 +98,38 @@ const getmaterials = async() => {
 
 // Listen for authentication state changes
 onAuthStateChanged(auth, (user) => {
+    const loader = document.querySelector(".ui.loader"); // Get the loader element
     if (user) {
         console.log("User is logged in:", user.uid);
         // User is authenticated, now we can call the cloud function
         getmaterials();
+
+
+        // Check if the user has the 'admin' claim
+        user.getIdTokenResult().then((idTokenResult) => {
+            const isAdmin = !!idTokenResult.claims.admin;
+            console.log("Is user admin:", isAdmin);
+
+            // Store the admin status for future use
+            window.isAdmin = isAdmin;
+
+            // Toggle visibility of add button based on admin status
+            const addBtn = document.querySelector(".add-btn");
+            if (addBtn && isAdmin) {
+                addBtn.style.visibility = "visible";  // Show the button if admin
+            }
+
+
+        }).catch((error) => {
+            console.log("Error retrieving user token:", error);
+        }).finally(() => {
+            // Hide the entire dimmer (loader + overlay) once the authentication check is complete
+            if (loaderDimmer) loaderDimmer.style.display = "none";
+        });
+
     } else {
         console.log("No user is logged in. Delaying function call.");
+        if (loaderDimmer) loaderDimmer.style.display = "none"; // Hide the loader if no user
     }
 });
 
@@ -994,10 +1020,10 @@ const displayButtonsOnDetailView = (id) => {
         const buttonsDiv = document.createElement("div");
         buttonsDiv.className = "action";
         buttonsDiv.innerHTML = `
-            <button class="edit-user">
+            <button class="edit-user" style="visibility: hidden;">
                 <img src="./assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
             </button>
-            <button class="delete-user">
+            <button class="delete-user" style="visibility: hidden;">
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
             </button>
             <button class="download-btn">
@@ -1013,6 +1039,14 @@ const displayButtonsOnDetailView = (id) => {
 
         // Append the new buttons div to the list item
         listItem.appendChild(buttonsDiv);
+
+        // If the user is admin, make edit and delete buttons visible
+        if (window.isAdmin) {
+            buttonsDiv.querySelector(".edit-user").style.visibility = "visible";
+            buttonsDiv.querySelector(".delete-user").style.visibility = "visible";
+        }
+
+
     } else {
         console.error(`material with id ${id} not found`);
     }
@@ -1332,7 +1366,7 @@ const generateJCFchart = (id) => {
 // MODAL
 //------------------------------------------------------------
 
-const addBtn = document.querySelector(".add-btn");
+
 const modalOverlay = document.getElementById("modal-overlay");
 const closeBtn = document.querySelector(".close-btn");
 

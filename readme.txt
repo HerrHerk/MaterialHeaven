@@ -13,3 +13,7 @@ firebase deploy --only functions
 RUN
 
 https://contacts-e0803.web.app
+
+ADMIN
+
+node setAdmin.js

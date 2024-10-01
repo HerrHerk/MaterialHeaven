@@ -38,6 +38,13 @@ h2 {
 
 }
 
+
+.add-btn {
+    visibility: hidden;
+}
+
+
+
 /* Hide scrollbar for the entire page */
 html, body {
     overflow: auto; /* Ensure scrolling is enabled */

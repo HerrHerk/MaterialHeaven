@@ -96,11 +96,18 @@ const getmaterials = async() => {
 };
 
 
+
+const addBtn = document.querySelector(".add-btn");
+
+// Ensure you select the loader dimmer correctly
+
 // Listen for authentication state changes
 onAuthStateChanged(auth, (user) => {
-    const loader = document.querySelector(".ui.loader"); // Get the loader element
+    
     if (user) {
         console.log("User is logged in:", user.uid);
+
+
         // User is authenticated, now we can call the cloud function
         getmaterials();
 
@@ -114,7 +121,7 @@ onAuthStateChanged(auth, (user) => {
             window.isAdmin = isAdmin;
 
             // Toggle visibility of add button based on admin status
-            const addBtn = document.querySelector(".add-btn");
+            
             if (addBtn && isAdmin) {
                 addBtn.style.visibility = "visible";  // Show the button if admin
             }
@@ -124,13 +131,19 @@ onAuthStateChanged(auth, (user) => {
             console.log("Error retrieving user token:", error);
         }).finally(() => {
             // Hide the entire dimmer (loader + overlay) once the authentication check is complete
-            if (loaderDimmer) loaderDimmer.style.display = "none";
+
         });
 
     } else {
         console.log("No user is logged in. Delaying function call.");
-        if (loaderDimmer) loaderDimmer.style.display = "none"; // Hide the loader if no user
+        const loaderDimmer = document.getElementById("loading-dimmer"); // Select by ID
+        if (loaderDimmer) {
+            
+            loaderDimmer.style.display = "none"; // Hide the loader if no user
+        }
+
     }
+
 });
 
 //------------------------------------------------------------
@@ -264,6 +277,11 @@ const showMaterials = (materials) => {
             group.classList.toggle('collapsed');
         });
     });
+    const loaderDimmer = document.getElementById("loading-dimmer"); // Select by ID
+    if (loaderDimmer) {
+        
+        loaderDimmer.style.display = "none"; // Hide the loader if no user
+    }
 
 };
 

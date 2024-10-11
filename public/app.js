@@ -1764,3 +1764,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+//------------------------------------------------------------
+// SLIDESHOW
+//------------------------------------------------------------
+
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+const indicators = document.querySelectorAll('.indicator');
+
+// Function to show the current slide
+function showSlide(index) {
+    const offset = -index * 20; // Calculate the offset based on the current slide index
+    document.querySelector('#slideshow').style.transform = `translateX(${offset}%)`;
+    updateIndicators(index);
+}
+
+// Function to show the next slide
+function showNextSlide() {
+    slideIndex = (slideIndex + 1) % totalSlides; // Increment index and loop back if needed
+    showSlide(slideIndex);
+}
+
+// Update indicators based on the current slide
+function updateIndicators(index) {
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
+}
+
+// Attach click events to indicators for manual slide control
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+        slideIndex = index;
+        showSlide(slideIndex);
+    });
+});
+
+// Set the slideshow to rotate every 5 seconds
+setInterval(showNextSlide, 10000);
+
+
+
+
+

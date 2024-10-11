@@ -101,35 +101,107 @@
                 <div class="ui massive text loader">Preparing Materials...</div>
             </div>
 
+
+            
+
             <div id="welcome-message" style="display:none;">
                 <div class="ui message">
                     <h2 class="ui header">Welcome to the Material Data Portal</h2>
                     <p>To see the material data, first you should log in. Click
                         <a href="#" id="main-login-btn">here</a>
-                        to gain access to hundreds of materials:                                         
+                        to gain access to hundreds of materials:
                     </p>
                 </div>
             
                 <h3 class="ui header">Some Features of Our Platform</h3>
-                <div class="ui four column grid">
-                    <div class="column">
-                        <!-- <img class="ui image" src="image1.jpg" alt="Feature 1"> -->
-                        <p>Feature 1 description</p>
+                <div id="slideshow-container" class="ui grid slideshow-container">
+                    <div id="slideshow-wrapper">
+                        <div id="slideshow">
+                            <!-- Slide 1 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_1.png" alt="Preview 1" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Title 1</h2>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet.</li>
+                                        <li>Consectetur adipiscing elit.</li>
+                                        <li>Integer nec odio.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_2.png" alt="Preview 2" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Title 2</h2>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet.</li>
+                                        <li>Consectetur adipiscing elit.</li>
+                                        <li>Integer nec odio.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_3.png" alt="Preview 3" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Title 3</h2>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet.</li>
+                                        <li>Consectetur adipiscing elit.</li>
+                                        <li>Integer nec odio.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 4 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_4.png" alt="Preview 4" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Title 4</h2>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet.</li>
+                                        <li>Consectetur adipiscing elit.</li>
+                                        <li>Integer nec odio.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 5 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_5.png" alt="Preview 5" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Title 5</h2>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet.</li>
+                                        <li>Consectetur adipiscing elit.</li>
+                                        <li>Integer nec odio.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="column">
-                       <!--  <img class="ui image" src="image2.jpg" alt="Feature 2"> -->
-                        <p>Feature 2 description</p>
-                    </div>
-                    <div class="column">
-                        <!-- <img class="ui image" src="image3.jpg" alt="Feature 3"> -->
-                        <p>Feature 3 description</p>
-                    </div>
-                    <div class="column">
-                        <!-- <img class="ui image" src="image4.jpg" alt="Feature 4"> -->
-                        <p>Feature 4 description</p>
+                    <div id="slideshow-indicators">
+                        <span class="indicator active" data-index="0"></span>
+                        <span class="indicator" data-index="1"></span>
+                        <span class="indicator" data-index="2"></span>
+                        <span class="indicator" data-index="3"></span>
+                        <span class="indicator" data-index="4"></span>
                     </div>
                 </div>
             </div>
+            
+            
+            
+            
 
             <!-- Tabs for navigation -->
             <div class="tabs" id="tabcontainer" style="display:none;">

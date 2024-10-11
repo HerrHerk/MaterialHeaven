@@ -96,11 +96,43 @@
                     <button class="add-btn"><img src="./assets/icons/add-icon.png" alt="edit icon" width="20" height="20"></button>
                 </div>
             </header>
-            
+     
+            <div class="ui active inverted dimmer" id="loading-dimmer" >
+                <div class="ui massive text loader">Preparing Materials...</div>
+            </div>
 
+            <div id="welcome-message" style="display:none;">
+                <div class="ui message">
+                    <h2 class="ui header">Welcome to the Material Data Portal</h2>
+                    <p>To see the material data, first you should log in. Click
+                        <a href="#" id="main-login-btn">here</a>
+                        to gain access to hundreds of materials:                                         
+                    </p>
+                </div>
+            
+                <h3 class="ui header">Some Features of Our Platform</h3>
+                <div class="ui four column grid">
+                    <div class="column">
+                        <!-- <img class="ui image" src="image1.jpg" alt="Feature 1"> -->
+                        <p>Feature 1 description</p>
+                    </div>
+                    <div class="column">
+                       <!--  <img class="ui image" src="image2.jpg" alt="Feature 2"> -->
+                        <p>Feature 2 description</p>
+                    </div>
+                    <div class="column">
+                        <!-- <img class="ui image" src="image3.jpg" alt="Feature 3"> -->
+                        <p>Feature 3 description</p>
+                    </div>
+                    <div class="column">
+                        <!-- <img class="ui image" src="image4.jpg" alt="Feature 4"> -->
+                        <p>Feature 4 description</p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Tabs for navigation -->
-            <div class="tabs">
+            <div class="tabs" id="tabcontainer" style="display:none;">
                 <div class="tab active" data-target="steel">
                     <img src="./assets/icons/steel-icon.png"  class="tab-icon" alt="Steel">
                     Steel
@@ -154,11 +186,9 @@
                     <div class="tab-column" id="steelFiles">
 
                         <ul id="material-list-steel", class="material-list">
-                            <div class="ui active inverted dimmer" id="loading-dimmer" > <!-- Start hidden -->
-                                <div class="ui massive text loader">Preparing Materials...</div>
-                            </div>
+
                             
-                            
+
 
                             <!-- <li class="material-list-item">
 

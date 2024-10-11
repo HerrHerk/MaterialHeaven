@@ -18,6 +18,10 @@ import {
     getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
 
+
+
+
+
 // Ensure the auth component is registered properly
 const auth = getAuth(app);
 const db = getFirestore();
@@ -341,7 +345,9 @@ const loginBtnPressed = async (e) => {
 }
 
 
-const needAnAccountBtnPressed = () => {
+export const needAnAccountBtnPressed = (e) => {
+    e.preventDefault();
+    mainView.style.display = "flex";
     loginForm.style.display = "none";
     signUpFormView.style.display = "block";
 }
@@ -352,7 +358,7 @@ const haveAnAccountBtnPressed = () => {
 }
 
 // Function to show the login form and hide the sign-up form
-const signUpLogInBtnPressed = (e) => {
+export const signUpLogInBtnPressed = (e) => {
     e.preventDefault(); // Prevent the default anchor link behavior
     mainView.style.display = "flex";
     loginForm.style.display = "block";

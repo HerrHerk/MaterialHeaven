@@ -3,8 +3,20 @@
 //------------------------------------------------------------
 
 
-import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-functions.js";
+import { 
+    getFirestore, 
+    collection, 
+    addDoc, 
+    onSnapshot, 
+    doc, 
+    updateDoc, 
+    deleteDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
+
+import { 
+    getFunctions, httpsCallable 
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-functions.js";
+
 const db = getFirestore();
 const dbRef = collection(db, "materialCollection");
 const functions = getFunctions();
@@ -14,8 +26,19 @@ import {
     getAuth,
     onAuthStateChanged, 
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+import { 
+    signUpLogInBtnPressed,
+    needAnAccountBtnPressed,
+} from './auth.js';
+
+
+
 const auth = getAuth(app);
 const user = auth.currentUser;
+
+
+
 
 //------------------------------------------------------------
 // MOBILE VIEW
@@ -107,6 +130,18 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("User is logged in:", user.uid);
 
+        const mainTabs = document.getElementById("tabcontainer");
+        mainTabs.style.display = "flex";  // Show the welcome message
+
+
+        // Reload the page if user logs in or out
+        if (!window.initialAuthCheck) {
+            window.initialAuthCheck = true;  // Ensure this only runs once on page load
+        } else {
+            console.log("Reloading page after login");  // Log before reloading
+            window.location.reload();  // Reload the page when auth state changes
+        }
+
 
         // User is authenticated, now we can call the cloud function
         getmaterials();
@@ -142,9 +177,47 @@ onAuthStateChanged(auth, (user) => {
             loaderDimmer.style.display = "none"; // Hide the loader if no user
         }
 
+        console.log("No user is logged in");
+
+        if (!window.initialAuthCheck) {
+            window.initialAuthCheck = true;
+        } else {
+            console.log("Reloading page after logout");  // Log before reloading
+            window.location.reload();  // Reload the page when auth state changes
+        }
+
+        // If no one is logged in, display a welcome message
+        displayWelcomeMessage();  // This function will handle the welcome content
+
     }
 
 });
+
+function displayWelcomeMessage() {
+    const loaderDimmer = document.getElementById("loading-dimmer");
+    const welcomeMessage = document.getElementById("welcome-message");
+
+    if (loaderDimmer) {
+        loaderDimmer.style.display = "none";  // Hide the loader
+    }
+
+    if (welcomeMessage) {
+        welcomeMessage.style.display = "block";  // Show the welcome message
+    }
+
+    // Add event listeners for login and register links
+    document.getElementById('main-login-btn').addEventListener('click', function(e) {
+        // Add your login logic here
+        signUpLogInBtnPressed(e);
+    });
+
+    document.getElementById('main-register-btn').addEventListener('click', function(e) {
+        // Add your register logic here
+        console.log("welcome register btn pressed");
+        needAnAccountBtnPressed(e);
+    });
+}
+
 
 //------------------------------------------------------------
 // SHOW material AS LIST ITEM ON THE LEFT

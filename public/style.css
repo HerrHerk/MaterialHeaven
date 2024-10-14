@@ -1335,6 +1335,28 @@ SLIDESHOW AND WELCOME
     border: none; /* Remove borders */
 }
 
+/* Add separator line before the container */
+#slideshow-container::before, 
+#slideshow-container::after {
+    content: "";
+    display: block;
+    width: 80%; /* Line length is 80% of container */
+    height: 1px; /* Line height */
+    background-color: #34495E; /* Line color */
+    margin: 20px auto; /* Center the line and give space */
+}
+
+/* Positioning the lines */
+#slideshow-container::before {
+    margin-top: 0; /* Adjust margin to remove extra space */
+    margin-bottom: 20px; /* Space between line and container */
+}
+
+#slideshow-container::after {
+    margin-top: 20px; /* Space between container and bottom line */
+}
+
+
 /* Slideshow wrapper with no padding */
 #slideshow-wrapper {
     width: 100%;
@@ -1353,13 +1375,13 @@ SLIDESHOW AND WELCOME
     display: flex;
     width: 100%; /* Take up full width of the container */
     align-items: center;
-    max-height: 700px; /* Set a max height for slides */
+    
 }
 
 /* Style for the image column */
 .image-column {
-    flex: 2; /* Allow the image column to take 2 parts */
-    max-height: 700px; /* Set max height for the image column */
+    flex: 3; /* Allow the image column to take 2 parts */
+    
     overflow: hidden; /* Hide overflow to avoid cropping */
 }
 
@@ -1374,7 +1396,7 @@ SLIDESHOW AND WELCOME
 .description-column {
     flex: 1; /* Allow the description column to take 1 part */
     text-align: left; /* Align text to the left */
-    padding: 20px; /* Add some padding for aesthetics */
+    margin-left: 1%;
 }
 
 /* Style the indicators */
@@ -1394,11 +1416,11 @@ SLIDESHOW AND WELCOME
 }
 
 .indicator.active {
-    background-color: #717171;
+    background-color: #34495E;
 }
 
 /* Ensure the layout is responsive */
-@media (max-width: 768px) {
+@media (max-width: 1900px) {
     .slide {
         flex-direction: column; /* Stack the image and description vertically on smaller screens */
         text-align: center;
@@ -1406,10 +1428,26 @@ SLIDESHOW AND WELCOME
     }
 }
 
-.ui.grid > .slide,
-.ui.image {
-    margin: 0 !important; /* Override any default margin */
-    padding: 0 !important; /* Override any default padding */
-    border: none !important; /* Remove any default borders */
+/* Remove default grid flex behavior and padding from Semantic UI */
+.ui.grid.slideshow-container {
+    display: block !important; /* Ensure it's not using flex */
+    padding: 0 !important; /* Override padding from Semantic UI */
+    margin: 0 !important; /* Override margin */
+    border: none !important; /* Remove border */
 }
 
+/* Style for bullet points */
+.description-column ul {
+    font-size: 25px; /* Set font size to 25px */
+    color: #545F66; /* Set text color to #545F66 */
+    
+    line-height: 1.5; /* Optional: adds space between bullet points */
+}
+
+/* Style for titles above bullet points (h2) */
+.description-column h2 {
+    font-size: 30px; /* Set font size to 25px */
+    text-decoration: underline;
+    color: #545F66; /* Set text color to #545F66 */
+    margin-bottom: 10px; /* Optional: adds spacing between title and bullet points */
+}

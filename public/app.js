@@ -1804,7 +1804,7 @@ indicators.forEach((indicator, index) => {
 });
 
 // Set the slideshow to rotate every 5 seconds
-setInterval(showNextSlide, 10000);
+setInterval(showNextSlide, 1000000);
 
 
 

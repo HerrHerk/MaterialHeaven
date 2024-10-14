@@ -1167,16 +1167,59 @@ SUBSCRIPTION PLANS
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.search-icon {
-    width: 20px ;
-    height: 20px ;
-    
+
+/* Highlight the current user's plan */
+.current-plan {
+    background-color: rgb(177, 204, 116) !important; /* Light green background */
+    border: 2px solid #b1cc74; /* Optional: Add a border with a slightly darker green */
+    box-shadow: 0 0 20px rgba(177, 204, 116, 0.8); /* Shadow to create a glowing effect */
+    position: relative; /* Ensure positioning for label */
 }
+
+/* Label to indicate the current plan */
+.current-plan-label {
+    font-size: 1.5em; /* Make the font larger for better visibility */
+    color: #fff; /* White text color */
+    background-color: #b1cc74; /* Matching background color */
+    padding: 8px 15px; /* Add some padding */
+    border-radius: 20px; /* Rounded edges */
+    display: inline-block;
+    margin-top: -25px; /* Adjust positioning to overlap the card */
+    position: absolute; /* Position the label absolutely */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    z-index: 1; /* Ensure it appears above the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a slight shadow for depth */
+}
+
+/* Disable styles for the current plan's button */
+.current-plan .select-plan-btn {
+    background-color: #545F66 !important; /* Background color of the button */
+    color: #ffffff; /* Change the text color to white for better visibility */
+    font-weight: bold; /* Make the text bold */
+    cursor: not-allowed; /* Disable cursor */
+    pointer-events: none; /* Disable click */
+    opacity: 1; /* Ensure full opacity */
+}
+
+/* Additional styles to make the button more prominent */
+.select-plan-btn {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smoothness */
+}
+
+
+
+
 
 /*-------------
  Search, Filter, Collapse All
 ------------- */
 
+.search-icon {
+    width: 20px ;
+    height: 20px ;
+    
+}
 /* Container for search, filter, and collapse buttons */
 .search-filter-collapse {
     display: flex;
@@ -1267,6 +1310,11 @@ SUBSCRIPTION PLANS
 .collapse-all-btn:hover {
     background-color: #45a049;
 }
+
+
+
+
+
 
 /* Space between elements */
 .search-filter-collapse > * {

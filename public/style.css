@@ -307,6 +307,9 @@ material LIST
     display: flex;
     border-bottom: 1px solid #999;
     padding: 1px;
+    height: 60px; /* Set this to whatever fixed height you prefer */
+    display: flex; /* Ensure the content aligns well */
+    align-items: center; /* Center items vertically */
 }
 
 .separator-line {
@@ -345,7 +348,7 @@ material LIST
 }
 
 .material-list-item .content .title {
-    font-size: 1.2m;
+    font-size: 1.4rem;
     font-weight: normal;
     color: #333;
     padding-right: 0.5em;
@@ -355,7 +358,7 @@ material LIST
 }
 
 .material-list-item .content .subtitle {
-    font-size: 1.2m;
+    font-size: 1.3rem;
     font-weight: normal;
     color: #333;
     margin-top: 10px;
@@ -386,7 +389,7 @@ material LIST
     padding: 10px 15px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -418,7 +421,7 @@ material LIST
 
 .material-group-header::after {
     content: "\25BC"; /* Downward arrow */
-    font-size: 0.8em;
+    font-size: 1.4rem;
     transition: transform 0.3s ease;
 }
 
@@ -1499,3 +1502,96 @@ SLIDESHOW AND WELCOME
     color: #545F66; /* Set text color to #545F66 */
     margin-bottom: 10px; /* Optional: adds spacing between title and bullet points */
 }
+
+
+/*-------------
+LIST TIER LABELS
+------------- */
+
+/* Base tier label styling for circles */
+.tier-label {
+    padding: 0;  /* No padding initially */
+    width: 10px; /* Smaller initial circle size */
+    height: 10px; /* Match height to width for a perfect circle */
+    line-height: 8px; /* Center the content */
+    text-align: center;
+    border-radius: 50%; /* Circular shape */
+    font-size: 0; /* Hide text */
+    display: inline-block;
+    
+    margin-right: 15px; /* Space between circle and text */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    overflow: hidden; /* Hide text */
+    vertical-align: middle;
+}
+
+/* Hover state - expand the circle and show text */
+.material-list-item:hover .tier-label {
+    width: auto; /* Smaller initial circle size */
+    height: 25px; /* Match height to width for a perfect circle */
+    line-height: 25px; /* Center the content */
+    padding: 0px 8px; /* Add padding to display text */
+    font-size: 1em; /* Show the text */
+    border-radius: 12px; /* Rounded rectangle */
+    border: 2px;
+}
+
+
+/* Border variables */
+:root {
+    --tier-border-thickness: 3px; /* Thickness of the borders */
+    --tier-border-radius: 75%; /* Border radius */
+    
+    /* Define border colors for each tier */
+    --tier-free-border-color: #7a7a7a; /* Color for free tier */
+    --tier-basic-border-color: #8ba848; /* Color for basic tier */
+    --tier-standard-border-color: rgb(69, 118, 173); /* Color for standard tier */
+    --tier-premium-border-color: #992a78; /* Color for premium tier */
+    --tier-admin-border-color: #ff0000; /* Color for disabled tier */
+}
+
+/* Specific colors for each tier */
+.tier-free {
+    background-color: rgb(236, 240, 241); /* Muted teal for free tier */
+    color: #7a7a7a; /* Text color for better contrast */
+    border: var(--tier-border-thickness) solid var(--tier-free-border-color); /* Use variables */
+    border-radius: var(--tier-border-radius); /* Use variable for radius */
+}
+
+.tier-basic {
+    background-color: rgb(236, 240, 241); /* Light greenish-yellow for basic tier */
+    color: #8ba848; /* Darker text for contrast */
+    border: var(--tier-border-thickness) solid var(--tier-basic-border-color); /* Use variables */
+    border-radius: var(--tier-border-radius); /* Use variable for radius */
+}
+
+.tier-standard {
+    background-color: rgb(236, 240, 241); /* Soft green for standard tier */
+    color: rgb(69, 118, 173); /* Darker text for contrast */
+    border: var(--tier-border-thickness) solid var(--tier-standard-border-color); /* Use variables */
+    border-radius: var(--tier-border-radius); /* Use variable for radius */
+}
+
+.tier-premium {
+    background-color: rgb(236, 240, 241); /* Dark slate gray for premium tier */
+    color: #992a78; /* White text for better contrast */
+    border: var(--tier-border-thickness) solid var(--tier-premium-border-color); /* Use variables */
+    border-radius: var(--tier-border-radius); /* Use variable for radius */
+}
+
+/* Admin/Disabled tier */
+.tier-admin {
+    background-color: rgb(236, 240, 241); /* Light red for disabled tier */
+    color: #ff0000; /* White text for contrast */
+    border: var(--tier-border-thickness) solid var(--tier-admin-border-color); /* Use variables */
+    border-radius: var(--tier-border-radius); /* Use variable for radius */
+}
+
+/* Ensure correct hover effect for admin */
+.tier-admin span {
+    color: #FF0000; /* White text for "Disabled" */
+}
+
+
+
+

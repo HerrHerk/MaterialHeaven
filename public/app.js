@@ -233,7 +233,7 @@ const showMaterials = (materials) => {
         other: document.getElementById("material-list-other")
     };
     
-    console.log(materialLists.steel, materialLists.aluminium, materialLists.iron, materialLists.specialMetal, materialLists.other);
+    // console.log(materialLists.steel, materialLists.aluminium, materialLists.iron, materialLists.specialMetal, materialLists.other);
     
     for (let list in materialLists) {
         if (materialLists.hasOwnProperty(list)) {
@@ -267,6 +267,28 @@ const showMaterials = (materials) => {
         "special metal": "specialMetal",  // Mapping "special metal" to "specialMetal"
         "other": "other"
     };
+
+
+    // Helper function to get the tier label (badge)
+    const getTierLabel = (tier) => {
+        switch (tier) {
+            case "free":
+                return `<div class="tier-label tier-free"><span>free</span></div>`;
+            case "basic":
+                return `<div class="tier-label tier-basic"><span>basic</span></div>`;
+            case "standard":
+                return `<div class="tier-label tier-standard"><span>standard</span></div>`;
+            case "premium":
+                return `<div class="tier-label tier-premium"><span>premium</span></div>`;
+            case "admin":
+                return `<div class="tier-label tier-admin"><span>Disabled</span></div>`; // Directly replace with "Disabled"
+            default:
+                return ``; // No label for unknown tiers
+        }
+    };
+    
+    
+    
 
     // Create the HTML structure
     for (const [name, materialGroup] of Object.entries(groupedMaterials)) {
@@ -322,7 +344,7 @@ const showMaterials = (materials) => {
             li.innerHTML = `
                 <div class="content">
                     <div class="subtitle">
-                        ${material.materialInfo.version}
+                        ${getTierLabel(material.materialInfo.tier)}${material.materialInfo.version} 
                     </div>
                 </div>
             `;

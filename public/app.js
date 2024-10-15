@@ -281,7 +281,7 @@ const showMaterials = (materials) => {
             case "premium":
                 return `<div class="tier-label tier-premium"><span>premium</span></div>`;
             case "admin":
-                return `<div class="tier-label tier-admin"><span>Disabled</span></div>`; // Directly replace with "Disabled"
+                return `<div class="tier-label tier-admin"><span>disabled</span></div>`; // Directly replace with "Disabled"
             default:
                 return ``; // No label for unknown tiers
         }

@@ -401,12 +401,31 @@ const loginWithGoogleBtnPressed = async (e) => {
     const googleProvider = new GoogleAuthProvider();
  
     try {
-        await signInWithPopup(auth, googleProvider);
+        const userCredential = await signInWithPopup(auth, googleProvider);
+        
+        // After signing in, check if the user document exists in Firestore
+        const docRef = doc(db, "users", userCredential.user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            // If user document does not exist, create it
+            await createUserProfileWithGoogle(userCredential);
+        }
+
     } catch (error) {
         console.log(error.code);
     }
-    
+}
 
+const createUserProfileWithGoogle = async (userCredential) => {
+    const docRef = doc(db, "users", userCredential.user.uid);
+    await setDoc(docRef, {
+        username: userCredential.user.displayName || '', // Use display name from Google
+        realname: userCredential.user.displayName || '', // Use display name from Google
+        email: userCredential.user.email,
+        favourites: {},  // Initialize favourites map (empty by default)
+    });
+    console.log('User profile created:', userCredential);
 }
 
 const updateBtnPressed = async (e) => {

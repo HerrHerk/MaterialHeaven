@@ -7,10 +7,12 @@ import {
     getFirestore, 
     collection, 
     addDoc, 
+    getDoc,
     onSnapshot, 
     doc, 
     updateDoc, 
-    deleteDoc 
+    deleteDoc,
+    deleteField 
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"
 
 import { 
@@ -1142,6 +1144,11 @@ const displayButtonsOnDetailView = (id) => {
             <button class="download-btn">
                 <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
             </button>
+
+            <!-- Favourite Button -->
+            <button class="favourite-btn">
+                <img src="./assets/icons/star-empty-icon.svg" alt="favourite icon" width="20" height="20">
+            </button>
         `;
 
         // Clear any previous buttons on this item to avoid duplication
@@ -1158,6 +1165,32 @@ const displayButtonsOnDetailView = (id) => {
             buttonsDiv.querySelector(".edit-user").style.visibility = "visible";
             buttonsDiv.querySelector(".delete-user").style.visibility = "visible";
         }
+
+
+        // Favourite button logic
+        const favouriteBtn = buttonsDiv.querySelector('.favourite-btn');
+        const favouriteIcon = favouriteBtn.querySelector('img');
+
+        // Fetch the current user's favourite status and update the icon
+        checkIfFavourite(id)
+            .then(isFavourite => updateFavouriteIcon(isFavourite, favouriteIcon))
+            .catch(error => console.error("Error checking favourites:", error));
+
+        // Handle click event for toggling favourite
+        favouriteBtn.addEventListener('click', () => {
+            const currentIsFavourite = favouriteIcon.src.includes('star-filled-icon.svg');
+            const newIsFavourite = !currentIsFavourite;
+
+            // Swap the icon based on the new state
+            updateFavouriteIcon(newIsFavourite, favouriteIcon);
+
+            // Update Firestore with the new favourite state
+            if (newIsFavourite) {
+                addToFavourites(id);  // Add the item to favourites
+            } else {
+                removeFromFavourites(id);  // Remove the item from favourites
+            }
+        });
 
 
     } else {
@@ -1177,6 +1210,71 @@ const hideOtherButtonsOnDetailView = (id) => {
             }
         }
     });
+};
+
+//------------------------------------------------------------
+// FAVOURITE LOGIC
+//------------------------------------------------------------
+
+// Function to update the favourite icon based on the state
+const updateFavouriteIcon = (isFavourite, iconElement) => {
+    if (isFavourite) {
+        iconElement.src = './assets/icons/star-filled-icon.svg';
+        iconElement.alt = 'remove from favourites';
+    } else {
+        iconElement.src = './assets/icons/star-empty-icon.svg';
+        iconElement.alt = 'add to favourites';
+    }
+};
+
+// Check if the material is a favourite
+const checkIfFavourite = async (materialId) => {
+    const user = auth.currentUser;
+    if (!user) {
+        throw new Error('User is not logged in');
+    }
+
+    const userDocRef = doc(db, 'users', user.uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const favourites = userData.favourites || {};
+
+        // Check if the material ID is in the favourites map
+        return favourites.hasOwnProperty(materialId);
+    } else {
+        console.log('User document not found');
+        return false;
+    }
+};
+
+// Add the material to favourites in Firestore
+const addToFavourites = async (materialId) => {
+    const user = auth.currentUser;
+    if (!user) {
+        throw new Error('User is not logged in');
+    }
+
+    const userDocRef = doc(db, 'users', user.uid);
+    await updateDoc(userDocRef, {
+        [`favourites.${materialId}`]: true
+    });
+    console.log(`Material ${materialId} added to favourites`);
+};
+
+// Remove the material from favourites in Firestore
+const removeFromFavourites = async (materialId) => {
+    const user = auth.currentUser;
+    if (!user) {
+        throw new Error('User is not logged in');
+    }
+
+    const userDocRef = doc(db, 'users', user.uid);
+    await updateDoc(userDocRef, {
+        [`favourites.${materialId}`]: deleteField()  // Remove the favourite
+    });
+    console.log(`Material ${materialId} removed from favourites`);
 };
 
 //------------------------------------------------------------

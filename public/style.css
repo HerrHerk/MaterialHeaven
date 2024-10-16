@@ -342,7 +342,8 @@ material LIST
 
     flex: 3;
     display: flex;
-    
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Horizontally center items */
     justify-content: left;
     padding-left: 2em; /* sub materials */
 }
@@ -513,6 +514,23 @@ HOVER EFFECTS
 #material-list-other .material-list-item:hover .subtitle {
     color: rgb(255, 128, 64) !important; /* Adjust color for Other tab */
 }
+
+
+.favorite-indicator {
+    display: flex; /* Make it a flex container */
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Horizontally center items */
+    padding-right: 15px; /* Optional: adjust padding to your needs */
+    width: 30px; /* Ensure enough width for centering */
+    height: 60px; /* Match height with the icon */
+}
+
+.favorite-icon {
+    width: 20px; /* Adjust width */
+    height: 20px; /* Adjust height */
+}
+
+
 
 
 /*-------------

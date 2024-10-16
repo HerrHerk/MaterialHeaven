@@ -225,7 +225,10 @@ function displayWelcomeMessage() {
 // SHOW material AS LIST ITEM ON THE LEFT
 //------------------------------------------------------------
 
-const showMaterials = (materials) => {
+const showMaterials = async (materials) => {
+
+    await fetchUserFavorites(); // Ensure favorites are fetched
+
     // Clear all material lists first
     const materialLists = {
         steel: document.getElementById("material-list-steel"),
@@ -342,12 +345,21 @@ const showMaterials = (materials) => {
         materialGroup.forEach(material => {
             const li = document.createElement('li');
             li.classList.add('material-list-item');
+            li.classList.add(material.materialType); // Add a class for material type
             li.id = material.id;
+        
+            // Check if the material is in user favorites
+            const isFavorite = userFavorites.has(material.id);
+            const starIcon = isFavorite
+                ? `<img src="./assets/icons/star-empty-icon.svg" alt="Empty star"  class="favorite-icon" />`
+                : ''; // Show filled star if favorite, else empty
+        
             li.innerHTML = `
                 <div class="content">
                     <div class="subtitle">
-                        ${getTierLabel(material.materialInfo.tier)}${material.materialInfo.version} 
+                        ${getTierLabel(material.materialInfo.tier)} ${material.materialInfo.version}
                     </div>
+                    <div class="favorite-indicator" style="margin-left: auto;">${starIcon}</div> <!-- Separate star container -->
                 </div>
             `;
             list.appendChild(li);
@@ -356,8 +368,8 @@ const showMaterials = (materials) => {
         container.appendChild(header);
         container.appendChild(list);
 
+        // Determine material type and append to corresponding list
         const materialType = materialMapping[materialGroup[0].materialInfo.material.toLowerCase()];
-
         if (materialType && materialLists[materialType]) {
             materialLists[materialType].appendChild(container);
         } else {
@@ -365,8 +377,6 @@ const showMaterials = (materials) => {
             console.error(`Unknown material: ${materialGroup[0].materialInfo.material}`);
         }
     }
-
-    
 
     document.querySelectorAll('.material-group-header').forEach(header => {
         header.addEventListener('click', function() {
@@ -1215,6 +1225,29 @@ const hideOtherButtonsOnDetailView = (id) => {
 //------------------------------------------------------------
 // FAVOURITE LOGIC
 //------------------------------------------------------------
+
+let userFavorites = new Set(); // Store favorite material IDs
+
+const fetchUserFavorites = async () => {
+    const user = auth.currentUser;
+    if (!user) {
+        throw new Error('User is not logged in');
+    }
+
+    const userDocRef = doc(db, 'users', user.uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const favourites = userData.favourites || {};
+        // Populate the set with the favorite material IDs
+        userFavorites = new Set(Object.keys(favourites));
+    } else {
+        console.log('User document not found');
+    }
+};
+
+
 
 // Function to update the favourite icon based on the state
 const updateFavouriteIcon = (isFavourite, iconElement) => {

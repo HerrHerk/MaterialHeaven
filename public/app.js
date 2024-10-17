@@ -350,10 +350,41 @@ const showMaterials = async (materials) => {
         
             // Check if the material is in user favorites
             const isFavorite = userFavorites.has(material.id);
+
+            // Define color logic for each material type
+            const materialType = material.materialInfo.material.toLowerCase(); // Convert to lowercase for uniformity
+            let starColor = '';
+            switch (materialType) {
+                case 'steel':
+                    starColor = 'rgb(120, 0, 0)'; // Red for Steel
+                    break;
+                case 'aluminium':
+                    starColor = 'rgb(0, 128, 192)'; // Blue for Aluminium
+                    break;
+                case 'iron':
+                    starColor = 'rgb(0, 111, 55)'; // Green for Iron
+                    break;
+                case 'special-metal':
+                    starColor = 'rgb(135, 104, 143)'; // Purple for Special Metal
+                    break;
+                case 'other':
+                    starColor = 'rgb(255, 128, 64)'; // Orange for Other
+                    break;
+                default:
+                    starColor = 'black'; // Fallback color if material type is unknown
+            }
+
+            // Insert SVG icon with dynamic fill color and contour
             const starIcon = isFavorite
-                ? `<img src="./assets/icons/star-empty-icon.svg" alt="Empty star"  class="favorite-icon" />`
-                : ''; // Show filled star if favorite, else empty
+                ? `<svg id="star-icon-${material.id}" class="favorite-icon" width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" stroke="${starColor}" stroke-width="2" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>`
+                : '';
+
         
+
+
+
             li.innerHTML = `
                 <div class="content">
                     <div class="subtitle">
@@ -513,6 +544,11 @@ const hideButtonsOnCollapse = (id) => {
     const existingActionDiv = listItem.querySelector('.action');
     if (existingActionDiv) {
         existingActionDiv.remove(); // Remove buttons when card is collapsed
+    }
+    // Hide the specific list item Star Icon (favorite-indicator)
+    const starIcon = listItem.querySelector(`#star-icon-${id}`); // Assuming we have a unique ID for each star icon
+    if (starIcon) {
+        starIcon.style.display = 'block'; // Hide the star icon
     }
 };
 
@@ -1135,7 +1171,7 @@ const displaymaterialOnDetailsView = (id) => {
 };
 
 const displayButtonsOnDetailView = (id) => {
-    const material = getmaterial(id);
+    // const material = getmaterial(id);
     const listItem = document.getElementById(id);
 
     if (listItem) {
@@ -1201,6 +1237,16 @@ const displayButtonsOnDetailView = (id) => {
                 removeFromFavourites(id);  // Remove the item from favourites
             }
         });
+
+        // Hide the specific list item Star Icon (favorite-indicator)
+        const starIcon = listItem.querySelector(`#star-icon-${id}`); // Assuming we have a unique ID for each star icon
+        if (starIcon) {
+            starIcon.style.display = 'none'; // Hide the star icon
+        }
+
+
+        // Hide list item Star Icon
+
 
 
     } else {

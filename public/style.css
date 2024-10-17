@@ -519,17 +519,17 @@ HOVER EFFECTS
 .favorite-indicator {
     display: flex; /* Make it a flex container */
     align-items: center; /* Vertically center items */
-    justify-content: center; /* Horizontally center items */
+    justify-content: right; /* Horizontally center items */
     padding-right: 15px; /* Optional: adjust padding to your needs */
-    width: 30px; /* Ensure enough width for centering */
+    width: 60px; /* Ensure enough width for centering */
     height: 60px; /* Match height with the icon */
 }
 
 .favorite-icon {
-    width: 20px; /* Adjust width */
-    height: 20px; /* Adjust height */
+    width: 20px; 
+    height: 20px; 
 }
-
+ 
 
 
 

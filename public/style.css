@@ -1616,5 +1616,39 @@ LIST TIER LABELS
 }
 
 
+/*-------------
+SHOPPING CART
+------------- */
+
+#shopping-cart-overlay {
+    min-width: 800px; /* Adjust width as needed */
+    max-width: 90%; /* Ensure it doesn't exceed viewport width */
+    text-align: center;
+    position: fixed;
+    top: 20%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    background-color: #fff; /* White background for better visibility */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    z-index: 1000; /* Ensure it appears above other elements */
+    padding: 20px; /* Add some padding */
+}
+
+
+
+#cart-items tr {
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+#cart-items tr:hover {
+    background-color: #f9f9f9; /* Light grey background on hover */
+}
+
+.ui.button.green {
+    margin-top: 20px; /* Add some space above the checkout button */
+}
+
+
 
 

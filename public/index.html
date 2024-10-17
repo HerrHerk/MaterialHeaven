@@ -34,6 +34,9 @@
                         <div class="sidebar-name" id="sidebar-name">Profile</div>
                         <div class="sidebar-email" id="sidebar-email">Profile</div>
 
+
+
+
                         <!-- Separator Line -->
                         <hr class="sidebar-separator">
                         
@@ -41,15 +44,24 @@
                             <i class="cog icon"></i>
                             <a href="#" id="sidebar-profile">Profile</a>
                         </div>
+
+                        <div class="sidebar-logger" id="sidebar-reset-password-div">
+                            <i class="lock icon"></i>
+                            <a href="#" id="sidebar-reset-password">Reset Password</a>
+                        </div>
                         
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
                         <div class="sidebar-logger" id="sidebar-subscription-plan-div">
                             <i class="euro icon"></i>
                             <a href="#" id="sidebar-subscription-plan">Subscription</a>
                         </div>
                         
-                        <div class="sidebar-logger" id="sidebar-reset-password-div">
-                            <i class="lock icon"></i>
-                            <a href="#" id="sidebar-reset-password">Reset Password</a>
+                        <div class="sidebar-logger" id="sidebar-shopping-cart-div">
+                            <i class="shopping cart icon"></i>
+                            <a href="#" id="sidebar-shopping-cart">Shopping Cart</a>
                         </div>
 
                         <!-- Separator Line -->
@@ -622,7 +634,7 @@
 
 
             <!-- PROFILE -->
-            <div  class="ui-segment" id = "user-profile">
+            <div  class="ui segment" id = "user-profile">
                 <div class="ui card">
                     <div class="ui content">
                         <div class="header">
@@ -639,6 +651,37 @@
                     </div>
                 </div>
             </div>
+
+            <!-- SHOPPING CART OVERLAY -->
+            <div class="ui segment" id="shopping-cart-overlay">
+                <h2>
+                    <i class="shopping cart icon"></i> Shopping Cart
+                </h2>
+                <div class="ui message hidden" id="cart-message"></div>
+                
+                <div id="cart-list">
+                    <table class="ui celled table">
+                        <thead>
+                            <tr>
+                                <th></th> <!-- Empty header for the icon -->
+                                <th>Material Name</th>
+                                <th>Version</th>
+                                <th>Tier</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- Materials will be dynamically added here -->
+                            <tr id="empty-cart" style="display: table-row;">
+                                <td colspan="6">Your shopping cart is empty. Come back once you have selected materials for purchase.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="ui button green big" id="checkout-btn">Checkout</button>
+            </div>
+
 
             <!-- PROFILE -->
 <!--             <div class="ui segment" id="user-profile">

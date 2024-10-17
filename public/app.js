@@ -130,7 +130,7 @@ const addBtn = document.querySelector(".add-btn");
 onAuthStateChanged(auth, (user) => {
     
     if (user) {
-        console.log("User is logged in:", user.uid);
+        // console.log("User is logged in:", user.uid);
 
         const mainTabs = document.getElementById("tabcontainer");
         mainTabs.style.display = "flex";  // Show the welcome message
@@ -152,7 +152,7 @@ onAuthStateChanged(auth, (user) => {
         // Check if the user has the 'admin' claim
         user.getIdTokenResult().then((idTokenResult) => {
             const isAdmin = !!idTokenResult.claims.admin;
-            console.log("Is user admin:", isAdmin);
+            // console.log("Is user admin:", isAdmin);
 
             // Store the admin status for future use
             window.isAdmin = isAdmin;
@@ -436,9 +436,9 @@ const materialListPressed = (event) => {
     const id = event.target.closest("li").getAttribute("id");
 
     // Log the clicked element and its parent classes for better debugging
-    console.log("Clicked element:", event.target);
-    console.log("Clicked element's class:", event.target.className);
-    console.log("Parent button class (if any):", event.target.closest('button')?.className);
+    // console.log("Clicked element:", event.target);
+    // console.log("Clicked element's class:", event.target.className);
+    // console.log("Parent button class (if any):", event.target.closest('button')?.className);
     console.log("Item ID:", id);
 
     // Check if a button is pressed using closest
@@ -455,6 +455,9 @@ const materialListPressed = (event) => {
         } else if (buttonClass.includes("delete-user")) {
             console.log("Delete button function called.");
             deleteButtonPressed(id);
+        } else if (buttonClass.includes("material-purchase-btn")) {
+            console.log("Material Purchase button function called.");
+            MaterialPurchaseButtonPressed(id);
         } else if (buttonClass.includes("download-btn")) {
             console.log("Download button function called.");
             downloadButtonPressed(id);
@@ -464,13 +467,13 @@ const materialListPressed = (event) => {
     }
 
     // Handle card expansion/collapse when non-button area is clicked
-    console.log("No button pressed, handling card expansion/collapse.");
+    // console.log("No button pressed, handling card expansion/collapse.");
     const cardExpanded = moveCardToNextRow(id);
     if (!cardExpanded) {
-        console.log("Card collapsed, hiding buttons.");
+        //console.log("Card collapsed, hiding buttons.");
         hideButtonsOnCollapse(id); // Hide buttons when card is collapsed
     } else {
-        console.log("Card expanded, displaying material details.");
+        //console.log("Card expanded, displaying material details.");
     }
     displaymaterialOnDetailsView(id);
     displayButtonsOnDetailView(id);
@@ -1186,6 +1189,10 @@ const displayButtonsOnDetailView = (id) => {
             </button>
             <button class="delete-user" style="visibility: hidden;">
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
+            </button>
+            
+            <button class="material-purchase-btn">
+                <img src="./assets/icons/shopping-cart-icon.png" alt="shopping cart icon" width="20" height="20"> 
             </button>
             <button class="download-btn">
                 <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
@@ -2006,6 +2013,102 @@ indicators.forEach((indicator, index) => {
 setInterval(showNextSlide, 1000000);
 
 
+
+//------------------------------------------------------------
+// SHOPPING CART PRESSED
+//------------------------------------------------------------
+
+// Array to hold the materials in the shopping cart
+let shoppingCart = [];
+
+// Function to handle adding a material to the cart
+const MaterialPurchaseButtonPressed = (id) => {
+    const selectedMaterial = getmaterial(id);  // Access the current material
+
+    // Check if the material is already in the cart
+    const isInCart = shoppingCart.some(material => material.id === selectedMaterial.id);
+
+    if (isInCart) {
+        alert('This material is already in your shopping cart.');
+        return;  // Do nothing if it's already in the cart
+    }
+
+    // Add the selected material to the shopping cart array
+    shoppingCart.push(selectedMaterial);
+
+    console.log(shoppingCart);
+
+    // Update the shopping cart UI
+    updateShoppingCartUI();
+};
+
+// Function to update the shopping cart overlay
+const updateShoppingCartUI = () => {
+    const cartList = document.getElementById('cart-items');  // Ensure this matches your HTML
+    cartList.innerHTML = '';  // Clear the existing list
+
+    // Check if shopping cart is empty
+    if (shoppingCart.length === 0) {
+        const emptyRow = document.createElement('tr');
+        emptyRow.innerHTML = `
+            <td colspan="6">Your shopping cart is empty. Come back once you have selected materials for purchase.</td>
+        `;
+        cartList.appendChild(emptyRow);
+    } else {
+        let totalCost = 0;  // Initialize total cost variable
+
+        shoppingCart.forEach(material => {
+            const cartItem = document.createElement('tr');
+            cartItem.setAttribute('id', `cart-item-${material.id}`);
+
+            // Ensure the price is treated as a number
+            const price = parseFloat(material.materialInfo.price) || 0; // Fallback to 0 if price is not valid
+            totalCost += price;  // Increment total cost
+
+            cartItem.innerHTML = `
+                <td>
+                    <img src="${material.materialInfo.icon ? `./assets/icons/${material.materialInfo.icon}-icon.png` : ''}" alt="" width="30" height="30">
+                </td>
+                <td>${material.materialInfo.name}</td>
+                <td>${material.materialInfo.version}</td>
+                <td>${material.materialInfo.tier}</td>
+                <td>$${price.toFixed(2)}</td>
+                <td>
+                    <button class="ui button red tiny remove-btn" data-id="${material.id}">X</button>
+                </td>
+            `;
+            // Append the material item to the cart list
+            cartList.appendChild(cartItem);
+        });
+
+        // Add a summary row for total cost
+        const totalRow = document.createElement('tr');
+        totalRow.innerHTML = `
+            <td colspan="4" style="text-align: right;"><strong>Total Cost:</strong></td>
+            <td>$${totalCost.toFixed(2)}</td>
+            <td></td> <!-- Empty cell for the action button -->
+        `;
+        cartList.appendChild(totalRow);
+
+        // Add event listeners for removing items
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const materialId = event.target.getAttribute('data-id');
+                removeMaterialFromCart(materialId);
+            });
+        });
+    }
+};
+
+
+// Function to remove a material from the cart
+const removeMaterialFromCart = (id) => {
+    // Filter out the material to be removed
+    shoppingCart = shoppingCart.filter(material => material.id !== id);
+
+    // Update the cart UI after removing
+    updateShoppingCartUI();
+};
 
 
 

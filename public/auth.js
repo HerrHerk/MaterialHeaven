@@ -85,6 +85,9 @@ const sidebarLogout = document.getElementById("sidebar-logout-div");
 
 const sidebarSubscription = document.getElementById("sidebar-subscription-plan-div");
 const subscriptionForm = document.getElementById("subscription-plan-form");
+const ShoppingCart = document.getElementById("shopping-cart-overlay");
+const sidebarShoppingCart = document.getElementById("sidebar-shopping-cart-div");
+
 
 const aboutForm = document.getElementById("about-form");
 
@@ -191,7 +194,7 @@ onAuthStateChanged(auth, async (user) => {
                 /*console.log("Updated sidebarName to:", sidebarName.textContent);
                 console.log("Updated sidebarEmail to:", sidebarEmail.textContent); */
 
-                console.log("teszttext");
+                // console.log("teszttext");
                 // updateName.value = docSnap.data().realname;
                 // updateUserName.value = docSnap.data().username;
 
@@ -236,6 +239,7 @@ const hideMainView = (e) => {
             loginForm.style.display = "none";
             userProfileView.style.display = "none";
             subscriptionForm.style.display = "none";
+            ShoppingCart.style.display = "none";
         }         
     } else {
         mainView.style.display = "none";
@@ -243,6 +247,7 @@ const hideMainView = (e) => {
         userProfileView.style.display = "none";
         aboutForm.style.display = "none";
         subscriptionForm.style.display = "none";
+        ShoppingCart.style.display = "none";
     }
 
 }
@@ -460,6 +465,13 @@ const sidebarAboutPressed = () => {
     aboutForm.style.display = "block";
 };
 
+
+const sidebarShoppingCartPressed = () => {
+    
+    mainView.style.display = "flex";
+    ShoppingCart.style.display = "block";
+};
+
 const sidebarSubscriptionPressed = () => {
     
     mainView.style.display = "flex";
@@ -489,6 +501,7 @@ sidebarLogout.addEventListener("click", logOutBtnPressed);
 sidebarResetPassword.addEventListener("click", sidebarResetPasswordPressed);
 
 sidebarSubscription.addEventListener("click", sidebarSubscriptionPressed);
+sidebarShoppingCart.addEventListener("click", sidebarShoppingCartPressed);
 
 // HIDE AND REVEAL PASSWORD
 /* const eyeIconPressed = () => {

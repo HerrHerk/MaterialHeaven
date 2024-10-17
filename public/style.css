@@ -751,9 +751,9 @@ AUTH UI
 ------------- */
 
 .ui.segment {
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
+    margin: 0 !important;    /* Force margin to be 0 */
+    border: 0;
+    padding: 0; 
 }
 
 #ui-section {
@@ -1649,6 +1649,61 @@ SHOPPING CART
     margin-top: 20px; /* Add some space above the checkout button */
 }
 
+
+/* Remove button style */
+.remove-shopping-cart-btn {
+    background-color: transparent; /* Transparent background */
+    border: 2px solid #d9534f; /* Red border */
+    border-radius: 50%; /* Circular button */
+    color: #d9534f; /* Red text color */
+    width: 30px; /* Button width */
+    height: 30px; /* Button height */
+    cursor: pointer; /* Pointer cursor */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+    margin: 0 auto; /* Center the button */
+}
+
+/* Remove button hover effect */
+.remove-shopping-cart-btn:hover {
+    background-color: #d9534f; /* Background color on hover */
+    color: white; /* White text color on hover */
+}
+
+/* Checkout button styling */
+.checkout-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 25px; /* More rounded corners */
+    padding: 12px 24px; /* Padding for a larger button */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 1.2em; /* Increase font size for better visibility */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Subtle shadow effect */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+/* Checkout button hover effect */
+.checkout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); /* Increase shadow on hover */
+}
+
+/* Checkout button focus effect */
+.checkout-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
+}
+
+
+/* Centering table cells */
+td {
+    text-align: center; /* Center content within table cells */
+}
 
 
 

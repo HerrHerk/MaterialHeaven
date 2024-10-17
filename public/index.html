@@ -420,9 +420,11 @@
                     <div class="input-group">
                         <label>Price:</label>
                         <select id="price">
-                            <option value="10">$10</option>
-                            <option value="25">$25</option>
-                            <option value="50">$50</option>
+                            <option value="10">€0</option>
+                            <option value="10">€10</option>
+                            <option value="25">€25</option>
+                            <option value="50">€50</option>
+                            <option value="50">€999</option>
                         </select>
                     </div>
                     <div class="input-group">
@@ -658,17 +660,17 @@
                     <i class="shopping cart icon"></i> Shopping Cart
                 </h2>
                 <div class="ui message hidden" id="cart-message"></div>
-                
+
                 <div id="cart-list">
                     <table class="ui celled table">
                         <thead>
                             <tr>
-                                <th></th> <!-- Empty header for the icon -->
+                                <th></th> <!-- Empty header for the icon column -->
                                 <th>Material Name</th>
                                 <th>Version</th>
                                 <th>Tier</th>
                                 <th>Price</th>
-                                <th>Action</th>
+                                <th style="text-align: center;">Remove</th> <!-- Centered "Remove" header -->
                             </tr>
                         </thead>
                         <tbody id="cart-items">
@@ -679,8 +681,9 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="ui button green big" id="checkout-btn">Checkout</button>
+                <button class="ui checkout-button">Checkout</button>
             </div>
+
 
 
             <!-- PROFILE -->

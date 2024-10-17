@@ -2073,8 +2073,8 @@ const updateShoppingCartUI = () => {
                 <td>${material.materialInfo.version}</td>
                 <td>${material.materialInfo.tier}</td>
                 <td>$${price.toFixed(2)}</td>
-                <td>
-                    <button class="ui button red tiny remove-btn" data-id="${material.id}">X</button>
+                <td style="text-align: center;">
+                    <button class="remove-shopping-cart-btn" data-id="${material.id}">X</button>
                 </td>
             `;
             // Append the material item to the cart list
@@ -2091,7 +2091,7 @@ const updateShoppingCartUI = () => {
         cartList.appendChild(totalRow);
 
         // Add event listeners for removing items
-        document.querySelectorAll('.remove-btn').forEach(button => {
+        document.querySelectorAll('.remove-shopping-cart-btn').forEach(button => {
             button.addEventListener('click', (event) => {
                 const materialId = event.target.getAttribute('data-id');
                 removeMaterialFromCart(materialId);

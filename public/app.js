@@ -2019,7 +2019,7 @@ setInterval(showNextSlide, 1000000);
 //------------------------------------------------------------
 
 // Array to hold the materials in the shopping cart
-let shoppingCart = [];
+export let shoppingCart = [];
 
 // Function to handle adding a material to the cart
 const MaterialPurchaseButtonPressed = (id) => {

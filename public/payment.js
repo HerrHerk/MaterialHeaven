@@ -16,6 +16,9 @@ const auth = getAuth(app); // Pass the app instance
 const db = getFirestore();
 
 
+//------------------------------------------------------------
+// HANDLE SUBSCRIPTION
+//------------------------------------------------------------
 
 // Get the Cloud Function for creating a checkout session
 const createCheckoutSession = httpsCallable(functions, "createCheckoutSession");
@@ -125,3 +128,61 @@ onAuthStateChanged(auth, (user) => {
     console.log('No user is signed in.');
   }
 });
+
+//------------------------------------------------------------
+// HANDLE SHOPPING CART
+//------------------------------------------------------------
+
+// payment.js
+import { shoppingCart } from './app.js'; // Adjust the path if necessary
+
+// Get the Cloud Function for creating a checkout session
+const createSCCheckout = httpsCallable(functions, "createSCCheckout");
+
+
+// Function to handle shopping cart checkout
+const handleCartCheckout = async () => {
+  if (!auth.currentUser) {
+    alert("Please log in to proceed with payment.");
+    return;
+  }
+
+  const userId = auth.currentUser.uid; // Get the current user's UID from Firebase Auth
+  const materialIds = shoppingCart.map(item => item.id);
+
+  try {
+      
+    // Call the Cloud Function to create a checkout session
+    console.log("Awaiting for createCheckoutSession...");
+    console.log("Material IDs:", materialIds);
+    
+    let result;
+    try {
+      result = await createSCCheckout({ materialIds, userId });
+      console.log("Checkout session result:", result); // Add this line for debugging
+    } catch (error) {
+      console.error("Error during createCheckoutSession:", error);
+      return; // Exit if there's an error, so you don't try to use undefined `result`
+    }
+
+    const { id } = result.data; // Safely access result.data here
+
+    // Redirect to Stripe Checkout
+    const stripe = Stripe("pk_test_51PqDNEHfaXGRtSlVGqOOcDqIgYGSME9GKUZFAsdx1oJZk1XjrWxmdlunFeAZgHyoJgPT08RDprptLse6KdAk01QJ00l7ERpnMA"); // Replace with your actual Stripe publishable key
+    const { error } = await stripe.redirectToCheckout({ sessionId: id });
+
+    if (error) {
+      console.error("Error during checkout:", error);
+    }
+  } catch (error) {
+    console.error("Error during checkout:", error);
+  }
+};
+
+
+
+// Add event listener to the checkout button
+const checkoutButton = document.getElementById('checkout-cart-btn');
+if (checkoutButton) {
+  checkoutButton.addEventListener('click', handleCartCheckout);
+}

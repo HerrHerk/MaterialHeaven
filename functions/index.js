@@ -111,3 +111,76 @@ exports.stripeWebhook = stripeWebhook;
 const {getFilteredMaterials} = require("./material-tier-filter.js");
 
 exports.getFilteredMaterials = getFilteredMaterials;
+
+
+// Function to create a Stripe Checkout session for material purchases
+exports.createSCCheckout = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    console.log("Request body:", req.body);
+
+    if (req.method === "OPTIONS") {
+      res.set("Access-Control-Allow-Methods", "GET, POST");
+      res.set("Access-Control-Allow-Headers", "Content-Type");
+      res.status(204).send("");
+      return;
+    }
+
+    const {materialIds, userId} = req.body.data;
+
+    console.log("Material IDs received:", materialIds);
+    console.log("User ID received:", userId);
+
+    if (!materialIds || materialIds.length === 0) {
+      return res.status(400).send({error: "Items are required"});
+    }
+
+    if (!userId) {
+      return res.status(400).send({error: "User ID is required"});
+    }
+
+    try {
+      // Retrieve material data from Firestore
+      const materialPromises = materialIds.map(async (id) => {
+        const materialDoc = await admin
+            .firestore()
+            .collection("materialCollection")
+            .doc(id)
+            .get();
+        if (!materialDoc.exists) {
+          throw new Error(`Material with ID ${id} not found`);
+        }
+        const materialData = materialDoc.data();
+        const materialInfo = materialData.materialInfo;
+        return {
+          price_data: {
+            currency: "eur",
+            product_data: {
+              name: `${materialInfo.name} (Version ${materialInfo.version})`,
+            },
+            unit_amount: materialInfo.price * 100,
+          },
+          quantity: 1,
+        };
+      });
+
+      const lineItems = await Promise.all(materialPromises);
+
+      // Create a Stripe checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: lineItems, // Use the retrieved line items
+        mode: "payment",
+        success_url: "https://contacts-e0803.web.app/success.html",
+        cancel_url: "https://contacts-e0803.web.app/cancel.html",
+        client_reference_id: userId, // Use the actual user ID
+      });
+
+      res.json({data: {id: session.id}});
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      res.status(500).send({error: "Internal Server Error"});
+    }
+  });
+});
+
+

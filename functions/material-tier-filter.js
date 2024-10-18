@@ -22,11 +22,15 @@ const getUserTier = async (userId) => {
 };
 
 // Function to filter material data based on user's tier
-const filterMaterialData = (material, userTier) => {
+const filterMaterialData = (material, userTier, purchasedMaterials) => {
   const materialTierValue = tierValue[material.materialInfo.tier] || -1;
   const userTierValue = tierValue[userTier] || -1;
 
-  if (userTierValue >= materialTierValue) {
+  // Check if the material ID is in the purchased materials
+  const isPurchased = purchasedMaterials[material.id] !== undefined;
+
+
+  if (userTierValue >= materialTierValue || isPurchased) {
     console.log(`Returning full material data for tier ${userTier}`);
     return material; // User has access to all data
   } else {
@@ -58,6 +62,14 @@ const getFilteredMaterials = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError("perm.-denied", "tier not found");
   }
 
+  // Fetch the user document to get purchased materials
+  const userDoc = await admin.firestore()
+      .collection("users")
+      .doc(userId)
+      .get();
+  const purchasedMaterials = userDoc.data().restricted.purchased;
+
+
   const materialCollection = admin
       .firestore()
       .collection("materialCollection");
@@ -67,7 +79,11 @@ const getFilteredMaterials = functions.https.onCall(async (data, context) => {
   snapshot.forEach((doc) => {
     const material = doc.data();
     material.id = doc.id;
-    const filteredMaterial = filterMaterialData(material, userTier);
+    const filteredMaterial = filterMaterialData(
+        material,
+        userTier,
+        purchasedMaterials,
+    );
     materials.push(filteredMaterial);
     // console.log("Filtered Material:", filteredMaterial); // Log filtered
   });

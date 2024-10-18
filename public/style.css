@@ -1625,6 +1625,7 @@ SHOPPING CART
     max-width: 90%; /* Ensure it doesn't exceed viewport width */
     text-align: center;
     position: fixed;
+    display: none;
     top: 20%;
     left: 50%; /* Position the left edge in the middle of the screen */
     transform: translateX(-50%); /* Shift the element back by 50% of its width */

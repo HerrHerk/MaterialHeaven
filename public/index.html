@@ -22,6 +22,26 @@
     
     <main id="app-layout">
 
+        <!-- Notification for item added to cart -->
+        <div id="notification-added" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #8ba848; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            Item added to cart!
+        </div>
+
+        <!-- Notification for item already in cart -->
+        <div id="notification-exists" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #d9534f; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            This material is already in your shopping cart.
+        </div>
+
+        <!-- Notification for tier eligibility -->
+        <div id="notification-tier" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            Your tier makes this material available!
+        </div>
+
+        <!-- Notification for already purchased material -->
+        <div id="notification-purchased" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            You have already purchased this material.
+        </div>
+        
 
         <section id = "left-col">
             <header class="main-header">

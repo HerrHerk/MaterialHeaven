@@ -1186,10 +1186,10 @@ const displayButtonsOnDetailView = (id) => {
         const buttonsDiv = document.createElement("div");
         buttonsDiv.className = "action";
         buttonsDiv.innerHTML = `
-            <button class="edit-user" style="visibility: hidden;">
+            <button class="edit-user" >
                 <img src="./assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
             </button>
-            <button class="delete-user" style="visibility: hidden;">
+            <button class="delete-user" >
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
             </button>
             
@@ -1215,10 +1215,18 @@ const displayButtonsOnDetailView = (id) => {
         // Append the new buttons div to the list item
         listItem.appendChild(buttonsDiv);
 
-        // If the user is admin, make edit and delete buttons visible
-        if (window.isAdmin) {
-            buttonsDiv.querySelector(".edit-user").style.visibility = "visible";
-            buttonsDiv.querySelector(".delete-user").style.visibility = "visible";
+        // Check if the user is admin
+        if (!window.isAdmin) {
+            // Remove edit and delete buttons if the user is not admin
+            const editButton = buttonsDiv.querySelector(".edit-user");
+            const deleteButton = buttonsDiv.querySelector(".delete-user");
+            
+            if (editButton) {
+                editButton.remove(); // Remove edit button from DOM
+            }
+            if (deleteButton) {
+                deleteButton.remove(); // Remove delete button from DOM
+            }
         }
 
 
@@ -2026,14 +2034,34 @@ setInterval(showNextSlide, 1000000);
 export let shoppingCart = [];
 
 // Function to handle adding a material to the cart
-const MaterialPurchaseButtonPressed = (id) => {
+const MaterialPurchaseButtonPressed = async (id) => {
     const selectedMaterial = getmaterial(id);  // Access the current material
+    const userId = auth.currentUser.uid; // Get the current user's UID from Firebase Auth
+    const userTier = await getUserTier(userId); // Get the user's tier
+
 
     // Check if the material is already in the cart
     const isInCart = shoppingCart.some(material => material.id === selectedMaterial.id);
 
+    // Check if the material is already purchased
+    const userDoc = await getDoc(doc(db, "users", userId));
+    const purchasedMaterials = userDoc.data().restricted.purchased; // Assuming this is a map of purchased material IDs
+    const isPurchased = purchasedMaterials[selectedMaterial.id] !== undefined;
+
+    // Check tier eligibility
+    if (selectedMaterial.materialInfo.tier > userTier) {
+        showTierNotification();
+        return; // If tier is not sufficient, do not add to cart
+    }
+
+    if (isPurchased) {
+        showPurchasedNotification();
+        return; // If already purchased, do not add to cart
+    }
+
     if (isInCart) {
-        alert('This material is already in your shopping cart.');
+        // Show notification for existing item
+        showExistsNotification();
         return;  // Do nothing if it's already in the cart
     }
 
@@ -2041,6 +2069,9 @@ const MaterialPurchaseButtonPressed = (id) => {
     shoppingCart.push(selectedMaterial);
 
     console.log(shoppingCart);
+
+    // Show notification for added item
+    showAddedNotification();
 
     // Update the shopping cart UI
     updateShoppingCartUI();
@@ -2115,4 +2146,95 @@ const removeMaterialFromCart = (id) => {
 };
 
 
+const showAddedNotification = () => {
+    const notification = document.getElementById('notification-added');
+    notification.style.display = 'block'; // Make the notification visible
+    notification.style.opacity = 1; // Set opacity to 1 for fade-in
 
+    // After 2 seconds, start fading out
+    setTimeout(() => {
+        notification.style.opacity = 0; // Set opacity to 0 for fade-out
+
+        // Hide the notification after the fade-out transition
+        setTimeout(() => {
+            notification.style.display = 'none'; // Hide it after fading out
+        }, 500); // Match this time with the transition duration
+    }, 2000); // Display for 2 seconds
+};
+
+const showExistsNotification = () => {
+    const notification = document.getElementById('notification-exists');
+    notification.style.display = 'block'; // Make the notification visible
+    notification.style.opacity = 1; // Set opacity to 1 for fade-in
+
+    // After 2 seconds, start fading out
+    setTimeout(() => {
+        notification.style.opacity = 0; // Set opacity to 0 for fade-out
+
+        // Hide the notification after the fade-out transition
+        setTimeout(() => {
+            notification.style.display = 'none'; // Hide it after fading out
+        }, 500); // Match this time with the transition duration
+    }, 2000); // Display for 2 seconds
+};
+
+const showTierNotification = () => {
+    const notification = document.getElementById('notification-tier');
+    notification.style.display = 'block'; // Make the notification visible
+    notification.style.opacity = 1; // Set opacity to 1 for fade-in
+
+    // After 2 seconds, start fading out
+    setTimeout(() => {
+        notification.style.opacity = 0; // Set opacity to 0 for fade-out
+
+        // Hide the notification after the fade-out transition
+        setTimeout(() => {
+            notification.style.display = 'none'; // Hide it after fading out
+        }, 500); // Match this time with the transition duration
+    }, 2000); // Display for 2 seconds
+};
+
+const showPurchasedNotification = () => {
+    const notification = document.getElementById('notification-purchased');
+    notification.style.display = 'block'; // Make the notification visible
+    notification.style.opacity = 1; // Set opacity to 1 for fade-in
+
+    // After 2 seconds, start fading out
+    setTimeout(() => {
+        notification.style.opacity = 0; // Set opacity to 0 for fade-out
+
+        // Hide the notification after the fade-out transition
+        setTimeout(() => {
+            notification.style.display = 'none'; // Hide it after fading out
+        }, 500); // Match this time with the transition duration
+    }, 2000); // Display for 2 seconds
+};
+
+
+//------------------------------------------------------------
+// EXTRACT USER TIER
+//------------------------------------------------------------
+
+
+
+// Function to get user tier in client-side using Firestore v9+
+const getUserTier = async (userId) => {
+    try {
+      // Get a reference to the user's document
+      const docRef = doc(db, "users", userId);
+  
+      // Fetch the document
+      const userDoc = await getDoc(docRef);
+  
+      // Check if the document exists and return the tier if it does
+      if (userDoc.exists()) {
+        return userDoc.data().restricted.tier; // Adjust this path to your Firestore structure
+      } else {
+        console.log("No such user document!");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching user data: ", error);
+      return null;
+    }
+  };

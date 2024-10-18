@@ -12,8 +12,9 @@ if (!admin.apps.length) { // Check if the app is already initialized
   admin.initializeApp();
 }
 
-// Import the stripeWebhook function
-const {stripeWebhook} = require("./stripe-webhook.js");
+// Import the purchaseWebhook function
+const {purchaseWebhook} = require("./purchase-webhook.js");
+
 
 // Function to set restricted data on user creation
 exports.setRestrictedData = functions.auth.user().onCreate(async (user) => {
@@ -89,10 +90,11 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
         mode: "payment",
         success_url: "https://contacts-e0803.web.app/success.html",
         cancel_url: "https://contacts-e0803.web.app/cancel.html",
+        client_reference_id: userId, // Use the actual user ID here
         metadata: {
+          purchase_type: "subscription", // Add this metadata to ident as a sub
           plan: plan,
         },
-        client_reference_id: userId, // Use the actual user ID here
       });
 
       res.json({data: {id: session.id}});
@@ -103,8 +105,8 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
   });
 });
 
-// Export the stripeWebhook function
-exports.stripeWebhook = stripeWebhook;
+// Export the purchaseWebhook function
+exports.purchaseWebhook = purchaseWebhook;
 
 
 // Import the material-tier-filter function
@@ -173,6 +175,10 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
         success_url: "https://contacts-e0803.web.app/success.html",
         cancel_url: "https://contacts-e0803.web.app/cancel.html",
         client_reference_id: userId, // Use the actual user ID
+        metadata: {
+          purchase_type: "materials", // Add this metadata to identify as mat
+          material_ids: materialIds.join(","),
+        },
       });
 
       res.json({data: {id: session.id}});
@@ -182,5 +188,4 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
     }
   });
 });
-
 

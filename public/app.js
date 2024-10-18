@@ -390,7 +390,7 @@ const showMaterials = async (materials) => {
                     <div class="subtitle">
                         ${getTierLabel(material.materialInfo.tier)} ${material.materialInfo.version}
                     </div>
-                    <div class="favorite-indicator" style="margin-left: auto;">${starIcon}</div> <!-- Separate star container -->
+                    <div class="favorite-indicator"  id="favorite-indicator-${material.id}" style="margin-left: auto;">${starIcon}</div> <!-- Separate star container -->
                 </div>
             `;
             list.appendChild(li);
@@ -550,7 +550,9 @@ const hideButtonsOnCollapse = (id) => {
     }
     // Hide the specific list item Star Icon (favorite-indicator)
     const starIcon = listItem.querySelector(`#star-icon-${id}`); // Assuming we have a unique ID for each star icon
+    const starIconContainer = listItem.querySelector(`#favorite-indicator-${id}`);
     if (starIcon) {
+        starIconContainer.style.display = "flex";
         starIcon.style.display = 'block'; // Hide the star icon
     }
 };
@@ -1246,9 +1248,11 @@ const displayButtonsOnDetailView = (id) => {
         });
 
         // Hide the specific list item Star Icon (favorite-indicator)
-        const starIcon = listItem.querySelector(`#star-icon-${id}`); // Assuming we have a unique ID for each star icon
+        const starIcon = listItem.querySelector(`#star-icon-${id}`);
+        const starIconContainer = listItem.querySelector(`#favorite-indicator-${id}`); // Assuming we have a unique ID for each star icon
         if (starIcon) {
             starIcon.style.display = 'none'; // Hide the star icon
+            starIconContainer.style.display = "none";
         }
 
 

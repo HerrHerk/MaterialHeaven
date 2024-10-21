@@ -786,6 +786,120 @@ AUTH UI
     transform: translateX(-50%); /* Shift the element back by 50% of its width */
 }
 
+#about-form {
+    top: 5%;
+}
+
+#about-form h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Define the colors for the tiers using IDs */
+#tier-free {
+    color: #7a7a7a; /* Color for free tier */
+}
+
+#tier-basic {
+    color: #8ba848; /* Color for basic tier */
+}
+
+#tier-standard {
+    color: rgb(69, 118, 173); /* Color for standard tier */
+}
+
+#tier-premium {
+    color: #992a78; /* Color for premium tier */
+}
+
+#about-form p {
+    font-size: 1.2rem;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify; /* Apply justification for all paragraphs */
+}
+
+#about-form a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+#about-form a:hover {
+    text-decoration: underline;
+}
+
+/* Separator Style */
+.section-divider {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 30px 0;
+    width: 100%;
+}
+
+/* Material popup styling */
+#materials-popup {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000; /* Ensure it appears above other elements */
+    display: flex;
+    flex-direction: column;
+}
+
+#materials-popup h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Initially hidden */
+.hidden {
+    display: none;
+}
+
+.material-category {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #34495E;
+    margin-top: 10px;
+}
+
+.category-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+#materials-link {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Separator Style */
+.section-divider {
+    border: 0;
+    height: 1px;
+    background: #ddd; /* Thin gray line for section separation */
+    margin: 30px 0; /* Space above and below the line */
+    width: 100%; /* Full width separator */
+}
+
+#materials-link {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 #subscription-plan-form {
     min-width: 1000px;
     text-align: center;

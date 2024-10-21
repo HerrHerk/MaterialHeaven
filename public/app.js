@@ -2238,3 +2238,37 @@ const getUserTier = async (userId) => {
       return null;
     }
   };
+
+//------------------------------------------------------------
+// ABOUT LSIT
+//------------------------------------------------------------
+
+// Example material count
+const materialCount = 150;  // Replace this with the actual material count when data is available
+
+// Replace 'X materials' with actual count
+document.getElementById('materials-link').innerHTML = `${materialCount} materials`;
+
+// Show the materials popup on click
+document.getElementById('materials-link').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent default link behavior
+
+    // Show the materials popup
+    const materialsPopup = document.getElementById('materials-popup');
+    materialsPopup.classList.remove('hidden');
+});
+
+// Close the popup when clicking the close button
+document.getElementById('close-popup').addEventListener('click', function() {
+    document.getElementById('materials-popup').classList.add('hidden');
+});
+
+// Close the popup when clicking outside of it
+window.addEventListener('click', function(event) {
+    const materialsPopup = document.getElementById('materials-popup');
+    if (!materialsPopup.classList.contains('hidden') && !materialsPopup.contains(event.target) && event.target !== document.getElementById('materials-link')) {
+        materialsPopup.classList.add('hidden');
+    }
+});
+
+

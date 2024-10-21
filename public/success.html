@@ -3,10 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Success</title>
+  <title>XplicitMaterials</title>
+  <link rel="icon" href="./assets/main/favicon.png" type="image/png"> <!-- For .png files -->
 </head>
 <body>
-  <h1>Payment Success</h1>
-  <p>Thank you for your purchase!</p>
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Herk's Material Heaven</title>
+      <link rel="stylesheet" href="./cancel-style.css">
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+  
+  
+      
+  </head>
+  
+  <body class="main-body">
+
+    <header class="main-header">
+        <div class="title">
+            <img src="./assets/titel/cog-background.png" alt="Materials" class="header-image">
+        </div>
+    </header>
+
+    <main id="app-layout">
+      <section id="main-section" class="main-section success-section">
+          <h1 class="success-title">
+            Payment Successful
+            <img src="./assets/icons/success-icon.png" alt="Success" class="success-icon"> <!-- Success icon -->
+          </h1>
+          <p>Your payment was successful! Please note that it may take a few moments for the transaction to be fully processed. Enjoy your purchase, and good luck with your simulations!</p>
+          <p>If any problem persists, please contact us at <a href="mailto:business.herrherk@gmail.com">business.herrherk@gmail.com</a>.</p>
+          <button id="return-to-main-btn">Return</button>
+      </section>
+    </main>
+
+    <script>
+      // Add functionality for the button
+      document.getElementById("return-to-main-btn").addEventListener("click", function() {
+          window.location.href = "https://xplicitmaterials.com";  // Replace with the main page URL
+      });
+  </script>
+
 </body>
+
+
 </html>

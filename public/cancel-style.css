@@ -19,14 +19,73 @@ body.main-body{
 
 
 
-h1 {
-    color: #34495E;
+.main-section {
+    background-color: #f9f9f9; /* Light red background for warning */
+    color: #D32F2F; /* Darker red for text */
+    padding: 40px 20px; /* Padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px; /* Limit the width */
+    margin: 20px auto; /* Center the section with auto margins */
+    text-align: center; /* Center text */
+    border: 2px solid #D32F2F; /* Red border */
+}
 
-    font-size: 2rem; /* Increase font size for Herk's */
-    text-align: center;
+.cancelled-title {
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center title and icon */
+    font-size: 2rem; /* Increase font size for header */
+    margin-bottom: 20px; /* Margin for spacing */
+    color: #D32F2F; /* Match the text color to the warning theme */
+}
+
+.cancelled-icon {
+    width: 40px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 10px; /* Space between title and icon */
+}
+
+.success-section {
+    background-color: #f9f9f9; /* Light green background for success */
+    color: #B1CC74; /* Dark green for text */
+    padding: 40px 20px; /* Padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px; /* Limit the width */
+    margin: 20px auto; /* Center the section with auto margins */
+    text-align: center; /* Center text */
+    border: 2px solid #B1CC74; /* Green border */
+}
+
+.success-title {
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center title and icon */
+    font-size: 2rem; /* Increase font size for header */
+    margin-bottom: 20px; /* Margin for spacing */
+    
+}
+
+.success-icon {
+    width: 40px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 10px; /* Space between title and icon */
+}
+
+
+h1 {
+    
+    font-size: 2rem; /* Increase font size for the header */
+    margin-bottom: 20px; /* Margin for spacing */
+}
+
+p {
+    color: #545F66; /* Dark gray for text */
+    margin-bottom: 20px; /* Margin for spacing */
 }
 h2 {
-    color: #34495E;
+    color: #545F66;
 
     font-size: 1.5rem; /* Adjust font size for the loading message */
     text-align: center;
@@ -93,4 +152,79 @@ button:hover{
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+
+/*-------------
+PRIVACY STYLES
+------------- */
+
+
+/* Styling the privacy policy section */
+.privacy-section {
+    background-color: #ECF0F1;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.privacy-section .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.privacy-section h1,
+.privacy-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.privacy-section p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.privacy-section ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.privacy-section ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.privacy-section a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.privacy-section a:hover {
+    text-decoration: underline;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #222;
+}
+
+@media (max-width: 768px) {
+    .privacy-section .container {
+        padding: 20px;
+    }
+
+    .privacy-section h1 {
+        font-size: 28px;
+    }
+
+    .privacy-section h2 {
+        font-size: 22px;
+    }
 }

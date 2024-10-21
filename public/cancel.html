@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Cancelled</title>
+  <title>XplicitMaterials</title>
+  <link rel="icon" href="./assets/main/favicon.png" type="image/png"> <!-- For .png files -->
 </head>
 <body>
   <!DOCTYPE html>
@@ -24,24 +25,34 @@
   </head>
   
   <body class="main-body">
-      
+
+    <header class="main-header">
+        <div class="title">
+            <img src="./assets/titel/cog-background.png" alt="Materials" class="header-image">
+        </div>
+    </header>
+
     <main id="app-layout">
-
-        <section id = "middle-col">
-            <header class="main-header">
-            </div>
-                <div class="title">
-                    <img src="./assets/titel/cog-background.png" alt="Materials" class="header-image">
-                </div>
-            </header>
-        </section>
-
+      <section id="main-section" class="main-section">
+          <h1 class="cancelled-title">
+              Payment Cancelled
+              <img src="./assets/icons/cancelled-icon.png" alt="Cancelled" class="cancelled-icon" />
+          </h1>
+          <p>Your payment was cancelled. Please try again later.</p>
+          <p><strong>Rest assured, no charges have been made to your account.</strong></p> <!-- New reassurance message -->
+          <p>If the problem persists, please contact us at <a href="mailto:business.herrherk@gmail.com">business.herrherk@gmail.com</a>.</p>
+          <button id="return-to-main-btn">Return</button>
+      </section>
     </main>
-    <section id ="main-section">
-      <h1>Payment Cancelled</h1>
-      <p>Your payment was cancelled. Please try again later.</p>
-      <button id="return-to-main-btn">Return</button>
-    </section>
+
+    <script>
+      // Add functionality for the button
+      document.getElementById("return-to-main-btn").addEventListener("click", function() {
+          window.location.href = "https://xplicitmaterials.com";  // Replace with the main page URL
+      });
+  </script>
 
 </body>
+
+
 </html>

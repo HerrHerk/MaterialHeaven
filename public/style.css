@@ -1162,44 +1162,44 @@ SUBSCRIPTION PLANS
 .plan-benefits li {
     
     font-weight: bold; /* Make text bolder */
+    color: #333; /* Dark text for all plans for better contrast */
 }
 
 
-/* Differentiating Colors and Gradients */
+/* Uniform Background and Color for All Plans */
+.plan-card {
+    background: #E6E6E6; /* A light grey background for uniformity */
+    color: #333; /* Dark text color for readability */
+}
+
+/* Specific Header and Price Styles for Each Plan */
+.plan-card .plan-header h3 {
+    margin: 0; /* Adjust margin for consistency */
+}
+
+.plan-card .plan-price {
+    color: #5A5A5A; /* A uniform price color */
+}
+
+/* Specific Plan Styling (Optional for Differentiation) */
 .free-plan {
-    background: linear-gradient(135deg, #E6E6E6, #CCCCCC);
-    color: #333; /* Darker text color for better contrast */
-}
-
-.free-plan .plan-price {
-    color: #555; /* Darker price color */
+    border: 1px solid #7a7a7a; /* Green border for free plan */
+    
 }
 
 .basic-plan {
-    background: linear-gradient(135deg, #C9EAFD, #829399);
-    color: #333;
-}
-
-.basic-plan .plan-price {
-    color: #1A3E5D; /* Darker price color */
+    border: 1px solid #8ba848; /* Blue border for basic plan */
+    
 }
 
 .standard-plan {
-    background: linear-gradient(135deg, #A8D8EB, #545f66);
-    color: #FFF; /* White text for contrast */
-}
-
-.standard-plan .plan-price {
-    color: #D0F4EA; /* Light color for price */
+    border: 1px solid rgb(69, 118, 173); /* Yellow border for standard plan */
+    
 }
 
 .premium-plan {
-    background: linear-gradient(135deg, #7BA5D6, #2F4858);
-    color: #FFF;
-}
+    border: 1px solid #992a78; /* Red border for premium plan */
 
-.premium-plan .plan-price {
-    color: #D0F4EA; /* Light color for price */
 }
 
 /* Hover Effect */
@@ -1294,24 +1294,7 @@ SUBSCRIPTION PLANS
     transform: scale(1.05);
 }
 
-/* Button Gradient Effect */
-.select-plan-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: all 0.4s ease;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 0;
-}
 
-.select-plan-btn:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-}
 
 
 

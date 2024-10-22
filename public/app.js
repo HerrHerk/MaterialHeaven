@@ -2259,16 +2259,16 @@ document.getElementById('materials-link').addEventListener('click', function(eve
 });
 
 // Close the popup when clicking the close button
-document.getElementById('close-popup').addEventListener('click', function() {
+/* document.getElementById('close-popup').addEventListener('click', function() {
     document.getElementById('materials-popup').classList.add('hidden');
-});
+}); */
 
-// Close the popup when clicking outside of it
+/* // Close the popup when clicking outside of it
 window.addEventListener('click', function(event) {
     const materialsPopup = document.getElementById('materials-popup');
     if (!materialsPopup.classList.contains('hidden') && !materialsPopup.contains(event.target) && event.target !== document.getElementById('materials-link')) {
         materialsPopup.classList.add('hidden');
     }
-});
+}); */
 
 

@@ -72,6 +72,7 @@ document.querySelectorAll('.select-plan-btn').forEach(button => {
 
 const highlightCurrentPlan = async (userId) => {
   const userTier = await getUserTier(userId); // Fetch the user's tier from Firestore
+  
 
   if (userTier) {
       console.log("Current user tier: ", userTier);
@@ -119,9 +120,10 @@ const getUserTier = async (userId) => {
 
 
 
-
+console.log("Auth initialized:", auth);
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    console.log("User is signed in:", user);
     const userId = user.uid; // Get the user ID
     highlightCurrentPlan(userId); // Highlight the current plan
   } else {

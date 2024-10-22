@@ -1861,3 +1861,75 @@ FOOTER
     margin-left: 5px; /* Adds a small margin between text and icon */
     vertical-align: middle; /* Ensures icons align vertically with text */
 }
+
+
+.footer-tooltip {
+    position: relative; /* Ensures the tooltip is positioned relative to the icon */
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-tooltip img {
+    vertical-align: middle;
+}
+
+.footer-tooltip::after {
+    content: attr(data-tooltip); /* Retrieves the tooltip text from the data attribute */
+    position: absolute;
+    bottom: 100%; /* Position it above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; /* Dark background for the tooltip */
+    color: #fff; /* White text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Prevent it from blocking other elements */
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    z-index: 100; /* Make sure it's above other elements */
+    border: 5px solid; /* Default border */
+}
+
+/* Hover effect for showing tooltip */
+.footer-tooltip:hover::after {
+    opacity: 1; /* Show the tooltip when hovered */
+}
+
+/* Tooltip border colors based on the icon */
+
+/* Mail tooltip with green border */
+.footer-tooltip[href^="mailto"]::after {
+    border-color: #28a745; /* Green color for email */
+}
+
+/* LinkedIn tooltip with LinkedIn blue border */
+.footer-tooltip[href*="linkedin"]::after {
+    border-color: #0077b5; /* LinkedIn blue */
+}
+
+/* YouTube tooltip with YouTube red border */
+.footer-tooltip[href*="youtube"]::after {
+    border-color: #FF0000; /* YouTube red */
+}
+
+/* Discord tooltip with Discord blurple border */
+.footer-tooltip[href*="discord"]::after {
+    border-color: #7289da; /* Discord blurple */
+}
+
+/* External link tooltip with black border */
+.footer-tooltip[href*="yourportfolio"]::after {
+    border-color: #000000; /* Black for portfolio */
+}
+
+/* Privacy Policy tooltip with black border */
+.footer-tooltip[href*="policy"]::after {
+    border-color: #000000; /* Black for portfolio */
+}
+
+/* ToS tooltip with black border */
+.footer-tooltip[href*="service"]::after {
+    border-color: #000000; /* Black for portfolio */
+}

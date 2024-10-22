@@ -415,23 +415,40 @@ const loginWithGoogleBtnPressed = async (e) => {
         if (!docSnap.exists()) {
             // If user document does not exist, create it
             await createUserProfileWithGoogle(userCredential);
+        } else {
+            // If document exists, handle logged-in state or show success message
+            console.log('User already exists, logged in successfully.');
         }
 
     } catch (error) {
         console.log(error.code);
     }
-}
+};
 
 const createUserProfileWithGoogle = async (userCredential) => {
+    // Extract Google-provided data
+    const googleName = userCredential.user.displayName || '';  // Use display name from Google
+    const googleEmail = userCredential.user.email;             // Use email from Google
+
+    // Prompt the user to set a username after sign-in
+    const userSetUsername = prompt('Please set your username');
+
+    if (!userSetUsername) {
+        console.log('Username was not provided');
+        return; // Handle case where user cancels or doesn't provide a username
+    }
+
+    // Create the user's profile document in Firestore
     const docRef = doc(db, "users", userCredential.user.uid);
     await setDoc(docRef, {
-        username: userCredential.user.displayName || '', // Use display name from Google
-        realname: userCredential.user.displayName || '', // Use display name from Google
-        email: userCredential.user.email,
+        username: userSetUsername,
+        realname: googleName,    // Use Google name as real name
+        email: googleEmail,
         favourites: {},  // Initialize favourites map (empty by default)
     });
+
     console.log('User profile created:', userCredential);
-}
+};
 
 const updateBtnPressed = async (e) => {
     e.preventDefault();

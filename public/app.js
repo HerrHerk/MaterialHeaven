@@ -141,7 +141,7 @@ onAuthStateChanged(auth, (user) => {
             window.initialAuthCheck = true;  // Ensure this only runs once on page load
         } else {
             console.log("Reloading page after login");  // Log before reloading
-            window.location.reload();  // Reload the page when auth state changes
+            // window.location.reload();  // Reload the page when auth state changes
         }
 
 

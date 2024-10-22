@@ -346,6 +346,8 @@ const loginBtnPressed = async (e) => {
         loginErrorMessage.classList.add('visible');
     }
 
+    // Reload the page only after the user profile is fully created
+    window.location.reload();
     
 }
 
@@ -406,49 +408,36 @@ const loginWithGoogleBtnPressed = async (e) => {
     const googleProvider = new GoogleAuthProvider();
  
     try {
+        // Sign in with Google popup
         const userCredential = await signInWithPopup(auth, googleProvider);
         
         // After signing in, check if the user document exists in Firestore
         const docRef = doc(db, "users", userCredential.user.uid);
         const docSnap = await getDoc(docRef);
 
+        // If user document does not exist, create it
         if (!docSnap.exists()) {
-            // If user document does not exist, create it
             await createUserProfileWithGoogle(userCredential);
-        } else {
-            // If document exists, handle logged-in state or show success message
-            console.log('User already exists, logged in successfully.');
         }
 
     } catch (error) {
-        console.log(error.code);
+        console.log("Google login error: ", error.code);
     }
-};
+
+    // Reload the page only after the user profile is fully created
+    window.location.reload();
+}
 
 const createUserProfileWithGoogle = async (userCredential) => {
-    // Extract Google-provided data
-    const googleName = userCredential.user.displayName || '';  // Use display name from Google
-    const googleEmail = userCredential.user.email;             // Use email from Google
-
-    // Prompt the user to set a username after sign-in
-    const userSetUsername = prompt('Please set your username');
-
-    if (!userSetUsername) {
-        console.log('Username was not provided');
-        return; // Handle case where user cancels or doesn't provide a username
-    }
-
-    // Create the user's profile document in Firestore
     const docRef = doc(db, "users", userCredential.user.uid);
     await setDoc(docRef, {
-        username: userSetUsername,
-        realname: googleName,    // Use Google name as real name
-        email: googleEmail,
-        favourites: {},  // Initialize favourites map (empty by default)
+        username: userCredential.user.displayName || '', // Use Google display name
+        realname: userCredential.user.displayName || '', // Use Google display name
+        email: userCredential.user.email,
+        favourites: {},  // Initialize empty favourites map
     });
-
     console.log('User profile created:', userCredential);
-};
+}
 
 const updateBtnPressed = async (e) => {
     e.preventDefault();

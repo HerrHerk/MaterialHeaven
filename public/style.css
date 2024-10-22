@@ -7,6 +7,7 @@ body.main-body{
 
 #app-layout{
     display: flex;
+    padding-bottom: 200px;
 }
 
 #app-layout #left-col{
@@ -1821,4 +1822,42 @@ td {
 }
 
 
+/*-------------
+FOOTER
+------------- */
 
+.main-footer {
+    background-color: #ECF0F1;
+    color: #1C1837;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed; /* Sticks the footer to the bottom */
+    width: 100%; /* Makes sure it spans the entire page width */
+    bottom: 0; /* Ensures it's at the bottom */
+    font-size: 14px;
+    z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+.footer-content {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
+
+.main-footer a {
+    color: #1C1837;
+    margin: 0 10px; /* Adds space between links */
+    text-decoration: none; /* Removes underline */
+    font-weight: normal;
+    display: flex; /* Makes the link a flex container for alignment */
+    align-items: center; /* Vertically centers text and icon inside the link */
+}
+
+.main-footer a:hover {
+    text-decoration: solid;
+}
+
+.main-footer img {
+    margin-left: 5px; /* Adds a small margin between text and icon */
+    vertical-align: middle; /* Ensures icons align vertically with text */
+}

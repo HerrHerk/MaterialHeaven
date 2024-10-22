@@ -8,6 +8,7 @@ import {
     collection, 
     addDoc, 
     getDoc,
+    getDocs,
     onSnapshot, 
     doc, 
     updateDoc, 
@@ -2271,4 +2272,146 @@ window.addEventListener('click', function(event) {
     }
 }); */
 
+//------------------------------------------------------------
+// SORT MATERIALS FOR STATISTICS
+//------------------------------------------------------------
 
+
+const sortMaterialsByTierAndType = async () => {
+    try {
+        // Fetch all materials
+        const querySnapshot = await getDocs(dbRef);
+
+        // Tier counters
+        let tierCount = {
+            free: 0,
+            basic: 0,
+            standard: 0,
+            premium: 0,
+            total: 0
+        };
+
+        // Material category lists
+        let steel = [];
+        let aluminium = [];
+        let iron = [];
+        let specialMetals = [];
+        let other = [];
+
+        // Iterate through the documents in materialCollection
+        querySnapshot.forEach((doc) => {
+            const materialData = doc.data();
+            const materialId = doc.id; // Document ID (used as ID)
+
+            // Accessing the materialInfo map
+            const materialInfo = materialData.materialInfo || {}; // Default to an empty object if undefined
+
+            // Destructure the required fields from materialInfo with fallback defaults
+            const {
+                material = "", 
+                name = "", 
+                version = "", 
+                tier = "other" // Default tier if not defined
+            } = materialInfo;
+
+            // Log the material data for debugging
+            // console.log(`Processing material ID: ${materialId}, Material Info:`, materialInfo);
+
+            // Increment tier count if the tier is defined
+            if (tierCount[tier] !== undefined) {
+                tierCount[tier]++;
+                tierCount.total++; // Increment total materials count
+            } else {
+                console.warn(`Undefined tier found for material ID: ${materialId}, Tier: ${tier}`);
+                return; // Skip to next iteration if tier is not recognized
+            }
+
+            // Create material object to store ID, name, and version
+            const materialObject = {
+                id: materialId,
+                name: name,
+                version: version
+            };
+
+            // Sort materials based on their 'material' type, handling potential issues
+            if (material) {
+                switch (material.toLowerCase()) {
+                    case 'steel':
+                        steel.push(materialObject);
+                        break;
+                    case 'aluminium':
+                    case 'aluminum': // In case of US spelling
+                        aluminium.push(materialObject);
+                        break;
+                    case 'iron':
+                        iron.push(materialObject);
+                        break;
+                    case 'special metal':
+                        specialMetals.push(materialObject);
+                        break;
+                    default:
+                        other.push(materialObject);
+                        break;
+                }
+            } else {
+                console.warn(`Missing material name for document ID: ${materialId}`);
+            }
+        });
+
+        // Output the tier counts and categorized materials
+        return {
+            tierCount,
+            steel,
+            aluminium,
+            iron,
+            specialMetals,
+            other
+        };
+
+    } catch (error) {
+        console.error("Error fetching materials:", error);
+        return null;
+    }
+};
+
+const updatePlanCounts = (tierCount) => {
+    // Update the counts in the HTML
+    document.getElementById("free-material-count").innerText = tierCount.free;
+    document.getElementById("basic-material-count").innerText = tierCount.basic;
+    document.getElementById("standard-material-count").innerText = tierCount.standard;
+    document.getElementById("premium-material-count").innerText = tierCount.premium;
+
+    const totalBasicCount = tierCount.free + tierCount.basic;
+    const totalStandardCount = totalBasicCount + tierCount.basic;
+    const totalPremiumCount = totalStandardCount + tierCount.basic;
+
+    document.getElementById("basic-material-total-count").innerText = totalBasicCount;
+    document.getElementById("standard-material-total-count").innerText = totalStandardCount;
+    document.getElementById("premium-material-total-count").innerText = totalPremiumCount;
+};
+
+
+
+
+
+// Usage example
+sortMaterialsByTierAndType().then((result) => {
+    if (result) {
+        console.log("Tier counts:", result.tierCount);
+/*         console.log("Steel materials:", result.steel);
+        console.log("Aluminium materials:", result.aluminium);
+        console.log("Iron materials:", result.iron);
+        console.log("Special metals:", result.specialMetals);
+        console.log("Other materials:", result.other); */
+    }
+});
+
+const fetchAndDisplayMaterialCounts = async () => {
+    const materialsData = await sortMaterialsByTierAndType();
+    if (materialsData) {
+        updatePlanCounts(materialsData.tierCount);
+    }
+};
+
+// Call the function when you want to fetch and update the counts
+fetchAndDisplayMaterialCounts();

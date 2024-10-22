@@ -1156,38 +1156,50 @@ SUBSCRIPTION PLANS
     overflow: hidden;
 }
 
+/* Text Styling */
+.plan-card .plan-header h3,
+.plan-card .plan-price,
+.plan-benefits li {
+    
+    font-weight: bold; /* Make text bolder */
+}
+
+
 /* Differentiating Colors and Gradients */
 .free-plan {
     background: linear-gradient(135deg, #E6E6E6, #CCCCCC);
-    color: #7A7A7A;
+    color: #333; /* Darker text color for better contrast */
 }
 
 .free-plan .plan-price {
-    color: #A9A9A9;
+    color: #555; /* Darker price color */
 }
 
 .basic-plan {
     background: linear-gradient(135deg, #C9EAFD, #829399);
+    color: #333;
 }
 
 .basic-plan .plan-price {
-    color: #5A7D92;
+    color: #1A3E5D; /* Darker price color */
 }
 
 .standard-plan {
     background: linear-gradient(135deg, #A8D8EB, #545f66);
+    color: #FFF; /* White text for contrast */
 }
 
 .standard-plan .plan-price {
-    color: #3D5B73;
+    color: #D0F4EA; /* Light color for price */
 }
 
 .premium-plan {
     background: linear-gradient(135deg, #7BA5D6, #2F4858);
+    color: #FFF;
 }
 
 .premium-plan .plan-price {
-    color: #D0F4EA;
+    color: #D0F4EA; /* Light color for price */
 }
 
 /* Hover Effect */
@@ -1301,12 +1313,7 @@ SUBSCRIPTION PLANS
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Text Styling */
-.plan-card .plan-header h3,
-.plan-card .plan-price,
-.plan-benefits li {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
+
 
 
 /* Highlight the current user's plan */

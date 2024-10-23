@@ -1180,32 +1180,77 @@ const displayButtonsOnDetailView = (id) => {
     // const material = getmaterial(id);
     const listItem = document.getElementById(id);
 
+
+    const material = materials.find(item => item.id === id);
+
+    if (!material) {
+        console.log("Material not found");
+        return;
+    }
+
+
+    console.log("listItem", listItem);
+
     if (listItem) {
         // Hide buttons on all other list items
         hideOtherButtonsOnDetailView(id);
 
         const buttonsDiv = document.createElement("div");
         buttonsDiv.className = "action";
+
+        // Determine the class based on material tier
+        let tierClass = "";
+        let tierName = ""; // Capitalize first letter
+        
+        switch (material.materialInfo.tier) {
+            case "free":
+                tierClass = "free";
+                tierName = "Free";
+                break;
+            case "basic":
+                tierClass = "basic";
+                tierName = "Basic";
+                break;
+            case "standard":
+                tierClass = "standard";
+                tierName = "Standard";
+                break;
+            case "premium":
+                tierClass = "premium";
+                tierName = "Premium";
+                break;
+            case "admin":
+                tierClass = "admin";
+                tierName = "Admin";
+                break;
+            default:
+                tierClass = ""; // Default, no additional styling
+                tierName = material.materialInfo.tier.charAt(0).toUpperCase() + material.materialInfo.tier.slice(1);
+        }
+
+
+
         buttonsDiv.innerHTML = `
-            <button class="edit-user" >
+            <button class="button-tooltip edit-user" data-tooltip="Edit this Material">
                 <img src="./assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
             </button>
-            <button class="delete-user" >
+            <button class="button-tooltip delete-user" data-tooltip="Delete this Material">
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
             </button>
             
-            <button class="material-purchase-btn">
+            <button class="button-tooltip material-purchase-btn material-purchase-btn-tooltip ${tierClass}" data-tooltip="Price: € ${material.materialInfo.price} | ${tierName}">
                 <img src="./assets/icons/shopping-cart-icon.png" alt="shopping cart icon" width="20" height="20"> 
             </button>
-            <button class="download-btn">
-                <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20"> 
+            <button class="button-tooltip download-btn" data-tooltip="Download Material as XML File">
+                <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20">
             </button>
-
+        
             <!-- Favourite Button -->
-            <button class="favourite-btn">
+            <button class="button-tooltip favourite-btn" data-tooltip="Add this Material to your Favourites">
                 <img src="./assets/icons/star-empty-icon.svg" alt="favourite icon" width="20" height="20">
             </button>
         `;
+    
 
         // Clear any previous buttons on this item to avoid duplication
         const existingActionDiv = listItem.querySelector('.action');

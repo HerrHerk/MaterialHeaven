@@ -381,7 +381,7 @@ material LIST
     border: 1px solid #ccc; /* Soft border */
     border-radius: 8px; /* Rounded corners */
     margin-bottom: 10px;
-    overflow: hidden;
+    
     transition: all 0.3s ease; /* Smooth transition */
     width: calc(25% - 20px); /* Adjust for four cards per row */
 }
@@ -436,13 +436,13 @@ material LIST
     padding: 0;
     margin: 0;
     max-height: 500px; /* Max height to limit overflow */
-    overflow-y: auto;
+
     transition: max-height 0.3s ease;
 }
 
 .material-group.collapsed .material-sublist {
     max-height: 0; /* Collapse the list */
-    overflow: hidden;
+    
 }
 
 /* Optional: Visual styling for a more modern look */
@@ -1891,7 +1891,7 @@ FOOTER
 
 /* Mail tooltip with green border */
 .footer-tooltip[href^="mailto"]::after {
-    border-color: #28a745; /* Green color for email */
+    border-color: #8ba848; /* Green color for email */
 }
 
 /* LinkedIn tooltip with LinkedIn blue border */
@@ -1922,4 +1922,110 @@ FOOTER
 /* ToS tooltip with black border */
 .footer-tooltip[href*="service"]::after {
     border-color: #000000; /* Black for portfolio */
+}
+
+/*-------------
+BUTTON TOOLTIPS
+------------- */
+
+
+/* Styling for tooltips on buttons */
+.button-tooltip {
+    position: relative;
+    text-decoration: none;
+}
+
+.button-tooltip img {
+    vertical-align: middle;
+}
+
+.button-tooltip::after {
+    content: attr(data-tooltip); /* Retrieve the tooltip text from the data attribute */
+    position: absolute;
+    bottom: 100%; /* Position it above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; /* Dark background for the tooltip */
+    color: #fff; /* White text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Prevent it from blocking other elements */
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    z-index: 100;
+    border: 5px solid transparent; /* Default border */
+}
+
+/* Hover effect for showing tooltip */
+.button-tooltip:hover::after {
+    opacity: 1; /* Show the tooltip when hovered */
+}
+
+/* You can later customize borders based on specific buttons */
+/* For example, green border for edit button */
+.button-tooltip.edit-user::after {
+    border-color: #8ba848; /* Green color for edit */
+}
+
+/* Red border for delete button */
+.button-tooltip.delete-user::after {
+    border-color: #8ba848 /* Red color for delete */
+}
+
+/* Blue border for download button */
+.button-tooltip.download-btn::after {
+    border-color: #8ba848 /* Blue color for download */
+}
+
+/* Yellow border for favourite button */
+.button-tooltip.favourite-btn::after {
+    border-color: #8ba848 /* Yellow color for favourite */
+}
+
+/* Tooltip style for material-purchase-btn */
+.material-purchase-btn-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: var(--tier-border-radius);
+    white-space: pre-line;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    z-index: 100;
+    border: var(--tier-border-thickness) solid; /* Default border */
+}
+
+/* Tooltip border colors based on tier */
+.material-purchase-btn-tooltip.free::after {
+    border-color: var(--tier-free-border-color);
+}
+
+.material-purchase-btn-tooltip.basic::after {
+    border-color: var(--tier-basic-border-color);
+}
+
+.material-purchase-btn-tooltip.standard::after {
+    border-color: var(--tier-standard-border-color);
+}
+
+.material-purchase-btn-tooltip.premium::after {
+    border-color: var(--tier-premium-border-color);
+}
+
+.material-purchase-btn-tooltip.admin::after {
+    border-color: var(--tier-admin-border-color);
+}
+
+/* Hover effect to show the tooltip */
+.material-purchase-btn-tooltip:hover::after {
+    opacity: 1;
 }

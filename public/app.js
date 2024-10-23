@@ -1201,27 +1201,33 @@ const displayButtonsOnDetailView = (id) => {
         // Determine the class based on material tier
         let tierClass = "";
         let tierName = ""; // Capitalize first letter
+        let tierPrice = "";
         
         switch (material.materialInfo.tier) {
             case "free":
                 tierClass = "free";
-                tierName = "Free";
+                tierName = "| Free";
+                tierPrice = "free";
                 break;
             case "basic":
                 tierClass = "basic";
-                tierName = "Basic";
+                tierName = "| Basic";
+                tierPrice = "€ 10";
                 break;
             case "standard":
                 tierClass = "standard";
-                tierName = "Standard";
+                tierName = "| Standard";
+                tierPrice = "€ 25";
                 break;
             case "premium":
                 tierClass = "premium";
-                tierName = "Premium";
+                tierName = "| Premium";
+                tierPrice = "€ 40";
                 break;
             case "admin":
                 tierClass = "admin";
-                tierName = "Admin";
+                tierName = "";
+                tierPrice = "Disabled Material ";
                 break;
             default:
                 tierClass = ""; // Default, no additional styling
@@ -1238,7 +1244,7 @@ const displayButtonsOnDetailView = (id) => {
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
             </button>
             
-            <button class="button-tooltip material-purchase-btn material-purchase-btn-tooltip ${tierClass}" data-tooltip="Price: € ${material.materialInfo.price} | ${tierName}">
+            <button class="button-tooltip material-purchase-btn material-purchase-btn-tooltip ${tierClass}" data-tooltip="Price: ${tierPrice} ${tierName}">
                 <img src="./assets/icons/shopping-cart-icon.png" alt="shopping cart icon" width="20" height="20"> 
             </button>
             <button class="button-tooltip download-btn" data-tooltip="Download Material as XML File">

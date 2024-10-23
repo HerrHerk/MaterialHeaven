@@ -380,8 +380,10 @@ material LIST
 .material-group {
     border: 1px solid #ccc; /* Soft border */
     border-radius: 8px; /* Rounded corners */
-    margin-bottom: 10px;
     
+    margin-bottom: 10px;
+    overflow-y: auto;
+
     transition: all 0.3s ease; /* Smooth transition */
     width: calc(25% - 20px); /* Adjust for four cards per row */
 }
@@ -1989,7 +1991,7 @@ BUTTON TOOLTIPS
     content: attr(data-tooltip);
     position: absolute;
     bottom: 100%; 
-    left: 50%;
+    left: calc(50% - 60px);
     transform: translateX(-50%);
     background-color: #333;
     color: #fff;

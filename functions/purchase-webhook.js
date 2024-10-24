@@ -5,9 +5,11 @@ const functions = require("firebase-functions");
 const express = require("express");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(
-    "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpxT9f9CBEpl5wE" +
-    "8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
+    "sk_live_51PqDNEHfaXGRtSlVPUoCi1qqXv1eaSIrsq4DOA80HV" +
+    "nX8TthdptKJPvp93RHNfEvfeAVuGcW6ARX5Dt6fy4WfhQG00aISNFSHC",
 );
+
+
 const admin = require("./firebase-admin.js"); // Import the initialized admin
 
 const app = express();
@@ -29,7 +31,7 @@ app.post(
     express.raw({type: "application/json"}),
     async (req, res) => {
       let event;
-      const endpointSecret = "whsec_FIPY5vipzZQdVdA7fHqaOPjmv7jQABhy";
+      const endpointSecret = "whsec_N7TzRMsiL377OAHLbT3UOUIs8jhSibSw";
 
       const sig = req.headers["stripe-signature"];
       console.log("Signature imported successfully:");

@@ -1237,23 +1237,24 @@ const displayButtonsOnDetailView = (id) => {
 
 
         buttonsDiv.innerHTML = `
+
+                        <!-- Favourite Button -->
+            <button class="button-tooltip favourite-btn" data-tooltip="Add this Material to your Favourites">
+                <img src="./assets/icons/star-empty-icon.svg" alt="favourite icon" width="20" height="20">
+            </button>
+
+            <button class="button-tooltip download-btn" data-tooltip="Download Material as XML File">
+                <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20">
+            </button>
+            <button class="button-tooltip material-purchase-btn material-purchase-btn-tooltip ${tierClass}" data-tooltip="Price: ${tierPrice} ${tierName}">
+                <img src="./assets/icons/shopping-cart-icon.png" alt="shopping cart icon" width="20" height="20"> 
+            </button>
+
             <button class="button-tooltip edit-user" data-tooltip="Edit this Material">
                 <img src="./assets/icons/edit-icon.png" alt="edit icon" width="20" height="20">
             </button>
             <button class="button-tooltip delete-user" data-tooltip="Delete this Material">
                 <img src="./assets/icons/delete-icon.png" alt="delete icon" width="20" height="20">
-            </button>
-            
-            <button class="button-tooltip material-purchase-btn material-purchase-btn-tooltip ${tierClass}" data-tooltip="Price: ${tierPrice} ${tierName}">
-                <img src="./assets/icons/shopping-cart-icon.png" alt="shopping cart icon" width="20" height="20"> 
-            </button>
-            <button class="button-tooltip download-btn" data-tooltip="Download Material as XML File">
-                <img src="./assets/icons/download-icon.png" alt="download icon" width="20" height="20">
-            </button>
-        
-            <!-- Favourite Button -->
-            <button class="button-tooltip favourite-btn" data-tooltip="Add this Material to your Favourites">
-                <img src="./assets/icons/star-empty-icon.svg" alt="favourite icon" width="20" height="20">
             </button>
         `;
     

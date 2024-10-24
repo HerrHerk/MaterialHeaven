@@ -49,7 +49,7 @@ const handlePlanSelection = async (plan) => {
     const { id } = result.data; // Safely access result.data here
 
     // Redirect to Stripe Checkout
-    const stripe = Stripe("pk_test_51PqDNEHfaXGRtSlVGqOOcDqIgYGSME9GKUZFAsdx1oJZk1XjrWxmdlunFeAZgHyoJgPT08RDprptLse6KdAk01QJ00l7ERpnMA"); // Replace with your actual Stripe publishable key
+    const stripe = Stripe("pk_live_51PqDNEHfaXGRtSlV5zENSUHECvyzD7WYp8zd6E5U6RrYYLOhoSXJ9iTDj4XVl8JNOOvaT7o1WnrJ47YqEN9wBNtr00a6jdbGWP"); // Replace with your actual Stripe publishable key
     const { error } = await stripe.redirectToCheckout({ sessionId: id });
 
     if (error) {
@@ -170,7 +170,7 @@ const handleCartCheckout = async () => {
     const { id } = result.data; // Safely access result.data here
 
     // Redirect to Stripe Checkout
-    const stripe = Stripe("pk_test_51PqDNEHfaXGRtSlVGqOOcDqIgYGSME9GKUZFAsdx1oJZk1XjrWxmdlunFeAZgHyoJgPT08RDprptLse6KdAk01QJ00l7ERpnMA"); // Replace with your actual Stripe publishable key
+    const stripe = Stripe("pk_live_51PqDNEHfaXGRtSlV5zENSUHECvyzD7WYp8zd6E5U6RrYYLOhoSXJ9iTDj4XVl8JNOOvaT7o1WnrJ47YqEN9wBNtr00a6jdbGWP"); // Replace with your actual Stripe publishable key
     const { error } = await stripe.redirectToCheckout({ sessionId: id });
 
     if (error) {

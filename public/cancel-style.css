@@ -17,7 +17,14 @@ body.main-body{
     
 }
 
-
+.section-divider {
+    width: 60%; /* Sets the width to 60% of the container */
+    margin: 20px auto; /* Centers it horizontally */
+    border: none; /* Removes the default border */
+    height: 1px; /* Adjusts thickness */
+    background-color: #ccc; /* Soft gray color */
+    opacity: 0.5; /* Makes it softer */
+}
 
 .main-section {
     background-color: #f9f9f9; /* Light red background for warning */
@@ -227,4 +234,91 @@ PRIVACY STYLES
     .privacy-section h2 {
         font-size: 22px;
     }
+}
+
+
+/*-------------
+TOS STYLES
+------------- */
+
+/* Styling the terms of service section */
+.terms-section {
+    background-color: #ECF0F1;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.terms-section .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.terms-section h1,
+.terms-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.terms-section p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.terms-section ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.terms-section ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.terms-section a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.terms-section a:hover {
+    text-decoration: underline;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #222;
+}
+
+@media (max-width: 768px) {
+    .terms-section .container {
+        padding: 20px;
+    }
+
+    .terms-section h1 {
+        font-size: 28px;
+    }
+
+    .terms-section h2 {
+        font-size: 22px;
+    }
+}
+
+/* Center and position the Return button */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    padding-top: 40px; /* Adds spacing above the button */
+}
+
+
+/* Optional: Additional padding at the bottom of the section for visual balance */
+.terms-section .container {
+    padding-bottom: 20px;
 }

@@ -2434,8 +2434,8 @@ const updatePlanCounts = (tierCount) => {
     document.getElementById("premium-material-count").innerText = tierCount.premium;
 
     const totalBasicCount = tierCount.free + tierCount.basic;
-    const totalStandardCount = totalBasicCount + tierCount.basic;
-    const totalPremiumCount = totalStandardCount + tierCount.basic;
+    const totalStandardCount = totalBasicCount + tierCount.standard;
+    const totalPremiumCount = totalStandardCount + tierCount.premium;
 
     document.getElementById("basic-material-total-count").innerText = totalBasicCount;
     document.getElementById("standard-material-total-count").innerText = totalStandardCount;

@@ -630,7 +630,39 @@ const populateUserProfile = async () => {
             document.getElementById("user-id").innerText = `ID: ${userId}`;
             document.getElementById("user-name").innerText = userDoc.data().realname || "Not Available";
             document.getElementById("user-email").innerText = userDoc.data().email || "Not Available";
-            document.getElementById("user-plan").innerText = userDoc.data().restricted.tier || "No Plan";
+
+            // Get the tier value
+            let tier = userDoc.data().restricted.tier || "No Plan";
+
+            // Capitalize the first letter
+            if (tier !== "No Plan" && tier.length > 0) {
+                tier = tier.charAt(0).toUpperCase() + tier.slice(1).toLowerCase();
+            }
+
+            // Set the tier color based on its value
+            const tierColors = {
+                free: '#7a7a7a',
+                basic: '#8ba848',
+                standard: 'rgb(69, 118, 173)',
+                premium: '#992a78',
+                admin: '#ff0000'
+            };
+
+            // Create a span element for the tier
+            const tierSpan = document.createElement('span');
+            tierSpan.innerText = tier; // Add only the tier text
+            
+            // Set the text color based on the tier
+            tierSpan.style.color = tierColors[tier.toLowerCase()] || '#000'; // Default to black if no color found
+
+            // Create a text node for the separator
+            const separatorTextNode = document.createTextNode(" | "); // Create a text node for the separator
+
+            // Append the tier span and the separator to the user-plan element
+            const userPlanElement = document.getElementById("user-plan");
+            userPlanElement.innerHTML = ''; // Clear existing text
+            userPlanElement.appendChild(tierSpan); // Add the tier span
+            userPlanElement.appendChild(separatorTextNode); // Add the separator
         } else {
             console.log("No such user document!");
         }
@@ -638,6 +670,9 @@ const populateUserProfile = async () => {
         console.error("Error fetching user data:", error);
     }
 };
+
+
+
 
 
 

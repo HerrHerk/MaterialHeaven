@@ -613,6 +613,7 @@
                         <div class="header">Verification Email Sent! <i class="icon check green"></i></div>
                         <div class="meta">We've sent an email for verification. Pease click the link in the email to confirm.</div>
                     </div>
+                    <hr class="section-divider">
                     <div class="extra content">
                         <button class="ui button red big" id="resend-email-btn">Resend</button>
                     </div>
@@ -742,17 +743,27 @@
 
 
             <!-- PROFILE -->
-            <div  class="ui segment" id = "user-profile">
-                <div class="ui card">
-                    <div class="ui content">
+            <div class="ui segment" id="user-profile">
+                <div class="ui card profile-card">
+                    <div class="content">
                         <div class="header">
-                            User Profile 
+                            User Profile
                         </div>
-                        <div class="meta" id="user-email">
-                            someemail@gmail.com
+                        <div class="meta">
+                            <span id="user-id">ID: Loading...</span>
+                        </div>
+                        <hr class="section-divider">
+                        <div class="description">
+                            <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+                            <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+                            <p>
+                                <strong>Plan:</strong> <span id="user-plan">Loading...</span>
+                                <button class="upgrade-btn" id="upgrade-btn">Upgrade Plan!</button>
+                            </p>
                         </div>
                     </div>
-                    <div class="ui extra content">
+                    <hr class="section-divider">
+                    <div class="botton-div-logout">
                         <button class="ui button red tiny" id="logout-btn">
                             Log out
                         </button>

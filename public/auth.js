@@ -88,7 +88,7 @@ const subscriptionForm = document.getElementById("subscription-plan-form");
 const ShoppingCart = document.getElementById("shopping-cart-overlay");
 const sidebarShoppingCart = document.getElementById("sidebar-shopping-cart-div");
 
-
+const upgradeButton = document.getElementById("upgrade-btn");
 const aboutForm = document.getElementById("about-form");
 
 //const eyeIcon = document.getElementById("eye-btn");
@@ -152,7 +152,7 @@ onAuthStateChanged(auth, async (user) => {
         sidebarLogout.style.display = "flex";
         emailVerificationView.style.display = "none";
 
-
+        populateUserProfile();
 
 
         if (!user.emailVerified) {
@@ -507,6 +507,7 @@ sidebarLogout.addEventListener("click", logOutBtnPressed);
 sidebarResetPassword.addEventListener("click", sidebarResetPasswordPressed);
 
 sidebarSubscription.addEventListener("click", sidebarSubscriptionPressed);
+upgradeButton.addEventListener("click", sidebarSubscriptionPressed);
 sidebarShoppingCart.addEventListener("click", sidebarShoppingCartPressed);
 
 // HIDE AND REVEAL PASSWORD
@@ -610,6 +611,34 @@ document.addEventListener('DOMContentLoaded', function() {
 });     
     
     
+//------------------------------------------------------------
+// USER PROFILE
+//------------------------------------------------------------
+
+
+
+// Function to populate user profile
+const populateUserProfile = async () => {
+    try {
+        // Reference the user's document in Firestore
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        const userId = auth.currentUser.uid; // Get the current user's UID from Firebase Auth
+        const userDoc = await getDoc(docRef);
+
+        // If the user document exists, populate fields
+        if (userDoc.exists()) {
+            document.getElementById("user-id").innerText = `ID: ${userId}`;
+            document.getElementById("user-name").innerText = userDoc.data().realname || "Not Available";
+            document.getElementById("user-email").innerText = userDoc.data().email || "Not Available";
+            document.getElementById("user-plan").innerText = userDoc.data().restricted.tier || "No Plan";
+        } else {
+            console.log("No such user document!");
+        }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+};
+
 
 
 

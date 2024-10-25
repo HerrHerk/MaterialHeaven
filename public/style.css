@@ -776,7 +776,7 @@ AUTH UI
 
 #signup-form,
 #login-form,
-#user-profile,
+
 #email-verification,
 #reset-password-form,
 #about-form {
@@ -920,13 +920,7 @@ AUTH UI
 }
 
 
-#ui-section #login-overlay {
-    
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
 
-}
 
 
 
@@ -2029,4 +2023,75 @@ BUTTON TOOLTIPS
 /* Hover effect to show the tooltip */
 .material-purchase-btn-tooltip:hover::after {
     opacity: 1;
+}
+
+/*-------------
+USER PROFILE
+------------- */
+
+/*------------- 
+USER PROFILE 
+------------- */
+
+/* Profile Card Styling */
+.profile-card {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+#user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    padding: 20px;
+}
+
+#user-profile .profile-card .header {
+    font-size: 1.8em; /* Increased font size */
+    color: #545F66;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#user-profile .profile-card .meta {
+    /* color: #545F66; */
+    font-size: 1.1em; /* Increased font size */
+    text-align: center;
+    margin-bottom: 10px;
+    font-style: italic; /* Apply italic styling */
+    
+}
+
+#user-profile .profile-card .description {
+    font-size: 1.2em; /* Increased font size */
+    color: #545F66;
+    margin-top: 15px;
+    line-height: 1.6;
+    
+}
+
+.profile-card .description p {
+    margin: 10px 0;
+}
+
+
+
+.profile-card .extra.content {
+    text-align: center;
+    padding-top: 15px;
+    border-top: none !important;
+}
+
+.botton-div-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
 }

@@ -1495,6 +1495,25 @@ BLURRED
 }
 
 
+.overlay-text-example {
+    position: absolute; /* Position it absolutely within the card-chart-container */
+    bottom: 20%; /* Align it to the bottom */
+    left: 20%; /* Align it to the left */
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    color: white; /* White text color */
+    font-size: 5rem; /* Adjust the size as needed */
+    font-weight: bold; /* Make it bold */
+    opacity: 0.8; /* 80% opacity */
+    transform: rotate(-45deg); /* Rotate to go from bottom-left to top-right */
+    transform-origin: left bottom; /* Set rotation origin */
+    display: flex; /* Use flex to center text if needed */
+    align-items: flex-end; /* Align text to bottom */
+    justify-content: flex-start; /* Align text to start */
+    pointer-events: none; /* Ensure clicks pass through this element */
+}
+
+
 /*-------------
 SLIDESHOW AND WELCOME
 ------------- */

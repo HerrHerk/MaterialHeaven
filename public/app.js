@@ -979,6 +979,10 @@ const displaymaterialOnDetailsView = (id) => {
                         <div class="mat-header">Chart of Johnson Cook Failure</div>
                         <canvas class="chart-canv" id="chart-johnson-cook-failure"></canvas>
                     </div>
+                    <!-- Overlay text div -->
+                    <div class="overlay-text-example">
+                        EXAMPLE - EXAMPLE 
+                    </div>
                 </div>
 
 

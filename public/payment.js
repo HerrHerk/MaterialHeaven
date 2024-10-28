@@ -151,9 +151,11 @@ const handleCartCheckout = async () => {
 
   const userId = auth.currentUser.uid; // Get the current user's UID from Firebase Auth
   const materialIds = shoppingCart.map(item => item.id);
+  const loadingDimmer = document.getElementById("loading-dimmer-checkout");
 
   try {
       
+    loadingDimmer.style.display = "flex"; // Make it visible
     // Call the Cloud Function to create a checkout session
     console.log("Awaiting for createCheckoutSession...");
     console.log("Material IDs:", materialIds);
@@ -164,6 +166,7 @@ const handleCartCheckout = async () => {
       console.log("Checkout session result:", result); // Add this line for debugging
     } catch (error) {
       console.error("Error during createCheckoutSession:", error);
+      loadingDimmer.style.display = "none"; // Hide dimmer on error
       return; // Exit if there's an error, so you don't try to use undefined `result`
     }
 
@@ -175,6 +178,7 @@ const handleCartCheckout = async () => {
 
     if (error) {
       console.error("Error during checkout:", error);
+      loadingDimmer.style.display = "none"; // Hide dimmer on error
     }
   } catch (error) {
     console.error("Error during checkout:", error);
@@ -188,3 +192,9 @@ const checkoutButton = document.getElementById('checkout-cart-btn');
 if (checkoutButton) {
   checkoutButton.addEventListener('click', handleCartCheckout);
 }
+
+// Hide the dimmer when Stripe checkout is completed
+window.addEventListener("popstate", () => {
+  const loadingDimmer = document.getElementById("loading-dimmer-checkout");
+  loadingDimmer.style.display = "none";
+});

@@ -476,6 +476,8 @@ const sidebarShoppingCartPressed = () => {
     
     mainView.style.display = "flex";
     ShoppingCart.style.display = "block";
+    const loadingDimmer = document.getElementById("loading-dimmer-checkout");
+    loadingDimmer.classList.add("hidden");
 };
 
 const sidebarSubscriptionPressed = () => {

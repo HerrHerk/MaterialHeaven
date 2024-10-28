@@ -419,13 +419,13 @@ const loginWithGoogleBtnPressed = async (e) => {
         if (!docSnap.exists()) {
             await createUserProfileWithGoogle(userCredential);
         }
-
+        // Reload the page only after the user profile is fully created
+        window.location.reload();
     } catch (error) {
         console.log("Google login error: ", error.code);
     }
 
-    // Reload the page only after the user profile is fully created
-    window.location.reload();
+
 }
 
 const createUserProfileWithGoogle = async (userCredential) => {

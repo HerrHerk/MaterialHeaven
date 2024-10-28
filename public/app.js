@@ -430,7 +430,8 @@ const showMaterials = async (materials) => {
 //------------------------------------------------------------
 
 
-
+// Track the currently expanded card
+let currentExpandedCardId = null;
 
 
 const materialListPressed = (event) => {
@@ -467,17 +468,26 @@ const materialListPressed = (event) => {
         return; // Exit the function to prevent card collapse/expansion
     }
 
+
+
+    // If a different card is currently expanded, collapse it first
+    if (currentExpandedCardId && currentExpandedCardId !== id) {
+        moveCardToNextRow(currentExpandedCardId); // Collapse the currently expanded card
+        hideButtonsOnCollapse(currentExpandedCardId); // Hide buttons for the previously expanded card
+    }
     // Handle card expansion/collapse when non-button area is clicked
     // console.log("No button pressed, handling card expansion/collapse.");
     const cardExpanded = moveCardToNextRow(id);
     if (!cardExpanded) {
         //console.log("Card collapsed, hiding buttons.");
         hideButtonsOnCollapse(id); // Hide buttons when card is collapsed
+        currentExpandedCardId = null;
     } else {
         //console.log("Card expanded, displaying material details.");
     }
     displaymaterialOnDetailsView(id);
     displayButtonsOnDetailView(id);
+    currentExpandedCardId = id;
 };
 
 
@@ -496,6 +506,7 @@ const moveCardToNextRow = (id) => {
 
     if (existingTopLine && existingBottomLine && existingDetailDiv) {
         // Card is already expanded, collapse it
+        cardContainer.classList.remove('expanded'); // Remove expanded class
         materialList.insertBefore(cardContainer, existingTopLine);
         existingTopLine.remove();
         existingBottomLine.remove();
@@ -515,6 +526,7 @@ const moveCardToNextRow = (id) => {
         document.querySelectorAll('.material-detail').forEach(div => div.remove());
 
         // Expand the card
+        cardContainer.classList.add('expanded'); // Add expanded class
         const topLine = document.createElement('div');
         topLine.id = topLineId;
         topLine.classList.add('separator-line');
@@ -548,6 +560,7 @@ const hideButtonsOnCollapse = (id) => {
     const existingActionDiv = listItem.querySelector('.action');
     if (existingActionDiv) {
         existingActionDiv.remove(); // Remove buttons when card is collapsed
+        
     }
     // Hide the specific list item Star Icon (favorite-indicator)
     const starIcon = listItem.querySelector(`#star-icon-${id}`); // Assuming we have a unique ID for each star icon

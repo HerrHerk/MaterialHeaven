@@ -388,6 +388,15 @@ material LIST
     width: calc(25% - 20px); /* Adjust for four cards per row */
 }
 
+
+/* Style for expanded card */
+.material-group.expanded {
+    width: calc(32% - 20px); /* Wider width for expanded card */
+    overflow-y: visible;
+    overflow-x: visible;
+}
+
+
 .material-group-header {
     background-color: #FDFEFE; /* Light grey background for the header */
     padding: 10px 15px;

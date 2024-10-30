@@ -600,7 +600,13 @@ const editButtonPressed = (id) => {
     version.value = selectedMaterial.materialInfo.version;
     material.value = selectedMaterial.materialInfo.material;  // This refers to the HTML element or another variable, not the renamed constant
     icon.value = selectedMaterial.materialInfo.icon;
-    description.value = selectedMaterial.materialInfo.description;
+    // Join description array into a single string
+    // Check if description is an array; if so, join with newline, otherwise set directly
+    if (Array.isArray(selectedMaterial.materialInfo.description)) {
+        description.value = selectedMaterial.materialInfo.description.join("\n");
+    } else {
+        description.value = selectedMaterial.materialInfo.description || ""; // Fallback to an empty string if undefined
+    }
     tier.value = selectedMaterial.materialInfo.tier;
     price.value = selectedMaterial.materialInfo.price;
    
@@ -1870,7 +1876,7 @@ const saveButtonPressed = async() => {
                 tier: tier.value, // Ensure you include this if it’s part of the schema
                 price: price.value, // Ensure you include this if it’s part of the schema
                 icon: icon.value,
-                description: description.value
+                description: description.value.split("\n").filter(line => line.trim() !== "") // Filter out any empty lines
             },
             
             materialModels: {

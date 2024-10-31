@@ -1,0 +1,1297 @@
+body.main-body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #ECF0F1;
+}
+
+#app-layout{
+    display: flex;
+    padding-bottom: 200px;
+}
+
+#app-layout #left-col{
+
+    flex: 1;
+}
+
+#app-layout #middle-col{
+
+    flex: 6;
+    
+}
+
+#app-layout #right-col{
+
+    flex: 1;
+    
+}
+
+h1 {
+    color: #34495E;
+
+    font-size: 2rem; /* Increase font size for Herk's */
+}
+h2 {
+    color: #34495E;
+
+    font-size: 0.8rem; /* Adjust font size for the loading message */
+
+}
+
+
+.add-btn {
+    visibility: hidden;
+}
+
+
+
+/* Hide scrollbar for the entire page */
+html, body {
+    overflow: auto; /* Ensure scrolling is enabled */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+button{
+    background-color:#B1CC74;
+    border: none;
+    color: white;
+    font-size: 1em;
+    margin: 5px;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #E8Fcc2;
+    cursor: pointer;
+}
+
+
+
+/*-------------
+HEADER
+------------- */
+
+/* Your custom styles */
+header.main-header {
+    display: flex;
+    background-color: #1C1837;
+    color: white;
+    height: 300px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* Optional: Reset or normalize styles if needed */
+article, aside, footer, header, nav, section {
+    display: block; /* Default block display */
+}
+
+header .left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.header-image {
+    max-width: 100%;
+    height: 300px;
+    bottom: -20px;
+    position: relative;
+}
+
+
+header .title {
+
+    flex: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    overflow: hidden; /* Hide overflow to simulate cropping */
+}
+
+header .right {
+
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+header .sidebar-logger {
+    display: flex;
+}
+
+/*-------------
+AUTH STYLES
+------------- */
+
+/* Styling for the "Sign Up / Log In" section */
+.auth-links-login {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes this div to the far right */
+}
+
+.auth-links-logout {
+    display: none;
+    align-items: center;
+    margin-left: auto; /* Pushes this div to the far right */
+    
+}
+
+
+/* Styling for the text */
+.auth-text, .profile-data {
+    margin-right: 10px; /* Add space between "Profile" and "Log Out" */
+    font-size: 14px; /* Adjust font size as needed */
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Inherit color from parent */
+    cursor: pointer; /* Make it look clickable */
+}
+
+
+/* Optional: Change color on hover */
+.auth-text:hover {
+    color: #4183c4; /* Change to a suitable color on hover */
+}
+
+.profile-data:hover {
+    color: #dfae28; /* Change to a suitable color on hover */
+}
+
+.profile-data-btn {
+    margin-right: 5px;
+    font-size: 14px; /* Adjust font size as needed */
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Inherit color from parent */
+}
+
+/* Icon alignment */
+.auth-links-logout i {
+    display: flex;
+    align-items: center;
+}
+
+/*-------------
+GLOBAL STYLES
+------------- */
+
+
+
+/*-------------
+MODAL WINDOW
+------------- */
+
+#modal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none; /* hides on opening the page */
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-overlay #modal {
+    /* max-width: 650px; */
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+
+}
+
+
+/*-------------
+ADD materialS FORM
+------------- */
+
+#modal .modal-header h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    
+}
+
+#modal {
+    position: fixed;
+}
+
+#modal .modal-content{
+    display: flex;
+    
+}
+
+#modal .modal-content .input-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    padding: 15px; /* Add some padding to the input card */
+    gap: 10px; /* Space between each input group */
+    
+}
+
+#modal .modal-content .input-card .input-group {
+    
+    display: flex;
+    
+    margin: 5px 15px;
+}
+
+#modal .modal-content .input-card .input-group label {
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+#modal .modal-content .input-card .input-group input {
+    width: 35%; /* Input field takes full width of its container */
+    font-size: 16px;
+    height: 28px;
+    padding-left: 5px;
+    padding-right: 1px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    
+}
+
+#modal .modal-footer{
+    display: flex;
+    justify-content: right;
+    margin: 5px 10px;
+}
+
+.close-btn{
+    background-color: #999;
+}
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+/*-------------
+SMALL SCREEN ADJUSTMENT
+------------- */
+
+#app-layout #right-col #back-btn {
+    display: none;
+}
+
+@media only screen and (max-width:600px) {
+    #app-layout #right-col {
+        display: none;
+    }
+
+    #app-layout #right-col #back-btn {
+        margin: 20px 0 0 20px;
+        display: block;
+    }
+
+    #modal .modal-content .input-card {
+        flex-direction: column;
+    }
+}
+
+
+
+
+/*-------------
+AUTH UI
+------------- */
+
+.ui.segment {
+    margin: 0 !important;    /* Force margin to be 0 */
+    border: 0;
+    padding: 0; 
+}
+
+#ui-section {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none; /* hides on opening the page */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's on top of other content */
+    
+}
+
+#signup-form,
+#login-form,
+
+#email-verification,
+#reset-password-form,
+#about-form {
+    min-width: 400px;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
+}
+
+#about-form {
+    top: 10%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 3%;
+    box-sizing: border-box; /* Include padding in the max-height */
+    
+}
+
+#about-form h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Define the colors for the tiers using IDs */
+#tier-free {
+    color: #7a7a7a; /* Color for free tier */
+}
+
+#tier-basic {
+    color: #8ba848; /* Color for basic tier */
+}
+
+#tier-standard {
+    color: rgb(69, 118, 173); /* Color for standard tier */
+}
+
+#tier-premium {
+    color: #992a78; /* Color for premium tier */
+}
+
+#about-form p {
+    font-size: 1.2rem;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify; /* Apply justification for all paragraphs */
+}
+
+#about-form a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+#about-form a:hover {
+    text-decoration: underline;
+}
+
+/* Separator Style */
+.section-divider {
+    width: 60%; /* Sets the width to 60% of the container */
+    margin: 20px auto; /* Centers it horizontally */
+    border: none; /* Removes the default border */
+    height: 1px; /* Adjusts thickness */
+    background-color: #ccc; /* Soft gray color */
+    opacity: 0.5; /* Makes it softer */
+}
+
+/* Material popup styling */
+#materials-popup {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000; /* Ensure it appears above other elements */
+    display: flex;
+    flex-direction: column;
+}
+
+#materials-popup h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Initially hidden */
+.hidden {
+    display: none;
+}
+
+.material-category {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #34495E;
+    margin-top: 10px;
+}
+
+.category-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+#materials-link {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+#materials-link {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#subscription-plan-form {
+    min-width: 1000px;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
+}
+
+/* CSS to add pointer cursor to specific anchor tags */
+#need-an-account-btn,
+#have-an-account-btn,
+#forgot-password-btn {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/*-------------
+PASSWORD VISIBILITY 
+------------- */
+
+
+/* Position the eye icon inside the input field */
+#eye-icon,
+#signup-eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Specific styles for the visible state */
+.eye-visible {
+    color: rgba(0, 0, 0, 0.4); /* Less opaque to indicate visibility */
+}
+
+/* Specific styles for the hidden state */
+.eye-hidden {
+    color: rgba(0, 0, 0, 0.6); /* Normal opacity for hidden */
+}
+
+
+/*-------------
+SIDEBAR 
+------------- */
+/* Sidebar Styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #B1CC74;
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 60px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #545F66;
+    display: block;
+    /* transition: 0.3s; */
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: white; /* Ensure the close button is visible */
+}
+
+/* Show Sidebar */
+.sidebar.open {
+    width: 270px;
+}
+
+/* Hide Sidebar */
+.sidebar.close {
+    width: 0;
+}
+
+/* Horizontal separator line */
+.sidebar-separator {
+    border: none;
+    border-bottom: 1px solid #545F66; /* Light grey color */
+    margin: 15px 0;
+}
+
+/* Sidebar log in/out section */
+.sidebar-logger {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+/* Override the default margin or padding if needed */
+.sidebar a,
+.sidebar-logger a {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.sidebar-name {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #545F66;
+    display: block;
+    align-items: center;
+    text-decoration: underline;
+    /* transition: 0.3s; */
+}
+.sidebar-email {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #545F66;
+    display: block;
+    align-items: center;
+    /* transition: 0.3s; */
+}
+
+
+
+/*-------------
+SIDEBAR RIGHT
+------------- */
+
+
+
+.sidebar-right {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0; /* Change from left: 100% to right: 0 */
+    background-color: #D0F4EA;
+    overflow-x: hidden;
+    transition: width 0.3s ease; /* Added easing for a smoother transition */
+    padding-top: 60px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+
+
+/* Show Sidebar */
+.sidebar-right.open {
+    width: 485px;
+}
+
+/* Hide Sidebar */
+.sidebar-right.close {
+    width: 0;
+}
+
+.sidebar-right .closebtn-right {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Positions the button 25px from the left edge */
+    font-size: 36px;
+    color: #545F66;; /* Ensure the close button is visible */
+}
+
+.sidebar-right-title {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #545F66;
+    display: block;
+    align-items: center;
+    text-decoration: underline;
+    text-align: center;
+    /* transition: 0.3s; */
+}
+
+/*-------------
+SUBSCRIPTION PLANS
+------------- */
+
+/* Subscription Plans Container */
+.subscription-plans-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* Header */
+.subscription-plans-container h2 {
+    font-size: 2.5em;
+    color: #545f66;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+}
+
+.subscription-plans-container h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #2F4858;
+    margin: 20px auto 0;
+    border-radius: 5px;
+}
+
+/* Subscription Plans */
+.subscription-plans {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Plan Cards */
+.plan-card {
+    flex: 1;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #e6e6e6;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Text Styling */
+.plan-card .plan-header h3,
+.plan-card .plan-price,
+.plan-benefits li {
+    
+    font-weight: bold; /* Make text bolder */
+    color: #333; /* Dark text for all plans for better contrast */
+}
+
+
+/* Uniform Background and Color for All Plans */
+.plan-card {
+    background: #E6E6E6; /* A light grey background for uniformity */
+    color: #333; /* Dark text color for readability */
+}
+
+/* Specific Header and Price Styles for Each Plan */
+.plan-card .plan-header h3 {
+    margin: 0; /* Adjust margin for consistency */
+}
+
+.plan-card .plan-price {
+    color: #5A5A5A; /* A uniform price color */
+}
+
+/* Specific Plan Styling (Optional for Differentiation) */
+.free-plan {
+    border: 1px solid #7a7a7a; /* Green border for free plan */
+    
+}
+
+.basic-plan {
+    border: 1px solid #8ba848; /* Blue border for basic plan */
+    
+}
+
+.standard-plan {
+    border: 1px solid rgb(69, 118, 173); /* Yellow border for standard plan */
+    
+}
+
+.premium-plan {
+    border: 1px solid #992a78; /* Red border for premium plan */
+
+}
+
+/* Hover Effect */
+.plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+/* Plan Header */
+.plan-header {
+    margin-bottom: 20px;
+}
+
+.plan-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: inherit;
+}
+
+.plan-header h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: inherit;
+    font-weight: 700;
+}
+
+.plan-price {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Plan Benefits */
+.plan-benefits {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font-weight: 500;
+}
+
+.plan-benefits li {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.plan-benefits li::before {
+    content: '✔';
+    color: inherit;
+    font-weight: bold;
+    position: absolute;
+    left: -25px;
+    top: 0;
+    font-size: 1.2em;
+}
+
+/* Horizontal Line Separators */
+.plan-separator {
+    border: 0;
+    height: 2px;
+    background: #fff;
+    width: 50%;
+    margin: 15px auto 25px;
+    opacity: 0.5;
+    border-radius: 2px;
+}
+
+.benefits-separator {
+    margin: 20px auto;
+    width: 80%;
+    opacity: 0.3;
+}
+
+/* Select Plan Button */
+.select-plan-btn {
+    background-color: #2F4858;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.select-plan-btn:hover {
+    background-color: #4A6F82;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+/* Highlight the current user's plan */
+.current-plan {
+    background-color: rgb(177, 204, 116) !important; /* Light green background */
+    border: 2px solid #b1cc74; /* Optional: Add a border with a slightly darker green */
+    box-shadow: 0 0 20px rgba(177, 204, 116, 0.8); /* Shadow to create a glowing effect */
+    position: relative; /* Ensure positioning for label */
+}
+
+/* Label to indicate the current plan */
+.current-plan-label {
+    font-size: 1.5em; /* Make the font larger for better visibility */
+    color: #fff; /* White text color */
+    background-color: #b1cc74; /* Matching background color */
+    padding: 8px 15px; /* Add some padding */
+    border-radius: 20px; /* Rounded edges */
+    display: inline-block;
+    margin-top: -25px; /* Adjust positioning to overlap the card */
+    position: absolute; /* Position the label absolutely */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    z-index: 1; /* Ensure it appears above the card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a slight shadow for depth */
+}
+
+/* Disable styles for the current plan's button */
+.current-plan .select-plan-btn {
+    background-color: #545F66 !important; /* Background color of the button */
+    color: #ffffff; /* Change the text color to white for better visibility */
+    font-weight: bold; /* Make the text bold */
+    cursor: not-allowed; /* Disable cursor */
+    pointer-events: none; /* Disable click */
+    opacity: 1; /* Ensure full opacity */
+}
+
+/* Additional styles to make the button more prominent */
+.select-plan-btn {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smoothness */
+}
+
+
+
+
+
+/*-------------
+ Search, Filter, Collapse All
+------------- */
+
+.search-icon {
+    width: 20px ;
+    height: 20px ;
+    
+}
+/* Container for search, filter, and collapse buttons */
+.search-filter-collapse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search bar styling */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.filter-icon, .star-icon, .euro-icon {
+    width: 20px ;
+    height: 20px ;
+    
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Filter area styling */
+.filter-area {
+    display: flex;
+    align-items: center;
+}
+
+.filter-btn,
+.star-btn,
+.owned-btn {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+.filter-btn:hover,
+.star-btn:hover,
+.owned-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.filter-dropdown {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: white;
+    font-size: 16px;
+}
+
+/* Collapse all button styling */
+.collapse-all-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.collapse-all-btn:hover {
+    background-color: #45a049;
+}
+
+
+
+
+
+
+/* Space between elements */
+.search-filter-collapse > * {
+    margin-right: 20px;
+}
+
+.search-filter-collapse > *:last-child {
+    margin-right: 0;
+}
+
+
+
+/*-------------
+SHOPPING CART
+------------- */
+
+#shopping-cart-overlay {
+    min-width: 800px; /* Adjust width as needed */
+    max-width: 90%; /* Ensure it doesn't exceed viewport width */
+    text-align: center;
+    position: fixed;
+    display: none;
+    top: 20%;
+    left: 50%; /* Position the left edge in the middle of the screen */
+    transform: translateX(-50%); /* Shift the element back by 50% of its width */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    background-color: #fff; /* White background for better visibility */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    z-index: 1000; /* Ensure it appears above other elements */
+    padding: 20px; /* Add some padding */
+}
+
+
+
+#cart-items tr {
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+#cart-items tr:hover {
+    background-color: #f9f9f9; /* Light grey background on hover */
+}
+
+.ui.button.green {
+    margin-top: 20px; /* Add some space above the checkout button */
+}
+
+
+/* Remove button style */
+.remove-shopping-cart-btn {
+    background-color: transparent; /* Transparent background */
+    border: 2px solid #d9534f; /* Red border */
+    border-radius: 50%; /* Circular button */
+    color: #d9534f; /* Red text color */
+    width: 30px; /* Button width */
+    height: 30px; /* Button height */
+    cursor: pointer; /* Pointer cursor */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+    margin: 0 auto; /* Center the button */
+}
+
+/* Remove button hover effect */
+.remove-shopping-cart-btn:hover {
+    background-color: #d9534f; /* Background color on hover */
+    color: white; /* White text color on hover */
+}
+
+/* Checkout button styling */
+.checkout-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 25px; /* More rounded corners */
+    padding: 12px 24px; /* Padding for a larger button */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 1.2em; /* Increase font size for better visibility */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Subtle shadow effect */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+/* Checkout button hover effect */
+.checkout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); /* Increase shadow on hover */
+}
+
+/* Checkout button focus effect */
+.checkout-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
+}
+
+
+/* Centering table cells */
+td {
+    text-align: center; /* Center content within table cells */
+}
+
+
+/*-------------
+FOOTER
+------------- */
+
+.main-footer {
+    background-color: #ECF0F1;
+    color: #1C1837;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed; /* Sticks the footer to the bottom */
+    width: 100%; /* Makes sure it spans the entire page width */
+    bottom: 0; /* Ensures it's at the bottom */
+    font-size: 14px;
+    z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+.footer-content {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
+
+.main-footer a {
+    color: #1C1837;
+    margin: 0 10px; /* Adds space between links */
+    text-decoration: none; /* Removes underline */
+    font-weight: normal;
+    display: flex; /* Makes the link a flex container for alignment */
+    align-items: center; /* Vertically centers text and icon inside the link */
+}
+
+.main-footer a:hover {
+    text-decoration: solid;
+}
+
+.main-footer img {
+    margin-left: 5px; /* Adds a small margin between text and icon */
+    vertical-align: middle; /* Ensures icons align vertically with text */
+}
+
+
+.footer-tooltip {
+    position: relative; /* Ensures the tooltip is positioned relative to the icon */
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-tooltip img {
+    vertical-align: middle;
+}
+
+.footer-tooltip::after {
+    content: attr(data-tooltip); /* Retrieves the tooltip text from the data attribute */
+    position: absolute;
+    bottom: 100%; /* Position it above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; /* Dark background for the tooltip */
+    color: #fff; /* White text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Prevent it from blocking other elements */
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    z-index: 100; /* Make sure it's above other elements */
+    border: 5px solid; /* Default border */
+}
+
+/* Hover effect for showing tooltip */
+.footer-tooltip:hover::after {
+    opacity: 1; /* Show the tooltip when hovered */
+}
+
+/* Tooltip border colors based on the icon */
+
+/* Mail tooltip with green border */
+.footer-tooltip[href^="mailto"]::after {
+    border-color: #8ba848; /* Green color for email */
+}
+
+/* LinkedIn tooltip with LinkedIn blue border */
+.footer-tooltip[href*="linkedin"]::after {
+    border-color: #0077b5; /* LinkedIn blue */
+}
+
+/* YouTube tooltip with YouTube red border */
+.footer-tooltip[href*="youtube"]::after {
+    border-color: #FF0000; /* YouTube red */
+}
+
+/* Discord tooltip with Discord blurple border */
+.footer-tooltip[href*="discord"]::after {
+    border-color: #7289da; /* Discord blurple */
+}
+
+/* External link tooltip with black border */
+.footer-tooltip[href*="yourportfolio"]::after {
+    border-color: #000000; /* Black for portfolio */
+}
+
+/* Privacy Policy tooltip with black border */
+.footer-tooltip[href*="policy"]::after {
+    border-color: #000000; /* Black for portfolio */
+}
+
+/* ToS tooltip with black border */
+.footer-tooltip[href*="service"]::after {
+    border-color: #000000; /* Black for portfolio */
+}
+
+
+
+
+/*------------- 
+USER PROFILE 
+------------- */
+
+/* Profile Card Styling */
+.profile-card {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+#user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    padding: 20px;
+}
+
+#user-profile .profile-card .header {
+    font-size: 1.8em; /* Increased font size */
+    color: #545F66;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#user-profile .profile-card .meta {
+    /* color: #545F66; */
+    font-size: 1.1em; /* Increased font size */
+    text-align: center;
+    margin-bottom: 10px;
+    font-style: italic; /* Apply italic styling */
+    
+}
+
+#user-profile .profile-card .description {
+    font-size: 1.2em; /* Increased font size */
+    color: #545F66;
+    margin-top: 15px;
+    line-height: 1.6;
+    
+}
+
+.profile-card .description p {
+    margin: 10px 0;
+}
+
+
+
+.profile-card .extra.content {
+    text-align: center;
+    padding-top: 15px;
+    border-top: none !important;
+}
+
+.botton-div-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+}

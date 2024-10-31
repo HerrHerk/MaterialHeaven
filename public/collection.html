@@ -14,8 +14,10 @@
 
 
     <link rel="icon" href="./assets/main/favicon.png" type="image/png"> <!-- For .png files -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css">
+
+    <link rel="stylesheet" href="./collection-style.css">
     <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
@@ -28,40 +30,16 @@
     
     <main id="app-layout">
 
-        <!-- Notification for item added to cart -->
-        <div id="notification-added" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #8ba848; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
-            Item added to cart!
-        </div>
-
-        <!-- Notification for item already in cart -->
-        <div id="notification-exists" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #d9534f; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
-            This material is already in your shopping cart.
-        </div>
-
-        <!-- Notification for tier eligibility -->
-        <div id="notification-tier" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
-            Your tier makes this material available!
-        </div>
-
-        <!-- Notification for already purchased material -->
-        <div id="notification-purchased" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
-            You have already purchased this material.
-        </div>
-        
-
-        <section id = "left-col">
+        <!-- Left Column -->
+        <section id="left-col">
             <header class="main-header">
                 <div class="left">
                     <!-- Sidebar -->
                     <div class="sidebar" id="sidebar">
                         <a href="#" class="closebtn" id="closebtn">&times;</a>
                         
-
-                        <div class="sidebar-name" id="sidebar-name">Profile</div>
-                        <div class="sidebar-email" id="sidebar-email">Profile</div>
-
-
-
+                        <h2 class="sidebar-name" id="sidebar-name">Profile</h2>
+                        <p class="sidebar-email" id="sidebar-email">Profile</p>
 
                         <!-- Separator Line -->
                         <hr class="sidebar-separator">
@@ -75,7 +53,6 @@
                             <i class="lock icon"></i>
                             <a href="#" id="sidebar-reset-password">Reset Password</a>
                         </div>
-                        
 
                         <!-- Separator Line -->
                         <hr class="sidebar-separator">
@@ -97,6 +74,7 @@
                             <i class="envelope icon"></i>
                             <a href="mailto:business.herrherk@gmail.com?subject=Contact Inquiry&body=Hello," id="sidebar-contact">Contact</a>
                         </div>
+                        
                         <div class="sidebar-logger" id="sidebar-about-div">
                             <i class="book icon"></i>
                             <a href="#" id="sidebar-about">About</a>
@@ -121,467 +99,56 @@
             </header>
         </section>
         
-        <section id = "middle-col">
+        <!-- Middle Column -->
+        <section id="middle-col">
             <header class="main-header">
-            </div>
                 <div class="left">
-                    
+                    <h1 class="title"></h1>
                 </div>
                 <div class="title">
                     <img src="./assets/titel/cog-background.png" alt="Materials" class="header-image">
                 </div>
                 <div class="right">
-                    <button class="add-btn"><img src="./assets/icons/add-icon.png" alt="edit icon" width="20" height="20"></button>
+                    <button class="add-btn" aria-label="Add Material">
+                        <img src="./assets/icons/add-icon.png" alt="Add icon" width="20" height="20">
+                    </button>
                 </div>
             </header>
-     
-            <div class="ui active inverted dimmer" id="loading-dimmer" >
-                <div class="ui massive text loader">Preparing Materials...</div>
-            </div>
 
-
-            
-
-            <div id="welcome-message" style="display:none;">
-                <div class="ui message">
-                    <h2 class="ui header">Welcome to Xplicit Materials</h2>
-                    <p>Click
-                        <a href="#" id="main-login-btn">here</a> 
-                        to register or log in and  
-                        gain access to hundreds of materials:
-                    </p>
-                </div>
-            
-                <!-- <h3 class="ui header">Some Features of Our Platform</h3> -->
-                <div id="slideshow-container" class="ui grid slideshow-container">
-                    <div id="slideshow-wrapper">
-                        <div id="slideshow">
-                            <!-- Slide 1 -->
-                            <div class="slide">
-                                <div class="image-column">
-                                    <img src="./assets/main/preview_1.png" alt="Preview 1" class="ui image">
-                                </div>
-                                <div class="description-column">
-                                    <h2>Materials of your desire</h2>
-                                    <ul>
-                                        <li>Find the material for your application</li>
-                                        <li>Simulate with the materials defined by publications and motivated community</li>
-                                        <li>Materials for everyday, industrial or military applications</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Slide 2 -->
-                            <div class="slide">
-                                <div class="image-column">
-                                    <img src="./assets/main/preview_2.png" alt="Preview 2" class="ui image">
-                                </div>
-                                <div class="description-column">
-                                    <h2>Library for the public</h2>
-                                    <ul>
-                                        <li>Largest publicly availible collection</li>
-                                        <li>Over 150 materials</li>
-                                        <li>Materials from different authors, sources online availible</li>
-                                        <li>Additional self and community developed and tested models</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Slide 3 -->
-                            <div class="slide">
-                                <div class="image-column">
-                                    <img src="./assets/main/preview_3.png" alt="Preview 3" class="ui image">
-                                </div>
-                                <div class="description-column">
-                                    <h2>Johnson and Cook Material Model</h2>
-                                    <ul>
-                                        <li>JC properties are visualised enhanced material choice</li>
-                                        <li>Addition "Shock EOS", "Isotropic Elasticity" and "Physical Properties" provide additional depth to the material models</li>
-                                        <li>Simulation ready materials for Explicit and Implicit use as well</li>
-                                        <li>Online availible materials contain a direct link to the author or document</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Slide 4 -->
-                            <div class="slide">
-                                <div class="image-column">
-                                    <img src="./assets/main/preview_4.png" alt="Preview 4" class="ui image">
-                                </div>
-                                <div class="description-column">
-                                    <h2>Versions and Alternatives from different Authors and Sources</h2>
-                                    <ul>
-                                        <li>Same material from different sources to compare them and chose the best fitting for the application</li>
-                                        <li>Materials with different heat treatmens or hardness</li>
-                                        <li>Alternative chemaical compound for the same material family</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Slide 5 -->
-                            <div class="slide">
-                                <div class="image-column">
-                                    <img src="./assets/main/preview_5.png" alt="Preview 5" class="ui image">
-                                </div>
-                                <div class="description-column">
-                                    <h2>Simulation Ready Materials</h2>
-                                    <ul>
-                                        <li>Download the .XML file with a single click</li>
-                                        <li>Easy to import</li>
-                                        <li>Backwards compatible up to ANSYS v19R2</li>
-                                        <li>Simulation ready material models without the need of extra sources</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="slideshow-indicators">
-                        <span class="indicator active" data-index="0"></span>
-                        <span class="indicator" data-index="1"></span>
-                        <span class="indicator" data-index="2"></span>
-                        <span class="indicator" data-index="3"></span>
-                        <span class="indicator" data-index="4"></span>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-            
-
-            <!-- Tabs for navigation -->
-            <div class="tabs" id="tabcontainer" style="display:none;">
-                <div class="tab active" data-target="steel">
-                    <img src="./assets/icons/steel-icon.png"  class="tab-icon" alt="Steel">
-                    Steel
-                </div>
-                <div class="tab" data-target="aluminium">
-                    <img src="./assets/icons/aluminium-icon.png"  class="tab-icon" alt="Aluminium">
-                    Aluminium
-                </div>
-                <div class="tab" data-target="iron">
-                    <img src="./assets/icons/iron-icon.png" class="tab-icon" alt="Iron">
-                    Iron
-                </div>
-                <div class="tab" data-target="special-metal">
-                    <img src="./assets/icons/special-metal-icon.png" alt="edit icon" class="tab-icon" alt="Special Metals">
-                    Special Metals
-                </div>
-                <div class="tab" data-target="other">
-                    <img src="./assets/icons/other-icon.png"class="tab-icon" alt="Other">
-                    Other
-                </div>
-            </div>
-
-
-            <!-- Material Loader Overlay -->
-
-
-                <!-- Content areas for each tab -->
-                <div id="steel" class="tab-content active">
-                    <div class="tab-column" id="steelFiles">
-
-                        <ul id="material-list-steel", class="material-list">
-
-                            
-
-
-                            <!-- <li class="material-list-item">
-
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="aluminium" class="tab-content">
-                    <div class="tab-column" id="aluminiumFiles">
-
-                        <ul id="material-list-aluminium", class="material-list">
-                    
-                            <!-- <li class="material-list-item">
-
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="iron" class="tab-content">
-                    <div class="tab-column" id="ironFiles">
-
-                        <ul id="material-list-iron", class="material-list">
-                    
-                            <!-- <li class="material-list-item">
-
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="special-metal" class="tab-content">
-                    <div class="tab-column" id="special-metalFiles">
-
-                        <ul id="material-list-special-metal", class="material-list">
-                    
-                            <!-- <li class="material-list-item">
-
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div id="other" class="tab-content">
-                    <div class="tab-column" id="otherFiles">
-
-                        <ul id="material-list-other", class="material-list">
-                    
-                            <!-- <li class="material-list-item">
-
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-
-            <div id="material-list" class="card-layout">
-            </div>
+            <div id="materials-list"></div>
 
         </section>
 
-        <section id = "right-col">
+        <!-- Right Column -->
+        <section id="right-col">
             <header class="main-header">
                 <div class="right">
                     <!-- Sidebar -->
                     <div class="sidebar-right" id="sidebar-right">
                         <a href="#" class="closebtn-right" id="closebtn-right">&times;</a>
                         
-                        <div class="sidebar-right-title" id="sidebar-right-title">Detailed Search</div>
+                        <h2 class="sidebar-right-title" id="sidebar-right-title">Detailed Search</h2>
                         <!-- Separator Line -->
                         <hr class="sidebar-separator">
-
 
                         <div class="search-bar">
                             <img src="./assets/icons/search-icon.png" alt="Search Icon" class="search-icon">
                             <input type="text" placeholder="Search..." class="search-input">
                         </div>
 
-
                         <!-- Separator Line -->
                         <hr class="sidebar-separator">                     
-
-
-                        
                     </div>
-                    <button id="filter-btn"><img src="./assets/icons/filter-icon.png" alt="Filter Icon" class="filter-icon"></button> <!-- Button to open sidebar -->
+                    <button id="filter-btn">
+                        <img src="./assets/icons/filter-icon.png" alt="Filter Icon" class="filter-icon">
+                    </button> <!-- Button to open sidebar -->
                 </div>
             </header>
-
-           
-
-
         </section>
 
     </main>
 
-    <!-- MODAL-->
 
-    <div id="modal-overlay">
-        <div id="modal">
-
-            <!-- MODAL HEADER-->
-
-            <div class="modal-header">
-                <h2>Add Explicit Material</h2>
-            </div>
-            <ul id="error-label"></ul>
-
-            <!-- MODAL CONTENT-->
-
-            <div class="modal-content">
-
-                <div class="input-card">
-
-                    <div class="input-group">
-                        <label>Material Name:</label>
-                        <input type="text" id="name"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Material Version:</label>
-                        <input type="text" id="version"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Category:</label>
-                        <select id="material">
-                            <option value="Steel">Steel</option>
-                            <option value="Aluminium">Aluminium</option>
-                            <option value="iron">Iron</option>
-                            <option value="special metal">Special Metal</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Icon:</label>
-                        <input type="text" id="icon"/>
-                    </div>
-
-
-                    <div class="input-group">
-                        <label>Price:</label>
-                        <select id="price">
-                            <option value="10">€0</option>
-                            <option value="10">€10</option>
-                            <option value="25">€25</option>
-                            <option value="50">€50</option>
-                            <option value="50">€999</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Tier:</label>
-                        <select id="tier">
-                            <option value="free">Free</option>
-                            <option value="basic">Basic</option>
-                            <option value="standard">Standard</option>
-                            <option value="premium">Premium</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-
-
-                    <div class="input-group">
-                        <label>Source:</label>
-                        <input type="text" id="source"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Reference:</label>
-                        <input type="text" id="reference"/>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Description:</label>
-                        <textarea id="description" rows="5" placeholder="Enter description lines..."></textarea>
-                    </div>
-
-
-
-                </div>
-
-                <div class="input-card">
-                    <div class="input-group">
-                        <label>Initial Yield Strength:</label>
-                        <input type="number" id="initial_yield_strength"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Hardening Constant:</label>
-                        <input type="number" id="hardening_constant"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Hardening Exponent:</label>
-                        <input type="number" id="hardening_exponent"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Strain Rate Constant:</label>
-                        <input type="number" id="strain_rate_constant"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Thermal Softening Exp:</label>
-                        <input type="number" id="thermal_softening_exp"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Melting Temperature:</label>
-                        <input type="number" id="melting_temperature"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Reference Strain Rate:</label>
-                        <input type="number" id="reference_strain_rate"/>
-                    </div>
-                </div>
-
-                <div class="input-card">
-                    <div class="input-group">
-                        <label>Initial Failure Strain:</label>
-                        <input type="number" id="initial_failure_strain"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Exponential Factor:</label>
-                        <input type="number" id="exponential_factor"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Triaxial Factor:</label>
-                        <input type="number" id="triaxial_factor"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Strain Rate Factor:</label>
-                        <input type="number" id="strain_rate_factor"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Temperature Factor:</label>
-                        <input type="number" id="temperature_factor"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Reference Strain Rate 2:</label>
-                        <input type="number" id="reference_strain_rate_alt"/>
-                    </div>
-                </div>
-
-
-                <div class="input-card">
-                    <div class="input-group">
-                        <label>Young's Modulus:</label>
-                        <input type="number" id="e_modulus"/>
-                    </div>
-                    <div class="input-group">
-                        <label>&#957-Poisson Ratio:</label>
-                        <input type="number" id="poisson"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Shear Modulus:</label>
-                        <input type="number" id="shear_modulus"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Bulk Modulus:</label>
-                        <input type="number" id="bulk_modulus"/>
-                    </div>
-                </div>
-
-                <div class="input-card">
-                    <div class="input-group">
-                        <label>&#947-Grueneisen Coefficient:</label>
-                        <input type="number" id="grueneisen_coefficient"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Parameter C1:</label>
-                        <input type="number" id="parameter_c1"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Parameter S1:</label>
-                        <input type="number" id="parameter_s1"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Parameter Quadratic:</label>
-                        <input type="number" id="parameter_quadratic"/>
-                    </div>
-                </div>
-
-                <div class="input-card">
-                    <div class="input-group">
-                        <label>Density:</label>
-                        <input type="number" id="density"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Specific Heat Const. Pr.:</label>
-                        <input type="number" id="specific_heat"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Hardness:</label>
-                        <input type="number" id="hardness"/>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MODAL FOOTER-->
-
-            <div class="modal-footer">
-                <button class="close-btn">Close</button>
-                <button class="save-btn">Save</button>
-            </div>
-        </div>   
-    </div>
 
 
     <!-- USER-->
@@ -590,7 +157,6 @@
         <div id="login-overlay">
 
             <!-- EMAIL VERIFICATION-->
-
             <div class="ui-segment" id="email-verification">
                 <div class="ui card">
                     <div class="ui content">
@@ -605,7 +171,6 @@
             </div>
 
             <!-- FORGOT PASSWORD-->
-
             <div class="ui segment" id="reset-password-form">
                 <h1>Reset Your Password</h1>
                 <p>Enter your email address to reset your password</p>
@@ -621,6 +186,7 @@
                 </form>
             </div>
 
+            <!-- ABOUT -->
             <div class="ui segment" id="about-form">
                 <h1>About Us</h1>
                 <hr class="section-divider">
@@ -724,8 +290,6 @@
                 </p>
             </div>
             
-
-
             <!-- PROFILE -->
             <div class="ui segment" id="user-profile">
                 <div class="ui card profile-card">
@@ -789,53 +353,6 @@
                 </div>
                 <button class="ui checkout-button" id="checkout-cart-btn">Checkout</button>
             </div>
-
-
-
-            <!-- PROFILE -->
-<!--             <div class="ui segment" id="user-profile">
-                <div class="ui form">
-                    <div class="ui stacked segment">
-                        <div class="ui content">
-                            <h2 class="ui header">
-                                User Profile
-                            </h2>
-                            <div class="meta" id="user-email">
-                                someemail@gmail.com
-                            </div>
-                        </br>
-                        </div>
-
-                        <div class="field">
-                            <div class="ui left icon input big">
-                                <i class="user icon"></i>
-                                <input type="text" placeholder="Name" id="update-realname" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="ui left icon input big">
-                                <i class="user icon"></i>
-                                <input type="text" placeholder="Username" id="update-username" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="ui left icon input big">
-                                <i class="mail icon"></i>
-                                <input type="email" placeholder="Email" id="update-email" />
-                            </div>
-                        </div>
-
-                        <button class="ui button blue fluid big" id="update-btn">Update</button>
-                    </div>
-
-                    <div class="ui extra content">
-                        <button class="ui button red fluid tiny" id="logout-btn">Log out</button>
-                    </div>
-                </div>
-            </div> -->
-
 
             <!-- SUBSCRIPTION PLANS -->
             <div class="ui segment" id="subscription-plan-form">
@@ -918,12 +435,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
 
             <!-- LOG IN FORM -->
             <div class="ui segment" id="login-form">
@@ -1027,6 +538,10 @@
         </div>
     </div>
 
+
+    
+
+
     
     <footer class="main-footer">
         <div class="footer-content">
@@ -1044,25 +559,14 @@
             <a href="https://www.discord.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my partner's Discord server">
                 <img src="./assets/icons/discord-icon.png" alt="Discord" width="20" />
             </a>
-<!--             <a href="https://www.yourportfolio.com" target="_blank" class="footer-tooltip" data-tooltip="Visit my Portfolio">
-                <img src="./assets/icons/external-link-icon.png" alt="Portfolio" width="20" />
-            </a> -->
         </div>
     </footer>
     
-    
-
-
-
     <script type="module" src="firebase-sdk.js"></script>
-    
     <script type="module" src="auth.js"></script>
     <script type="module" src="payment.js"></script>
     <script src="app.js" type="module"></script>
-
-
-
-
+    <script type="module" src="collection.js"></script>
 
 </body>
 </html>

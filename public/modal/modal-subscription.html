@@ -1,0 +1,108 @@
+<!-- modal-subscription.html -->
+<br>
+<h2 class="subscription-title">Choose Your Plan</h2>
+
+<div class="form-container" id="subscription-form">
+    <div class="plan-tier-wrapper">
+        
+         <!-- Free Plan -->
+         <div class="plan-tier free-plan">
+            <div class="tier-header">
+                <div class="tier-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Free Plan</h3>
+                <h4 class="plan-price">Free</h4>
+            </div>
+            <div class="divider-full"></div>
+            <ul class="tier-benefits">
+                <li>Preview <strong><span id="free-material-count">0</span></strong> materials</li>
+                <li>Visualize materials using charts</li>
+                <li>Download simulation-ready materials</li>
+                <li>Add materials to your favorites</li>
+            </ul>
+            <div class="divider-full"></div>
+            <button class="select-plan-btn" data-plan="free">Choose Free</button>
+        </div>
+
+        <!-- Basic Plan -->
+        <div class="plan-tier basic-plan">
+            <div class="tier-header">
+                <div class="tier-icon"><i class="fas fa-star"></i></div>
+                <h3>Basic Plan</h3>
+                <h4 class="plan-price">€150</h4>
+            </div>
+            <div class="divider-full"></div>
+            <ul class="tier-benefits">
+                <li>Access to an additional <strong><span id="basic-material-count">0</span></strong> materials</li>
+                <li>Unlock a total of <strong><span id="basic-material-total-count">0</span></strong> materials</li>
+                <li>Includes all features from lower tiers</li>
+                <li>&nbsp;</li> <!-- Empty list item -->
+            </ul>
+            <div class="divider-full"></div>
+            <button class="select-plan-btn" data-plan="basic">Choose Basic</button>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="plan-tier standard-plan">
+            <div class="tier-header">
+                <div class="tier-icon"><i class="fas fa-gem"></i></div>
+                <h3>Standard Plan</h3>
+                <h4 class="plan-price">€250</h4>
+            </div>
+            <div class="divider-full"></div>
+            <ul class="tier-benefits">
+                <li>Unlock <strong><span id="standard-material-count">0</span></strong> additional standard materials</li>
+                <li>Gain access to a total of <strong><span id="standard-material-total-count">0</span></strong> materials</li>
+                <li>Includes all features from lower tiers</li>
+                <li>Additional features are in development</li>
+            </ul>
+            <div class="divider-full"></div>
+            <button class="select-plan-btn" data-plan="standard">Choose Standard</button>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="plan-tier premium-plan">
+            <div class="tier-header">
+                <div class="tier-icon"><i class="fas fa-crown"></i></div>
+                <h3>Premium Plan</h3>
+                <h4 class="plan-price">€400</h4>
+            </div>
+            <div class="divider-full"></div>
+            <ul class="tier-benefits">
+                <li>Access to all features</li>
+                <li>Unlock every material: <strong><span id="premium-material-total-count">0</span></strong></li>
+                <li>Exclusive access to <strong><span id="premium-material-count">0</span></strong> premium materials</li>
+                <li>Premium features are in development</li>
+            </ul>
+            <div class="divider-full"></div>
+            <button class="select-plan-btn" data-plan="premium">Choose Premium</button>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <br></br>
+    <!-- Terms and Conditions Checkbox -->
+    <div class="terms-container">
+        <input type="checkbox" id="termsCheckboxSubscription">
+        <label for="termsCheckboxSubscription">I agree with the Terms of Service and Privacy Policy.</label>
+    </div>
+
+    <!-- Refund Acknowledgment Checkbox -->
+    <div class="refund-container">
+        <input type="checkbox" id="refundCheckboxSubscription">
+        <label for="refundCheckboxSubscription">I acknowledge that no refund is possible due to the nature of this content.</label>
+    </div>
+
+    <div class="checkout-button-container">
+        <button class="checkout-button" data-type="subscription" disabled>Checkout</button>
+    </div>
+
+</div>
+
+<div class="close-button-container">
+    <button class="close-button">Close</button>
+</div>

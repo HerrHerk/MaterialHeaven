@@ -1,0 +1,2503 @@
+/* ==========================================
+   COLOR PALETTE
+
+   Dark - #071428
+   Primary - #164384
+   Text dark - #091B35
+   Text blue - #0D284F
+   White - #FFFFFF
+   Light - #E8ECF3
+   Grey - #E4E3E1
+   Red - #B52C2A;
+   Green - #438416;
+   Orange - #E68A00;
+========================================== */
+
+
+
+/* ==========================================
+   Global Styles & Resets
+========================================== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #071428;
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, * {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar, *::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* ==========================================
+   Typography Settings
+========================================== */
+h1 { font-size: 2.3rem; }
+h2 { font-size: 1.8rem; text-align: center; color: #164384; }
+h3 { font-size: 1.5rem; color: #164384; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.8rem; }
+
+/* ==========================================
+   Header Styles
+========================================== */
+header {
+  display: flex;
+  justify-content: center; /* Center content */
+  background-color: #1C3448;
+  color: #FFFFFF;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header .content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%; /* Centered content width for larger screens */
+  height: 44px;
+}
+
+/* Apply scroll color swap */
+header.scrolled {
+  background-color: #FFFFFF;
+  color: #1C3448;
+}
+
+.header-separator {
+  width: 2px;
+  background-color: #FFFFFF;
+  align-self: stretch;
+}
+
+.header-separator.scrolled {
+  width: 2px;
+  
+  align-self: stretch;
+  background-color: #1C3448;
+
+}
+
+/* Style for each li element */
+#navMenu {
+
+  /* padding-right: 2.6%; */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style for each li element */
+#navMenu ul li {
+  display: flex; /* Enables flex on li to align its children */
+  align-items: center; /* Centers content vertically */
+  
+}
+
+
+
+/* Header Icon Styling */
+.white-header-icon,
+.dark-header-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute; /* Position them on top of each other */
+  transition: transform 0.3s ease;
+  margin-right: 8px;
+}
+
+
+.icon-item {
+  transition: opacity 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+/* Target the profile icon's <li> element */
+.icon-item.profile-icon,
+.icon-item.subscription-icon {
+  margin-left: 38px; /* 38px margin for profile icon */
+}
+
+.dark-header-icon {
+  opacity: 0; /* Hide dark icons by default */
+}
+
+/* When scrolled, show dark icons and hide white icons */
+header.scrolled .white-header-icon {
+  opacity: 0; /* Hide white icons */
+}
+
+header.scrolled .dark-header-icon {
+  opacity: 1; /* Show dark icons */
+}
+
+
+
+.icon-text {
+  display: none;
+  margin-left: 10px; /* Adds space between the icon and the text */
+  margin-top: 5px;
+}
+
+.icon-item a {
+  display: flex; /* Enables flexbox on the anchor */
+  align-items: center; /* Centers icon and text vertically */
+  text-decoration: none; /* Optional: removes underline */
+}
+
+/* ==========================================
+   Logo Styling
+========================================== */
+.logo {
+  margin-left: 0;
+  position: relative;
+}
+
+.logo img {
+  height: 20px;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: -10px;
+}
+
+.logo-dark {
+  opacity: 0; /* Start with blue logo hidden */
+}
+
+header.scrolled .logo-white {
+  opacity: 0; /* Hide white logo when scrolled */
+}
+
+header.scrolled .logo-dark {
+  opacity: 1; /* Show blue logo when scrolled */
+}
+
+/* ==========================================
+   Navigation Styling
+========================================== */
+nav {
+  margin-right: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+/* Scrolled styles for menu-toggle button and nav menu */
+nav.open.scrolled {
+  background-color: #FFFFFF;
+  color: #1C3448;
+}
+
+/* ==========================================
+   Menu Toggle Button
+========================================== */
+.menu-toggle {
+  display: none;
+  color: #071428;
+  background-color: #FFFFFF;
+  border: none;
+  font-size: 24px;
+  padding: 0;
+  cursor: pointer;
+  margin-right: 10%;
+  transition: background-color 0.3s, color 0.3s;
+  width: 44px;
+  height: 44px;
+}
+
+.menu-toggle.scrolled {
+  background-color: #1C3448;
+  color: #FFFFFF;
+}
+
+/* ==========================================
+   Hero Section Styling
+========================================== */
+.hero {
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; /* Prevents extra scrolling */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../assets/images/hero.jpeg');
+  background-size: cover; /* Ensures image covers the full container */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.hero-library {
+  
+  margin-top: 44px;
+  height: 20vh;
+}
+
+.hero-library::before {
+  background-image: url('../assets/images/hero-library.jpeg');
+
+}
+
+.hero .content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column; /* Ensure elements stack vertically */
+  align-items: flex-end; /* Align items to the left */
+  width: 39%;
+  margin-left: 10%;
+}
+
+
+
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: right;
+}
+
+
+
+.hero h1 .welcome-text {
+  display: inline-block;
+  margin-right: 0; /* Ensure no extra spacing */
+}
+
+
+
+
+/* Logo Styling */
+.hero img.logo-blue {
+  max-width: 100%; /* Make sure it stays within the wrapper */
+  height: auto;
+  align-self: flex-start;
+  
+}
+
+.hero h2 {
+  font-size: 1.8rem;
+  margin: 10px 0 20px;
+  color: #1C3448;
+  font-style: italic;
+  width: 100%;
+  text-align: right;
+}
+
+/* Button Styling */
+.hero button {
+  background-color: #164384;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  text-align: right;
+  
+  margin-top: 15px; /* Adds space between button and h2 */
+}
+
+.hero button:hover {
+  background-color: #FFFFFF;
+  color: #164384;
+}
+
+/* ==========================================
+   About Section Styling
+========================================== */
+.about {
+  padding: 60px 0px;
+  background-color: #E4E3E1;
+  color: #071428;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: left;
+  
+}
+
+.about-text {
+  flex: 1; /* Each section takes up 50% of available width */
+}
+.about-image {
+  flex: 2; /* Each section takes up 50% of available width */
+}
+
+/* Wrapper for text and image with flex layout */
+.about-content {
+  display: flex;
+  gap: 20px; /* Space between text and image */
+  align-items: center; /* Vertical alignment */
+  
+  margin: 0 0; /* Center the content */
+}
+
+.about-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+}
+
+
+
+.about-image img {
+  width: 33%; /* Ensure the image fills the width of the container */
+  height: 33%; /* Ensure the image fills the height of the container */
+  object-fit: cover; /* Crop the image to fill the container */
+  
+   
+}
+
+.about-image {
+  display: flex;
+  position: relative;
+  overflow: hidden; /* Hide any overflow when the image is cropped */
+}
+
+
+
+/* ==========================================
+   Features Section Styling
+========================================== */
+.features {
+  padding: 60px 0px;
+  background-color: #FFFFFF;
+  color: #071428;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.slabs {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+}
+
+.feature-icon {
+  
+  width: 20%;
+  
+}
+
+
+.slab {
+  text-align: justify;
+  width: 30%;
+  
+}
+
+/* Flex layout for icon and text */
+.slab-div {
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  gap: 3%; /* Spacing between icon and text */
+}
+
+
+
+.separator {
+  width: 2px;
+  background-color: #071428;
+  align-self: stretch;
+}
+
+.slab h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.slab p {
+  font-size: 1rem;
+  line-height: 1.5;
+  
+}
+
+/* ==========================================
+   Contact Section Styling
+========================================== */
+.contact {
+  padding: 60px 0px;
+  background-color: #E4E3E1;
+  color: #071428;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact p {
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.contact button {
+  background-color: #164384;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.contact button:hover {
+  background-color: #FFFFFF;
+  color: #1C3448;
+}
+
+/* ==========================================
+   Footer Styles
+========================================== */
+footer {
+  background-color: #1C3448;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem; /* Set a uniform base font size for the footer */
+  flex-direction: column; /* Keeps layout responsive for small screens */
+}
+
+footer .content-wrapper {
+  width: 80%; /* Centered content width on larger screens */
+  
+  display: flex;
+  justify-content: space-between; /* Distribute space between the two sections */
+  align-items: center; /* Vertically center the content */
+}
+
+
+footer p {
+  margin: 5px 0;
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+footer ul li {
+  margin: 0 10px;
+}
+
+footer a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+footer a, footer p {
+  font-size: 1.1rem; /* Ensures <a> and <p> inherit from footer */
+}
+
+footer a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.footer-icon {
+  width: 40px; /* Adjust icon size */
+  height: auto;
+  vertical-align: middle;
+}
+
+.legal-links {
+  margin-top: 10px;  
+}
+
+.footer-tooltip {
+  position: relative;
+}
+
+
+.footer-separator {
+  width: 2px;
+  background-color: #FFFFFF;
+  align-self: stretch;
+}
+
+.footer-social, .footer-legal {
+  flex: 1;
+}
+
+/* ==========================================
+   Content Wrapper Styling
+========================================== */
+.content-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+
+/* ==========================================
+=============================================
+   Library Styling
+=============================================   
+========================================== */
+/* Global Styles for Databank */
+
+
+/* Tabs Container */
+.tabs {
+  display: flex;
+  justify-content: space-between; /* Distribute tabs evenly */
+  
+  width: 100%; /* Ensure the tabs container fills the available width */
+  margin-top: 1rem;
+}
+
+/* Tab Button */
+.tab {
+  display: flex;
+  flex: 1; /* Each tab equally shares available space */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  text-align: center;
+  padding: 2rem; /* Add padding for better touch targets */
+  padding-top: 1rem; /* Add padding for better touch targets */
+  padding-bottom: 1rem; /* Add padding for better touch targets */
+  font-size: 1.3rem;
+  
+  transition: background-color 0.3s, transform 0.2s; /* Add subtle hover effect */
+  cursor: pointer; /* Show pointer on hover */
+  
+  border-left: 0.5px solid #E4E3E1; /* Ensure no overlap with adjacent tab */
+  border-right: 0.5px solid #E4E3E1;
+}
+
+/* Remove borders on edges */
+.tab:first-child {
+  border-left: none;
+}
+.tab:last-child {
+  border-right: none;
+}
+
+
+/* Icon Styling */
+.tab-icon {
+  width: 70px; /* Smaller icon size */
+  height: 70px;
+  margin-right: 0.5rem; /* Space between icon and text */
+}
+
+/* Text Styling */
+.tab span {
+  
+  font-weight: normal;
+  color: #071428;
+}
+
+/* Active Tab Styling */
+.tab.active {
+  background-color: #E4E3E1;
+  
+  border-bottom: 0;
+  /* border-top: solid 1px; */
+  font-weight: bold; /* Bold text for active tab */
+  color: #164384; /* Text color for active tab */
+}
+
+.tab.active span {
+  font-weight: bold; /* Bold text for active tab */
+  color: #164384;
+  
+}
+
+/* Hover Effect */
+.tab:hover {
+  background-color: #E4E3E1; /* Subtle background on hover */
+  
+}
+
+
+.databank {
+  background-color: #E4E3E1;
+  min-height: 100vh;
+}
+
+.databank-content {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+/* Material Library Section */
+.material-library {
+  padding: 60px 0px;
+  background-color: #E4E3E1;
+  color: #071428;
+}
+
+
+
+.category-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.category-body {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 item per row */
+  gap: 2rem; /* Space between family blocks */
+  margin-top: 1rem;
+}
+
+/* Family Block */
+.family-block {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  
+  background-color: #ffffff;
+  
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Family Header */
+.family-header {
+  display: block;
+  
+  align-items: center;
+ 
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.family-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+/* Icon and Description Group */
+.icon-description {
+  display: flex;
+  height: 225px;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center; /* Center items horizontally */
+}
+
+.family-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.description-list {
+  
+  padding: 0;
+  padding-left: 0.5rem;
+  margin: 0;
+  
+}
+
+.description-list li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #091B35;
+  
+}
+
+/* Material Blocks */
+.materials-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between material cards */
+}
+
+.material-block {
+  border: 1px solid #1C3448;
+  padding: 1rem;
+  padding-top: 0.2rem;
+  
+  background-color: #f9f9f9;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+.material-block:hover {
+  border: 1px solid #164384;
+  background-color: #FFF;
+}
+
+
+.material-version {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.material-tier {
+  font-size: 14px;
+  color: #777;
+}
+
+.library-actions {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: flex-end; /* Align items vertically in the middle */
+  flex-direction: column;
+  width: 100%; /* Ensure the container spans the full width of its parent */
+}
+
+/* ==========================================
+=============================================
+   Material Modal Styling
+=============================================   
+========================================== */
+
+
+.hidden-modal {
+  display: none;
+}
+
+.visible-modal {
+  display: block;
+  flex-direction: column;
+  width: 100%;
+  /* Add other styling as needed */
+}
+
+
+.modal-content-material {
+  background: #E4E3E1;
+  /* margin-top: 7%; */
+  position: relative; /* To position close button inside it */
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  overflow-y: none; /* Allow vertical scrolling */
+  display: flex; /* Use flexbox inside modal-content */
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the left by default */
+  justify-content: flex-start; /* Start items from the top */
+}
+
+/* Grid layout for form containers */
+.form-container-grid-material {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px; /* Space between grid items */
+  margin-top: 20px; /* Add spacing above the grid */
+}
+
+/* Grid layout for form containers */
+.form-container-grid-chart {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3 columns */
+  gap: 20px; /* Space between grid items */
+  margin-top: 20px; /* Add spacing above the grid */
+}
+
+/* Optional: Style the h4 */
+.form-container h4 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-align: center;
+}
+
+/* Optional: Style the h4 */
+.form-container .divider-full {
+  margin: 10px 0;
+}
+
+
+/* Grid container for Physical Properties */
+.property-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 3.3fr 2.2fr 1.5fr; /* Proportional columns */
+  
+  width: 100%; /* Use full width of the parent container */
+}
+
+/* Row styling */
+.property-row {
+  display: contents; /* Rows rely on grid parent */
+}
+
+/* General cell styling */
+.property-cell {
+  padding: 5px; /* Space inside cells */
+  white-space: nowrap; /* Prevent text wrapping by default */
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+/* Specifically allow the 2nd cell in each row to wrap */
+.property-cell:nth-child(2) {
+  white-space: normal; /* Allow text wrapping */
+  word-wrap: break-word; /* Ensure long words wrap within the cell */
+  overflow-wrap: break-word; /* Ensure long words wrap within the cell */
+}
+
+
+.property-cell.narrow-cell {
+  text-align: left;
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+.property-cell.wide-cell {
+  text-align: left;
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+.property-cell:nth-child(3) {
+  text-align: center; /* Center-align value cells */
+}
+
+.property-cell:nth-child(4) {
+  text-align: right; /* Right-align units */
+}
+
+.property-cell sub {
+  vertical-align: baseline; /* Aligns the subscript with the baseline of the parent text */
+  font-size: 0.7rem; /* Ensures the subscript does not change the font size */
+  line-height: 1; /* Adjusts the line height to match the parent */
+}
+
+
+.missing-data {
+  color:#bdbdbd;
+}
+
+.grey-line {
+  background-color: #E4E3E1; /* Light grey color */
+}
+
+/* Container for the header */
+.header-flex-container {
+  display: flex;
+  justify-content: center; /* Center the entire flexbox */
+  align-items: center;    /* Align content vertically to the center */
+  gap: 10px;  
+  flex:1;            /* Space between text and icon */
+}
+
+/* Material icon */
+.material-icon {
+  height: 48px;           /* Adjust as needed for icon size */
+  width: 48px;            /* Ensure icon is square */
+  object-fit: contain;    /* Prevent distortion */
+  flex: 0 0 auto;         /* Prevent resizing of the icon */
+  margin: 0;              /* Ensure no unintended margins */
+}
+
+/* Heading */
+.header-flex-container h2 {
+  flex: 0 0 auto;         /* Prevent resizing */
+  text-align: right;      /* Align text to the right within its space */
+  margin: 0;              /* Reset default margins */
+}
+
+
+
+
+.share-button,
+.download-button,
+.purchase-button,
+.edit-button,
+.favourite-button,
+.favourite-filter-button,
+.save-button,
+.filter-button,
+.search-button,
+.add-button,
+.delete-button {
+  background-color: #FFFFFF;
+  color: #164384;
+  border: none;
+  padding: 12px; /* Adjust padding as needed */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  margin-top: 15px;
+  margin-right: 10px;
+  display: flex; /* Center the icon */
+  justify-content: center; /* Center the icon */
+  align-items: center; /* Center the icon */
+}
+
+/* Icon Style */
+button img {
+  width: 24px; /* Ensure consistent icon size */
+  height: 24px;
+  object-fit: contain; /* Maintain the icon's aspect ratio */
+  transition: opacity 0.3s; /* Smooth swap between icons */
+}
+
+/* Blue icon visible by default */
+button img.icon-blue {
+  opacity: 1;
+}
+
+/* White icon hidden by default */
+button img.icon-white {
+  opacity: 0;
+  position: absolute; /* Overlays the blue icon */
+}
+
+/* Hover State */
+.share-button:hover,
+.download-button:hover,
+.purchase-button:hover,
+.edit-button:hover,
+.save-button:hover,
+.filter-button:hover,
+.favourite-filter-button:hover,
+.search-button:hover,
+.add-button:hover,
+.favourite-button:hover,
+
+.delete-button:hover {
+  background-color: #164384;
+  color: #FFFFFF;
+  padding: 12px; /* Adjust padding as needed */
+}
+
+/* Swap icons on hover */
+.share-button:hover img.icon-blue,
+.download-button:hover img.icon-blue,
+.purchase-button:hover img.icon-blue,
+.edit-button:hover img.icon-blue,
+.save-button:hover img.icon-blue,
+.favourite-button:hover img.icon-blue,
+.favourite-filter-button:hover img.icon-blue,
+.filter-button:hover img.icon-blue,
+.search-button:hover img.icon-blue,
+.add-button:hover img.icon-blue,
+.delete-button:hover img.icon-blue {
+  opacity: 0;
+}
+
+.share-button:hover img.icon-white,
+.download-button:hover img.icon-white,
+.purchase-button:hover img.icon-white,
+.edit-button:hover img.icon-white,
+.save-button:hover img.icon-white,
+.favourite-button:hover img.icon-white,
+.favourite-filter-button:hover img.icon-white,
+.filter-button:hover img.icon-white,
+.search-button:hover img.icon-white,
+.add-button:hover img.icon-white,
+.delete-button:hover img.icon-white {
+  opacity: 1;
+  width: 32px; /* Ensure consistent icon size */
+  height: 32px;
+}
+
+.grid-button-container{
+  display: flex;
+  align-items: center; /* Align items horizontally in the center */
+}
+
+.card-button-container{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.action-button-container{ 
+  display: flex;
+
+}
+.admin-button-container{
+  display: flex;
+
+}
+
+.admin-button-container-alt{
+  display: flex;
+
+}
+
+/* Ensure the editable input looks like the regular content */
+.editable-input {
+  border: none; /* Remove default input borders */
+  background-color: #E4E3E1; /* Slight background color change */
+  padding: 0; /* Remove padding to match the content style */
+  margin: 0; /* Remove margin to keep it consistent */
+  font: inherit; /* Inherit the font family and size from the surrounding text */
+  text-align: inherit; /* Align text the same way as regular content */
+  width: 100%; /* Make sure the input fills the space, keeping alignment */
+  box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+/* Optional: subtle border on focus to indicate edit mode */
+.editable-input:focus {
+  outline: 2px solid #164384; /* Add a subtle blue outline when focused to indicate it's editable */
+  border: none; /* Ensure no additional border */
+}
+
+/* Optional: Change the background slightly to show it's editable */
+
+.editable-input:hover {
+  background-color: #E4E3E1; /* Slight background color change */
+  outline: 2px solid #164384; /* Add a subtle blue outline when focused to indicate it's editable */
+  border: none; /* Ensure no additional border */
+}
+
+.hidden-in-view-mode {
+  display: none;
+}
+.edit-mode .hidden-in-view-mode {
+  display: flex;
+}
+
+
+
+
+/* Style for the select element (editable-dropdown) */
+.editable-dropdown {
+  background-color: #E4E3E1; /* Slight background color */
+  padding: 0; /* No padding to match layout */
+  margin: 0; /* No margin to keep consistency */
+  font: inherit; /* Inherit font styling */
+  width: 100%; /* Fill the width of the parent container */
+  border: none; /* Remove border */
+  appearance: none; /* Hide default dropdown arrow */
+  -webkit-appearance: none; /* Webkit browsers */
+  -moz-appearance: none; /* Firefox browsers */
+  text-align: center; /* Center text in the dropdown */
+  box-sizing: border-box; /* Make padding included in width */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Custom dropdown arrow */
+.editable-dropdown::after {
+  content: ' ▼'; /* Custom dropdown arrow */
+  font-size: 12px;
+  color: #164384;
+  padding-left: 5px; /* Space between text and arrow */
+}
+
+/* Make sure the dropdown text is centered */
+.editable-dropdown option {
+  text-align: center; /* Center text inside each option */
+}
+
+/* Focus and hover states for the dropdown */
+.editable-dropdown:focus {
+  outline: 2px solid #164384; /* Blue outline on focus */
+}
+
+.editable-dropdown:hover {
+  background-color: #D2D1CF; /* Slightly darker on hover */
+}
+
+/* Style for the textarea element (editable-textarea) */
+.editable-textarea {
+  background-color: #E4E3E1; /* Slight background color */
+  padding: 10px; /* Add padding inside textarea */
+  margin: 0; /* No margin */
+  font: inherit; /* Inherit font styling */
+  width: 100%; /* Fill the width */
+  border: none; /* Remove border */
+  resize: vertical; /* Allow vertical resize */
+  box-sizing: border-box; /* Include padding in the width */
+  text-align: center; /* Center the text inside the textarea */
+}
+
+.editable-textarea:focus {
+  outline: 2px solid #164384; /* Blue outline on focus */
+}
+
+.editable-textarea:hover {
+  background-color: #D2D1CF; /* Slightly darker on hover */
+}
+
+
+
+
+
+/* ==========================================
+=============================================
+   Modal Styling
+=============================================   
+========================================== */
+
+.modal-content-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Narrow width for profile modal content-wrapper*/
+.narrow-width {
+  margin-top: 7%;
+  width: 20%;
+}
+
+
+.medium-width {
+  margin-top: 7%;
+  width: 40%;
+}
+
+/* Prevent body scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Modal overlay styling */
+.modal-overlay {
+  position: fixed;
+  
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #E4E3E1;
+  margin-top: 7%;
+  position: relative; /* To position close button inside it */
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  overflow-y: auto; /* Allow vertical scrolling */
+  display: flex; /* Use flexbox inside modal-content */
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the left by default */
+  justify-content: flex-start; /* Start items from the top */
+}
+
+#modal-inner-content,
+#modal-inner-content-material {
+  overflow-y: auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column; /* Stack items vertically */
+  max-height: 90vh;      /* Constrain height further if needed */
+}
+
+.close-modal {
+  position: absolute;
+  top: 7%;           /* Position the close button from the top */
+  right: 5%;          /* Position from the right */
+  background: none;
+  color: #164384;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: #b52c2a; /* Darker red on hover */
+}
+
+.button-div {
+  display: flex;
+  justify-content: space-between; /* Distributes space between items */
+  align-items: center;
+}
+
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  background-color: #164384;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  margin-top: 15px;
+}
+
+.close-button:hover {
+  background-color: #FFFFFF;
+  color: #164384;
+}
+
+/* ==========================================
+   Shopping Cart Styling
+========================================== */
+/* Table Styling */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 1.2rem; /* Set font size for all text in the table */
+  border-bottom: 3px solid #164384; /* Thick bottom border for the table */
+  table-layout: auto; /* Allow columns to auto-adjust based on content */
+}
+
+/* Thick separator for header */
+.cart-table thead tr {
+  border-bottom: 3px solid #164384 /* Thick dark separator */
+}
+
+/* Thin 1px separator for each item row */
+.cart-table tbody tr {
+  border-bottom: 1px solid #164384;
+}
+
+
+.cart-table th, .cart-table td {
+  padding: 12px;
+  padding-left: 0;
+  padding-right: 0;
+  /* text-align: left; */
+  vertical-align: middle; /* Centers content vertically within cells */
+  white-space: nowrap; /* Prevents columns from wrapping and taking extra space */
+}
+
+/* Centering list items inside the content column */
+.content-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.content-details li {
+  
+  align-items: center; /* Centers items vertically in the list row */
+   /* Spreads text and icon */
+  margin: 3px 0;
+}
+
+
+.item-icon {
+  text-align: center;
+}
+
+
+.shop-item-icon {
+  height: 5rem;
+}
+
+/* Consistent height for tick and cross icons */
+.status-icon {
+  font-weight: bold;
+  font-size: 1rem; /* Adjust size to keep icons visible */
+  height: 1em;     /* Uniform icon height */
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.status-icon.tick {
+  color: #164384;
+}
+
+.status-icon.cross {
+  color: #164384;
+}
+
+/* Right-align Price, Discount, and Total Price columns */
+.cart-table td:nth-child(8), /* Standard Price */
+.cart-table td:nth-child(6), /* Discount */
+.cart-table td:nth-child(7) { /* Total Price */
+  text-align: center;
+}
+
+
+/* Right-align Price, Discount, and Total Price columns */
+.cart-table td:nth-child(2),
+.cart-table td:nth-child(3), /* Standard Price */
+.cart-table td:nth-child(5),
+.cart-table td:nth-child(4) { /* Total Price */
+  text-align: center;
+}
+
+
+
+/* Styling for the "Remove Item" button */
+.remove-item-button {
+  background: none;
+  border: none;
+  color:  #164384; /* Red color */
+  font-size: 3rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+
+
+.remove-item-button:hover {
+  color: #b52c2a; /* Darker red on hover */
+}
+
+/* Align Terms and Refund Containers to the Right */
+.terms-container, .refund-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* Style checkboxes and labels within the containers */
+.terms-container input[type="checkbox"], .refund-container input[type="checkbox"] {
+  margin-right: 8px;
+  /* Hide the default checkbox */
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Style the custom checkbox using ::before pseudo-element */
+.terms-container input[type="checkbox"] + label, .refund-container input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 25px; /* Space for the custom checkbox */
+  cursor: pointer;
+}
+
+/* Custom checkbox style */
+.terms-container input[type="checkbox"]:checked + label::before, .refund-container input[type="checkbox"]:checked + label::before {
+  background-color: #164384; /* Set the background to the custom color when checked */
+  border-color: #164384; /* Border color to match the checked state */
+}
+
+/* Custom checkbox appearance (unchecked state) */
+.terms-container input[type="checkbox"] + label::before, .refund-container input[type="checkbox"] + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: white; /* Background color of the checkbox when unchecked */
+  border: 2px solid #164384; /* Border color of the checkbox */
+  
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for color changes */
+}
+
+/* Checkmark style when checkbox is checked */
+.terms-container input[type="checkbox"]:checked + label::after, .refund-container input[type="checkbox"]:checked + label::after {
+  content: "✔";
+  position: absolute;
+  left: 2.5px;
+  top: -2px;
+  color: white; /* White checkmark */
+  font-size: 16px; /* Size of the checkmark */
+}
+
+/* Optional: Hover effect on the label */
+.terms-container label:hover, .refund-container label:hover {
+  color: #164384; /* Change label text color on hover */
+}
+
+.checkout-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Disable checkout button initially */
+.checkout-button:disabled {
+  justify-content: flex-end;
+  background-color: #cccccc; /* Grey background */
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* Enable checkout button when checkbox is checked */
+.checkout-button:enabled {
+  background-color: #164384; /* Green */
+  color: #FFFFFF;
+}
+
+/* Disable plan buttons */
+.select-plan-btn.disabled {
+  background-color: #cccccc; /* Grey background */
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* Selected plan button */
+.select-plan-btn.selected {
+  background-color: #FFFFFF;
+  color: #164384;
+}
+
+/* Total Container Styling */
+.total-container {
+  display: flex;
+  justify-content: flex-end; /* Align total to the right */
+  padding-top: 15px; /* Space above the total section */
+}
+
+.total-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 15px; /* Space between label and amount */
+}
+
+.total-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #164384; /* You can adjust the color */
+}
+
+/* Styling the checkout button */
+.checkout-button {
+  background-color: #164384;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  margin-top: 15px;
+}
+
+.checkout-button:hover {
+  background-color: #FFFFFF;
+  color: #164384;
+}
+
+
+
+.mobile-table {
+  display: none; /* Hide mobile table by default */
+}
+
+
+/* ==========================================
+   Profile Styling
+========================================== */
+
+.profile-container {
+  display: flex;
+  /* margin-left: 20%; */
+  /* width: 80%; */
+  align-items: left;
+  flex-direction: column;
+  
+}
+
+
+
+
+
+
+/* Title styling */
+.section-title {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+/* Horizontal separators */
+.separator-horizontal {
+  width: 100%;
+  height: 2px;
+  background-color: #1C3448;
+  margin: 20px auto;
+}
+
+/* Styling the checkout button */
+.profile-button,
+.return-button {
+  background-color: #164384;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  
+  
+}
+
+.profile-button:hover,
+.return-button:hover {
+  background-color: #FFFFFF;
+  color: #164384;
+}
+
+
+
+.profile-link {
+  text-decoration: none;
+  color: #164384;
+  padding: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.profile-link:hover {
+  
+  color: #071428;
+  text-decoration: underline;
+}
+
+/* ==========================================
+   Login / Signup Styling
+========================================== */
+
+.signup-container,
+.login-container {
+  display: flex;
+  /* margin-left: 20%; */
+  width: 80%;
+  align-items: left;
+  flex-direction: column;
+  
+}
+
+
+
+
+.form-container {
+  width: 100%;
+  
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  
+  
+}
+
+.form-box {
+  text-align: center;
+}
+
+.form-field {
+  margin: 15px 0;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #164384;
+  outline: none;
+}
+
+.password-field {
+  position: relative;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #164384;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  background: #db4437;
+  border: 2px solid #db4437;
+  color: #fff;
+  font-weight: bold;
+  
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.google-button:hover {
+
+  background: #FFF;
+  color: #db4437;
+  border: 2px solid #db4437;
+
+}
+
+.google-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.divider {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #aaa;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  height: 1px;
+  width: 45%;
+  background: #E4E3E1;
+  position: absolute;
+  top: 50%;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.divider-full {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #aaa;
+  position: relative;
+  height: 1px; /* Set the height directly for the full width */
+  background: #E4E3E1;
+}
+
+
+.action-button {
+  width: 100%;
+  padding: 10px;
+  background: #164384;
+  color: #fff;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.action-button:hover {
+  background: #FFF;
+  color: #164384;
+  border: 2px solid #164384;
+}
+
+
+
+
+
+
+
+
+
+
+
+.form-footer,
+.form-links {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-footer a,
+.form-links a {
+  color: #164384;
+  text-decoration: none;
+}
+
+.form-footer a:hover,
+.form-links a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #841643;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+
+
+
+/* ==========================================
+   Subscription Styling
+========================================== */
+
+.subscription-title {
+  text-align: center;
+}
+
+#subscription-form {
+  background: #E4E3E1;
+  padding: 0;
+}
+
+/* Plan Tiers */
+.plan-tier-wrapper {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 20px;
+  background: #E4E3E1;
+}
+
+/* Individual Plan Tier */
+.plan-tier {
+  padding: 20px;
+  background: #FFFFFF;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  border: none; /* Remove rounded corners */
+}
+
+h4.plan-price {
+  text-align: left;
+}
+
+
+.plan-tier.free-plan {
+  border-left: 6px solid #d0d9e6;
+}
+
+.plan-tier.basic-plan {
+  border-left: 6px solid 	#438416;
+}
+
+.plan-tier.standard-plan {
+  border-left: 6px solid #167a84;
+}
+
+.plan-tier.premium-plan {
+  border-left: 6px solid #841643;
+}
+
+/* Plan Header */
+.tier-header {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  
+
+}
+
+.tier-icon {
+  font-size: 32px;
+  color: inherit;
+}
+
+.tier-header h3 {
+
+  margin: 0;
+
+}
+
+.plan-price {
+  margin: 0;
+  margin-top: 3%;
+}
+
+.plan-price p{
+  font-size: 18px;
+
+}
+
+/* Tier Benefits */
+.tier-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.tier-benefits li {
+  margin-bottom: 10px;
+  font-size: 14px;
+
+}
+
+
+.select-plan-btn {
+  width: 100%;
+  padding: 10px;
+  background: #164384;
+  color: #fff;
+  border: 2px solid #164384;
+  transition: background-color 0.3s;
+  align-self: flex-end;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.select-plan-btn:hover {
+  background: #FFF;
+  color: #164384;
+  border: 2px solid #164384;
+}
+
+
+
+/* ==========================================
+   Scroll Control
+========================================== */
+
+/* Disable scrolling on the main page */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Ensure the modal can scroll if content overflows */
+#modal-container,
+#modal-container-material {
+  display: none; /* Default is hidden until shown by JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Allow scrolling within the modal */
+  background: rgba(0, 0, 0, 0.6); /* Optional: semi-transparent background */
+  z-index: 9999; /* Make sure it appears on top */
+}
+
+/* Style modal content area */
+#modal-inner-content {
+
+  overflow-y: auto; /* Enable scrolling within modal content */
+}
+
+
+/* ==========================================
+   LOADER STYLE
+========================================== */
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
+.loader-container.active {
+  display: flex; /* Show when active */
+}
+
+.loader {
+  display: flex;
+  flex-direction: column; /* Stack spinner and text vertically */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.loader .spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 10px solid white;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px; /* Space between spinner and text */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/* ==========================================
+   Responsive Styles for Small Screens
+========================================== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: inline-block;
+    margin-right: 0;
+  }
+
+  nav {
+    display: none;
+  }
+
+  nav.open {
+    display: block;
+    position: absolute;
+    top: 44px;
+    background-color: #1C3448;
+    right: 5%;
+    padding: 10px;
+    color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  header .content-wrapper {
+    width: 90%;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  .header-separator,
+  .header-separator.scrolled {
+    width: 100%; /* Full width for horizontal separator */
+    height: 2px; /* Adjust thickness for horizontal separator */
+    align-self: center; /* Centers separator between slabs */
+  }
+
+  /* Target the profile icon's <li> element */
+  .icon-item.profile-icon,
+  .icon-item.subscription-icon {
+    margin-left: 0px; /* 38px margin for profile icon */
+  }
+
+  .icon-text {
+    display: inline; /* Show text next to the icon */
+    margin-left: 28px;
+  }
+
+
+
+  .content-wrapper {
+    width: 90%;
+  }
+  .modal-content-wrapper {
+    width: 90%;
+  }
+
+    /* Narrow width for profile modal content-wrapper*/
+  .narrow-width {
+    margin-top: 0;
+    
+  }
+
+  .medium-width {
+    margin-top: 0;
+    width: 90%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem; /* Adjust the size for smaller screens */
+    
+    flex-direction: column; /* Change to column for mobile */
+    align-self: flex-start; /* Align the button to the left */
+  }
+
+  .hero::before {
+    background-image: url('../assets/images/hero-phone2.jpeg');
+  }
+  
+  .hero .content-wrapper {
+
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  /* Styling for welcome text */
+  .welcome-text {
+    margin-right: 10px; /* Space between text and logo */
+    text-align: left; /* Ensure the text is left-aligned */
+  }
+
+  .hero h1 img.logo-blue {
+    height: 1em; /* Adjust logo size relative to text size */
+    vertical-align: middle; /* Aligns image with text */
+    max-width: 100%; /* Limit the logo width to 80% of its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .hero h2 {
+    font-size: 1.3rem; /* Adjust font size for h2 */
+    
+    width: 100%; /* Ensure h2 takes full width for left alignment */
+    
+    align-self: flex-start; /* Align the button to the left */
+  }
+
+  .hero button {
+    padding: 10px 20px; /* Adjust button padding for smaller screens */
+    font-size: 0.9rem; /* Adjust button font size */
+    text-align: right; /* Align h2 to the left */
+    
+  }
+
+  .about-content {
+    flex-direction: column; /* Stack text and image on small screens */
+    text-align: center;
+  }
+
+  .about h2 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .about-text, .about-image {
+    flex: none;
+    width: 100%; /* Ensure full width on small screens */
+  }
+
+  .about-text p{
+    text-align: justify;
+  }
+
+  .about-image {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-image img {
+    width: 100%; /* Ensure the image fills the width of the container */
+    height: 100%; /* Ensure the image fills the height of the container */
+  }
+  .slabs {
+    flex-direction: column; /* Stacks slabs vertically */
+    gap: 20px; /* Adjusts gap for vertical layout */
+  }
+
+  .slab {
+    width: 100%; /* Full width for slabs on small screens */
+  }
+
+  .separator {
+    width: 100%; /* Full width for horizontal separator */
+    height: 2px; /* Adjust thickness for horizontal separator */
+    align-self: center; /* Centers separator between slabs */
+  }
+
+  .footer-icon {
+    width: 40px; /* Adjust icon size */
+
+  }
+
+  footer .content-wrapper {
+    width: 90%;
+    flex-direction: column; /* Stack the sections on top of each other */
+    align-items: center; /* Center them horizontally */
+  }
+  .footer-separator {
+    width: 100%; /* Full width for horizontal separator */
+    height: 2px; /* Adjust thickness for horizontal separator */
+    align-self: center; /* Centers separator between slabs */
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }
+  .logo img {
+    height: 15px;
+    top: -7px;
+    left: 5px;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 2.2%;           /* Position the close button from the top */
+    right: 5%; 
+  }
+  h2 { font-size: 1.8rem; text-align: left; color: #164384; }
+
+  /* Shopping cart */
+
+  .status-icon {
+
+    margin-left: 0px;
+  }
+  .cart-table-container {
+    display: none;
+  }
+
+  /* Show mobile version of the table */
+  .mobile-table {
+    border-top: 2px solid #164384;
+    display: block;
+  }
+
+
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+    
+    
+    border-bottom: 2px solid #164384;
+    padding: 10px 0;
+  }
+
+  .item-icon {
+    margin-bottom: 10px;
+    text-align: center;
+    flex: 1;
+  }
+
+  .first-row{
+    display: flex;
+    width: 100%;  /* Ensure it uses the entire horizontal space */
+    justify-content: space-between;  /* Distribute the space between child elements */
+    align-items: center; /* Align the items vertically */
+    
+  }
+
+  .item-details {
+    display: flex;
+    width: 100%;  /* Ensure it uses the entire horizontal space */
+    justify-content: space-between;  /* Distribute the space between child elements */
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .content-details {
+    flex: 1;  /* Give equal width to both content-details sections */
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Align `li` items inside content-details in the first row to center */
+  .first-row .content-details {
+    text-align: center; /* Center the list items in the first-row */
+  }
+
+  /* Align `li` items inside the second .content-details in .item-details to the right */
+  .item-details .content-details:nth-child(3) {
+    text-align: right; /* Right align the second content-details */
+  }
+
+  .mobile-sc-separator {
+    width: 1px;
+    background-color: #071428;
+    align-self: stretch;  /* Make the separator span the full height */
+    margin: 0 10px;  /* Add some horizontal space around the separator */
+  }
+
+  /* Ensure ul and li elements take full width within content-details */
+  .content-details ul {
+    width: 100%;  /* Make the ul take the full width */
+    padding: 0;   /* Remove default padding */
+    margin: 0;    /* Remove default margin */
+    list-style: none;  /* Remove bullets */
+  }
+
+  .content-details li {
+    width: 100%;  /* Make each li take the full width */
+    display: flex;
+    justify-content: space-between;  /* Spread items in each li to left and right */
+    padding: 5px 0;  /* Add some spacing for readability */
+  }
+  
+  .content-details:nth-child(3) li {
+    display: block;
+  }
+
+  /* Align `li` items inside content-details in the first row to center */
+  .first-row .content-details li{
+    display: block;
+  }
+
+  .remove-item-button {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    color: #164384;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .plan-tier-wrapper {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+  } 
+
+
+  .card-button-container {
+    display: block;
+  }
+
+  .grid-button-container{
+    display: block;
+    
+  }
+
+  .share-button,
+  .download-button,
+  .purchase-button,
+  .edit-button,
+  .favourite-button,
+  .favourite-filter-button,
+  .filter-button,
+  .search-button,
+  .add-button,
+  .save-button,
+  .delete-button {
+
+    padding: 8px; /* Adjust padding as needed */
+
+  }
+  
+  button img {
+
+    height: 24px; /* Icon scales to fill the button */
+    width: 24px; /* Ensure consistent icon size */
+
+  }
+
+  .share-button:hover img.icon-white,
+  .download-button:hover img.icon-white,
+  .purchase-button:hover img.icon-white,
+  .edit-button:hover img.icon-white,
+  .save-button:hover img.icon-white,
+  .favourite-button:hover img.icon-white,
+  .favourite-filter-button:hover img.icon-white,
+  .filter-button:hover img.icon-white,
+  .search-button:hover img.icon-white,
+  .add-button:hover img.icon-white,
+  .delete-button:hover img.icon-white {
+
+    width: 24px; /* Ensure consistent icon size */
+    height: 24px;
+  }
+/* Hover State */
+.share-button:hover,
+.download-button:hover,
+.purchase-button:hover,
+.edit-button:hover,
+.save-button:hover,
+.favourite-button:hover,
+.favourite-filter-button:hover,
+.filter-button:hover,
+.search-button:hover,
+.add-button:hover,
+.delete-button:hover {
+
+  padding: 8px; /* Adjust padding as needed */
+}
+
+
+
+}
+
+@media (max-width: 1300px) {
+  .tabs {
+    
+    align-items: center; /* Center tabs horizontally */
+    
+  }
+
+  .tab {
+    
+    flex-direction: column; /* Stack icon and text vertically */
+    padding: 0.5rem; /* Adjust padding for smaller screens */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center; /* Center align text */
+    flex: 0.5;
+    
+    font-size: 0.7rem;
+  }
+
+  .tab-icon {
+    width: 30px; /* Default smaller icon size */
+    height: 30px;
+    margin-bottom: 0.25rem; /* Space below the icon */
+    margin-right: 0;
+    transition: width 0.3s ease, height 0.3s ease; /* Smooth icon size transition */
+  }
+
+  .tab.active .tab-icon {
+    width: 60px; /* Larger icon size for active tab */
+    height: 60px;
+  }
+
+  .tab.active {
+    flex: 1.5; /* Active tab takes up more space */
+    font-size: 1.1rem;
+  }
+
+
+}
+
+
+/* Grid layout for form containers */
+.form-container-grid {
+
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+
+}
+
+
+/* For phones (small screens) */
+@media (max-width: 739px) {
+  .category-body {
+    grid-template-columns: repeat(1, 1fr); /* 1 item per row */
+  }
+  /* Grid layout for form containers */
+  .form-container-grid-material {
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+  }
+  .form-container-grid-chart {
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+  }
+}
+
+/* For tilted phones or tablets */
+@media (min-width: 740px) and (max-width: 1299px) {
+  .category-body {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  }
+  /* Grid layout for form containers */
+  .form-container-grid-material {
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+  }
+  .form-container-grid-chart {
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+  }
+}
+
+/* For standard PC screens (1080p) */
+@media (min-width: 1300px) and (max-width: 1799px) {
+  .category-body {
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  }
+  /* Grid layout for form containers */
+  .form-container-grid-material {
+    grid-template-columns: repeat(2, 1fr); /* 3 columns */
+  }
+  .form-container-grid-chart {
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+  }
+}
+
+/* For 1440p screens */
+@media (min-width: 1800px) and (max-width: 2600px) {
+  .category-body {
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  }
+  /* Grid layout for form containers */
+  .form-container-grid-material {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  }
+
+}
+
+/* For 4k screens */
+@media (min-width: 2601px) {
+  .category-body {
+    grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+  }
+  /* Grid layout for form containers */
+  .form-container-grid-material {
+    grid-template-columns: repeat(4, 1fr); /* 3 columns */
+  }
+}
+

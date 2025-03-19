@@ -1,0 +1,21 @@
+{
+    "materialDefaults": {
+      "Steel": {
+        "alpha": 0.46
+      },
+      "Aluminium": {
+        "alpha": 0.48
+      },
+      "Iron": {
+        "alpha": 0.50
+      }
+    },
+    "nameDefaults": {
+      "Copper": {
+        "alpha": 0.47
+      },
+      "Tungsten Alloy": {
+        "alpha": 0.38
+      }
+    }
+  }

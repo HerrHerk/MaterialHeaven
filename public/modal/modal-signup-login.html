@@ -1,0 +1,140 @@
+<!-- modal-signup.html -->
+<br>
+<h2>Welcome</h2>
+
+<!-- SIGN UP FORM -->
+<div class="form-container" id="signup-form" style="display: none;">
+    <div class="form-box">
+        <!-- Error Message -->
+        <div class="error-message" id="signup-error-message"></div>
+
+        <!-- Name Input -->
+        <div class="form-field">
+            <label for="signup-name">Name</label>
+            <input type="text" id="signup-name" placeholder="Enter your full name" />
+        </div>
+
+
+        <!-- Email Input -->
+        <div class="form-field">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="Enter your email" />
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-field password-field">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="Create a password" />
+            <button class="toggle-password" id="signup-eye-btn">
+                <i class="eye-icon" id="signup-eye-icon"></i>
+            </button>
+        </div>
+
+        <button class="action-button" id="signup-btn">CREATE ACCOUNT</button>
+    </div>
+    <div class="divider-full"></div>
+    <div class="form-footer">
+        Already have an account? <a href="#" id="have-an-account-btn">Log In</a>
+    </div>
+</div>
+
+<!-- LOG IN FORM -->
+<div class="form-container" id="login-form">
+    <div class="form-box">
+        <button class="google-button" id="login-with-google-btn">
+            <span class="google-icon">G</span>
+            Log in with Google
+        </button>
+        <div class="divider">or</div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="login-error-message"></div>
+
+        <!-- Email Input -->
+        <div class="form-field">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="Enter your email" />
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-field password-field">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" />
+            <button class="toggle-password" id="eye-btn">
+                <i class="eye-icon" id="eye-icon"></i>
+            </button>
+        </div>
+
+        <button class="action-button" id="login-btn">LOG IN</button>
+
+        <div class="error-message" id="reset-error-message"></div>
+        <div class="form-links">
+            <a href="#" id="forgot-password-btn">Forgot Password?</a>
+        </div>
+    </div>
+    <div class="divider-full"></div>
+    <div class="form-footer">
+        Need an account? <a href="#" id="need-an-account-btn">Sign up</a>
+    </div>
+</div>
+
+<!-- VERIFY FORM -->
+<div class="form-container" id="verify-form" style="display: none;">
+    <div class="form-box">
+
+        <!-- Header -->
+        <h4>Email Verification Required</h4>
+
+        <div class="divider-full"></div>
+
+        <!-- Message -->
+        <p class="info-message">
+            Your account has been created, but we need to verify your email to complete the registration. 
+        </p>
+        <p class="info-message" id="activation-message">
+            An activation link has been sent to your email. It might take a few minutes to arrive.
+        </p>
+        
+
+        <!-- Error Message (optional, for resend issues) -->
+        <div class="error-message hidden" id="verify-error-message"></div>
+        
+        <!-- Success Message (shown after resend) -->
+        <div class="success-message hidden" id="verify-success-message"></div>
+
+        <div class="divider-full"></div>
+
+        <!-- Resend Verification Email Link -->
+        <div class="form-links">
+            <a href="#" id="resend-verification-btn">Resend Verification Email</a>
+        </div>
+        <div class="divider-full"></div>
+        <button class="profile-button" id="logout-btn">Log Out</button>
+    </div>
+</div>
+
+<!-- RESET PASSWORD FORM -->
+<div class="form-container" id="reset-password-form" style="display: none;">
+    <div class="form-box">
+        <h4>Reset Your Password</h4>
+        <!-- Error/Success Message -->
+        <div class="error-message" id="reset-error-message-2"></div>
+
+        <!-- Email Input -->
+        <div class="form-field">
+            <label for="reset-password-email">Enter your email</label>
+            <input type="email" id="reset-password-email" placeholder="Enter your email" />
+        </div>
+
+        <button class="action-button" id="send-reset-email-btn">Send Reset Email</button>
+    </div>
+    <div class="form-links">
+        <a href="#" id="back-to-login-btn">Back to Login</a>
+    </div>
+</div>
+
+
+<div class="close-button-container">    
+    <button class="close-button">Close</button>
+</div>
+

@@ -1,0 +1,63 @@
+<!-- modal-cart.html -->
+<h2>Shopping Cart</h2>
+<!-- Add this to your modal-cart.html -->
+<div id="loading-dimmer-checkout" style="display: none;">
+    <div class="loading-spinner">Loading...</div>
+  </div>
+  
+<div class="form-container" id="cart-form">
+    <div class="cart-table-container">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Material Name</th>
+                    <th>Remove Item</th>
+                    <th>Model Properties</th>
+                    <th>Tier</th>
+                    <th>Item Price</th>
+                    <th>Discount</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be dynamically injected here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile Version of the Table -->
+    <div class="cart-table-container mobile-table">
+        <!-- Cart items will be dynamically injected here -->
+    </div>
+    
+
+    <!-- Total Calculation Section -->
+    <div class="total-container">
+        <span class="total-label">Total:</span>
+        <span class="total-amount">€0.00</span>
+    </div>
+    
+
+    <!-- Terms and Conditions Checkbox -->
+    <div class="terms-container">
+        <input type="checkbox" id="termsCheckbox">
+        <label for="termsCheckbox">I agree with the Terms of Service and Privacy Policy.</label>
+    </div>
+    
+    <!-- Refund Acknowledgment Checkbox -->
+    <div class="refund-container">
+        <input type="checkbox" id="refundCheckbox">
+        <label for="refundCheckbox">I acknowledge that no refund is possible due to the nature of this content.</label>
+    </div>
+
+    <div class="checkout-button-container">
+        <button class="checkout-button" data-type="cart" disabled>Checkout</button>
+    </div>
+    
+
+</div>
+
+<div class="close-button-container">    
+    <button class="close-button">Close</button>
+</div>

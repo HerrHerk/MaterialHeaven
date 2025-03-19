@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title with keywords for targeting -->
+    <title>Johnson-Cook Material Models for FEM Simulations | XplicitMaterials</title>
+    
+    <!-- Meta description for search relevance -->
+    <meta name="description" content="Discover high-quality Johnson-Cook material models for explicit FEM simulations, including options for materials like Al 7075. Reliable data for simulation with ANSYS LS-DYNA, AUTODYN and Explicit Dynamics.">
+
+
+    <link rel="icon" href="./assets/main/favicon.png" type="image/png"> <!-- For .png files -->
+
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+    
+</head>
+
+<body class="main-body">
+    
+    <main id="app-layout">
+
+        <!-- Notification for item added to cart -->
+        <div id="notification-added" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #8ba848; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            Item added to cart!
+        </div>
+
+        <!-- Notification for item already in cart -->
+        <div id="notification-exists" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #d9534f; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            This material is already in your shopping cart.
+        </div>
+
+        <!-- Notification for tier eligibility -->
+        <div id="notification-tier" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            Your tier makes this material available!
+        </div>
+
+        <!-- Notification for already purchased material -->
+        <div id="notification-purchased" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #ffc107; color: black; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+            You have already purchased this material.
+        </div>
+        
+
+        <section id = "left-col">
+            <header class="main-header">
+                <div class="left">
+                    <!-- Sidebar -->
+                    <div class="sidebar" id="sidebar">
+                        <a href="#" class="closebtn" id="closebtn">&times;</a>
+                        
+
+                        <div class="sidebar-name" id="sidebar-name">Profile</div>
+                        <div class="sidebar-email" id="sidebar-email">Profile</div>
+
+
+
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+                        
+                        <div class="sidebar-logger" id="sidebar-profile-div">
+                            <i class="cog icon"></i>
+                            <a href="#" id="sidebar-profile">Profile</a>
+                        </div>
+
+                        <div class="sidebar-logger" id="sidebar-reset-password-div">
+                            <i class="lock icon"></i>
+                            <a href="#" id="sidebar-reset-password">Reset Password</a>
+                        </div>
+                        
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
+                        <div class="sidebar-logger" id="sidebar-subscription-plan-div">
+                            <i class="euro icon"></i>
+                            <a href="#" id="sidebar-subscription-plan">Subscription</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-shopping-cart-div">
+                            <i class="shopping cart icon"></i>
+                            <a href="#" id="sidebar-shopping-cart">Shopping Cart</a>
+                        </div>
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">                     
+
+                        <div class="sidebar-logger" id="sidebar-contact-div">
+                            <i class="envelope icon"></i>
+                            <a href="mailto:business.herrherk@gmail.com?subject=Contact Inquiry&body=Hello," id="sidebar-contact">Contact</a>
+                        </div>
+                        <div class="sidebar-logger" id="sidebar-about-div">
+                            <i class="book icon"></i>
+                            <a href="#" id="sidebar-about">About</a>
+                        </div>
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
+                        <div class="sidebar-logger" id="sidebar-login-div">
+                            <i class="user icon"></i>
+                            <a href="#" id="sidebar-login">Sign Up / Log In</a>
+                        </div>
+                        
+                        <div class="sidebar-logger" id="sidebar-logout-div">
+                            <i class="sign-out icon"></i>
+                            <a href="#" id="sidebar-logout">Log Out</a>
+                        </div>
+                        
+                    </div>
+                    <button id="menu-btn">☰</button> <!-- Button to open sidebar -->
+                </div>
+            </header>
+        </section>
+        
+        <section id = "middle-col">
+            <header class="main-header">
+            </div>
+                <div class="left">
+                    
+                </div>
+                <div class="title">
+                    <img src="./assets/titel/cog-background.png" alt="Materials" class="header-image">
+                </div>
+                <div class="right">
+                    <button class="add-btn"><img src="./assets/icons/add-icon.png" alt="edit icon" width="20" height="20"></button>
+                </div>
+            </header>
+     
+            <div class="ui active inverted dimmer" id="loading-dimmer" >
+                <div class="ui massive text loader">Preparing Materials...</div>
+            </div>
+
+
+            
+
+            <div id="welcome-message" style="display:none;">
+                <div class="ui message">
+                    <h2 class="ui header">Welcome to Xplicit Materials</h2>
+                    <p>Click
+                        <a href="#" id="main-login-btn">here</a> 
+                        to register or log in and  
+                        gain access to hundreds of materials:
+                    </p>
+                </div>
+            
+                <!-- <h3 class="ui header">Some Features of Our Platform</h3> -->
+                <div id="slideshow-container" class="ui grid slideshow-container">
+                    <div id="slideshow-wrapper">
+                        <div id="slideshow">
+                            <!-- Slide 1 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_1.png" alt="Preview 1" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Materials of your desire</h2>
+                                    <ul>
+                                        <li>Find the material for your application</li>
+                                        <li>Simulate with the materials defined by publications and motivated community</li>
+                                        <li>Materials for everyday, industrial or military applications</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_2.png" alt="Preview 2" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Library for the public</h2>
+                                    <ul>
+                                        <li>Largest publicly availible collection</li>
+                                        <li>Over 150 materials</li>
+                                        <li>Materials from different authors, sources online availible</li>
+                                        <li>Additional self and community developed and tested models</li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_3.png" alt="Preview 3" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Johnson and Cook Material Model</h2>
+                                    <ul>
+                                        <li>JC properties are visualised enhanced material choice</li>
+                                        <li>Addition "Shock EOS", "Isotropic Elasticity" and "Physical Properties" provide additional depth to the material models</li>
+                                        <li>Simulation ready materials for Explicit and Implicit use as well</li>
+                                        <li>Online availible materials contain a direct link to the author or document</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 4 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_4.png" alt="Preview 4" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Versions and Alternatives from different Authors and Sources</h2>
+                                    <ul>
+                                        <li>Same material from different sources to compare them and chose the best fitting for the application</li>
+                                        <li>Materials with different heat treatmens or hardness</li>
+                                        <li>Alternative chemaical compound for the same material family</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Slide 5 -->
+                            <div class="slide">
+                                <div class="image-column">
+                                    <img src="./assets/main/preview_5.png" alt="Preview 5" class="ui image">
+                                </div>
+                                <div class="description-column">
+                                    <h2>Simulation Ready Materials</h2>
+                                    <ul>
+                                        <li>Download the .XML file with a single click</li>
+                                        <li>Easy to import</li>
+                                        <li>Backwards compatible up to ANSYS v19R2</li>
+                                        <li>Simulation ready material models without the need of extra sources</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slideshow-indicators">
+                        <span class="indicator active" data-index="0"></span>
+                        <span class="indicator" data-index="1"></span>
+                        <span class="indicator" data-index="2"></span>
+                        <span class="indicator" data-index="3"></span>
+                        <span class="indicator" data-index="4"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+
+            <!-- Tabs for navigation -->
+            <div class="tabs" id="tabcontainer" style="display:none;">
+                <div class="tab active" data-target="steel">
+                    <img src="./assets/icons/steel-icon.png"  class="tab-icon" alt="Steel">
+                    Steel
+                </div>
+                <div class="tab" data-target="aluminium">
+                    <img src="./assets/icons/aluminium-icon.png"  class="tab-icon" alt="Aluminium">
+                    Aluminium
+                </div>
+                <div class="tab" data-target="iron">
+                    <img src="./assets/icons/iron-icon.png" class="tab-icon" alt="Iron">
+                    Iron
+                </div>
+                <div class="tab" data-target="special-metal">
+                    <img src="./assets/icons/special-metal-icon.png" alt="edit icon" class="tab-icon" alt="Special Metals">
+                    Special Metals
+                </div>
+                <div class="tab" data-target="other">
+                    <img src="./assets/icons/other-icon.png"class="tab-icon" alt="Other">
+                    Other
+                </div>
+            </div>
+
+
+            <!-- Material Loader Overlay -->
+
+
+                <!-- Content areas for each tab -->
+                <div id="steel" class="tab-content active">
+                    <div class="tab-column" id="steelFiles">
+
+                        <ul id="material-list-steel", class="material-list">
+
+                            
+
+
+                            <!-- <li class="material-list-item">
+
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="aluminium" class="tab-content">
+                    <div class="tab-column" id="aluminiumFiles">
+
+                        <ul id="material-list-aluminium", class="material-list">
+                    
+                            <!-- <li class="material-list-item">
+
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="iron" class="tab-content">
+                    <div class="tab-column" id="ironFiles">
+
+                        <ul id="material-list-iron", class="material-list">
+                    
+                            <!-- <li class="material-list-item">
+
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="special-metal" class="tab-content">
+                    <div class="tab-column" id="special-metalFiles">
+
+                        <ul id="material-list-special-metal", class="material-list">
+                    
+                            <!-- <li class="material-list-item">
+
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div id="other" class="tab-content">
+                    <div class="tab-column" id="otherFiles">
+
+                        <ul id="material-list-other", class="material-list">
+                    
+                            <!-- <li class="material-list-item">
+
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+            <div id="material-list" class="card-layout">
+            </div>
+
+        </section>
+
+        <section id = "right-col">
+            <header class="main-header">
+                <div class="right">
+                    <!-- Sidebar -->
+                    <div class="sidebar-right" id="sidebar-right">
+                        <a href="#" class="closebtn-right" id="closebtn-right">&times;</a>
+                        
+                        <div class="sidebar-right-title" id="sidebar-right-title">Detailed Search</div>
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">
+
+
+                        <div class="search-bar">
+                            <img src="./assets/icons/search-icon.png" alt="Search Icon" class="search-icon">
+                            <input type="text" placeholder="Search..." class="search-input">
+                        </div>
+
+
+                        <!-- Separator Line -->
+                        <hr class="sidebar-separator">                     
+
+
+                        
+                    </div>
+                    <button id="filter-btn"><img src="./assets/icons/filter-icon.png" alt="Filter Icon" class="filter-icon"></button> <!-- Button to open sidebar -->
+                </div>
+            </header>
+
+           
+
+
+        </section>
+
+    </main>
+
+    <!-- MODAL-->
+
+    <div id="modal-overlay">
+        <div id="modal">
+
+            <!-- MODAL HEADER-->
+
+            <div class="modal-header">
+                <h2>Add Explicit Material</h2>
+            </div>
+            <ul id="error-label"></ul>
+
+            <!-- MODAL CONTENT-->
+
+            <div class="modal-content">
+
+                <div class="input-card">
+
+                    <div class="input-group">
+                        <label>Material Name:</label>
+                        <input type="text" id="name"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Material Version:</label>
+                        <input type="text" id="version"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Category:</label>
+                        <select id="material">
+                            <option value="Steel">Steel</option>
+                            <option value="Aluminium">Aluminium</option>
+                            <option value="iron">Iron</option>
+                            <option value="special metal">Special Metal</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Icon:</label>
+                        <input type="text" id="icon"/>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label>Price:</label>
+                        <select id="price">
+                            <option value="10">€0</option>
+                            <option value="10">€10</option>
+                            <option value="25">€25</option>
+                            <option value="50">€50</option>
+                            <option value="50">€999</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Tier:</label>
+                        <select id="tier">
+                            <option value="free">Free</option>
+                            <option value="basic">Basic</option>
+                            <option value="standard">Standard</option>
+                            <option value="premium">Premium</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label>Source:</label>
+                        <input type="text" id="source"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Reference:</label>
+                        <input type="text" id="reference"/>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Description:</label>
+                        <textarea id="description" rows="5" placeholder="Enter description lines..."></textarea>
+                    </div>
+
+
+
+                </div>
+
+                <div class="input-card">
+                    <div class="input-group">
+                        <label>Initial Yield Strength:</label>
+                        <input type="number" id="initial_yield_strength"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Hardening Constant:</label>
+                        <input type="number" id="hardening_constant"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Hardening Exponent:</label>
+                        <input type="number" id="hardening_exponent"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Strain Rate Constant:</label>
+                        <input type="number" id="strain_rate_constant"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Thermal Softening Exp:</label>
+                        <input type="number" id="thermal_softening_exp"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Melting Temperature:</label>
+                        <input type="number" id="melting_temperature"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Reference Strain Rate:</label>
+                        <input type="number" id="reference_strain_rate"/>
+                    </div>
+                </div>
+
+                <div class="input-card">
+                    <div class="input-group">
+                        <label>Initial Failure Strain:</label>
+                        <input type="number" id="initial_failure_strain"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Exponential Factor:</label>
+                        <input type="number" id="exponential_factor"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Triaxial Factor:</label>
+                        <input type="number" id="triaxial_factor"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Strain Rate Factor:</label>
+                        <input type="number" id="strain_rate_factor"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Temperature Factor:</label>
+                        <input type="number" id="temperature_factor"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Reference Strain Rate 2:</label>
+                        <input type="number" id="reference_strain_rate_alt"/>
+                    </div>
+                </div>
+
+
+                <div class="input-card">
+                    <div class="input-group">
+                        <label>Young's Modulus:</label>
+                        <input type="number" id="e_modulus"/>
+                    </div>
+                    <div class="input-group">
+                        <label>&#957-Poisson Ratio:</label>
+                        <input type="number" id="poisson"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Shear Modulus:</label>
+                        <input type="number" id="shear_modulus"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Bulk Modulus:</label>
+                        <input type="number" id="bulk_modulus"/>
+                    </div>
+                </div>
+
+                <div class="input-card">
+                    <div class="input-group">
+                        <label>&#947-Grueneisen Coefficient:</label>
+                        <input type="number" id="grueneisen_coefficient"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Parameter C1:</label>
+                        <input type="number" id="parameter_c1"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Parameter S1:</label>
+                        <input type="number" id="parameter_s1"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Parameter Quadratic:</label>
+                        <input type="number" id="parameter_quadratic"/>
+                    </div>
+                </div>
+
+                <div class="input-card">
+                    <div class="input-group">
+                        <label>Density:</label>
+                        <input type="number" id="density"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Specific Heat Const. Pr.:</label>
+                        <input type="number" id="specific_heat"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Hardness:</label>
+                        <input type="number" id="hardness"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL FOOTER-->
+
+            <div class="modal-footer">
+                <button class="close-btn">Close</button>
+                <button class="save-btn">Save</button>
+            </div>
+        </div>   
+    </div>
+
+
+    <!-- USER-->
+
+    <div id="ui-section" class="ui segment loading">
+        <div id="login-overlay">
+
+            <!-- EMAIL VERIFICATION-->
+
+            <div class="ui-segment" id="email-verification">
+                <div class="ui card">
+                    <div class="ui content">
+                        <div class="header">Verification Email Sent! <i class="icon check green"></i></div>
+                        <div class="meta">We've sent an email for verification. Pease click the link in the email to confirm.</div>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="extra content">
+                        <button class="ui button red big" id="resend-email-btn">Resend</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORGOT PASSWORD-->
+
+            <div class="ui segment" id="reset-password-form">
+                <h1>Reset Your Password</h1>
+                <p>Enter your email address to reset your password</p>
+                <div class="ui message hidden" id="rp-message"></div>
+                <form class="ui form">
+                    <div class="field">
+                        <div class="ui left icon input big">
+                            <i class="mail icon"></i>
+                            <input type="email" placeholder="Email" id="reset-password-email" />
+                        </div>
+                    </div>
+                    <button class="ui button red big" id = reset-password-btn>Reset Password</button>
+                </form>
+            </div>
+
+            <div class="ui segment" id="about-form">
+                <h1>About Us</h1>
+                <hr class="section-divider">
+                <p>
+                    I am a simulation engineer with years of experience in explicit dynamics and material modeling. Throughout my career, I faced a recurring challenge: finding accurate, high-quality material models for simulations. After years of collecting materials from research papers, technical forums, and conducting my own experiments, I realized that there was no comprehensive database or marketplace for simulation-ready materials.
+                </p>
+                
+                <hr class="section-divider">
+                
+                <p>
+                    This website was created to bridge that gap by providing a rich collection of Johnson and Cook material models tailored for simulations, particularly for software like Ansys Explicit Dynamics and LS-DYNA. My collection includes hundreds of material models sourced from publicly available research, shared on Discord servers, and developed in my own projects.
+                </p>
+                
+                <hr class="section-divider">
+                
+                <p>
+                    Where possible, I provide direct links to the original sources so that the authors receive proper credit, and users can review the documentation for context. I highly recommend verifying that the materials are suitable for your specific use case and reading the accompanying documentation when available. While I strive for accuracy, the responsibility for their proper use lies with you.
+                </p>
+                            
+
+
+                <hr class="section-divider">
+                
+                <p>
+                    The core feature of the site is the ability to download simulation-ready XML files containing the Johnson and Cook material models, allowing for seamless integration into your projects. Currently, we offer more than <a href="#" id="materials-link">X materials</a>, and the collection is continually expanding.
+                </p>
+
+<!--                 <div id="materials-popup" class="ui segment hidden">
+                    <button id="close-popup" class="ui red button" style="float: right;">&times; Close</button>
+                    <h2>Current List of Materials</h2>
+                    <div class="material-category">Steel</div>
+                    <hr class="category-divider">
+                    <ul>
+                        <li>Content 1</li>
+                        <li>Content 2</li>
+                        <li>Content 3</li>
+                    </ul>
+                    <div class="material-gap"></div>
+                
+                    <div class="material-category">Aluminium</div>
+                    <hr class="category-divider">
+                    <ul>
+                        <li>Content 1</li>
+                        <li>Content 2</li>
+                    </ul>
+                    <div class="material-gap"></div>
+                
+                    <div class="material-category">Iron</div>
+                    <hr class="category-divider">
+                    <ul>
+                        <li>Content 1</li>
+                    </ul>
+                    <div class="material-gap"></div>
+                
+                    <div class="material-category">Special Metals</div>
+                    <hr class="category-divider">
+                    <ul>
+                        <li>Content 1</li>
+                    </ul>
+                    <div class="material-gap"></div>
+                
+                    <div class="material-category">Other</div>
+                    <hr class="category-divider">
+                    <ul>
+                        <li>Content 1</li>
+                    </ul>
+                </div> -->
+                
+                <p>
+                    While the database is currently optimized exclusively for Johnson and Cook models, future updates will include support for alternative material models. Each material can have various properties, such as Johnson and Cook Strength and Failure models, isotropic properties (including shear modulus, bulk modulus, Young's modulus, or Poisson's ratio), and equations of state (such as Grüneisen shock EOS) with their parameters. Additionally, other physical properties like density, specific heat, and Brinell hardness are included to offer comprehensive data for accurate simulations.
+                </p>
+                
+                <p>
+                    The purchasable materials are offered in tiers: 
+                    <span id="tier-free">Free</span>, 
+                    <span id="tier-basic">Basic</span>, 
+                    <span id="tier-standard">Standard</span>, 
+                    and <span id="tier-premium">Premium</span>. 
+                    While the amount of data provided in each material and its overall quality does not always correlate with the tier, the goal is to offer premium quality for premium pricing. Higher-tier materials are generally more complete and contain a broader set of parameters, while lower-cost materials often include only the essential base properties. Regardless of the tier, users can expect high-quality, reliable material data for their simulations.
+                </p>
+                
+                <hr class="section-divider">
+                
+                <p>
+                    Please note that when purchasing access to these materials, you are paying for the services provided by this platform, including the convenience of downloading, data visualization, and organization. Any materials sourced from other authors remain the intellectual property of their creators, and credit is given accordingly.
+                </p>
+                
+                <hr class="section-divider">
+                
+                <p>
+                    If you are the author of any of these materials and would like to discuss their use on this site, feel free to contact me at <a href="mailto:business.herrherk@gmail.com">business.herrherk@gmail.com</a>.
+                </p>
+                
+                <p>
+                    You can also review our <a href="privacy-policy.html" id="privacy-policy-link">Privacy Policy</a> for more information on how we handle data.
+                </p>
+
+                <p>
+                    By accessing, browsing, or using this website, you acknowledge that you have read, understood, and agree to be bound by the <a href="terms-of-service.html" id="terms-of-service-link">Terms of Service</a>.
+                    
+                </p>
+            </div>
+            
+
+
+            <!-- PROFILE -->
+            <div class="ui segment" id="user-profile">
+                <div class="ui card profile-card">
+                    <div class="content">
+                        <div class="header">
+                            User Profile
+                        </div>
+                        <div class="meta">
+                            <span id="user-id">ID: Loading...</span>
+                        </div>
+                        <hr class="section-divider">
+                        <div class="description">
+                            <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+                            <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+                            <p>
+                                <strong>Plan:</strong> <span id="user-plan">Loading...</span>
+                                <button class="upgrade-btn" id="upgrade-btn">Upgrade Plan!</button>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="botton-div-logout">
+                        <button class="ui button red tiny" id="logout-btn">
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHOPPING CART OVERLAY -->
+            <div class="ui segment" id="shopping-cart-overlay">
+
+                <div class="ui active inverted dimmer" id="loading-dimmer-checkout" style="display: none;"> 
+                    <div class="ui massive text loader">Preparing Stripe Checkout... <br> Redirecting in a few seconds</div> 
+                </div>
+                  
+                <h2>
+                    <i class="shopping cart icon"></i> Shopping Cart
+                </h2>
+                <div class="ui message hidden" id="cart-message"></div>
+
+                <div id="cart-list">
+                    <table class="ui celled table">
+                        <thead>
+                            <tr>
+                                <th></th> <!-- Empty header for the icon column -->
+                                <th>Material Name</th>
+                                <th>Version</th>
+                                <th>Tier</th>
+                                <th>Price</th>
+                                <th style="text-align: center;">Remove</th> <!-- Centered "Remove" header -->
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- Materials will be dynamically added here -->
+                            <tr id="empty-cart" style="display: table-row;">
+                                <td colspan="6">Your shopping cart is empty. Come back once you have selected materials for purchase.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="ui checkout-button" id="checkout-cart-btn">Checkout</button>
+            </div>
+
+
+
+            <!-- PROFILE -->
+<!--             <div class="ui segment" id="user-profile">
+                <div class="ui form">
+                    <div class="ui stacked segment">
+                        <div class="ui content">
+                            <h2 class="ui header">
+                                User Profile
+                            </h2>
+                            <div class="meta" id="user-email">
+                                someemail@gmail.com
+                            </div>
+                        </br>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class="user icon"></i>
+                                <input type="text" placeholder="Name" id="update-realname" />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class="user icon"></i>
+                                <input type="text" placeholder="Username" id="update-username" />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class="mail icon"></i>
+                                <input type="email" placeholder="Email" id="update-email" />
+                            </div>
+                        </div>
+
+                        <button class="ui button blue fluid big" id="update-btn">Update</button>
+                    </div>
+
+                    <div class="ui extra content">
+                        <button class="ui button red fluid tiny" id="logout-btn">Log out</button>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- SUBSCRIPTION PLANS -->
+            <div class="ui segment" id="subscription-plan-form">
+                <h2 class="ui header">Choose Your Plan</h2>
+                <div class="subscription-plans">
+                    <!-- Free Plan -->
+                    <div class="plan-card free-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Free Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">Free</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Preview <strong><span id="free-material-count">0</span></strong> materials</li>
+                            <li>Visualize materials using charts</li>
+                            <li>Download simulation-ready materials</li>
+                            <li>Add materials to your favorites</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="free-plan-btn" data-plan="free">Choose Free</button>
+                    </div>
+                    <!-- Basic Plan -->
+                    <div class="plan-card basic-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Basic Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€150</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Access to an additional <strong><span id="basic-material-count">0</span></strong> basic materials</li>
+                            <li>Unlock a total of <strong><span id="basic-material-total-count">0</span></strong> materials</li>
+                            <li>Includes all features from lower tiers</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="basic-plan-btn" data-plan="basic">Choose Basic</button>
+                    </div>
+                    <!-- Standard Plan -->
+                    <div class="plan-card standard-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Standard Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€250</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Unlock <strong><span id="standard-material-count">0</span></strong> additional standard materials</li>
+                            <li>Gain access to a total of <strong><span id="standard-material-total-count">0</span></strong> materials</li>
+                            <li>Includes all features from lower tiers</li>
+                            <li>Additional features are in development</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="standard-plan-btn" data-plan="standard">Choose Standard</button>
+                    </div>
+                    <!-- Premium Plan -->
+                    <div class="plan-card premium-plan">
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3>Premium Plan</h3>
+                            <hr class="plan-separator">
+                            <p class="plan-price">€400</p>
+                        </div>
+                        <ul class="plan-benefits">
+                            <li>Access to all features</li>
+                            <li>Unlock every material: <strong><span id="premium-material-total-count">0</span></strong></li>
+                            <li>Exclusive access to <strong><span id="premium-material-count">0</span></strong> premium materials</li>
+                            <li>Premium features are in development</li>
+                        </ul>
+                        <hr class="plan-separator benefits-separator">
+                        <button class="ui button select-plan-btn" id="premium-plan-btn" data-plan="premium">Choose Premium</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- LOG IN FORM -->
+            <div class="ui segment" id="login-form">
+                <form class="ui form">
+                    <div class="ui stacked segment">
+
+                        <button class="ui google plus button fluid big" id="login-with-google-btn">
+                            <i class="google icon"></i>
+                            Log in with Google
+                        </button>
+
+                        <div class="ui horizontal divider">or</div>
+
+                        <div class="ui error message" id="login-error-message">
+                            
+                        </div>
+                        <!-- EMAIL -->
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class="mail icon"></i>
+                                <input type="email" placeholder="Email" id="login-email"/>
+                            </div>
+                        </div>
+
+                        
+                        <!-- PASSWORD -->
+                        <div class="field" style="position: relative;">
+                            <div class="ui left icon input big">
+                                <i class="lock icon"></i>
+                                <input type="password" placeholder="Password" id="login-password" style="padding-right: 2.5em;"/>
+                            </div>
+                            <!-- Invisible button wrapping the eye icon -->
+                            <button id="eye-btn" style="background: transparent; border: none; padding: 0; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <i class="eye icon" id="eye-icon"></i>
+                            </button>
+                        </div>
+                        
+                        <button class="ui button blue fluid" id="login-btn">
+                            LOG IN
+                        </button>
+                        <br />
+                        <a id="forgot-password-btn">Forgot Password?</a>
+                    </div>
+                </form>
+                <div class="ui message small">Need an account? <a id="need-an-account-btn">Sign up</a></div>
+            </div>
+
+            <!-- SIGN UP FORM -->
+            <div class="ui segment" id="signup-form">
+                <form class="ui form">
+                    <div class="ui stacked segment">
+
+                        <!-- ERROR MSG -->
+
+                        <div class="ui error message" id="error-message">
+                        </div>
+
+
+                        <!-- Name -->   
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class=" user icon"></i>
+                                <input type="text" placeholder="Name" id="real-name" />
+                            </div>
+                        </div>
+
+
+                        <!-- Username -->   
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class=" user icon"></i>
+                                <input type="text" placeholder="Username" id="username" />
+                            </div>
+                        </div>
+                        
+
+                        <!-- EMAIL -->
+                        <div class="field">
+                            <div class="ui left icon input big">
+                                <i class="mail icon"></i>
+                                <input type="email" placeholder="Email" id="email"/>
+                            </div>
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div class="field" style="position: relative;">
+                            <div class="ui left icon input big">
+                                <i class="lock icon"></i>
+                                <input type="password" placeholder="Password" id="password" style="padding-right: 2.5em;"/>
+                            </div>
+                            <!-- Invisible button wrapping the eye icon -->
+                            <button id="signup-eye-btn" style="background: transparent; border: none; padding: 0; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <i class="eye icon" id="signup-eye-icon"></i>
+                            </button>
+                        </div>
+                        <button class="ui button green fluid" id="signup-btn">CREATE ACCOUNT</button>
+                    </div>
+                </form>
+                <div class="ui message small">Already have an account? <a id="have-an-account-btn">Log In</a></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="main-footer">
+        <div class="footer-content">
+            <a href="privacy-policy.html" class="footer-tooltip" data-tooltip="Read our Privacy Policy">Privacy Policy</a> |
+            <a href="terms-of-service.html" class="footer-tooltip" data-tooltip="Read our Terms of Service">Terms of Service</a> |
+            <a href="mailto:business.herrherk@gmail.com" class="footer-tooltip" data-tooltip="Send me an email">
+                <img src="./assets/icons/email-icon.png" alt="Mail" width="20" />
+            </a>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="footer-tooltip" data-tooltip="Visit my LinkedIn">
+                <img src="./assets/icons/linkedin-icon.png" alt="LinkedIn" width="20" />
+            </a>
+            <a href="https://www.youtube.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my YouTube Channel">
+                <img src="./assets/icons/youtube-icon.png" alt="YouTube" width="20" />
+            </a>
+            <a href="https://www.discord.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my partner's Discord server">
+                <img src="./assets/icons/discord-icon.png" alt="Discord" width="20" />
+            </a>
+<!--             <a href="https://www.yourportfolio.com" target="_blank" class="footer-tooltip" data-tooltip="Visit my Portfolio">
+                <img src="./assets/icons/external-link-icon.png" alt="Portfolio" width="20" />
+            </a> -->
+        </div>
+    </footer>
+    
+    
+
+
+
+    <script type="module" src="firebase-sdk.js"></script>
+    
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="payment.js"></script>
+    <script src="app.js" type="module"></script>
+
+
+
+
+
+</body>
+</html>

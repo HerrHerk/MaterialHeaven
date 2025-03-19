@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success - XplicitMaterials</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Ensure full height and sticky footer */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #E4E3E1;
+        }
+
+        .success-section {
+            flex-grow: 1; /* Push footer down */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        #success {
+            flex-grow: 1; /* Takes available space but doesn't push footer offscreen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            
+        }
+
+        /* Add border & background only to the main section */
+        .main-container {
+            width: 100%;
+            max-width: 800px; /* Adjust width as needed */
+            border: 2px solid #438416;
+            
+            background: white;
+            padding: 20px;
+            padding-top: 0;
+            
+        }
+        .cancelled-title {
+            display: flex;
+            align-items: center; /* Centers text and icon vertically */
+            gap: 40px; /* Adds spacing between text and icon */
+            justify-content: center; /* Centers everything */
+        }
+        /* Adjust cancel icon size */
+        .success-icon {
+            width: 50px;
+            height: auto;
+        }
+
+        /* Sticky footer */
+        footer {
+            flex-shrink: 0;
+        }
+
+        /* Only apply styles on larger screens */
+        @media (max-width: 768px) {
+            body {
+                display: block;
+            }
+            .success-section {
+                display: block;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="content-wrapper">
+            <div class="logo">
+                <img src="../assets/images/Design/xwhite.png" alt="White Logo" class="logo-white" />
+                <img src="../assets/images/Design/xdark.png" alt="Dark Logo" class="logo-dark" />
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#section2">About</a></li>
+                    <li><a href="/material-library">Material Library</a></li>
+                    <li><a href="/CAD-library">CAD Library</a></li>
+                
+
+
+                </ul>
+            </nav>
+            <button class="menu-toggle">☰</button> <!-- Menu toggle button -->
+        </div>
+    </header>
+
+
+    
+
+    <!-- Section 1: Hero Section with Inline Background Style -->
+    <section id="section1" class="hero hero-library">
+        <div class="content-wrapper">
+
+            <img src="../assets/images/Design/xblue.png" alt="Blue Logo" class="logo-blue" />
+            <h1>
+                <span class="welcome-text">Successful Payment</span>
+            </h1>
+
+        </div>
+    </section>
+
+ 
+    <!-- Main Section -->
+    <section id="success">
+        <div class="main-container">  <!-- Only this has border & white background -->
+            <div class="content-wrapper">
+                <h2 class="cancelled-title">
+                    Payment Successful
+                    <img src="../assets/images/Design/success-icon.png" alt="Success" class="success-icon" />
+                </h2>
+                <div class="divider-full"></div>
+                <p>Your payment was successful! Please note that it may take a few moments for the transaction to be fully processed. Enjoy your purchase, and good luck with your simulations!</p>
+                <p>If any problem persists, please contact us at <a href="mailto:business.herrherk@gmail.com">business.herrherk@gmail.com</a>.</p>
+                <div class="divider-full"></div>
+                <div class="button-div" style="text-align: center; display: block;">
+                    <button class="return-button" id="return-to-main-btn">Return</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="content-wrapper">
+            <div class="footer-social">
+                <p>Stay Connetcted:</p>
+                <ul>
+    
+
+                    <li><a href="https://www.youtube.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my YouTube Channel">
+                        <img src="../assets/images/Design/youtube-icon.png" alt="YouTube" class="footer-icon" />
+                    </a></li>
+                    <li><a href="https://www.discord.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my partner's Discord server">
+                        <img src="../assets/images/Design/discord-icon.png" alt="Discord" class="footer-icon" />
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="footer-tooltip" data-tooltip="Visit my LinkedIn">
+                        <img src="../assets/images/Design/linkedin-icon.png" alt="LinkedIn" class="footer-icon" />
+                    </a></li>
+                    <li><a href="mailto:business.herrherk@gmail.com" class="footer-tooltip" data-tooltip="Send me an email">
+                        <img src="../assets/images/Design/email-icon.png" alt="Mail" class="footer-icon" />
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-legal">
+                <div class="legal-links">
+                    <a href="/privacy-policy" class="footer-tooltip" data-tooltip="Read our Privacy Policy">Privacy Policy</a> |
+                    <a href="/terms-of-service" class="footer-tooltip" data-tooltip="Read our Terms of Service">Terms of Service</a> 
+                </div>
+                <p> &copy; 2025 XplicitMaterials. All rights reserved.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="notification-copied" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+        URL copied to clipboard!
+    </div>
+
+    <script>
+        // Add functionality for the button
+        document.getElementById("return-to-main-btn").addEventListener("click", function() {
+            window.location.href = "https://xplicitmaterials.com";  // Replace with the main page URL
+        });
+    </script>
+    <script type="module" src="../js/firebase-sdk.js"></script>
+    <script type="module" src="../js/modal.js"></script>
+    <!-- <script type="module" src="./js/auth.js"></script> -->
+    <script type="module" src="../js/style.js"></script>
+
+    <script type="module" src="../js/payment.js"></script>
+    <!-- <script type="module" src="../js/subscription.js"></script> -->
+</body>
+</html>
+

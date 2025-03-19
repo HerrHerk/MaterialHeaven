@@ -1,0 +1,625 @@
+/* ==========================================
+   COLOR PALETTE
+
+   Dark - #071428
+   Primary - #164384
+   Text dark - #091B35
+   Text blue - #0D284F
+   White - #FFFFFF
+   Light - #E8ECF3
+========================================== */
+
+
+
+/* ==========================================
+   Global Styles & Resets
+========================================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #071428;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  body, * {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  body::-webkit-scrollbar, *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
+  
+  /* ==========================================
+     Typography Settings
+  ========================================== */
+  h1 { font-size: 2.3rem; }
+  h2 { font-size: 1.8rem; text-align: center; color: #164384; }
+  h3 { font-size: 1.5rem; color: #164384; }
+  h4 { font-size: 1.2rem; }
+  h5 { font-size: 1rem; }
+  h6 { font-size: 0.8rem; }
+  
+  /* ==========================================
+     Header Styles
+  ========================================== */
+  header {
+    display: flex;
+    justify-content: center; /* Center content */
+    background-color: #1C3448;
+    color: #FFFFFF;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  header .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%; /* Centered content width for larger screens */
+    height: 44px;
+  }
+  
+  /* Apply scroll color swap */
+  header.scrolled {
+    background-color: #FFFFFF;
+    color: #1C3448;
+  }
+  
+  /* ==========================================
+     Logo Styling
+  ========================================== */
+  .logo {
+    margin-left: 0;
+    position: relative;
+  }
+  
+  .logo img {
+    height: 20px;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: -10px;
+  }
+  
+  .logo-dark {
+    opacity: 0; /* Start with blue logo hidden */
+  }
+  
+  header.scrolled .logo-white {
+    opacity: 0; /* Hide white logo when scrolled */
+  }
+  
+  header.scrolled .logo-dark {
+    opacity: 1; /* Show blue logo when scrolled */
+  }
+  
+  /* ==========================================
+     Navigation Styling
+  ========================================== */
+  nav {
+    margin-right: 0;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-right: 0;
+    margin-left: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+  }
+  
+  /* Scrolled styles for menu-toggle button and nav menu */
+  nav.open.scrolled {
+    background-color: #FFFFFF;
+    color: #1C3448;
+  }
+  
+  /* ==========================================
+     Menu Toggle Button
+  ========================================== */
+  .menu-toggle {
+    display: none;
+    color: #071428;
+    background-color: #FFFFFF;
+    border: none;
+    font-size: 24px;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 10%;
+    transition: background-color 0.3s, color 0.3s;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .menu-toggle.scrolled {
+    background-color: #1C3448;
+    color: #FFFFFF;
+  }
+  
+  /* ==========================================
+     Hero Section Styling
+  ========================================== */
+  .hero {
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden; /* Prevents extra scrolling */
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/images/hero.jpeg');
+    background-size: cover; /* Ensures image covers the full container */
+    background-position: center center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    opacity: 0.8;
+    z-index: 0;
+  }
+  
+  .hero .content-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column; /* Ensure elements stack vertically */
+    align-items: flex-end; /* Align items to the left */
+    width: 39%;
+    margin-left: 10%;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: right;
+  }
+  
+  .hero h1 .welcome-text {
+    display: inline-block;
+    margin-right: 0; /* Ensure no extra spacing */
+  }
+  
+  /* Logo Styling */
+  .hero img.logo-blue {
+    max-width: 100%; /* Make sure it stays within the wrapper */
+    height: auto;
+    align-self: flex-start;
+    
+  }
+  
+  .hero h2 {
+    font-size: 1.8rem;
+    margin: 10px 0 20px;
+    color: #1C3448;
+    font-style: italic;
+    width: 100%;
+    text-align: right;
+  }
+  
+  /* Button Styling */
+  .hero button {
+    background-color: #164384;
+    color: #FFFFFF;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #164384;
+    transition: background-color 0.3s;
+    text-align: right;
+    
+    margin-top: 15px; /* Adds space between button and h2 */
+  }
+  
+  .hero button:hover {
+    background-color: #FFFFFF;
+    color: #164384;
+  }
+  
+  /* ==========================================
+     About Section Styling
+  ========================================== */
+  .about {
+    padding: 60px 0px;
+    background-color: #E8ECF3;
+    color: #071428;
+  }
+  
+  .about h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .about-text, .about-image {
+    flex: 1; /* Each section takes up 50% of available width */
+  }
+  
+  
+  /* Wrapper for text and image with flex layout */
+  .about-content {
+    display: flex;
+    gap: 20px; /* Space between text and image */
+    align-items: center; /* Vertical alignment */
+    
+    margin: 0 0; /* Center the content */
+  }
+  
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: right;
+  }
+  
+  
+  
+  .about-image img {
+    width: 100%; /* Ensure the image fills the width of the container */
+    height: 100%; /* Ensure the image fills the height of the container */
+    object-fit: cover; /* Crop the image to fill the container */
+    
+    
+  }
+  
+  .about-image {
+    display: flex;
+    justify-content: flex-end; /* Align the image to the right if it doesn’t fill */
+    overflow: hidden; /* Hide any overflow when the image is cropped */
+  }
+  
+  /* ==========================================
+     Features Section Styling
+  ========================================== */
+  .features {
+    padding: 60px 0px;
+    background-color: #FFFFFF;
+    color: #071428;
+  }
+  
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .slabs {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+  }
+  
+  .feature-icon {
+    
+    width: 20%;
+    
+  }
+  
+  
+  .slab {
+    text-align: justify;
+    width: 30%;
+    
+  }
+  
+  /* Flex layout for icon and text */
+  .slab-div {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    gap: 3%; /* Spacing between icon and text */
+  }
+  
+  
+  
+  .separator {
+    width: 2px;
+    background-color: #071428;
+    align-self: stretch;
+  }
+  
+  .slab h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .slab p {
+    font-size: 1rem;
+    line-height: 1.5;
+    
+  }
+  
+  /* ==========================================
+     Contact Section Styling
+  ========================================== */
+  .contact {
+    padding: 60px 0px;
+    background-color: #E8ECF3;
+    color: #071428;
+    text-align: center;
+  }
+  
+  .contact h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .contact p {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+  
+  .contact button {
+    background-color: #164384;
+    color: #FFFFFF;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .contact button:hover {
+    background-color: #FFFFFF;
+    color: #1C3448;
+  }
+  
+  /* ==========================================
+     Footer Styles
+  ========================================== */
+  footer {
+    background-color: #1C3448;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem; /* Set a uniform base font size for the footer */
+    flex-direction: column; /* Keeps layout responsive for small screens */
+  }
+  
+  footer .content-wrapper {
+    width: 80%; /* Centered content width on larger screens */
+    
+    display: flex;
+    justify-content: space-between; /* Distribute space between the two sections */
+    align-items: center; /* Vertically center the content */
+  }
+  
+  
+  footer p {
+    margin: 5px 0;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  footer ul li {
+    margin: 0 10px;
+  }
+  
+  footer a {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  footer a, footer p {
+    font-size: 1.1rem; /* Ensures <a> and <p> inherit from footer */
+  }
+  
+  footer a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+  
+  .footer-icon {
+    width: 40px; /* Adjust icon size */
+    height: auto;
+    vertical-align: middle;
+  }
+  
+  .legal-links {
+    margin-top: 10px;  
+  }
+  
+  .footer-tooltip {
+    position: relative;
+  }
+  
+  
+  .footer-separator {
+    width: 2px;
+    background-color: #FFFFFF;
+    align-self: stretch;
+  }
+  
+  
+  /* ==========================================
+     Content Wrapper Styling
+  ========================================== */
+  .content-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  /* ==========================================
+     Responsive Styles for Small Screens
+  ========================================== */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: inline-block;
+      margin-right: 0;
+    }
+  
+    nav {
+      display: none;
+    }
+  
+    nav.open {
+      display: block;
+      position: absolute;
+      top: 44px;
+      background-color: #1C3448;
+      right: 5%;
+      padding: 10px;
+      color: #FFFFFF;
+      transition: background-color 0.3s, color 0.3s;
+    }
+  
+    header .content-wrapper {
+      width: 90%;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      text-align: left;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  
+    .content-wrapper {
+      width: 90%;
+    }
+  
+    .hero h1 {
+      font-size: 2.5rem; /* Adjust the size for smaller screens */
+      
+      flex-direction: column; /* Change to column for mobile */
+      align-self: flex-start; /* Align the button to the left */
+    }
+  
+    .hero::before {
+      background-image: url('../assets/images/hero-phone2.jpeg');
+    }
+    
+    .hero .content-wrapper {
+  
+      width: 80%;
+      margin-left: 10%;
+    }
+  
+    /* Styling for welcome text */
+    .welcome-text {
+      margin-right: 10px; /* Space between text and logo */
+      text-align: left; /* Ensure the text is left-aligned */
+    }
+  
+    .hero h1 img.logo-blue {
+      height: 1em; /* Adjust logo size relative to text size */
+      vertical-align: middle; /* Aligns image with text */
+      max-width: 100%; /* Limit the logo width to 80% of its container */
+      height: auto; /* Maintain aspect ratio */
+    }
+  
+    .hero h2 {
+      font-size: 1.3rem; /* Adjust font size for h2 */
+      
+      width: 100%; /* Ensure h2 takes full width for left alignment */
+      
+      align-self: flex-start; /* Align the button to the left */
+    }
+  
+    .hero button {
+      padding: 10px 20px; /* Adjust button padding for smaller screens */
+      font-size: 0.9rem; /* Adjust button font size */
+      text-align: right; /* Align h2 to the left */
+      
+    }
+  
+    .about-content {
+      flex-direction: column; /* Stack text and image on small screens */
+      text-align: center;
+    }
+  
+    .about-text, .about-image {
+      flex: none;
+      width: 100%; /* Ensure full width on small screens */
+    }
+  
+    .about-text p{
+      text-align: justify;
+    }
+  
+    .slabs {
+      flex-direction: column; /* Stacks slabs vertically */
+      gap: 20px; /* Adjusts gap for vertical layout */
+    }
+  
+    .slab {
+      width: 100%; /* Full width for slabs on small screens */
+    }
+  
+    .separator {
+      width: 100%; /* Full width for horizontal separator */
+      height: 2px; /* Adjust thickness for horizontal separator */
+      align-self: center; /* Centers separator between slabs */
+    }
+  
+    .footer-icon {
+      width: 40px; /* Adjust icon size */
+  
+    }
+  
+    footer .content-wrapper {
+      width: 90%;
+      flex-direction: column; /* Stack the sections on top of each other */
+      align-items: center; /* Center them horizontally */
+    }
+    .footer-separator {
+      width: 100%; /* Full width for horizontal separator */
+      height: 2px; /* Adjust thickness for horizontal separator */
+      align-self: center; /* Centers separator between slabs */
+      margin-bottom: 2%;
+      margin-top: 2%;
+    }
+    .logo img {
+      height: 15px;
+      top: -7px;
+      left: 5px;
+    }
+  
+  }
+  

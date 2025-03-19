@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - XplicitMaterials</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="content-wrapper">
+            <div class="logo">
+                <img src="../assets/images/Design/xwhite.png" alt="White Logo" class="logo-white" />
+                <img src="../assets/images/Design/xdark.png" alt="Dark Logo" class="logo-dark" />
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#section2">About</a></li>
+                    <li><a href="/material-library">Material Library</a></li>
+                    <li><a href="/CAD-library">CAD Library</a></li>
+                
+                    <!-- Separator -->
+                    <li>
+                        <div class="header-separator"></div>
+                    </li>
+
+                    <!-- Shopping Cart Icon -->
+                    <li class="icon-item">
+                        <a href="#" class="open-cart">
+                            <img src="../assets/images/Design/full-sc-icon-white.png" alt="White Shopping Cart Icon" class="white-header-icon" />
+                            <img src="../assets/images/Design/full-sc-icon-dark.png" alt="Dark Shopping Cart Icon" class="dark-header-icon" />
+                            <span class="icon-text">Purchase</span> <!-- Text for small screens -->
+                        </a>
+                    </li>
+
+                    <!-- Profile Icon -->
+                    <li class="icon-item profile-icon">
+                        <a href="#" class="open-profile">
+                            <img src="../assets/images/Design/full-user-icon-white.png" alt="White User Profile Icon" class="white-header-icon" />
+                            <img src="../assets/images/Design/full-user-icon-dark.png" alt="Dark User Profile Icon" class="dark-header-icon" />
+                            <span class="icon-text">Profile</span> <!-- Text for small screens -->
+                        </a>
+                    </li>
+
+                    <!-- Subscription Icon -->
+                    <li class="icon-item subscription-icon">
+                        <a href="#" class="open-subscription">
+                            <img src="../assets/images/Design/subscription-icon-white.png" alt="White Subscription Icon" class="white-header-icon" />
+                            <img src="../assets/images/Design/subscription-icon-dark.png" alt="Dark Subscription Icon" class="dark-header-icon" />
+                            <span class="icon-text">Subscription</span> <!-- Text for small screens -->
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <button class="menu-toggle">☰</button> <!-- Menu toggle button -->
+        </div>
+    </header>
+
+    <div id="loader" class="loader-container">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">Preparing Materials...</div>
+        </div>
+    </div>
+    
+
+    <!-- Section 1: Hero Section with Inline Background Style -->
+    <section id="section1" class="hero hero-library">
+        <div class="content-wrapper">
+
+            <img src="../assets/images/Design/xblue.png" alt="Blue Logo" class="logo-blue" />
+            <h1>
+                <span class="welcome-text">Material Library</span>
+            </h1>
+
+        </div>
+    </section>
+    
+    <!-- Section 2: Library Section -->
+    <section id="section2" class="library">
+        <div class="content-wrapper">
+            
+            <div class="library-content">
+
+                
+                <div class="library-actions">
+                    <!-- <div class="divider-full"></div> -->
+                    <!-- <h4>Actions: </h4> -->
+                    <div class="grid-button-container">
+                        <div class="action-button-container">
+                            <button class="favourite-filter-button" >
+                                <img class="icon-blue" src="../assets/images/Design/star-empty-icon.png" alt="Favourite" />
+                                <img class="icon-white" src="../assets/images/Design/star-empty-white-icon.png" alt="Favouritet White" />
+                            </button>
+                            <button class="filter-button" >
+                                <img class="icon-blue" src="../assets/images/Design/filter-icon.png" alt="Filter" />
+                                <img class="icon-white" src="../assets/images/Design/filter-white-icon.png" alt="Filter White" />
+                            </button>
+                            <button class="search-button" >
+                                <img class="icon-blue" src="../assets/images/Design/search-icon.png" alt="Search" />
+                                <img class="icon-white" src="../assets/images/Design/search-white-icon.png" alt="Search White" />
+                            </button>
+                        </div>
+                        <div class="admin-button-container" >
+                            <button class="add-button">
+                                <img class="icon-blue" src="../assets/images/Design/add-icon.png" alt="Add" />
+                                <img class="icon-white" src="../assets/images/Design/add-white-icon.png" alt="Add White" />
+                            </button>
+    
+                        </div>
+                    </div>
+                    <!-- <div class="divider-full"></div> -->
+                </div>
+
+                    
+
+                <!-- <h4>Material Category Selector</h4> -->
+                <div class="tabs" id="tabcontainer" style="display: flex;">
+                    <div class="tab active" data-target="steel">
+                        <img src="../assets/images/Design/steel-icon.png" class="tab-icon" alt="Steel">
+                        Steel
+                    </div>
+                    <div class="tab" data-target="aluminium">
+                        <img src="../assets/images/Design/aluminium-icon.png" class="tab-icon" alt="Aluminium">
+                        Aluminium
+                    </div>
+                    <div class="tab" data-target="iron">
+                        <img src="../assets/images/Design/iron-icon.png" class="tab-icon" alt="Iron">
+                        Iron
+                    </div>
+                    <div class="tab" data-target="special-metal">
+                        <img src="../assets/images/Design/special-metal-icon.png" alt="edit icon" class="tab-icon">
+                        Special Metals
+                    </div>
+                    <div class="tab" data-target="other">
+                        <img src="../assets/images/Design/other-icon.png" class="tab-icon" alt="Other">
+                        Other
+                    </div>
+                </div>
+
+
+            </div>
+        </div>  
+    </section>
+
+    <!-- Section 2: Databank Section -->
+    <section id="section3" class="databank">
+        <div class="content-wrapper">
+            
+            <div class="databank-content">
+
+                <!-- The material cards are generated here -->
+            </div>
+
+
+        </div>  
+    </section>
+    
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="content-wrapper">
+            <div class="footer-social">
+                <p>Stay Connetcted:</p>
+                <ul>
+    
+
+                    <li><a href="https://www.youtube.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my YouTube Channel">
+                        <img src="../assets/images/Design/youtube-icon.png" alt="YouTube" class="footer-icon" />
+                    </a></li>
+                    <li><a href="https://www.discord.com/channel/yourchannel" target="_blank" class="footer-tooltip" data-tooltip="Visit my partner's Discord server">
+                        <img src="../assets/images/Design/discord-icon.png" alt="Discord" class="footer-icon" />
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="footer-tooltip" data-tooltip="Visit my LinkedIn">
+                        <img src="../assets/images/Design/linkedin-icon.png" alt="LinkedIn" class="footer-icon" />
+                    </a></li>
+                    <li><a href="mailto:business.herrherk@gmail.com" class="footer-tooltip" data-tooltip="Send me an email">
+                        <img src="../assets/images/Design/email-icon.png" alt="Mail" class="footer-icon" />
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-legal">
+                <div class="legal-links">
+                    <a href="/privacy-policy" class="footer-tooltip" data-tooltip="Read our Privacy Policy">Privacy Policy</a> |
+                    <a href="/terms-of-service" class="footer-tooltip" data-tooltip="Read our Terms of Service">Terms of Service</a> 
+                </div>
+                <p> &copy; 2025 XplicitMaterials. All rights reserved.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="notification-copied" style="display: none; position: fixed; top: 50%; right: 50%; background-color: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; transform: translate(50%, -50%); opacity: 0; transition: opacity 0.5s ease; font-size: 18px;">
+        URL copied to clipboard!
+    </div>
+    
+
+
+    <div id="modal-container"></div>
+    <div id="modal-container-material"></div>
+   
+
+
+<!--     <script type="module">
+        console.log("Scripts are being loaded");
+    </script> -->
+    <script type="module" src="../js/firebase-sdk.js"></script>
+    <script type="module" src="../js/modal.js"></script>
+    <!-- <script type="module" src="./js/auth.js"></script> -->
+    <script type="module" src="../js/style.js"></script>
+    <script type="module" src="../js/material-library.js"></script>
+    <script type="module" src="../js/payment.js"></script>
+    <!-- <script type="module" src="../js/subscription.js"></script> -->
+
+
+</body>
+</html>

@@ -40,6 +40,13 @@ body::-webkit-scrollbar, *::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
 
+.strikethrough {
+  text-decoration: line-through;
+  color: grey; /* Make text grey */
+  font-weight: normal; /* Remove bold effect */
+}
+
+
 /* ==========================================
    Typography Settings
 ========================================== */
@@ -741,7 +748,7 @@ footer a:hover {
 /* Icon and Description Group */
 .icon-description {
   display: flex;
-  height: 225px;
+  min-height: 250px;
   align-items: center;
   gap: 2rem;
   justify-content: center; /* Center items horizontally */
@@ -1197,7 +1204,7 @@ button img.icon-white {
 
 /* Narrow width for profile modal content-wrapper*/
 .narrow-width {
-  margin-top: 7%;
+  /* margin-top: 7%; */
   width: 20%;
 }
 
@@ -1790,6 +1797,7 @@ input:focus {
 .form-footer,
 .form-links {
   margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 14px;
   color: #555;
 }

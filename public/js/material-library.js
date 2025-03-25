@@ -1658,9 +1658,9 @@ function updateCartModal() {
     // Define prices based on user tier
     const priceMap = {
         free: 0,
-        basic: 5,
+        basic: 10,
         standard: 10,
-        premium: 20
+        premium: 10
     };
 
     cartItems.forEach((materialId) => {
@@ -1692,13 +1692,13 @@ function updateCartModal() {
         // Calculate discount based on user tier
         if (userTier === "basic") {
             if (materialTier === "standard") {
-                discount = 0.5; // 50%
+                discount = 0; // 50%
             } else if (materialTier === "premium") {
-                discount = 0.25; // 25%
+                discount = 0; // 25%
             }
         } else if (userTier === "standard") {
             if (materialTier === "premium") {
-                discount = 0.5; // 50%
+                discount = 0; // 50%
             }
         }
 

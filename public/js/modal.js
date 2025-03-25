@@ -147,6 +147,7 @@ function preloadModals() {
                             const forgotPasswordBtn = document.querySelector("#forgot-password-btn");
                             const resetPasswordForm = document.querySelector("#reset-password-form");
                             const loginForm = document.querySelector("#login-form");
+                            const verifyForm = document.querySelector('#verify-form');
                             const resetPasswordMessage = document.querySelector("#reset-error-message-2");
                             const sendResetEmailBtn = document.querySelector("#send-reset-email-btn");
                             
@@ -207,8 +208,17 @@ function preloadModals() {
                             }
 
                             if (logoutBtn) {
-                                logoutBtn.addEventListener("click", logoutBtnPressed);
+                                logoutBtn.addEventListener("click", (e) => {
+                                    e.preventDefault(); // Prevent default behavior
+                                    
+                                    logoutBtnPressed(); // ✅ Call the function properly
+                                    
+                                    console.log("logging out");
+                                    verifyForm.style.display = "none";
+                                    loginForm.style.display = "block";
+                                });
                             }
+                            
 
                             if (resendVerificationBtn) {
                                 resendVerificationBtn.addEventListener("click", (e) => {
@@ -220,8 +230,10 @@ function preloadModals() {
                             
                             if (loginBtn) {
                                 loginBtn.addEventListener("click", (e) => {
-                                    e.preventDefault();
+                                    
                                     console.log("Login Button Pressed");
+                                    e.preventDefault();
+                                    
                                 
                                     // Clear any previous error messages
                                     loginErrorMessage.classList.add('hidden');
@@ -839,24 +851,21 @@ function checkIfUserIsVerifierd() {
 
 // Function to populate the profile modal
 function populateProfileModal() {
-    // Ensure we have a user before proceeding
     if (!currentUser) {
         console.error("No user is signed in.");
         return;
     }
 
     // References to profile fields
-    const userIdField = document.getElementById('user-id');
-    const userNameField = document.getElementById('user-name');
-    const userEmailField = document.getElementById('user-email');
-    const userPlanField = document.getElementById('user-plan');
-    const activationMessage = document.getElementById('activation-message');
-
+    const userIdField = document.getElementById("user-id");
+    const userNameField = document.getElementById("user-name");
+    const userEmailField = document.getElementById("user-email");
+    const userPlanField = document.getElementById("user-plan");
+    const subscriptionContainer = document.getElementById("subscription-status");
 
     // Populate fields with Firebase Auth data
     userIdField.textContent = currentUser.uid;
     userEmailField.textContent = currentUser.email;
-    activationMessage.innerHTML = `An activation link has been sent to <strong>${currentUser.email}</strong>. It might take a few minutes to arrive.`;
 
     // Fetch additional user data from Firestore
     const userDocRef = doc(db, "users", currentUser.uid);
@@ -866,6 +875,45 @@ function populateProfileModal() {
                 const userData = docSnapshot.data();
                 userNameField.textContent = userData.realname || "Not Provided";
                 userPlanField.textContent = userData.restricted?.tier || "Free";
+
+                // Get subscription data
+                const subscriptions = userData.restricted?.subscriptions || {};
+
+                // Construct subscription details HTML
+                let subscriptionHtml = '';
+
+                // Define all subscription categories (material, cad, simulation, complete)
+                const subscriptionCategories = [
+                    { name: "material", label: "Material" },
+                    { name: "cad", label: "CAD" },
+                    { name: "simulation", label: "Simulation" },
+                    { name: "complete", label: "Complete" }
+                ];
+
+                // Loop through subscription categories and check their status
+                subscriptionCategories.forEach((category) => {
+                    const isActive = subscriptions[category.name] || false;
+                    const expirationDate = subscriptions[`${category.name}Expiration`] 
+                        ? new Date(subscriptions[`${category.name}Expiration`]) 
+                        : null;
+                    
+                    // Determine subscription status and expiration date
+                    let statusText = isActive ? '✔️ Active' : '❌ Inactive';
+                    let expirationText = isActive && expirationDate ? ` (Expires: ${expirationDate.toLocaleDateString()})` : '';
+
+                    subscriptionHtml += `
+                        <p><strong>${category.label}:</strong> ${statusText}${expirationText}</p>
+                    `;
+                });
+
+                // If no subscriptions, show a message
+                if (!subscriptionHtml) {
+                    subscriptionHtml = `<p>No subscriptions data available.</p>`;
+                }
+
+                // Update the subscription section
+                subscriptionContainer.innerHTML = subscriptionHtml;
+
             } else {
                 console.error("User document does not exist in Firestore.");
             }
@@ -875,6 +923,11 @@ function populateProfileModal() {
         });
 }
 
+
+// Utility function to capitalize the first letter of a string
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 

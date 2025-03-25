@@ -1,10 +1,20 @@
 // Import required modules
 const functions = require("firebase-functions");
 const admin = require("./firebase-admin.js"); // Import the initialized admin
+
+// live key
+/* const stripe = require("stripe")(
+    "sk_live_51PqDNEHfaXGRtSlVh1lxHAO0Q6ENMBEOiR" +
+  "gAARkhfyZjGfiLghlMfV0bXSfP0Z6SUwEUyOgHH7QAcb5QmgyKU73600azh1UcNE",
+); */
+
+// test key
 const stripe = require("stripe")(
-    "sk_live_51PqDNEHfaXGRtSlVPUoCi1qqXv1eaSIrsq4DOA80HV" +
-  "nX8TthdptKJPvp93RHNfEvfeAVuGcW6ARX5Dt6fy4WfhQG00aISNFSHC",
+    "sk_test_51PqDNEHfaXGRtSlVaDTEQEHr3LU6sM0eiOy9PGykHpx" +
+"T9f9CBEpl5wE8yntoYClMZtZSX5sxNbKeyNkra4wjE7G300wpLgmGnU",
 );
+
+
 const cors = require("cors")({origin: true});
 
 // Initialize Firebase Admin SDK
@@ -24,8 +34,18 @@ exports.setRestrictedData = functions.auth.user().onCreate(async (user) => {
   return db.collection("users").doc(userId).set(
       {
         restricted: {
-          purchased: {}, // Initialize as empty map
-          tier: "free", // Default tier for new users
+          "purchased": {}, // Initialize as empty map
+          "tier": "free", // Default tier for new users
+          "subscriptions": {
+            "material": false,
+            "materialExpiration": null,
+            "cad": false,
+            "cadExpiration": null,
+            "simulation": false,
+            "simulationExpiration": null,
+            "complete": false,
+            "completeExpiration": null,
+          },
         },
       },
       {merge: true},
@@ -47,12 +67,12 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
       return;
     }
 
-    const {plan, userId} = req.body.data;
+    const {category, userId} = req.body.data;
 
-    console.log("Plan received:", plan);
+    console.log("Plan received:", category);
     console.log("userId received:", userId);
 
-    if (!plan) {
+    if (!category) {
       return res.status(400).send({error: "Plan is required"});
     }
 
@@ -61,14 +81,17 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
     }
 
 
-    const prices = {
-      free: 0,
-      basic: 15000,
-      standard: 25000,
-      premium: 40000,
+    // Subscription Prices (Stripe Product Prices IDs)
+
+    const subscriptionPrices = {
+      material: "price_1R6BHnHfaXGRtSlVApgNgEXP", // test ID
+      /* material: "price_1R51S6HfaXGRtSlVTnP4Yhbj", */ //  Price ID
+      cad: "price_1R51TOHfaXGRtSlV42KduAi4", // CAD Library Price ID
+      simulation: "price_1R51UaHfaXGRtSlVjVnE9TnH", // Simulation Tools Price ID
+      complete: "price_1R51VyHfaXGRtSlVvludmkqL", // Complete Package Price ID
     };
 
-    if (!Object.prototype.hasOwnProperty.call(prices, plan)) {
+    if (!Object.prototype.hasOwnProperty.call(subscriptionPrices, category)) {
       return res.status(400).send({error: "Invalid plan"});
     }
 
@@ -77,23 +100,17 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
         payment_method_types: ["card"],
         line_items: [
           {
-            price_data: {
-              currency: "eur",
-              product_data: {
-                name: `${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan`,
-              },
-              unit_amount: prices[plan],
-            },
+            price: subscriptionPrices[category],
             quantity: 1,
           },
         ],
-        mode: "payment",
-        success_url: "https://xplicitmaterials.com/success.html",
-        cancel_url: "https://xplicitmaterials.com/cancel.html",
-        client_reference_id: userId, // Use the actual user ID here
+        mode: "subscription", // Switch to subscription mode
+        success_url: "https://xplicitmaterials.com/success/",
+        cancel_url: "https://xplicitmaterials.com/cancel/",
+        client_reference_id: userId,
         metadata: {
-          purchase_type: "subscription", // Add this metadata to ident as a sub
-          plan: plan,
+          purchase_type: "subscription",
+          category: category,
         },
       });
 
@@ -159,7 +176,7 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
             product_data: {
               name: `${materialInfo.name} (Version ${materialInfo.version})`,
             },
-            unit_amount: materialInfo.price * 100,
+            unit_amount: 10 * 100,
           },
           quantity: 1,
         };
@@ -172,8 +189,8 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
         payment_method_types: ["card"],
         line_items: lineItems, // Use the retrieved line items
         mode: "payment",
-        success_url: "https://xplicitmaterials.com/success.html",
-        cancel_url: "https://xplicitmaterials.com/cancel.html",
+        success_url: "https://xplicitmaterials.com/success/",
+        cancel_url: "https://xplicitmaterials.com/cancel/",
         client_reference_id: userId, // Use the actual user ID
         metadata: {
           purchase_type: "materials", // Add this metadata to identify as mat
@@ -189,3 +206,34 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
   });
 });
 
+exports.checkExpiredSubscriptions = functions.pubsub
+    .schedule("every 24 hours")
+    .onRun(async () => {
+      const db = admin.firestore();
+      const usersRef = db.collection("users");
+      const now = new Date().toISOString();
+
+      const usersSnapshot = await usersRef.get();
+      usersSnapshot.forEach(async (doc) => {
+        const userData = doc.data();
+        const subscriptions = userData.restricted.subscriptions || {};
+
+        const updatedSubscriptions = {...subscriptions};
+
+        for (const key of Object.keys(subscriptions)) {
+          if (
+            key.endsWith("Expiration") &&
+                subscriptions[key] &&
+                subscriptions[key] < now
+          ) {
+            const subName = key.replace("Expiration", "");
+            updatedSubscriptions[subName] = false; // Deactivate
+          }
+        }
+
+        await usersRef.doc(doc.id).update({
+          "restricted.subscriptions": updatedSubscriptions,
+        });
+        console.log(`Checked & updated subscriptions for user: ${doc.id}`);
+      });
+    });

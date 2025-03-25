@@ -38,6 +38,7 @@ const filterMaterialData = (material, userTier, purchasedMaterials) => {
     // Directly remove materialModels if user tier is lower
     const materialWithoutModels = {...material};
     delete materialWithoutModels.materialModels; // Re
+    delete materialWithoutModels.additionalInfo;
     return materialWithoutModels; // Return material without
   }
 };

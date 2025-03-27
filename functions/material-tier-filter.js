@@ -18,8 +18,24 @@ const getUserTier = async (userId) => {
       .collection("users")
       .doc(userId)
       .get();
-  return userDoc.exists ? userDoc.data().restricted.tier : null;
+
+  if (!userDoc.exists) return null;
+
+  const userData = userDoc.data().restricted;
+  const tier = userData.tier;
+
+  const isSubscribed = (userData.subscriptions &&
+                        userData.subscriptions.material) ||
+                        false;
+
+
+  if (tier === "admin") return "admin";
+  if (tier === "free" && !isSubscribed) return "free";
+  if (isSubscribed && tier !== "admin") return "premium";
+
+  return tier;
 };
+
 
 // Function to filter material data based on user's tier
 const filterMaterialData = (material, userTier, purchasedMaterials) => {

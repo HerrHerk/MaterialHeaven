@@ -206,34 +206,4 @@ exports.createSCCheckout = functions.https.onRequest((req, res) => {
   });
 });
 
-exports.checkExpiredSubscriptions = functions.pubsub
-    .schedule("every 24 hours")
-    .onRun(async () => {
-      const db = admin.firestore();
-      const usersRef = db.collection("users");
-      const now = new Date().toISOString();
 
-      const usersSnapshot = await usersRef.get();
-      usersSnapshot.forEach(async (doc) => {
-        const userData = doc.data();
-        const subscriptions = userData.restricted.subscriptions || {};
-
-        const updatedSubscriptions = {...subscriptions};
-
-        for (const key of Object.keys(subscriptions)) {
-          if (
-            key.endsWith("Expiration") &&
-                subscriptions[key] &&
-                subscriptions[key] < now
-          ) {
-            const subName = key.replace("Expiration", "");
-            updatedSubscriptions[subName] = false; // Deactivate
-          }
-        }
-
-        await usersRef.doc(doc.id).update({
-          "restricted.subscriptions": updatedSubscriptions,
-        });
-        console.log(`Checked & updated subscriptions for user: ${doc.id}`);
-      });
-    });
